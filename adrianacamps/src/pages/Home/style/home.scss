@@ -1,0 +1,76 @@
+@use "../../../styles/mixins/general";
+
+
+.home-main{
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+
+   .carrusel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background:  url("https://www.aucoot.com/wp-content/uploads/2021/06/John-Pawson-Home-Farm-Costswolds-Aucoot-Favourites-Aucoot-Estate-Agents-web-size_152-1320x880.jpg") center/cover;
+    height: 100%;
+    width: 100%;
+
+    .adriana-name{
+        @include general.adrianaText($theme: #FFFFFF);
+        span{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 100%;
+    width: 170px;
+    height: 40px;
+    text-align: center;
+        }
+    }
+.copy-info{
+    z-index: 1;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span{        
+        font-family: 'Arya';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 100%;
+        color: #FFFFFF;
+            }
+}
+    
+}
+.backdrop{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(0, 0, 0,0.3);
+}
+
+.nav{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:  170px;
+    height:85vh;
+    outline: 1px solid black;
+    font-family: 'Arya';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 177.9%;
+    text-align: center;
+    z-index: 1;
+}
+}
+
+
+
+
