@@ -15,9 +15,54 @@
     height: 100%;
     width: 100%;
 
+    .main-container-big{
+        display: flex;
+        height: 75%;
+        width: 80%;
+        // outline:1px solid black;
+        
+        .left-small,.right-small{
+            flex-grow:1 ;
+            flex-basis: 300px;
+            // outline: 1px solid black;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .right-small{
+            nav{
+                height: 5%;
+                z-index: 1;
+                cursor: pointer;
+            
+
+                div:nth-of-type(1){
+                    position: relative;
+                    top: 1.4rem;
+                    width: 32px;
+                    height: 4px;
+                    background-color: #FFFFFF;
+                    z-index:1 ;
+                }
+              
+                div:nth-of-type(2){
+                    position: relative;
+                    top: 1.8rem;
+                    width: 32px;
+                    height: 3px;
+                    background-color: #FFFFFF;
+                    z-index:1 ;
+                }
+            }
+        }
+     
+    }
+
     .adriana-name{
         @include general.adrianaText($theme: #FFFFFF);
+        
         span{
+    align-self: center;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 100;
@@ -25,7 +70,6 @@
     line-height: 100%;
     width: 170px;
     height: 40px;
-    text-align: center;
         }
     }
 .copy-info{
@@ -40,7 +84,7 @@
         font-style: normal;
         font-weight: 400;
         font-size: 15px;
-        line-height: 100%;
+        line-height: 120%;
         color: #FFFFFF;
             }
 }
@@ -53,22 +97,6 @@
     background-color: rgb(0, 0, 0,0.3);
 }
 
-.nav{
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width:  170px;
-    height:85vh;
-    outline: 1px solid black;
-    font-family: 'Arya';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 177.9%;
-    text-align: center;
-    z-index: 1;
-}
 }
 
 
