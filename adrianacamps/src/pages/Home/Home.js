@@ -22,12 +22,13 @@ function Home() {
               </nav>
             </div>
           </div>
-          <div className="copy-info">
+          {/* <div className="copy-info">
             <span>Instagram — Pinterest — LinkedIn</span>
             <span>Design by Sauras Garriga</span>
             <span>© ADRIANA CAMPS 2023 — All rights reserved.</span>
-          </div>
+          </div> */}
         </div>
+
         <div className="backdrop"></div>
       </main>
     </>

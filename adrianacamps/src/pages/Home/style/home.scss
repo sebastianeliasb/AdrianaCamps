@@ -17,7 +17,7 @@
 
     .main-container-big{
         display: flex;
-        height: 75%;
+        height: 90%;
         width: 80%;
         // outline:1px solid black;
         
@@ -31,6 +31,10 @@
         
         .right-small{
             nav{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 height: 5%;
                 z-index: 1;
                 cursor: pointer;
@@ -38,7 +42,7 @@
 
                 div:nth-of-type(1){
                     position: relative;
-                    top: 1.4rem;
+                    top: 1rem;
                     width: 32px;
                     height: 4px;
                     background-color: #FFFFFF;
@@ -47,9 +51,9 @@
               
                 div:nth-of-type(2){
                     position: relative;
-                    top: 1.8rem;
+                    top: 1.4rem;
                     width: 32px;
-                    height: 3px;
+                    height: 2px;
                     background-color: #FFFFFF;
                     z-index:1 ;
                 }
@@ -59,7 +63,7 @@
     }
 
     .adriana-name{
-        @include general.adrianaText($theme: #FFFFFF);
+        @include general.adrianaText($theme: #FFFFFF, $profile:1);
         
         span{
     align-self: center;
@@ -73,6 +77,9 @@
         }
     }
 .copy-info{
+    position: absolute;
+    left: 0;
+    bottom: 0;
     z-index: 1;
     margin-top: 2rem;
     display: flex;
