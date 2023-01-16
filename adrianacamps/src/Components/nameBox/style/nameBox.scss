@@ -1,0 +1,89 @@
+@use "../../../styles/mixins/general";
+.main-container-big{
+    display: flex;
+    position: fixed;
+    height: 90%;
+    width: 80%;
+    // outline: 1px solid black;
+    // background-color: lightcoral;
+
+    .adriana-name{
+        @include general.adrianaText($theme: white);
+        
+     
+        span{
+    align-self: center;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 100%;
+    width: 170px;
+    height: 40px;
+        }
+    }
+    
+    .left-small,.right-small{
+        flex-grow:1 ;
+        flex-basis: 300px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .right-small{
+       .nav-open{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 5%;
+            cursor: pointer;
+        
+
+            div:nth-of-type(1){
+                position: relative;
+                top: 1rem;
+                width: 32px;
+                height: 4px;
+                background-color: #FFFFFF;
+                z-index:1 ;
+            }
+          
+            div:nth-of-type(2){
+                position: relative;
+                top: 1.4rem;
+                width: 32px;
+                height: 2px;
+                background-color: #FFFFFF;
+            }
+        }
+       .nav-close{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 5%;
+            cursor: pointer;
+        
+
+            div:nth-of-type(1){
+                position: relative;
+                transform: rotate(45deg);
+                top: 1.2rem;
+                width: 32px;
+                height: 4px;
+                background-color: #FFFFFF;
+                z-index:1 ;
+            }
+          
+            div:nth-of-type(2){
+                position: relative;
+                transform: rotate(-45deg);
+                top: 1rem;
+                width: 32px;
+                height: 2px;
+                background-color: #FFFFFF;
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 // Mixins
-@mixin adrianaText($theme:black , $profile:1){
+@mixin adrianaText($theme:black ){
     color: $theme;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     font-size: 40px;
     line-height: 177.9%;
     text-align: center;
-    z-index: $profile;
+   
 }
 
 // Variables

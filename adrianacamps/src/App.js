@@ -10,6 +10,7 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+
 // Layouts
 import RootLayout from "./layouts/RootLayout";
 
