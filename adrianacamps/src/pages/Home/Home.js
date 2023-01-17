@@ -14,13 +14,25 @@ function Home() {
   return (
     <>
       <Carrusel />
+
       <main className="home-main">
         {!isOpen ? (
-          <NameBox
-            text={<span>Interior & Lighting Studio</span>}
-            toggleNav={toggleNav}
-            navClass={"nav-open"}
-          />
+          <>
+            <NameBox
+              text={<span>Interior & Lighting Studio</span>}
+              toggleNav={toggleNav}
+              navClass={"nav-open"}
+            />
+            <footer>
+              <div>
+                <span>Instagram — Pinterest — LinkedIn </span>
+                <span>© Adriana Camps 2023 — All Rights reserved</span>
+              </div>
+              <div>
+                <span>Design by Sauras Garriga</span>
+              </div>
+            </footer>
+          </>
         ) : (
           <>
             <Nav toggleNav={toggleNav} />

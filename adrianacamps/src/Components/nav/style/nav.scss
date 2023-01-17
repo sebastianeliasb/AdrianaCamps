@@ -8,6 +8,8 @@ width: 100%;
 position: absolute;   
 background-color: general.$nav-color; 
 z-index: 1;
+box-sizing: border-box;
+padding: 1rem;
 
  .adriana-name{ @include general.adrianaText($theme: black);}
 

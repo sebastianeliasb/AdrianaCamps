@@ -1,9 +1,11 @@
 @use "../../../styles/mixins/general";
 .main-container-big{
     display: flex;
-    // position: fixed;
-    height: 90%;
+    position: relative;
+    
+    height: 95%;
     width: 80%;
+    margin-bottom: auto;
 
 
     .adriana-name{
