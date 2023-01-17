@@ -22,11 +22,9 @@ function Home() {
             navClass={"nav-open"}
           />
         ) : (
-          <NameBox
-            text={<span>HOLA</span>}
-            toggleNav={toggleNav}
-            navClass={"nav-close"}
-          />
+          <>
+            <Nav toggleNav={toggleNav} />
+          </>
         )}
       </main>
     </>

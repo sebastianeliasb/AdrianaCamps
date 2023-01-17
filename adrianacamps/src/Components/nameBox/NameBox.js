@@ -6,10 +6,21 @@ function NameBox(props) {
     <div className="main-container-big">
       <div className="left-small"></div>
       <div className="adriana-name">
-        <div>ADRIANA</div>
-        {props.text}
-        <div>CAMPS</div>
+        {props.navClass === "nav-open" ? (
+          <>
+            <div>ADRIANA</div>
+            {props.text}
+            <div>CAMPS</div>
+          </>
+        ) : (
+          <>
+            <div>ADRIANA</div>
+            <div className="nav-links">{props.text}</div>
+            <div>CAMPS</div>
+          </>
+        )}
       </div>
+
       <div className="right-small">
         <nav className={props.navClass} onClick={props.toggleNav}>
           {props.navClass === "nav-open" ? (

@@ -1,14 +1,40 @@
 @use "../../../styles/mixins/general";
 .main-container-big{
     display: flex;
-    position: fixed;
+    // position: fixed;
     height: 90%;
     width: 80%;
-    // outline: 1px solid black;
-    // background-color: lightcoral;
+
 
     .adriana-name{
         @include general.adrianaText($theme: white);
+
+        .nav-links{
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+
+a{
+    cursor: pointer;
+    margin: 0.4rem;
+    text-decoration: none;
+    color: black;
+    
+}
+a:visited{
+    text-decoration: none;
+}
+
+a:hover{
+    color:#6C9EBB; ;
+}
+
+        }
         
      
         span{
@@ -23,14 +49,17 @@
         }
     }
     
+        
+    
     .left-small,.right-small{
         flex-grow:1 ;
         flex-basis: 300px;
         display: flex;
-        justify-content: flex-end;
+        
     }
     
     .right-small{
+        justify-content: flex-end;
        .nav-open{
             display: flex;
             flex-direction: column;
@@ -46,7 +75,7 @@
                 width: 32px;
                 height: 4px;
                 background-color: #FFFFFF;
-                z-index:1 ;
+          
             }
           
             div:nth-of-type(2){
@@ -55,6 +84,7 @@
                 width: 32px;
                 height: 2px;
                 background-color: #FFFFFF;
+               
             }
         }
        .nav-close{
@@ -64,6 +94,7 @@
             align-items: center;
             height: 5%;
             cursor: pointer;
+            z-index: 1;
         
 
             div:nth-of-type(1){
@@ -72,8 +103,8 @@
                 top: 1.2rem;
                 width: 32px;
                 height: 4px;
-                background-color: #FFFFFF;
-                z-index:1 ;
+                background-color: #000000;
+               
             }
           
             div:nth-of-type(2){
@@ -82,7 +113,7 @@
                 top: 1rem;
                 width: 32px;
                 height: 2px;
-                background-color: #FFFFFF;
+                background-color: #000000;
             }
         }
     }
