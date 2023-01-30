@@ -1,19 +1,19 @@
 // Mixins
-@mixin adrianaText($theme:black){
-    color: $theme;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    justify-content: space-between;
-    font-family: 'Arya';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 177.9%;
-    text-align: center;
+// @mixin adrianaText($theme:none){
+//     color: $theme;
+//     display: flex;
+//     flex-direction: column;
+//     flex-grow: 2;
+//     justify-content: space-between;
+//     font-family: 'Arya';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 40px;
+//     line-height: 177.9%;
+//     text-align: center;
     // z-index: 1;
    
-}
+
 
 // Variables
 

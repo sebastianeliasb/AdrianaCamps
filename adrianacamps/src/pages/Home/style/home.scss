@@ -3,23 +3,16 @@
 
 .home-main{
     display: flex;
-    // justify-content: center;
     align-items: center;
     flex-direction: column-reverse;
    height: 100vh;
-//    box-sizing: border-box;
-//    padding: 1rem;
-    
-
-   
+  
 footer{
 position: relative;
 left: 0;
 bottom: 0;
     width: 100%;
-    // outline: 1px solid black;
     height: auto;
-    // margin-top: 2.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -64,10 +57,10 @@ bottom: 0;
     }
 
 }
+
+
+
+
 }
-
-
-
-
 
 
