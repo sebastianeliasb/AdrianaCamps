@@ -15,14 +15,15 @@ function Home() {
     <>
       <Carrusel />
 
-      <main className="home-main">
-        {!isOpen ? (
-          <>
-            <NameBox
-              text={<span>Interior & Lighting Studio</span>}
-              toggleNav={toggleNav}
-              navClass={"nav-open"}
-            />
+      {!isOpen ? (
+        <>
+          <NameBox
+            color={"white"}
+            text={<span>Interior & Lighting Studio</span>}
+            toggleNav={toggleNav}
+            navClass={"nav-open"}
+          />
+          <main className="home-main">
             <footer>
               <div>
                 <span>Instagram — Pinterest — LinkedIn </span>
@@ -32,13 +33,13 @@ function Home() {
                 <span>Design by Sauras Garriga</span>
               </div>
             </footer>
-          </>
-        ) : (
-          <>
-            <Nav toggleNav={toggleNav} />
-          </>
-        )}
-      </main>
+          </main>
+        </>
+      ) : (
+        <>
+          <Nav toggleNav={toggleNav} />
+        </>
+      )}
     </>
   );
 }

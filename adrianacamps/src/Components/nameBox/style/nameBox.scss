@@ -1,15 +1,26 @@
 @use "../../../styles/mixins/general";
 .main-container-big{
+    position: fixed;
     display: flex;
-    position: relative;
-    
-    height: 95%;
-    width: 80%;
-    margin-bottom: auto;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+    margin-top: 3rem;    
+    box-sizing: border-box;
+    padding: 1.5rem;
 
-
+// !! CHANGE COLOR SCHEME ORGANIZATION !! 
     .adriana-name{
-        @include general.adrianaText($theme: white);
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
+        justify-content: space-between;
+        font-family: 'Arya';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 177.9%;
+        text-align: center;
 
         .nav-links{
             color: black;
@@ -19,11 +30,11 @@
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
-line-height: 100%;
+// line-height: 100%;
 
 a{
     cursor: pointer;
-    margin: 0.4rem;
+    margin: 4rem;
     text-decoration: none;
     color: black;
     
@@ -119,4 +130,18 @@ a:hover{
             }
         }
     }
+}
+
+@media only screen and (max-width: 600px){
+    .nav-links{
+        flex-direction: column;
+        margin: 0.4rem;
+       
+     
+    }
+    a{
+        margin: 0.4rem !important;
+      }
+   
+   
 }
