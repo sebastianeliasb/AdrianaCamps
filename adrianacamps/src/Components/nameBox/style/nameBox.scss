@@ -1,13 +1,15 @@
 @use "../../../styles/mixins/general";
 .main-container-big{
+    position: fixed;
     display: flex;
-    position: relative;
-    
-    height: 95%;
-    width: 80%;
-    margin-bottom: auto;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+    margin-top: 3rem;    
+    box-sizing: border-box;
+    padding: 1.5rem;
 
-
+// !! CHANGE COLOR SCHEME ORGANIZATION !! 
     .adriana-name{
         @include general.adrianaText($theme: white);
 

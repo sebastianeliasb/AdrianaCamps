@@ -3,7 +3,7 @@ import "./style/nameBox.scss";
 
 function NameBox(props) {
   return (
-    <div className="main-container-big">
+    <div className="main-container-big" style={{zIndex:props.zIndex }}>
       <div className="left-small"></div>
       <div className="adriana-name">
         {props.navClass === "nav-open" ? (

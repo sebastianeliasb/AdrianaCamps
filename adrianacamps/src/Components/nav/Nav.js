@@ -4,8 +4,9 @@ import NameBox from "../nameBox";
 
 function Nav(props) {
   return (
-    <nav className="nav-home">
-      <NameBox
+    <>
+    <NameBox
+    zIndex={1}
         text={
           <>
             {" "}
@@ -17,7 +18,10 @@ function Nav(props) {
         toggleNav={props.toggleNav}
         navClass={"nav-close"}
       />
+    <nav className="nav-home">
+      
     </nav>
+    </>
   );
 }
 

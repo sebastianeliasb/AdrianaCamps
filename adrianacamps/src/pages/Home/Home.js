@@ -15,7 +15,7 @@ function Home() {
     <>
       <Carrusel />
 
-      <main className="home-main">
+     
         {!isOpen ? (
           <>
             <NameBox
@@ -23,6 +23,7 @@ function Home() {
               toggleNav={toggleNav}
               navClass={"nav-open"}
             />
+             <main className="home-main">
             <footer>
               <div>
                 <span>Instagram — Pinterest — LinkedIn </span>
@@ -32,13 +33,14 @@ function Home() {
                 <span>Design by Sauras Garriga</span>
               </div>
             </footer>
+            </main>
           </>
         ) : (
           <>
             <Nav toggleNav={toggleNav} />
           </>
         )}
-      </main>
+      
     </>
   );
 }
