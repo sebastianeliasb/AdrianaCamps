@@ -19,6 +19,7 @@ function Home() {
         <>
           <NameBox
             color={"white"}
+            navColor={"white"}
             text={<span>Interior & Lighting Studio</span>}
             toggleNav={toggleNav}
             navClass={"nav-open"}

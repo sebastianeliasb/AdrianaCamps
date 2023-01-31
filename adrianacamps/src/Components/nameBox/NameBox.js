@@ -9,7 +9,7 @@ function NameBox(props) {
     >
       <div className="left-small"></div>
       <div className="adriana-name">
-        {props.navClass === "nav-open" ? (
+        {props.navClass === "nav-open" && "nav-open-web" ? (
           <>
             <div>ADRIANA</div>
             {props.text}
@@ -25,13 +25,19 @@ function NameBox(props) {
       </div>
       {/* Here nav is closed */}
       <div className="right-small">
-        <nav className={props.navClass} onClick={props.toggleNav}>
-          {props.navClass === "nav-open" ? (
+        <nav
+          className={props.navClass}
+          onClick={props.toggleNav}
+          style={{ display: props.show }}
+        >
+          {props.navClass === "nav-open" || "nav-open-web" ? (
             <>
-              <div></div>
-              <div></div>
+              {console.log(props.navClass)}
+              <div style={{ backgroundColor: props.navColor }}></div>
+              <div style={{ backgroundColor: props.navColor }}></div>
             </>
           ) : (
+            // Nav close
             <>
               <div></div>
               <div></div>

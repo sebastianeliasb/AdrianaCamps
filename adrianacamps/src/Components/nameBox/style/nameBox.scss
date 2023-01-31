@@ -3,7 +3,7 @@
     position: fixed;
     display: flex;
     justify-content: center;
-    height: 80vh;
+    height: 90vh;
     width: 100%;
     margin-top: 3rem;    
     box-sizing: border-box;
@@ -21,6 +21,7 @@
         font-size: 40px;
         line-height: 177.9%;
         text-align: center;
+     
 
         .nav-links{
             color: black;
@@ -73,7 +74,7 @@ a:hover{
     
     .right-small{
         justify-content: flex-end;
-       .nav-open{
+       .nav-open, .nav-open-web{
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -86,8 +87,8 @@ a:hover{
                 position: relative;
                 top: 1rem;
                 width: 32px;
-                height: 4px;
-                background-color: #FFFFFF;
+                height: 4.5px;
+                background-color: #000000;
           
             }
           
@@ -96,7 +97,7 @@ a:hover{
                 top: 1.4rem;
                 width: 32px;
                 height: 2px;
-                background-color: #FFFFFF;
+                background-color: #000000;
                
             }
         }
@@ -128,6 +129,7 @@ a:hover{
                 height: 2px;
                 background-color: #000000;
             }
+            
         }
     }
 }
@@ -136,6 +138,8 @@ a:hover{
     .nav-links{
         flex-direction: column;
         margin: 0.4rem;
+
+        
        
      
     }
