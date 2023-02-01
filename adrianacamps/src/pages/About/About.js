@@ -4,6 +4,7 @@ import testImage from "../../assets/about_try_image.png";
 import "./style/about.scss";
 import NameLayout from "../../layouts/nameLayout";
 import Nav from "../../Components/nav";
+import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 function About() {
   return (
     <>
@@ -14,7 +15,7 @@ function About() {
             <div>HOLA</div>
           </div>
           <div className="about-right">
-            <div className="page-content-container">
+            <ContentContainer>
               <div
                 className="about-image-container"
                 style={{ backgroundImage: `url(${testImage}) ` }}
@@ -84,7 +85,7 @@ function About() {
                   cupidatat cillum velit ipsum quis aute anim ea nulla nulla in.
                 </p>
               </div>
-            </div>
+            </ContentContainer>
           </div>
         </main>
       </NameLayout>

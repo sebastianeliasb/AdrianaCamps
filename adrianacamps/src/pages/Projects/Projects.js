@@ -1,5 +1,7 @@
 import React from "react";
+import ContentContainer from "../../Components/ContentContainer";
 import NameLayout from "../../layouts/nameLayout";
+import "./style/projects.scss";
 
 import "./style/projects.scss";
 
@@ -8,7 +10,7 @@ function Projects() {
     <>
       <NameLayout />
       <main id="projects-main">
-        <div className="page-content-container"></div>
+        <ContentContainer></ContentContainer>
       </main>
     </>
   );

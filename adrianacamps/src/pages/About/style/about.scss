@@ -40,14 +40,7 @@ width: 100%;
     scrollbar-width: none;  /* Firefox */
   }
 
-.page-content-container{
-    display: flex;
-    flex-direction: column;
-overflow: scroll;
-height:45rem;
-width: 17rem;
-// outline: 5px solid black;
-z-index: 1;
+
 
     .about-image-container{
        background-size: cover;
@@ -55,9 +48,10 @@ z-index: 1;
         margin-top: 10rem;
         width: 100%;
         min-height: 417px;
+        z-index: -1;
         // outline: 1px solid black;
        
-    }
+    
 
     .about-text-container{
         height: 100%;
