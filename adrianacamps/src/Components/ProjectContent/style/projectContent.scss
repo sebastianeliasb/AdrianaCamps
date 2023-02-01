@@ -1,0 +1,27 @@
+.project-content-box{
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid black;
+    height: 350px;
+    // margin-bottom: 2rem;
+    
+    }
+    .project-image{
+        // position: relative;
+        // z-index: -1;
+        height: 295.9px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+       
+    }
+    
+    .project-image:hover{
+        cursor: pointer;
+        filter: grayscale(0);
+        -webkit-filter: grayscale(0);
+    }
+
+

@@ -6,7 +6,7 @@ function Nav(props) {
   return (
     <>
       <NameBox
-        zIndex={1}
+        zIndex={2}
         text={
           <>
             {" "}

@@ -15,7 +15,7 @@ div{
 }
 }
 .about-right{
-    overflow:scroll;
+    // overflow:scroll;
 display: flex;
 flex-direction: column;
 // justify-content: center;
@@ -45,7 +45,7 @@ width: 100%;
     .about-image-container{
        background-size: cover;
        background-repeat: no-repeat;
-        margin-top: 10rem;
+        // margin-top: 10rem;
         width: 100%;
         min-height: 417px;
         z-index: -1;
