@@ -12,8 +12,8 @@ function Footer() {
             <span>LinkedIn</span>
         </div>
         <div>
-            <span>(+34) 636 447 091</span>
-            <span>info@adrianacamps.com</span>
+            <span><a href="tel:(+34) 636 447 091">(+34) 636 447 091</a></span>
+            <span><a href="mailto:info@adrianacamps.com">info@adrianacamps.com</a></span>
             <span>Avinguda Barceloneta, 10</span> 
             <span> 43895 L’Ampolla (Tarragona)</span> 
         </div>

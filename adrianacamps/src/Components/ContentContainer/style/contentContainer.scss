@@ -8,4 +8,9 @@
     // outline: 5px solid black;
     box-sizing: border-box;
     padding-top: 10rem ;
+
 }
+
+.page-content-container::-webkit-scrollbar {
+    display: none;
+  }
