@@ -1,13 +1,15 @@
 @use "../../../styles/mixins/general";
 // .adriana-name{ @include general.adrianaText($theme: black);}
 .nav-home{
- display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-width: 100%;
-position: absolute;   
-background-color: general.$nav-color; 
-box-sizing: border-box;
-padding: 1rem;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: absolute;   
+    background-color: general.$nav-color; 
+    box-sizing: border-box;
+    padding: 1rem;
 }

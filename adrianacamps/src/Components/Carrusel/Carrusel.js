@@ -1,4 +1,5 @@
 import React from "react";
+//style
 import "./style/carrusel.scss";
 
 function Carrusel() {

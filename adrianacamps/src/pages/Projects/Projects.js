@@ -1,14 +1,22 @@
 import React from "react";
-import NameLayout from "../../layouts/nameLayout";
 
+//Components
+import ContentContainer from "../../Components/ContentContainer";
+import ProjectContent from "../../Components/ProjectContent/ProjectContent";
+//Layout
+import NameLayout from "../../layouts/nameLayout";
+//Style
 import "./style/projects.scss";
 
 function Projects() {
   return (
     <>
-      <NameLayout />
+      <NameLayout zindex={2} />
       <main id="projects-main">
-        <div className="page-content-container"></div>
+        <ContentContainer>
+          <ProjectContent />
+          <ProjectContent />
+        </ContentContainer>
       </main>
     </>
   );

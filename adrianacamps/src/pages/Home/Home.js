@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import NameBox from "../../Components/nameBox";
+//style
 import "./style/home.scss";
-import Nav from "../../Components/nav";
+//components
 import Carrusel from "../../Components/Carrusel";
+//layout
 import NameLayout from "../../layouts/nameLayout";
 
 function Home() {
