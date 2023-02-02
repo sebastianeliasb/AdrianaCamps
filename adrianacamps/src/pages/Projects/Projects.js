@@ -1,9 +1,11 @@
 import React from "react";
+
+//Components
 import ContentContainer from "../../Components/ContentContainer";
 import ProjectContent from "../../Components/ProjectContent/ProjectContent";
+//Layout
 import NameLayout from "../../layouts/nameLayout";
-import "./style/projects.scss";
-
+//Style
 import "./style/projects.scss";
 
 function Projects() {

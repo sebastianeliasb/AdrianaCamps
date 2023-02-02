@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+//style
 import testImage from "../../assets/about_try_image.png";
-// import Carrusel from "../../Components/Carrusel";
 import "./style/about.scss";
+//layout
 import NameLayout from "../../layouts/nameLayout";
-import Nav from "../../Components/nav";
+//components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 function About() {
   return (

@@ -1,4 +1,5 @@
 import React from "react";
+//style
 import "./style/projectContent.scss";
 import projectImage from "../../assets/project_image.jpg";
 function ProjectContent() {
@@ -7,9 +8,11 @@ function ProjectContent() {
       <div
         className="project-image"
         style={{ backgroundImage: `url(${projectImage}) ` }}
-      ></div>
-      <div className="project-title1">hola</div>
-      <div className="project-title2">hola</div>
+      >
+        
+      </div>
+      <div className="project-title1">Project Name</div>
+      <div className="project-title2">Project Name</div>
     </div>
   );
 }

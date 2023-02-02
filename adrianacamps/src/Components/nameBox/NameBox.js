@@ -1,4 +1,5 @@
 import React from "react";
+//style
 import "./style/nameBox.scss";
 
 function NameBox(props) {

@@ -10,9 +10,12 @@ function Nav(props) {
         text={
           <>
             {" "}
-            <a href="/about">Studio</a>
+            <a href="/studio">Studio</a>
             <a href="/projects">Projects</a>
+            <a href="/concepts">Concepts for sale</a>
+            <a href="/news">News</a>
             <a href="/contact">Contact</a>
+            <a href="/language">Language</a>
           </>
         }
         toggleNav={props.toggleNav}
