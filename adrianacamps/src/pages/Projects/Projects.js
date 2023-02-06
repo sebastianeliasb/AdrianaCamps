@@ -11,13 +11,14 @@ import "./style/projects.scss";
 function Projects() {
   return (
     <>
-      <NameLayout zindex={2} />
-      <main id="projects-main">
-        <ContentContainer>
-          <ProjectContent />
-          <ProjectContent />
-        </ContentContainer>
-      </main>
+      <NameLayout>
+        <main id="projects-main">
+          <ContentContainer>
+            <ProjectContent />
+            <ProjectContent />
+          </ContentContainer>
+        </main>
+      </NameLayout>
     </>
   );
 }
