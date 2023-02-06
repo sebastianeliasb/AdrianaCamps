@@ -3,16 +3,24 @@ import React from "react";
 import "./style/nameBox.scss";
 
 function NameBox(props) {
+  const mainContainerStyle = {
+    zIndex: props.zIndex,
+    color: props.color,
+  };
+
+  const navStyle = {
+    display: props.show,
+  };
+
+  const navOpen =
+    props.navClass === "nav-open" || props.navClass === "nav-open-web";
+
   return (
     <div className="overlay-container">
-      <div
-        className="main-container-big"
-        style={{ zIndex: props.zIndex, color: props.color }}
-      >
+      <div className="main-container-big" style={mainContainerStyle}>
         <div className="left-small"></div>
         <div className="adriana-name">
-          {props.navClass === "nav-open" ||
-          props.navClass === "nav-open-web" ? (
+          {navOpen ? (
             <>
               <div>ADRIANA</div>
               {props.text}
@@ -26,21 +34,18 @@ function NameBox(props) {
             </>
           )}
         </div>
-        {/* Here nav is closed */}
         <div className="right-small">
           <nav
             className={props.navClass}
             onClick={props.toggleNav}
-            style={{ display: props.show }}
+            style={navStyle}
           >
-            {props.navClass === "nav-open" || "nav-open-web" ? (
+            {navOpen ? (
               <>
-                {console.log(props.navClass)}
                 <div style={{ backgroundColor: props.navColor }}></div>
                 <div style={{ backgroundColor: props.navColor }}></div>
               </>
             ) : (
-              // Nav close
               <>
                 <div></div>
                 <div></div>

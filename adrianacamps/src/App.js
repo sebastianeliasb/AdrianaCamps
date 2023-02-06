@@ -10,9 +10,14 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Concepts from "./pages/Concepts/Concepts";
+import News from "./pages/News";
+import Contact from "./pages/Contact";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
+
+// import ProjectItem from "./pages/ProjectItem";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +25,9 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="studio" element={<About />} />
       <Route path="projects" element={<Projects />} />
+      <Route path="concepts" element={<Concepts />} />
+      <Route path="news" element={<News />} />
+      <Route path="contact" element={<Contact />} />
     </Route>
   )
 );
