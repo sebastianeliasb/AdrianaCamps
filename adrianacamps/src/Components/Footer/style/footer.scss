@@ -1,13 +1,15 @@
 //Mobile
 
 #footer-main-container{
+    position: relative;
+    height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     // background-color: red;   
-    margin: 15rem 0 11rem 0;
+    margin: 17rem 0 11rem 0;
 
 div{
     margin: 0.4rem;
