@@ -4,12 +4,13 @@ import Footer from "../Footer";
 import "./style/contentContainer.scss";
 function ContentContainer({ children }) {
   return (
-  <>
-  <div className="page-content-container">{children}
-  <Footer/>
-  </div>
-  
-  </>)
+    <>
+      <div className="page-content-container">
+        {children}
+        <Footer />
+      </div>
+    </>
+  );
 }
 
 export default ContentContainer;

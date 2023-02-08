@@ -3,21 +3,21 @@ import React from "react";
 //Components
 import ContentContainer from "../../Components/ContentContainer";
 import ProjectContent from "../../Components/ProjectContent/ProjectContent";
+import MainPageLayout from "../../layouts/MainPageLayout";
 //Layout
 import NameLayout from "../../layouts/nameLayout";
-//Style
-import "./style/projects.scss";
 
-function Projects() {
+function Projects({ ...color }) {
+  console.log(color);
   return (
     <>
       <NameLayout>
-        <main id="projects-main">
+        <MainPageLayout backgroundColor={"beige"}>
           <ContentContainer>
             <ProjectContent />
             <ProjectContent />
           </ContentContainer>
-        </main>
+        </MainPageLayout>
       </NameLayout>
     </>
   );

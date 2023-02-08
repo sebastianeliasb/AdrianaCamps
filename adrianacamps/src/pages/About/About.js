@@ -4,12 +4,13 @@ import testImage from "../../assets/about_try_image.png";
 import "./style/about.scss";
 //layout
 import NameLayout from "../../layouts/nameLayout";
+import MainPageLayout from "../../layouts/MainPageLayout";
 //components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 function About() {
   return (
     <NameLayout>
-      <main id="about-main">
+      <MainPageLayout>
         <div className="about-left">
           <div>HOLA</div>
         </div>
@@ -35,7 +36,7 @@ function About() {
             </div>
           </ContentContainer>
         </div>
-      </main>
+      </MainPageLayout>
     </NameLayout>
   );
 }

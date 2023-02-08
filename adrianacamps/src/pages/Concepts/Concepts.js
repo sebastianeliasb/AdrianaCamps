@@ -1,5 +1,6 @@
 import React from "react";
 import NameLayout from "../../layouts/nameLayout";
+import MainPageLayout from "../../layouts/MainPageLayout";
 
 import "./style/concepts.scss";
 
@@ -10,7 +11,7 @@ import ProjectContent from "../../Components/ProjectContent/ProjectContent";
 function Concepts() {
   return (
     <NameLayout>
-      <main id="concepts-main">
+      <MainPageLayout>
         <ContentContainer>
           <div className="concepts-intro">
             <p>
@@ -30,7 +31,7 @@ function Concepts() {
           <ProjectContent />
           <ProjectContent />
         </ContentContainer>
-      </main>
+      </MainPageLayout>
     </NameLayout>
   );
 }

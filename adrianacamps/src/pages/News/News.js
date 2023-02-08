@@ -3,13 +3,14 @@ import newsImage from "../../assets/news_image.jpg";
 import ContentContainer from "../../Components/ContentContainer";
 import NewsInfo from "../../Components/NewsInfo/NewsInfo";
 import NameLayout from "../../layouts/nameLayout";
+import MainPageLayout from "../../layouts/MainPageLayout";
 
 import "./style/news.scss";
 
 function News() {
   return (
     <NameLayout>
-      <main id="news-main">
+      <MainPageLayout backgroundColor="beige">
         <ContentContainer>
           <div
             className="news-image"
@@ -22,7 +23,7 @@ function News() {
           </div>
           <NewsInfo />
         </ContentContainer>
-      </main>
+      </MainPageLayout>
     </NameLayout>
   );
 }
