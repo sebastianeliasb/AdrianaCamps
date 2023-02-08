@@ -1,0 +1,18 @@
+.contact-image{
+    min-height:22rem ;
+    width:100% ;
+    background-size: cover;
+    background-position: center center;
+}
+.contact-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 140%;
+    /* or 22px */
+    
+    display: flex;
+    align-items: center;
+}
+.contact-form{}

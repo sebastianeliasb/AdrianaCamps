@@ -11,14 +11,12 @@ function Projects({ ...color }) {
   console.log(color);
   return (
     <>
-      <NameLayout>
-        <MainPageLayout backgroundColor={"beige"}>
-          <ContentContainer>
-            <ProjectContent />
-            <ProjectContent />
-          </ContentContainer>
-        </MainPageLayout>
-      </NameLayout>
+      <MainPageLayout backgroundColor={"beige"}>
+        <ContentContainer>
+          <ProjectContent />
+          <ProjectContent />
+        </ContentContainer>
+      </MainPageLayout>
     </>
   );
 }
