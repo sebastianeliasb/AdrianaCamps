@@ -1,18 +1,20 @@
 import React from "react";
 //style
 import "./style/projectContent.scss";
-import projectImage from "../../assets/project_image.jpg";
-function ProjectContent() {
+function ProjectContent({ data }) {
+  if (!data) {
+    return null;
+  }
   return (
     <div className="project-content-box">
       <div
         className="project-image"
-        style={{ backgroundImage: `url(${projectImage}) ` }}
-      >
-        
-      </div>
-      <div className="project-title1">Project Name</div>
-      <div className="project-title2">Project Name</div>
+        style={{
+          backgroundImage: `url(${data.projectImages[0].projectImageMain}) `,
+        }}
+      ></div>
+      <div className="project-title1">{data.projectInfo[0].name}</div>
+      <div className="project-title2">{data.projectInfo[0].name}</div>
     </div>
   );
 }
