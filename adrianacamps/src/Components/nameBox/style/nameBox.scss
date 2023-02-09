@@ -34,6 +34,19 @@
     font-size: 40px;
     line-height: 177.9%;
     text-align: center;
+    // pointer-events: all;
+
+    a{
+        cursor: pointer;
+        margin: 4rem;
+        text-decoration: none;
+       color: inherit;
+       pointer-events: all;
+        
+    }
+    a:visited{
+        text-decoration: none;
+    }
         
   
         

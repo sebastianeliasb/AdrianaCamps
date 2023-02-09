@@ -3,6 +3,7 @@ import ContentContainer from "../../Components/ContentContainer";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import "./style/contact.scss";
 import contactImage from "../../assets/contact_image.png";
+import sendArrow from "../../assets/arrow.png";
 
 function Contact() {
   return (
@@ -45,6 +46,9 @@ function Contact() {
               name="message"
               placeholder="Message"
             ></input>
+            <div className="send-form-container">
+              <img role="button" src={sendArrow} alt="sendForm"></img>
+            </div>
           </form>
         </ContentContainer>
       </MainPageLayout>

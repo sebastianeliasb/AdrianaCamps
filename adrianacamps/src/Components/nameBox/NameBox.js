@@ -22,13 +22,18 @@ function NameBox(props) {
         <div className="adriana-name">
           {navOpen ? (
             <>
-              <div>ADRIANA</div>
+              <div>
+                <a href="/">ADRIANA</a>
+              </div>
               {props.text}
               <div>CAMPS</div>
             </>
           ) : (
             <>
-              <div>ADRIANA</div>
+              <div>
+                {" "}
+                <a href="/">ADRIANA</a>
+              </div>
               <div className="nav-links">{props.text}</div>
               <div>CAMPS</div>
             </>
