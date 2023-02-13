@@ -7,9 +7,9 @@ import ProjectContent from "../../Components/ProjectContent/ProjectContent";
 import MainPageLayout from "../../layouts/MainPageLayout";
 //Images
 import projectImageMain1 from "../../assets/project_image.jpg";
+import projectImageMain2 from "../../assets/news_image.jpg";
 
 function Projects() {
-  console.log(projectImageMain1);
   const fakeData = [
     {
       id: "0",
@@ -56,7 +56,7 @@ function Projects() {
       ],
       projectImages: [
         {
-          projectImageMain: projectImageMain1,
+          projectImageMain: projectImageMain2,
           projectImage1: null,
           projectImage2: null,
           projectImage3: null,
@@ -76,9 +76,7 @@ function Projects() {
     <>
       <MainPageLayout backgroundColor={"beige"}>
         <ContentContainer>
-          {fakeData.map((data) => (
-            <ProjectContent data={data} />
-          ))}
+          <ProjectContent data={fakeData} />
           {/* <ProjectContent /> */}
         </ContentContainer>
       </MainPageLayout>

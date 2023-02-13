@@ -4,7 +4,9 @@
     flex-direction: column;
     overflow: auto;
     height:45rem;
-    width: 17.5rem;
+    width: 100%;
+    // box-sizing: border-box;
+    // padding: 3.35rem;
     // outline: 5px solid black;
     box-sizing: border-box;
     padding-top: 10rem ;

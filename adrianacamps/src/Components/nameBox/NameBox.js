@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 //style
 import "./style/nameBox.scss";
 
@@ -23,7 +24,7 @@ function NameBox(props) {
           {navOpen ? (
             <>
               <div>
-                <a href="/">ADRIANA</a>
+                <Link to="/">ADRIANA</Link>
               </div>
               {props.text}
               <div>CAMPS</div>
