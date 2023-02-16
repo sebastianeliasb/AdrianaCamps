@@ -11,16 +11,18 @@ function News() {
   return (
     <MainPageLayout backgroundColor="beige">
       <ContentContainer>
-        <div
-          className="news-image"
-          style={{ backgroundImage: `url(${newsImage})` }}
-        ></div>
-        <div className="news-info-container">
-          <div>15 Novembre 2023</div>
-          <div>LOS MEJORES 300 INTERIORISTAS</div>
-          <div>Leer mas</div>
+        <div id="news">
+          <div
+            className="news-image"
+            style={{ backgroundImage: `url(${newsImage})` }}
+          ></div>
+          <div className="news-info-container">
+            <div>15 Novembre 2023</div>
+            <div>LOS MEJORES 300 INTERIORISTAS</div>
+            <div>Leer mas</div>
+          </div>
+          <NewsInfo />
         </div>
-        <NewsInfo />
       </ContentContainer>
     </MainPageLayout>
   );

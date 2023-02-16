@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 //compoonents
 import NameBox from "../../Components/nameBox";
 import Nav from "../../Components/nav";
@@ -20,9 +21,9 @@ function NameLayout({ children, ...props }) {
               props.text || (
                 <div className="page-nav">
                   {" "}
-                  <a href="/about">Studio</a>
-                  <a href="/projects">Projects</a>
-                  <a href="/contact">Contact</a>
+                  <Link to="/about">Studio</Link>
+                  <Link to="/projects">Projects</Link>
+                  <Link to="/contact">Contact</Link>
                 </div>
               )
             }

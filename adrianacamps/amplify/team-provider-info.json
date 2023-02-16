@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-adrianacamps-dev-174813-authRole",
+      "UnauthRoleArn": "arn:aws:iam::372382360602:role/amplify-adrianacamps-dev-174813-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::372382360602:role/amplify-adrianacamps-dev-174813-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-adrianacamps-dev-174813-deployment",
+      "UnauthRoleName": "amplify-adrianacamps-dev-174813-unauthRole",
+      "StackName": "amplify-adrianacamps-dev-174813",
+      "StackId": "arn:aws:cloudformation:eu-west-3:372382360602:stack/amplify-adrianacamps-dev-174813/5fc21230-ac87-11ed-99cc-0a7074e3410a",
+      "AmplifyAppId": "dt3favowkk7xq"
+    },
+    "categories": {
+      "api": {
+        "adrianacamps": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.content-selected{
+    display: flex;
+    align-items: center;
+    // background-color: aqua;
+    border-bottom:  1px solid rgba(61, 61, 61, 0.702);
+    height: 4rem;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+}
+.content-information{
+    font-family: 'Roboto';
+    font-style: normal;
+    display: flex;
+    flex-direction:column;
+    height: 100%;
+    // background-color: aquamarine;
+    margin-top: 2rem;
+
+    .content-row-header,.content-row{
+       display: flex;
+        width: 100%;
+        border-bottom: 1px solid rgba(61, 61, 61, 0.702);
+        height: 5vh;
+
+        div{
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            min-width: 10%;
+            max-width: 25%;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+    }
+
+    .content-row{
+font-weight: 300 !important;
+font-size: 15px;
+
+
+
+div:nth-last-of-type(1){
+    background-position: center;
+    background-size: 1.5rem;
+    background-repeat: no-repeat;
+}
+    }
+    }
