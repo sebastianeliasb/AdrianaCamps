@@ -7,14 +7,14 @@ import "./style/projectItem.scss";
 function ProjectItem() {
   const location = useLocation();
   const data = location.state;
-  const projectName = data.project.projectInfo[0].name;
+  const projectName = data.project.name;
   const projectImages = {
-    mainImage: data.project.projectImages[0].projectImageMain,
+    mainImage: data.project.projectImages,
   };
-  const projectLocation = data.project.projectInfo[0].location;
-  console.log(data);
-  const projectDescription = data.project.projectInfo[0].description;
-  const projectDate = data.project.projectInfo[0].date;
+  const projectLocation = data.project.location;
+  // console.log(data);
+  const projectDescription = data.project.description;
+  const projectDate = data.project.date;
   return (
     <>
       <MainPageLayout backgroundColor={"beige"}>

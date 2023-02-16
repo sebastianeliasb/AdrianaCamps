@@ -15,6 +15,7 @@ import Concepts from "./pages/Concepts/Concepts";
 import News from "./pages/News";
 import Contact from "./pages/Contact";
 import ProjectItem from "./pages/ProjectItem";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "contact",
     element: <Contact />,
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
   },
 ]);
 
