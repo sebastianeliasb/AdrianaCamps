@@ -16,6 +16,7 @@ import News from "./pages/News";
 import Contact from "./pages/Contact";
 import ProjectItem from "./pages/ProjectItem";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Signin from "./pages/Signin/Signin";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "singin",
+    element: <Signin />,
   },
 ]);
 
