@@ -27,6 +27,22 @@ header{
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
+
+}
+a{
+    text-decoration: none;
+}
+a:visited{
+    color: black;
+}
+
+span:hover{
+    color:#6C9EBB; 
+}
+
+.selected{
+    color:#6C9EBB; 
+  
 }
 
 div{
@@ -41,8 +57,14 @@ div{
     box-sizing: border-box;
     padding: 2rem;
     flex-grow: 1;
+    span{
+        cursor: pointer;
+    }
     // background-color: lightseagreen;
    
+}
+div:hover{
+    color:#6C9EBB; 
 }
 
     }
@@ -56,6 +78,8 @@ div{
         display: flex;
         justify-content: center;
         align-items: center;
+
+      
 
         .dashboard{
             display: flex;
