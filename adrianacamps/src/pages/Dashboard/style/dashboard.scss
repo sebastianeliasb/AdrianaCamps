@@ -92,6 +92,29 @@ div:hover{
             box-sizing: border-box;
             padding: 2.5rem;
 
+            .username_signout{
+                display: flex;
+                justify-content: space-between;
+
+                button{
+                    background-color: white;
+                    width: 20%;
+                    height: 100%;
+                    border: 1px solid black;
+                    cursor: pointer;
+                    font-family: 'Arya';
+                    font-style: normal;
+
+                    
+                }
+                button:hover{
+                    color: #6C9EBB;
+                    transform: scale(1.05);
+                    border: 2px solid black;
+                //     background-color: black;
+                }
+            }
+
             
         }
 

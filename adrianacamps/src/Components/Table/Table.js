@@ -8,6 +8,7 @@ function Table({ projects, showModal, selected }) {
     <>
       <div className="content-selected">
         <span>{selected}</span>
+        <button>Create new</button>
       </div>
       {selected === "projects" ? (
         <div className="content-information">
