@@ -2,8 +2,11 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProjects = /* GraphQL */ `
-  subscription OnCreateProjects($filter: ModelSubscriptionProjectsFilterInput) {
-    onCreateProjects(filter: $filter) {
+  subscription OnCreateProjects(
+    $filter: ModelSubscriptionProjectsFilterInput
+    $username: String
+  ) {
+    onCreateProjects(filter: $filter, username: $username) {
       id
       name
       subName
@@ -17,12 +20,16 @@ export const onCreateProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;
 export const onUpdateProjects = /* GraphQL */ `
-  subscription OnUpdateProjects($filter: ModelSubscriptionProjectsFilterInput) {
-    onUpdateProjects(filter: $filter) {
+  subscription OnUpdateProjects(
+    $filter: ModelSubscriptionProjectsFilterInput
+    $username: String
+  ) {
+    onUpdateProjects(filter: $filter, username: $username) {
       id
       name
       subName
@@ -36,12 +43,16 @@ export const onUpdateProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;
 export const onDeleteProjects = /* GraphQL */ `
-  subscription OnDeleteProjects($filter: ModelSubscriptionProjectsFilterInput) {
-    onDeleteProjects(filter: $filter) {
+  subscription OnDeleteProjects(
+    $filter: ModelSubscriptionProjectsFilterInput
+    $username: String
+  ) {
+    onDeleteProjects(filter: $filter, username: $username) {
       id
       name
       subName
@@ -55,6 +66,7 @@ export const onDeleteProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;

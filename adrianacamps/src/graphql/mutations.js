@@ -20,6 +20,7 @@ export const createProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;
@@ -42,6 +43,7 @@ export const updateProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;
@@ -64,6 +66,7 @@ export const deleteProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;

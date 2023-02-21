@@ -16,7 +16,7 @@ function Dashboard() {
   const [lables, setLables] = useState(["Name", "Sub-name", "Client"]);
   const [signedUser, setSignedUser] = useState(false);
   const [user, setUser] = useState(null);
-  const [modalAdd, setModalAdd] = useState(false);
+  const [isEditing, setisEditing] = useState(false);
 
   //** */ UseEffects **//
   useEffect(() => {
@@ -108,8 +108,14 @@ function Dashboard() {
     fetchLabels(labelMap[name]);
   };
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const toggleModal = (isEdit) => {
+    if (isEdit === "edit") {
+      setisEditing(true);
+      setModal(!modal);
+    } else {
+      setisEditing(false);
+      setModal(!modal);
+    }
   };
 
   return (
@@ -192,6 +198,7 @@ function Dashboard() {
           </div>
         </div>
         <Modal
+          isEditing={isEditing}
           show={modal}
           toggleModal={toggleModal}
           modalTitle={selected}

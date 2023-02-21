@@ -17,6 +17,7 @@ export const getProjects = /* GraphQL */ `
       projectImages
       createdAt
       updatedAt
+      username
     }
   }
 `;
@@ -41,6 +42,7 @@ export const listProjects = /* GraphQL */ `
         projectImages
         createdAt
         updatedAt
+        username
       }
       nextToken
     }

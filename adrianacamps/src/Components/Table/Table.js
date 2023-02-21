@@ -8,7 +8,7 @@ function Table({ projects, showModal, selected }) {
     <>
       <div className="content-selected">
         <span>{selected}</span>
-        <button>Create new</button>
+        <button onClick={() => showModal()}>Create new</button>
       </div>
       {selected === "projects" ? (
         <div className="content-information">
@@ -27,7 +27,7 @@ function Table({ projects, showModal, selected }) {
                 <div>{project.location}</div>
                 <div>
                   <span
-                    onClick={() => showModal()}
+                    onClick={() => showModal("edit")}
                     style={{ backgroundImage: `url(${edit})` }}
                   ></span>
                 </div>
