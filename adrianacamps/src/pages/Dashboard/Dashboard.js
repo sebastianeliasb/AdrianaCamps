@@ -8,6 +8,8 @@ import Modal from "../../Components/Modal";
 import { listProjects } from "../../graphql/queries";
 import "../../configureAmplify";
 import "./style/dashboard.scss";
+import { deleteProjects as deleteProjectMutation } from "../../graphql/mutations";
+import { updateProjects as editProject } from "../../graphql/mutations";
 
 function Dashboard() {
   const [data, setData] = useState({ projects: [], news: [] });
@@ -16,7 +18,7 @@ function Dashboard() {
   const [lables, setLables] = useState(["Name", "Sub-name", "Client"]);
   const [signedUser, setSignedUser] = useState(false);
   const [user, setUser] = useState(null);
-  const [isEditing, setisEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   //** */ UseEffects **//
   useEffect(() => {
@@ -25,17 +27,26 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    async function fetchProjects() {
-      const projectData = await API.graphql({
-        query: listProjects,
-      });
-      setData((prevData) => ({
-        ...prevData,
-        projects: projectData.data.listProjects.items,
-      }));
-    }
     fetchProjects();
   }, []);
+  async function fetchProjects() {
+    const projectData = await API.graphql({
+      query: listProjects,
+    });
+    setData((prevData) => ({
+      ...prevData,
+      projects: projectData.data.listProjects.items,
+    }));
+  }
+
+  async function deleteProject(id) {
+    await API.graphql({
+      query: deleteProjectMutation,
+      variables: { input: { id } },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    fetchProjects();
+  }
 
   //** */ Auth Logic **//
   async function checkUser() {
@@ -108,14 +119,10 @@ function Dashboard() {
     fetchLabels(labelMap[name]);
   };
 
-  const toggleModal = (isEdit) => {
-    if (isEdit === "edit") {
-      setisEditing(true);
-      setModal(!modal);
-    } else {
-      setisEditing(false);
-      setModal(!modal);
-    }
+  const toggleModal = (isEditing = false) => {
+    setIsEditing(isEditing);
+    setModal(!modal);
+    fetchProjects();
   };
 
   return (
@@ -190,19 +197,23 @@ function Dashboard() {
               )}
 
               <Table
+                deleteProject={deleteProject}
                 projects={data.projects}
                 showModal={toggleModal}
                 selected={selected}
+                // projectId={data.projects.map((project) => project.id)}
               />
             </div>
           </div>
         </div>
         <Modal
+          selected={selected}
           isEditing={isEditing}
           show={modal}
           toggleModal={toggleModal}
           modalTitle={selected}
           projects={data.projects}
+          projectId={data.projects.map((project) => project.id)}
           navTabs={lables.map((label, index) => (
             <div key={index}>{label}</div>
           ))}

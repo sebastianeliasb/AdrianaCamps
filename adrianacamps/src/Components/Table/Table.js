@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import "./style/table.scss";
 
 import edit from "../../assets/edit.png";
+import deleteIcon from "../../assets/delete.png";
 
-function Table({ projects, showModal, selected }) {
+function Table({ projects, showModal, selected, deleteProject, projectId }) {
   return (
     <>
       <div className="content-selected">
         <span>{selected}</span>
-        <button onClick={() => showModal()}>Create new</button>
+        {selected === "projects" ? (
+          <button onClick={() => showModal()}>Create new</button>
+        ) : null}
       </div>
       {selected === "projects" ? (
         <div className="content-information">
@@ -22,13 +25,19 @@ function Table({ projects, showModal, selected }) {
             <>
               {" "}
               <div key={index} className="content-row">
-                <div>{project.name}</div>
+                <div onClick={() => console.log(project.id)}>
+                  {project.name}
+                </div>
                 <div>{project.client}</div>
                 <div>{project.location}</div>
                 <div>
                   <span
-                    onClick={() => showModal("edit")}
+                    onClick={() => showModal(true)}
                     style={{ backgroundImage: `url(${edit})` }}
+                  ></span>
+                  <span
+                    onClick={() => deleteProject(project.id)}
+                    style={{ backgroundImage: `url(${deleteIcon})` }}
                   ></span>
                 </div>
               </div>

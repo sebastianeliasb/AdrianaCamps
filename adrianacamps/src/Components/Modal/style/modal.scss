@@ -65,11 +65,36 @@
 }
        
     }
+
+    //GRID
     .modal-info-container{
-        display: flex;
-       
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+       flex-direction: column;
         min-height: 40vh;
+        grid-template-areas: "name subName client"
+                              "location photo surface"   
+                               "desc subDesc images";
+
+                            
+
+        .name-input{grid-area:name ;}
+        .client-input{grid-area:client ;}
+        .location-input{grid-area:location ;}
+        .subName-input{grid-area:subName ;}
+        .desc-input{grid-area:desc ;}
+        .subDesc-input{grid-area:subDesc ;}
+        .photographer-input{grid-area:photo ;}
+        .surface-input{grid-area:surface ;}
+        .images-input{grid-area:images ;}
+        
         // background-color: bisque;
+         input{
+            width: 20vw;
+            height: 5vh;
+         }
+
 
         
     }
