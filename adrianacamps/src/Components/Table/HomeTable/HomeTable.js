@@ -4,7 +4,8 @@ function HomeTable({ showModal }) {
   return (
     <div className="content-information">
       <div className="content-row-header">
-        <div>Carrousel Images</div>
+        <div>Image title</div>
+        <div>Image</div>
       </div>
       {/* {projects.map((project) => (
         <div key={project.id} className="content-row">
