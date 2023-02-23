@@ -4,7 +4,7 @@ import "./style/modal.scss";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { API } from "aws-amplify";
-import { createProjects } from "../../graphql/mutations";
+import { createProjects, updateProjects } from "../../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { getProjects } from "../../graphql/queries";
 
@@ -24,13 +24,12 @@ function Modal({
   show,
   toggleModal,
   projects,
-  // projectId,
+  projectData,
   isEditing,
   selected,
   ...props
 }) {
   const [project, setproject] = useState(initialState);
-
   const {
     name,
     subName,
@@ -64,7 +63,7 @@ function Modal({
     toggleModal();
     setproject(initialState);
   }
-  // console.log(id);
+  // const id = projectData.id;
   return (
     <>
       {show ? (
@@ -74,12 +73,21 @@ function Modal({
           </div>
           {isEditing ? (
             <div className="modal-body">
-              <div className="modal-title">
+              <div
+                onClick={() => console.log(projectData.id)}
+                className="modal-title"
+              >
                 <span>{props.modalTitle} edit</span>
               </div>
               {/* <div className="modal-nav">{props.navTabs}</div> */}
               <div className="modal-info-container">
-                <SimpleMDE style={{ width: "100% " }} />
+                <input
+                  className="name-input"
+                  onChange={onChange}
+                  name="name"
+                  value={projectData.name}
+                  placeholder="name"
+                />
               </div>
               <button>Confirm</button>
             </div>

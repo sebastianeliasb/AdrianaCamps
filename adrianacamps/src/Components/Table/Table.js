@@ -1,52 +1,77 @@
 import React, { useState } from "react";
 import "./style/table.scss";
 
-import edit from "../../assets/edit.png";
-import deleteIcon from "../../assets/delete.png";
+import ProjectsTable from "./ProjectsTable";
+import HomeTable from "./HomeTable/HomeTable";
+import StudioTable from "./StudioTable/StudioTable";
+import NewsTable from "./NewsTable/NewsTable";
+import ContactTable from "./ContactTable/ContactTable";
+import ConceptsTable from "./ConceptsTable/ConceptsTable";
 
-function Table({ projects, showModal, selected, deleteProject, projectId }) {
-  return (
-    <>
-      <div className="content-selected">
-        <span>{selected}</span>
-        {selected === "projects" ? (
-          <button onClick={() => showModal()}>Create new</button>
-        ) : null}
-      </div>
-      {selected === "projects" ? (
-        <div className="content-information">
-          <div className="content-row-header">
-            <div>Name</div>
-            <div>Client</div>
-            <div>Location</div>
-            <div>Edit</div>
+function Table({ data, showModal, selected, deleteProject }) {
+  switch (selected) {
+    case "projects":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+            <button onClick={() => showModal()}>Create new</button>
           </div>
-          {projects.map((project, index) => (
-            <>
-              {" "}
-              <div key={index} className="content-row">
-                <div onClick={() => console.log(project.id)}>
-                  {project.name}
-                </div>
-                <div>{project.client}</div>
-                <div>{project.location}</div>
-                <div>
-                  <span
-                    onClick={() => showModal(true)}
-                    style={{ backgroundImage: `url(${edit})` }}
-                  ></span>
-                  <span
-                    onClick={() => deleteProject(project.id)}
-                    style={{ backgroundImage: `url(${deleteIcon})` }}
-                  ></span>
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-      ) : null}
-    </>
-  );
+          <ProjectsTable
+            showModal={showModal}
+            projects={data.projects}
+            deleteProject={deleteProject}
+          />
+        </>
+      );
+    case "home":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+          </div>
+          <HomeTable />
+        </>
+      );
+    case "studio":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+          </div>
+          <StudioTable />
+        </>
+      );
+    case "news":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+          </div>
+          <NewsTable />
+        </>
+      );
+    case "contact":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+          </div>
+          <ContactTable />
+        </>
+      );
+    case "concepts":
+      return (
+        <>
+          <div className="content-selected">
+            <span>{selected}</span>
+          </div>
+          <ConceptsTable />
+        </>
+      );
+    default:
+      return null;
+  }
 }
 
 export default Table;

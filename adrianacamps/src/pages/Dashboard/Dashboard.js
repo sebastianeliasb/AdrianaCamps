@@ -10,17 +10,17 @@ import "../../configureAmplify";
 import "./style/dashboard.scss";
 import { deleteProjects as deleteProjectMutation } from "../../graphql/mutations";
 import { updateProjects as editProject } from "../../graphql/mutations";
+import DashboardNav from "../../Components/DashboardNav/DashboardNav";
 
 function Dashboard() {
   const [data, setData] = useState({ projects: [], news: [] });
   const [modal, setModal] = useState(false);
   const [selected, setSelected] = useState("home");
-  const [lables, setLables] = useState(["Name", "Sub-name", "Client"]);
   const [signedUser, setSignedUser] = useState(false);
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  //** */ UseEffects **//
+  //**  UseEffects **//
   useEffect(() => {
     authListener();
     checkUser();
@@ -29,6 +29,8 @@ function Dashboard() {
   useEffect(() => {
     fetchProjects();
   }, []);
+
+  //** */ Data Logic **//
   async function fetchProjects() {
     const projectData = await API.graphql({
       query: listProjects,
@@ -48,7 +50,7 @@ function Dashboard() {
     fetchProjects();
   }
 
-  //** */ Auth Logic **//
+  //** Auth Logic **//
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     setUser(user);
@@ -74,54 +76,15 @@ function Dashboard() {
     window.location.reload(false);
   };
 
-  //** */ Label Logic **//
-  const labelMap = {
-    home: ["carrouselImages"],
-    studio: ["studio"],
-    projects: [
-      "name",
-      "subName",
-      " location",
-      "date",
-      "description",
-      "subDescription",
-      "client",
-      "photographer",
-      "surface",
-      "projectImages",
-    ],
-    news: ["something"],
-    contact: ["something"],
-    concepts: ["something"],
-  };
-
-  const fetchLabels = useCallback(
-    (labelsToKeep) => {
-      const labelSet = new Set();
-
-      data.projects.forEach((project) => {
-        const keys = Object.keys(project);
-        keys.forEach((key) => {
-          if (labelsToKeep.includes(key)) {
-            labelSet.add(key);
-          }
-        });
-      });
-
-      const labels = Array.from(labelSet);
-      setLables(labels);
-    },
-    [data.projects]
-  );
-
   const handleSelect = (name) => {
     setSelected(name);
-    fetchLabels(labelMap[name]);
   };
+  const [projectData, setProjectData] = useState(null);
 
-  const toggleModal = (isEditing = false) => {
+  const toggleModal = (isEditing = false, project) => {
     setIsEditing(isEditing);
     setModal(!modal);
+    setProjectData(project || null);
     fetchProjects();
   };
 
@@ -129,62 +92,7 @@ function Dashboard() {
     user && (
       <>
         <div id="dashboard-body">
-          <div className="nav-body">
-            <Link to="/">
-              <header>Adriana</header>
-            </Link>
-            <div>
-              <span
-                className={selected === "home" ? "selected" : ""}
-                onClick={() => handleSelect("home")}
-              >
-                Home
-              </span>
-            </div>
-            <div>
-              <span
-                className={selected === "studio" ? "selected" : ""}
-                onClick={() => handleSelect("studio")}
-              >
-                Studio
-              </span>
-            </div>
-            <div>
-              <span
-                className={selected === "projects" ? "selected" : ""}
-                onClick={() => {
-                  handleSelect("projects");
-                }}
-              >
-                Projects
-              </span>
-            </div>
-            <div>
-              <span
-                className={selected === "news" ? "selected" : ""}
-                onClick={() => handleSelect("news")}
-              >
-                News
-              </span>
-            </div>
-            <div>
-              <span
-                className={selected === "contact" ? "selected" : ""}
-                onClick={() => handleSelect("contact")}
-              >
-                Contact
-              </span>
-            </div>
-            <div>
-              <span
-                className={selected === "concepts" ? "selected" : ""}
-                onClick={() => handleSelect("concepts")}
-              >
-                Concepts
-              </span>
-            </div>
-            <header>Camps</header>
-          </div>
+          <DashboardNav selected={selected} handleSelect={handleSelect} />
           <div className="content-body">
             <div className="dashboard">
               {signedUser && (
@@ -198,7 +106,7 @@ function Dashboard() {
 
               <Table
                 deleteProject={deleteProject}
-                projects={data.projects}
+                data={data}
                 showModal={toggleModal}
                 selected={selected}
                 // projectId={data.projects.map((project) => project.id)}
@@ -213,10 +121,7 @@ function Dashboard() {
           toggleModal={toggleModal}
           modalTitle={selected}
           projects={data.projects}
-          projectId={data.projects.map((project) => project.id)}
-          navTabs={lables.map((label, index) => (
-            <div key={index}>{label}</div>
-          ))}
+          projectData={projectData}
         />
       </>
     )
