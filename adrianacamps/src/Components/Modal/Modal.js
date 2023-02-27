@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { v4 as uuid } from "uuid";
 import "./style/modal.scss";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { createProjects, updateProjects } from "../../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { getProjects } from "../../graphql/queries";
@@ -30,6 +30,8 @@ function Modal({
   ...props
 }) {
   const [project, setproject] = useState(initialState);
+  const [image, setImage] = useState(null);
+  const imageFileInput = useRef(null);
   const {
     name,
     subName,
@@ -54,7 +56,11 @@ function Modal({
     if (!name) return;
     const id = uuid();
     project.id = id;
-
+    if (image) {
+      const fileName = `${image.name}_${uuid()}`;
+      project.projectImages = fileName;
+      await Storage.put(fileName, image);
+    }
     await API.graphql({
       query: createProjects,
       variables: { input: project },
@@ -62,6 +68,15 @@ function Modal({
     });
     toggleModal();
     setproject(initialState);
+  }
+
+  async function uploadImage() {
+    imageFileInput.current.click();
+  }
+  function handleChange(e) {
+    const fileUploaded = e.target.files[0];
+    if (!fileUploaded) return;
+    setImage(fileUploaded);
   }
   // const id = projectData.id;
   return (
@@ -156,17 +171,23 @@ function Modal({
                     placeholder="surface"
                   />
                   <input
-                    className="images-input"
-                    onChange={onChange}
-                    name="projectImages"
-                    value={project.projectImages}
-                    placeholder="projectImages"
+                    // className="images-input"
+                    type="file"
+                    ref={imageFileInput}
+                    onChange={handleChange}
+                    // name="projectImages"
+                    // value={project.projectImages}
+                    // placeholder="projectImages"
                   />
+                  {image && (
+                    <img alt="To upload" src={URL.createObjectURL(image)}></img>
+                  )}
+                  <button
+                    onClick={createNewProject}
+                  >{`Create ${props.modalTitle}`}</button>
+                  <button onClick={uploadImage}>{`Upload Image`}</button>
                 </div>
               ) : null}
-              <button
-                onClick={createNewProject}
-              >{`Create ${props.modalTitle}`}</button>
             </div>
           )}
         </>

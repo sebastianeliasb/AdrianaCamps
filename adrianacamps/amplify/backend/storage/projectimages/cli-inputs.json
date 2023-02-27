@@ -1,0 +1,16 @@
+{
+  "resourceName": "projectimages",
+  "policyUUID": "89cb8427",
+  "bucketName": "adrianacampsbdbf61de1d794c2085b822f76e214d17",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
