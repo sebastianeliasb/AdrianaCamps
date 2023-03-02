@@ -3,14 +3,16 @@
 #footer-main-container{
     position: relative;
     height: 100vh;
-    display: flex;
+   
     align-items: center;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     // background-color: red;   
     margin: 17rem 0 11rem 0;
-
+    .footer-top{
+        display: flex;
+        flex-direction: column;
 div{
     margin: 0.4rem;
     font-family: 'Roboto';
@@ -40,20 +42,28 @@ div:nth-of-type(3){
         }
 
 }
+}
 
-@media only screen and (min-width: 500px){
+
+@media only screen and (min-width: 600px){
     #footer-main-container{
-        // display: none;
         position: relative;
-        flex-direction: row;
+        
         bottom: 0;
         left: 0;
         height: 8vh;
         width: 100%;
-        margin: 5rem 0 7rem 0;
-        justify-content: space-between;
-        // background-color: red;
+        margin: 5rem 0 16vh 0;
+        
         box-sizing: border-box;
-        padding: 0 8vw 0 8vw;
+        padding: 2vh 8vw 0 8vw;
+
+        .footer-top{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row !important;
+            border-top: 0.5px solid #959595;
+            transform: rotate(-0.04deg);
+        }
     }
 }

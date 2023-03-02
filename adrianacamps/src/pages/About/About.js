@@ -8,9 +8,12 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 //components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 import Footer from "../../Components/Footer";
+import Nav from "../../Components/nav/Nav";
+import WebNav from "../../Components/WebNav";
 function About() {
   return (
     <MainPageLayout>
+      <WebNav />
       <ContentContainer>
         <main>
           <div className="about-left">
@@ -31,8 +34,10 @@ function About() {
                 <p>
                   Diseñadora de Interiores y Lighting Designer. Soy Hija de la
                   cultura mediterránea, hecho que ha provocado una fuerte
-                  influencia en mi modo de ver y entender el diseño. Espacios y
-                  objetos atemporales y funcionales, inspirados en la
+                  influencia en mi modo de ver y entender el diseño.
+                </p>{" "}
+                <p>
+                  Espacios y objetos atemporales y funcionales, inspirados en la
                   simplicidad y el uso de la luz natural son premisas
                   indispensables en mis diseños, adaptadas a la modernidad, sin
                   olvidar jamás las necesidades y deseos del cliente, así como
@@ -40,15 +45,14 @@ function About() {
                   designer, entiendo que la luz no solo debe moldearse de modo
                   artificial, motivo por el cual, latradicional celosía,
                   reinterpretada, es un elemento recurrente en mis espacios.
-                  Perfeccionista, analítica, proactiva y creativa, siempre con
-                  ganas de aprender cosas nuevas, mejorar y superarme. Ando en
-                  busca de nuevos retos y descubrir nuevos horizontes, lo que me
-                  ha llevado a vivir y estudiar en Italia, Suecia y Marruecos. Y
-                  arealizar proyectos en España, Bélgica, Países Bajos,
-                  Lituania, Rusia, Austria, Israel, Alemania, Kuwait, Reino
-                  Unido, China, Corea, Tailandia, Portugal, Polonia y Estados
-                  Unidos.
                 </p>
+                Perfeccionista, analítica, proactiva y creativa, siempre con
+                ganas de aprender cosas nuevas, mejorar y superarme. Ando en
+                busca de nuevos retos y descubrir nuevos horizontes, lo que me
+                ha llevado a vivir y estudiar en Italia, Suecia y Marruecos. Y
+                arealizar proyectos en España, Bélgica, Países Bajos, Lituania,
+                Rusia, Austria, Israel, Alemania, Kuwait, Reino Unido, China,
+                Corea, Tailandia, Portugal, Polonia y Estados Unidos.
                 <p>¿Cuál será el próximo destino?</p>
                 <u>Filosofia</u>
                 <p>
