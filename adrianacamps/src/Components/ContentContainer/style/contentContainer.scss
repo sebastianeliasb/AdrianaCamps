@@ -1,3 +1,25 @@
+//Web
+@media only screen and (min-width: 500px){
+    .page-content-container{
+        position: relative;
+        display: flex;
+        flex-direction: column !important;
+        overflow: auto;
+        min-height:100vh !important;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 !important ;
+       
+        
+    
+    }
+    
+    .page-content-container::-webkit-scrollbar {
+        display: none;
+      }
+}
+
+//Mobile
 .page-content-container{
     position: relative;
     display: flex;
@@ -5,9 +27,6 @@
     overflow: auto;
     height:45rem;
     width: 100%;
-    // box-sizing: border-box;
-    // padding: 3.35rem;
-    // outline: 5px solid black;
     box-sizing: border-box;
     padding-top: 10rem ;
 
@@ -16,3 +35,5 @@
 .page-content-container::-webkit-scrollbar {
     display: none;
   }
+  
+

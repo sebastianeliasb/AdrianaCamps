@@ -16,7 +16,7 @@ div{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 1.48vh;
     display: flex;
     flex-direction: column;
     line-height: 140%;
@@ -39,4 +39,21 @@ div:nth-of-type(3){
         }
         }
 
+}
+
+@media only screen and (min-width: 500px){
+    #footer-main-container{
+        // display: none;
+        position: relative;
+        flex-direction: row;
+        bottom: 0;
+        left: 0;
+        height: 8vh;
+        width: 100%;
+        margin: 5rem 0 7rem 0;
+        justify-content: space-between;
+        // background-color: red;
+        box-sizing: border-box;
+        padding: 0 8vw 0 8vw;
+    }
 }

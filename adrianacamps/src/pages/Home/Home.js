@@ -16,7 +16,7 @@ function Home() {
     >
       <Carrusel />
       <main className="home-main">
-        <footer>
+        <footer className="home-footer">
           <div>
             <span>Instagram — Pinterest — LinkedIn </span>
             <span>© Adriana Camps 2023 — All Rights reserved</span>
