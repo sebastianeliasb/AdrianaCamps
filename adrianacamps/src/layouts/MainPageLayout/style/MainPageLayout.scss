@@ -6,3 +6,22 @@
     // justify-content: center;
     
 }
+
+@media screen and (min-width:600px) {
+    .page-main{
+        
+        .main-layout-left{
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            
+        }
+        .main-layout-right{
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 50%;
+        }
+    }
+}

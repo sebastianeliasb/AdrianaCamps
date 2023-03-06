@@ -12,7 +12,10 @@ import Nav from "../../Components/nav/Nav";
 import WebNav from "../../Components/WebNav";
 function About() {
   return (
-    <MainPageLayout>
+    <MainPageLayout
+      backgroundColorLeft={"beige"}
+      backgroundColorRight={"white"}
+    >
       <WebNav />
       <ContentContainer>
         <main>
@@ -23,7 +26,7 @@ function About() {
             ></div>
           </div>
           <div className="about-right">
-            <div className="transparent-cover"></div>
+            {/* <div className="transparent-cover"></div> */}
             <div className="about-right-content">
               <div
                 className="about-image-container"

@@ -6,6 +6,7 @@ import { listProjects } from "../../graphql/queries";
 //Components
 import ContentContainer from "../../Components/ContentContainer";
 import ProjectContent from "../../Components/ProjectContent/ProjectContent";
+import WebNav from "../../Components/WebNav";
 //Layout
 import MainPageLayout from "../../layouts/MainPageLayout";
 //Images
@@ -30,9 +31,9 @@ function Projects() {
   return (
     <>
       <MainPageLayout backgroundColor={"beige"}>
+        <WebNav />
         <ContentContainer>
           <ProjectContent data={projects} />
-          {/* <ProjectContent /> */}
         </ContentContainer>
       </MainPageLayout>
     </>
