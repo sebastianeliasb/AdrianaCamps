@@ -1,36 +1,67 @@
 @use "../../../styles/mixins/general";
+
+.overlay-container{
+    position: fixed;
+    z-index: 1;
+    // position: fixed;
+    pointer-events: none;
+    // z-index: 1;
 .main-container-big{
     position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
-    height: 90vh;
+    height: 95vh;
     width: 100%;
-    margin-top: 3rem;    
+    margin-top: 2rem;    
     box-sizing: border-box;
     padding: 1.5rem;
+ 
 
 // !! CHANGE COLOR SCHEME ORGANIZATION !! 
-    .adriana-name{
-        display: flex;
-        flex-direction: column;
-        flex-grow: 2;
-        justify-content: space-between;
-        font-family: 'Arya';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        line-height: 177.9%;
-        text-align: center;
+.adriana-name{
+    // position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    justify-content: space-between;
+    font-family: 'Arya';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 177.9%;
+    text-align: center;
+    // pointer-events: all;
+
+    a{
+        cursor: pointer;
+        margin: 4rem;
+        text-decoration: none;
+       color: inherit;
+       pointer-events: all;
+        
+    }
+    a:visited{
+        text-decoration: none;
+    }
+        
+  
+        
      
 
-        .nav-links{
-            color: black;
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
+.nav-links{
+    pointer-events: all;
+    // position: fixed;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;    
 // line-height: 100%;
 
 a{
@@ -51,7 +82,7 @@ a:hover{
         }
         
      
-        span{
+span{
     align-self: center;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -65,87 +96,87 @@ a:hover{
     
         
     
-    .left-small,.right-small{
-        flex-grow:1 ;
-        flex-basis: 300px;
-        display: flex;
+.left-small,.right-small{
+    flex-grow:1 ;
+    flex-basis: 300px;
+    display: flex;
         
     }
     
-    .right-small{
-        justify-content: flex-end;
-       .nav-open, .nav-open-web{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 5%;
-            cursor: pointer;
+.right-small{
+    justify-content: flex-end;
+    pointer-events: all;
+.nav-open, .nav-open-web{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    cursor: pointer;
         
 
-            div:nth-of-type(1){
-                position: relative;
-                top: 1rem;
-                width: 32px;
-                height: 4.5px;
-                background-color: #000000;
+div:nth-of-type(1){
+    position: relative;
+    top: 1rem;
+    width: 32px;
+    height: 4.5px;
+    background-color: #000000;
           
             }
           
-            div:nth-of-type(2){
-                position: relative;
-                top: 1.4rem;
-                width: 32px;
-                height: 2px;
-                background-color: #000000;
+div:nth-of-type(2){
+    position: relative;
+    top: 1.4rem;
+    width: 32px;
+    height: 2px;
+    background-color: #000000;
                
             }
         }
-       .nav-close{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 5%;
-            cursor: pointer;
-            z-index: 1;
+.nav-close{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    cursor: pointer;
+    z-index: 1;
         
-
-            div:nth-of-type(1){
-                position: relative;
-                transform: rotate(45deg);
-                top: 1.2rem;
-                width: 32px;
-                height: 4px;
-                background-color: #000000;
+div:nth-of-type(1){
+    position: relative;
+    transform: rotate(45deg);
+    top: 1.2rem;
+    width: 32px;
+    height: 4px;
+    background-color: #000000;
                
             }
           
-            div:nth-of-type(2){
-                position: relative;
-                transform: rotate(-45deg);
-                top: 1rem;
-                width: 32px;
-                height: 2px;
-                background-color: #000000;
+div:nth-of-type(2){
+    position: relative;
+    transform: rotate(-45deg);
+    top: 1rem;
+    width: 32px;
+    height: 2px;
+    background-color: #000000;
             }
             
         }
     }
 }
+}
 
 @media only screen and (max-width: 600px){
-    .nav-links{
-        flex-direction: column;
-        margin: 0.4rem;
-
-        
-       
+.nav-links{
+    flex-direction: column;
+    margin: 0.4rem;
+    width: 10rem;
      
     }
-    a{
-        margin: 0.4rem !important;
-      }
+a{
+   margin: 0.1rem !important;
+      
+}
    
    
 }

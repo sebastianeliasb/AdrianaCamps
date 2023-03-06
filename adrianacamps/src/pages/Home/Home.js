@@ -1,47 +1,32 @@
-import React, { useState } from "react";
-import NameBox from "../../Components/nameBox";
+import React from "react";
+//style
 import "./style/home.scss";
-import Nav from "../../Components/nav";
+//components
 import Carrusel from "../../Components/Carrusel";
+//layout
+import NameLayout from "../../layouts/nameLayout";
 
 function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNav = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <>
+    <NameLayout
+      color="white"
+      navColor="white"
+      text={<span>Interior & Lighting Studio</span>}
+      navClass="nav-open"
+    >
       <Carrusel />
-
-      {!isOpen ? (
-        <>
-          <NameBox
-            color={"white"}
-            navColor={"white"}
-            text={<span>Interior & Lighting Studio</span>}
-            toggleNav={toggleNav}
-            navClass={"nav-open"}
-          />
-          <main className="home-main">
-            <footer>
-              <div>
-                <span>Instagram — Pinterest — LinkedIn </span>
-                <span>© Adriana Camps 2023 — All Rights reserved</span>
-              </div>
-              <div>
-                <span>Design by Sauras Garriga</span>
-              </div>
-            </footer>
-          </main>
-        </>
-      ) : (
-        <>
-          <Nav toggleNav={toggleNav} />
-        </>
-      )}
-    </>
+      <main className="home-main">
+        <footer className="home-footer">
+          <div>
+            <span>Instagram — Pinterest — LinkedIn </span>
+            <span>© Adriana Camps 2023 — All Rights reserved</span>
+          </div>
+          <div>
+            <span>Design by Sauras Garriga</span>
+          </div>
+        </footer>
+      </main>
+    </NameLayout>
   );
 }
 

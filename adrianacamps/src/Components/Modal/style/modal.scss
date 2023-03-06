@@ -1,0 +1,106 @@
+.modal-backdrop{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.533);
+
+
+}
+.modal-body{
+    position: absolute;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    top: 25%;
+    left: 0;
+    right: 0;
+    min-height: 20vh;
+    min-width: 40vw;
+    max-width: 70vw;
+    // outline: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    border-radius: 30px;
+
+    .modal-title{
+        font-size: 20px;
+        // background-color: aquamarine;
+        // border-bottom: 1px solid rgba(0, 0, 0, 0.697);
+        margin-bottom: 1rem;
+    }
+    span::first-letter{
+        text-transform: capitalize;
+    }
+
+    .modal-nav{
+        display: flex;
+        width: 100%;
+        height: 5vh;
+
+        div{
+            display: flex;
+            box-sizing: border-box;
+            padding: 5px;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            height: 100%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+      
+
+            border-radius: 0 0 7px 0;
+        }
+.active{
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    border-bottom:0 ;
+    border-radius: 0;
+}
+       
+    }
+
+    //GRID
+    .modal-info-container{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+       flex-direction: column;
+        min-height: 40vh;
+        grid-template-areas: "name subName client"
+                              "location photo surface"   
+                               "desc subDesc images";
+
+                            
+
+        .name-input{grid-area:name ;}
+        .client-input{grid-area:client ;}
+        .location-input{grid-area:location ;}
+        .subName-input{grid-area:subName ;}
+        .desc-input{grid-area:desc ;}
+        .subDesc-input{grid-area:subDesc ;}
+        .photographer-input{grid-area:photo ;}
+        .surface-input{grid-area:surface ;}
+        .images-input{grid-area:images ;}
+        
+        // background-color: bisque;
+         input{
+            width: 20vw;
+            height: 5vh;
+         }
+img{
+    height: 15vh;
+
+}
+
+        
+    }
+}       
+
+
