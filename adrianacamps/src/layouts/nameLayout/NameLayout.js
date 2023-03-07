@@ -31,6 +31,7 @@ function NameLayout({ children, ...props }) {
             toggleNav={toggleNav}
             navClass={props.navClass || "nav-open-web"}
             navColor={props.navColor || "black"}
+            events={props.events || "all"}
           />
           {children}
         </>

@@ -3,9 +3,7 @@
 .overlay-container{
     position: fixed;
     z-index: 1;
-    // position: fixed;
     pointer-events: none;
-    // z-index: 1;
 .main-container-big{
     position: fixed;
     top: 0;
@@ -105,7 +103,7 @@ span{
     
 .right-small{
     justify-content: flex-end;
-    pointer-events: all;
+    // pointer-events: all;
 .nav-open, .nav-open-web{
     display: flex;
     flex-direction: column;
@@ -177,6 +175,8 @@ a{
    margin: 0.1rem !important;
       
 }
-   
+//    .right-small{
+//    display: none !important;
+//    }
    
 }
