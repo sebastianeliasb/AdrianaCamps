@@ -37,9 +37,16 @@ function ProjectItem() {
               </div>
               <div className="project-content-right">
                 <div className="project-detail">
-                  <div>{projectName}</div>
-                  <div>{`${projectLocation}(${projectDate})`}</div>
-                  <div>{projectDescription}</div>
+                  <div className="project-info">
+                    <span>{projectName}</span>
+                    <span>{`${projectLocation}(${projectDate})`}</span>
+                    <span>{projectDescription}</span>
+                  </div>
+                  <div className="project-aspects">
+                    <span>Cliente:Lorem Ipsum</span>
+                    <span>Fotografo:Lorem Ipsum</span>
+                    <span>Superficie:Lorem Ipsum</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -53,11 +60,47 @@ function ProjectItem() {
               ></div>
             </div>
             {/* Third section */}
+            <div>
+              <img></img>
+              <span>
+                At ground floor level, while daily life and lines of sight
+                extrude freely beyond the walls of the house to colonise the
+                entirety of the plot, the atmosphere is purposefully
+                introspective. On the upper floors, the emphasis shifts to
+                elevated vistas and successive recalibration of the dialogue
+                between interior space and the fall of natural light.
+              </span>
+              <span></span>
+              <img></img>
+            </div>
             {/* Fourth section */}
+            <div>
+              <img></img>
+            </div>
             {/* Five section */}
+            <div>
+              <span></span>
+              <img></img>
+              <img></img>
+              <span></span>
+            </div>
             {/* Six section */}
+            <div>
+              <span></span>
+              <img></img>
+              <img></img>
+              <span></span>
+            </div>
             {/* Seven section */}
+            <div>
+              <img></img>
+            </div>
             {/* Eighth section */}
+            <div>
+              <img></img>
+              <img></img>
+              <img></img>
+            </div>
           </div>
 
           {/* <div className="project-order-box">
