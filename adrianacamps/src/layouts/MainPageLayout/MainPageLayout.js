@@ -15,7 +15,7 @@ function MainPageLayout({
   };
 
   return (
-    <NameLayout>
+    <NameLayout events={props.events}>
       <main
         className="page-main"
         style={{

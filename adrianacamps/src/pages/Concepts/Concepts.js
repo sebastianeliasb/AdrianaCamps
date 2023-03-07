@@ -7,10 +7,15 @@ import "./style/concepts.scss";
 //Components
 import ContentContainer from "../../Components/ContentContainer";
 import ProjectContent from "../../Components/ProjectContent/ProjectContent";
+import WebNav from "../../Components/WebNav";
 
 function Concepts() {
   return (
-    <MainPageLayout>
+    <MainPageLayout
+      backgroundColorLeft={"white"}
+      backgroundColorRight={"beige"}
+    >
+      <WebNav />
       <ContentContainer>
         <div id="concepts">
           <div className="concepts-intro">

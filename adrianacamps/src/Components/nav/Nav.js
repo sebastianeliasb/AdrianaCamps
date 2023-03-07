@@ -18,6 +18,7 @@ function Nav(props) {
             <Link to="/language">Language</Link>
           </>
         }
+        events={props.events || "all"}
         toggleNav={props.toggleNav}
         navClass={"nav-close"}
       />

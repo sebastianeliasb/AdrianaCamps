@@ -1,7 +1,7 @@
 import React from "react";
 import "../../configureAmplify";
 import { useState, useEffect } from "react";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { listProjects } from "../../graphql/queries";
 //Components
 import ContentContainer from "../../Components/ContentContainer";
@@ -23,17 +23,34 @@ function Projects() {
     const projectData = await API.graphql({
       query: listProjects,
     });
-    setProjects(projectData.data.listProjects.items);
+    const { items } = projectData.data.listProjects;
+    const projectWithImages = await Promise.all(
+      items.map(async (project) => {
+        if (project.projectImages) {
+          project.projectImages = await Storage.get(project.projectImages);
+        }
+        return project;
+      })
+    );
+    setProjects(projectWithImages);
   }
 
-  // console.log(projects);
+  const w = document.documentElement.clientWidth || window.innerWidth;
+  let pointerEvent;
+  if (w <= 600) {
+    pointerEvent = "all";
+  } else {
+    pointerEvent = "none";
+  }
 
   return (
     <>
-      <MainPageLayout backgroundColor={"beige"}>
+      <MainPageLayout backgroundColor={"beige"} events={pointerEvent}>
         <WebNav />
         <ContentContainer>
-          <ProjectContent data={projects} />
+          <div className="project-body">
+            <ProjectContent data={projects} />
+          </div>
         </ContentContainer>
       </MainPageLayout>
     </>

@@ -40,7 +40,7 @@ function NameBox(props) {
             </>
           )}
         </div>
-        <div className="right-small">
+        <div className="right-small" style={{ pointerEvents: props.events }}>
           <nav
             className={props.navClass}
             onClick={props.toggleNav}
