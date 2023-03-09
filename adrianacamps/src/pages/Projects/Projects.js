@@ -35,17 +35,9 @@ function Projects() {
     setProjects(projectWithImages);
   }
 
-  const w = document.documentElement.clientWidth || window.innerWidth;
-  let pointerEvent;
-  if (w <= 600) {
-    pointerEvent = "all";
-  } else {
-    pointerEvent = "none";
-  }
-
   return (
     <>
-      <MainPageLayout backgroundColor={"beige"} events={pointerEvent}>
+      <MainPageLayout backgroundColor={"beige"}>
         <WebNav />
         <ContentContainer>
           <div className="project-body">

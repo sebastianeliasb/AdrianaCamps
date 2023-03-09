@@ -3,13 +3,11 @@ import React from "react";
 import testImage from "../../assets/about_try_image.png";
 import "./style/about.scss";
 //layout
-import NameLayout from "../../layouts/nameLayout";
 import MainPageLayout from "../../layouts/MainPageLayout";
 //components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
-import Footer from "../../Components/Footer";
-import Nav from "../../Components/nav/Nav";
 import WebNav from "../../Components/WebNav";
+
 function About() {
   return (
     <MainPageLayout
@@ -18,7 +16,7 @@ function About() {
     >
       <WebNav />
       <ContentContainer>
-        <main>
+        <main id="about-main">
           <div className="about-left">
             <div
               className="about-image-container"

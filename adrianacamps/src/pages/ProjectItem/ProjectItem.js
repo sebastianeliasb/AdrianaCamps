@@ -18,24 +18,24 @@ function ProjectItem() {
   const projectDate = data.project.date;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
-  let pointerEvent;
+  let backgroundColor;
   if (w <= 600) {
-    pointerEvent = "all";
+    backgroundColor = "beige";
   } else {
-    pointerEvent = "none";
+    backgroundColor = "none";
   }
   return (
     <>
       <MainPageLayout
         backgroundColorLeft={"white"}
         backgroundColorRight={"beige"}
-        events={pointerEvent}
+        backgroundColor={backgroundColor}
       >
         <WebNav />
         <ContentContainer>
           <div className="project-item-body">
             {/* First section */}
-            <div>
+            <div className="first_section">
               <div className="project-content-left">
                 <div
                   className="project-image-main"

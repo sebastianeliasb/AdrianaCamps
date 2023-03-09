@@ -1,4 +1,6 @@
 .project-item-body{
+    // display: flex;
+    // flex-direction: column;
     box-sizing: border-box;
     padding: 0 3.5rem 0 3.5rem;
     // background-color: red;
@@ -15,33 +17,47 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    // background-color: red;
 
-    div:nth-of-type(1){
-        font-family: 'Arya';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 20px;
+    .project-info{
+        display: flex;
+        flex-direction: column;
         line-height: 120%;
         /* or 24px */
+
+        span:nth-of-type(1){
+            font-family:"arya";
+            font-size: 2vh;
+            margin-top: 2vh;
+        }
+        span:nth-of-type(2){
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 1.7vh;
+            line-height: 120%;
+            color: #959595;
+        }
+        span:nth-of-type(3){
+            margin-top: 1.8vh;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 1.7vh;
+            line-height: 120%;
+        }
     }
-    div:nth-of-type(2){
+
+    .project-aspects{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.8vh;
+        margin-bottom: 5vh;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 300;
-        font-size: 15px;
-        line-height: 120%;
-        color: #959595;
-        /* or 24px */
     }
-    div:nth-of-type(3){
-        margin-top: 2rem;
-        font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 16px;
-line-height: 120%;
-        /* or 24px */
-    }
+
 }
 
 .project-images{
@@ -54,7 +70,7 @@ line-height: 120%;
 }
 }
 
-
+//WEB
 @media screen and (min-width: 600px){
   
 .project-item-body{
@@ -70,7 +86,7 @@ line-height: 120%;
     // **SECTIONS** //
 
     // **First Section**
-    div:nth-of-type(1){
+    .first_section{
         display: flex;
         width: 100%;
         height: 72vh;
@@ -92,22 +108,20 @@ line-height: 120%;
 
         .project-content-right{
                 display: flex;
+                // flex-direction: column;
                 width: 50%;
                 box-sizing: border-box;
                 padding:  0 5vw 0 8vw;
             .project-detail{
                 display: flex;
-                flex-direction: row;
                 box-sizing: border-box;
-                padding:2rem 0 2rem 0 !important;
+                padding:2rem 0 2vh 0 !important;
                 width: 100%;
-                height:55vh;
+                max-height:55vh;
 
                 .project-info{
                     display: flex;
                     flex-direction: column;
-                    height: 80%;
-                    margin-bottom: 1vh;
                     font-family: 'roboto';
                     font-weight: 400 !important;
                     font-style: normal;
@@ -123,16 +137,17 @@ line-height: 120%;
                     }
 
                 }
+    
 
                 .project-aspects{ 
                     display: flex;
                     flex-direction: column;
                     height: 20%;
-                    // background-color: azure;
                     padding: 0 !important;
                     span{
+                        font-size: 1.6vh;
                     font-family: 'roboto';
-                    font-weight: 400;
+                    font-weight: 300;
                     font-style: normal;
                     color: black;
 }
@@ -174,7 +189,10 @@ line-height: 120%;
             width: 40%;
         }
         span{
-            font-size: 1.6vh;
+            font-family: 'roboto';
+            font-weight: 300;
+            font-style: normal;
+            font-size: 1.7vh;
             display: flex;
             justify-content: center;
             align-items: center;
