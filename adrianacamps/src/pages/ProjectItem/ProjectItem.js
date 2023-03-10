@@ -18,31 +18,26 @@ function ProjectItem() {
   const projectDate = data.project.date;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
-  let pointerEvent;
+  let backgroundColor;
   if (w <= 600) {
-    pointerEvent = "all";
+    backgroundColor = "beige";
   } else {
-    pointerEvent = "none";
+    backgroundColor = "none";
   }
   return (
     <>
       <MainPageLayout
         backgroundColorLeft={"white"}
         backgroundColorRight={"beige"}
-        events={pointerEvent}
+        backgroundColor={backgroundColor}
       >
         <WebNav />
         <ContentContainer>
           <div className="project-item-body">
             {/* First section */}
-            <div>
+            <div className="first_section">
               <div className="project-content-left">
-                <div
-                  className="project-image-main"
-                  style={{
-                    backgroundImage: `url(${projectImages.mainImage}) `,
-                  }}
-                ></div>
+                <img src={projectImages.mainImage} alt="main"></img>
               </div>
               <div className="project-content-right">
                 <div className="project-detail">
@@ -61,12 +56,7 @@ function ProjectItem() {
             </div>
             {/* Second section */}
             <div>
-              <div
-                className="project-image-large"
-                style={{
-                  backgroundImage: `url(${projectImages.mainImage}) `,
-                }}
-              ></div>
+              <img src={projectImages.mainImage} alt="first"></img>
             </div>
             {/* Third section */}
             <div>

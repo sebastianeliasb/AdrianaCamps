@@ -36,11 +36,11 @@
 
     a{
         cursor: pointer;
-        margin: 4rem;
+        margin: 0 3vw 0 3vw;
         text-decoration: none;
        color: inherit;
        pointer-events: all;
-        
+       
     }
     a:visited{
         text-decoration: none;
@@ -52,19 +52,16 @@
 
 .nav-links{
     pointer-events: all;
-    // position: fixed;
     color: black;
     display: flex;
     justify-content: space-between;
     font-family: 'roboto';
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;    
-// line-height: 100%;
+    font-size: 1.6vh; 
 
 a{
     cursor: pointer;
-    margin: 4rem;
     text-decoration: none;
     color: black;
     

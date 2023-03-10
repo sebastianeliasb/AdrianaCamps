@@ -13,9 +13,16 @@ function MainPageLayout({
     beige: "rgba(217, 199, 166, 0.5)",
     white: "rgba(255, 255, 255, 1)",
   };
+  const w = document.documentElement.clientWidth || window.innerWidth;
+  let pointerEvent;
+  if (w <= 600) {
+    pointerEvent = "all";
+  } else {
+    pointerEvent = "none";
+  }
 
   return (
-    <NameLayout events={props.events}>
+    <NameLayout events={pointerEvent}>
       <main
         className="page-main"
         style={{
