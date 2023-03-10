@@ -9,7 +9,6 @@ function ProjectContent({ data }) {
 
   return data.map((project, index) => (
     <>
-      {/* {console.log(project)} */}
       <div key={index} className="project-content-box">
         <div
           className="project-image"

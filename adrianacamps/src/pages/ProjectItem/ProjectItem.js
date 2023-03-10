@@ -37,12 +37,7 @@ function ProjectItem() {
             {/* First section */}
             <div className="first_section">
               <div className="project-content-left">
-                <div
-                  className="project-image-main"
-                  style={{
-                    backgroundImage: `url(${projectImages.mainImage}) `,
-                  }}
-                ></div>
+                <img src={projectImages.mainImage} alt="main"></img>
               </div>
               <div className="project-content-right">
                 <div className="project-detail">
@@ -61,12 +56,7 @@ function ProjectItem() {
             </div>
             {/* Second section */}
             <div>
-              <div
-                className="project-image-large"
-                style={{
-                  backgroundImage: `url(${projectImages.mainImage}) `,
-                }}
-              ></div>
+              <img src={projectImages.mainImage} alt="first"></img>
             </div>
             {/* Third section */}
             <div>

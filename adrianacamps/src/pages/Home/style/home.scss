@@ -10,12 +10,12 @@
   
 .home-footer{
 position: relative;
-left: 0;
-bottom: 0;
+// left: 0;
+// bottom: 0;
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: row;
+    // flex-direction: column;
     justify-content: space-between;
     align-items: center;
     z-index: 1;
@@ -23,7 +23,7 @@ bottom: 0;
     font-style: normal;
     font-weight: 300;
     font-size: 1.2vh;
-    line-height: 140%;
+    // line-height: 140%;
     color: white;
 
    div:nth-of-type(1n){
@@ -39,13 +39,14 @@ bottom: 0;
     flex-direction: column;
    }
 }
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 600px){
     .home-footer{
         position: relative;
         flex-direction: column;
         justify-content: center !important;
         align-items: center;
         margin-bottom: 1rem;
+        margin-right: 7vw;
         
 
         div:nth-of-type(1n){
