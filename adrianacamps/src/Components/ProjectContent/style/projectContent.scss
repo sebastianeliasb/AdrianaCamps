@@ -52,7 +52,7 @@
 @media only screen and (min-width: 1366px){
 .project-body{
     box-sizing:border-box;
-    padding: 25vh 5vw 0 5vw;
+    // padding: 25vh 5vw 0 5vw;
     display: flex;
     // align-items: center;
     // justify-content: center;
@@ -68,7 +68,6 @@
     .project-image{
         height: 100%;
     }
-
 } 
     
 }
@@ -76,7 +75,6 @@
 @media (min-width: 600px) and (max-width: 1365px){
     .project-body{
  
-        padding-top: 25vh;
         display: flex;
         justify-content:start;
         flex-wrap:wrap;

@@ -1,5 +1,4 @@
 import React from "react";
-import NameLayout from "../../layouts/nameLayout";
 import MainPageLayout from "../../layouts/MainPageLayout";
 
 import "./style/concepts.scss";

@@ -49,10 +49,11 @@ width: 100%;
 // WEB
 @media only screen and (min-width: 600px){
    
-    main {
-       min-height: 100vh;
-        width: 100%;
+    #about-main {
+    //    min-height: 100vh;
+        // width: 100%;
         display: flex;
+        // margin-top: 25vh;
       
       
       .about-left {
@@ -61,14 +62,15 @@ width: 100%;
         display: flex;
         width: 50% !important;
         box-sizing: border-box;
-        padding: 14vh 8vw 0 8vw;
+        padding: 0 8vw 0 10vw;
+        // background-color: black;
 
       
         .about-image-container {
           display: flex;
           width: 100%;
-          margin-top: 4rem;
-          height: calc(100% - 35vh);
+        //   margin-top: 4rem;
+          height: calc(100% - 50vh);
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -76,28 +78,35 @@ width: 100%;
       }
       
       .about-right {
-     position: relative;
-        display: flex;
-        flex-direction: row !important;
-        width: 100% !important;
-        flex-direction: column !important;
-        padding: 0 !important;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 !important;
+    // background-color: aqua;
+
+        span{
+            width: 50%;
+        
+        }
 
         .about-right-content{
-            position: absolute;
-            right: 0;
-            padding: 14vh 8vw 0 8vw;
-            flex-direction: column;
-            box-sizing: border-box;
-            display: flex;
-            width: 50%;
+                align-items: center;
+        right: 0;
+        padding: 0vh 0 0 8vw;
+        flex-direction: column;
+        box-sizing: border-box;
+        display: flex;
+        width: 50%;
+        // background-color: aquamarine;
+        // margin-bottom:10vh;
         .about-image-container {
           display: none;
         }
       
         .about-text-container {
           width: auto;
-          margin-top: 4rem;
+          margin-top: 0;
         box-sizing: border-box;
           font-family: 'Roboto';
           font-style: normal;
@@ -113,31 +122,5 @@ width: 100%;
     div{
         display: none;
     }
-// .page-nav{
-// display: block ;
-// position: absolute;
-// top: 10rem;
-// margin-bottom: 25rem;
-// }
-
-//     a{
-//         cursor: pointer;
-//         margin: 4rem;
-//         text-decoration: none;
-//         color: black;
-//         font-family: 'Roboto';
-// font-style: normal;
-// font-weight: 300;
-// font-size: 20px;
-// line-height: 100%;
-    
-//     }
-//     a:visited{
-//         text-decoration: none;
-//     }
-
-//     a:hover{
-//         color:#6C9EBB; ;
-//     }
 }
 }

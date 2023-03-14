@@ -22,7 +22,7 @@ function MainPageLayout({
   }
 
   return (
-    <NameLayout events={pointerEvent}>
+    <NameLayout>
       <main
         className="page-main"
         style={{

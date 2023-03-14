@@ -12,50 +12,54 @@ function Contact() {
       <MainPageLayout backgroundColorRight={"beige"}>
         <WebNav />
         <ContentContainer>
-          <div id="contact">
-            <div className="contact-right">
-              <img src={contactImage} alt="contact"></img>
-            </div>
-            <div className="contact-left">
-              <div className="contact-text">
-                <p>
-                  Si quieres más información sobre nuestros servicios, no dudes
-                  en ponerte en contacto con nosotros rellenando este formulario
-                  y te daremos una respuesta lo antes posible.
-                </p>
+          <span className="try_span">
+            <div id="contact">
+              {/* <div className="contact-content"> */}
+              <div className="contact-right">
+                <img src={contactImage} alt="contact"></img>
               </div>
-
-              <form id="contact-form">
-                <input
-                  type="text"
-                  id="names"
-                  name="names"
-                  placeholder="Full Name"
-                ></input>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                ></input>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="Subject"
-                ></input>
-                <input
-                  type="text"
-                  id="message"
-                  name="message"
-                  placeholder="Message"
-                ></input>
-                <div className="send-form-container">
-                  <img role="button" src={sendArrow} alt="sendForm"></img>
+              <div className="contact-left">
+                <div className="contact-text">
+                  <p>
+                    Si quieres más información sobre nuestros servicios, no
+                    dudes en ponerte en contacto con nosotros rellenando este
+                    formulario y te daremos una respuesta lo antes posible.
+                  </p>
                 </div>
-              </form>
+
+                <form id="contact-form">
+                  <input
+                    type="text"
+                    id="names"
+                    name="names"
+                    placeholder="Full Name"
+                  ></input>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                  ></input>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Subject"
+                  ></input>
+                  <input
+                    type="text"
+                    id="message"
+                    name="message"
+                    placeholder="Message"
+                  ></input>
+                  <div className="send-form-container">
+                    <img role="button" src={sendArrow} alt="sendForm"></img>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          </span>
+          {/* </div> */}
         </ContentContainer>
       </MainPageLayout>
     </>

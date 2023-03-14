@@ -24,7 +24,7 @@ function About() {
             ></div>
           </div>
           <div className="about-right">
-            {/* <div className="transparent-cover"></div> */}
+            <span></span>
             <div className="about-right-content">
               <div
                 className="about-image-container"
