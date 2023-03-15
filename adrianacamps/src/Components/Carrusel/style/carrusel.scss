@@ -10,7 +10,6 @@
     overflow-y: hidden;
     overflow-x: hidden;
     position: absolute;
-    display: flex;
     top: 0;
     // background:  url("https://www.aucoot.com/wp-content/uploads/2021/06/John-Pawson-Home-Farm-Costswolds-Aucoot-Favourites-Aucoot-Estate-Agents-web-size_152-1320x880.jpg") center/cover;
     height: 100vh;
@@ -18,9 +17,8 @@
 div{
     height: 100%;
     width: 100%;
-    // background-color: aqua;
     img{
-        // width:auto\9;
+
         width: 100%;
         height: 100%;
     }

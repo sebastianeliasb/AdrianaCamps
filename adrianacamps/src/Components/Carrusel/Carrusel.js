@@ -24,9 +24,8 @@ function Carrusel() {
     <>
       <div className="carrusel">
         <Slider {...settings}>
-          <div>
-            <img src={homeImage} alt="Image 1" />
-          </div>
+          <img src={homeImage} alt="Image 1" />
+
           <div>
             <img src={pic2} alt="Image 2" />
           </div>

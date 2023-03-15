@@ -16,7 +16,11 @@ function Contact() {
             <div id="contact">
               {/* <div className="contact-content"> */}
               <div className="contact-right">
-                <img src={contactImage} alt="contact"></img>
+                <img
+                  className="contact-image"
+                  src={contactImage}
+                  alt="contact"
+                ></img>
               </div>
               <div className="contact-left">
                 <div className="contact-text">

@@ -10,7 +10,7 @@
 
 .project-image{
     background-color: azure;
-    height: 295.9px;
+    height: 100%;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -52,24 +52,22 @@
 @media only screen and (min-width: 1366px){
 .project-body{
     box-sizing:border-box;
-    // padding: 25vh 5vw 0 5vw;
     display: flex;
-    // align-items: center;
-    // justify-content: center;
     justify-content:flex-start;
-    // height: 100%;
-    // width: 100%;
     flex-wrap:wrap;
-    
+    // background-color: aqua;
 }
 .project-content-box{
-    height: 50vh;
+    height:55vh;
     width: calc(100%/3);
+    padding: 0 1.5vw 0 1.5vw;
     .project-image{
+        width: auto;
         height: 100%;
     }
 } 
-    
+
+
 }
 
 @media (min-width: 600px) and (max-width: 1365px){

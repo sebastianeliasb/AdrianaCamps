@@ -10,12 +10,17 @@ function ProjectContent({ data }) {
   return data.map((project, index) => (
     <>
       <div key={index} className="project-content-box">
-        <div
+        {/* <div
           className="project-image"
           style={{
             backgroundImage: `url(${project.projectImages}) `,
           }}
-        ></div>
+        ></div> */}
+        <img
+          className="project-image"
+          src={project.projectImages}
+          alt={project.name}
+        ></img>
         <div className="project-title1">
           <Link to={`/project/${project.id}`} state={{ project }}>
             {project.name}
