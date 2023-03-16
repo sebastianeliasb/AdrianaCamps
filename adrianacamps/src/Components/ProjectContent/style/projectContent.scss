@@ -7,6 +7,8 @@
     box-sizing: border-box;
     padding: 0 3.5rem 0 3.5rem;
     }
+.project-image-link{
+min-height: 35vh;
 
 .project-image{
     background-color: azure;
@@ -17,7 +19,7 @@
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);   
     }
-
+}
 .project-title1{
     font-family: 'Arya';    
     font-style: normal;
@@ -29,6 +31,13 @@
     // outline: 1px solid black;
     margin: 0.5rem;
 }
+a{
+    text-decoration: none;
+ }
+ a:visited{
+    text-decoration: none;
+    color: black;
+ }
 
 .project-title2{
     font-family: 'roboto';
@@ -61,10 +70,14 @@
     height:55vh;
     width: calc(100%/3);
     padding: 0 1.5vw 0 1.5vw;
+
+.project-image-link{
+    min-height: 45vh;
     .project-image{
-        width: auto;
+        width: 100%;
         height: 100%;
     }
+}
 } 
 
 

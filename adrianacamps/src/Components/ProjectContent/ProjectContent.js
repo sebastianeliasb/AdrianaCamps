@@ -16,11 +16,16 @@ function ProjectContent({ data }) {
             backgroundImage: `url(${project.projectImages}) `,
           }}
         ></div> */}
-        <img
-          className="project-image"
-          src={project.projectImages}
-          alt={project.name}
-        ></img>
+
+        <div className="project-image-link">
+          <Link to={`/project/${project.id}`} state={{ project }}>
+            <img
+              className="project-image"
+              src={project.projectImages}
+              alt={project.name}
+            />
+          </Link>
+        </div>
         <div className="project-title1">
           <Link to={`/project/${project.id}`} state={{ project }}>
             {project.name}

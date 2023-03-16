@@ -32,6 +32,7 @@
     font-size: 4.5vh;
     line-height: 177.9%;
     text-align: center;
+    align-items: center;
     // pointer-events: all;
 
     a{
@@ -93,7 +94,7 @@ span{
     
 .left-small,.right-small{
     flex-grow:1 ;
-    flex-basis: 300px;
+    flex-basis: 6vw;
     display: flex;
         
     }
