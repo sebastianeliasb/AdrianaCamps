@@ -28,6 +28,7 @@
     align-items: center;
     width: 100%;
     margin-top: 4vh;
+    // max-width: 35vw;
 
     input{
         box-sizing: border-box;
@@ -49,7 +50,7 @@ line-height: 140%;
         border-bottom: 0.16vh solid black;
     }
     input:nth-of-type(4){
-        margin-top: 3rem;
+        margin-top: 5rem;
     }
 .send-form-container{
     height: 1.5vh;
@@ -114,14 +115,10 @@ line-height: 140%;
         height: 100%;
         justify-content: flex-end;
         box-sizing: border-box;
-        padding:  0 0 0 8vw;
 
-        // background-color: aqua;
-        // align-items: center;
-
-        img{
+        .contact-image{
             width: 30vw;
-            height: 45vh;
+            height: 50vh;
         }
     }
    }
