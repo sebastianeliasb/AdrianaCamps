@@ -23,35 +23,35 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "studio",
-    element: <About />,
-  },
-  {
-    path: "projects",
-    element: <Projects />,
-  },
+  // {
+  //   path: "studio",
+  //   element: <About />,
+  // },
+  // {
+  //   path: "projects",
+  //   element: <Projects />,
+  // },
 
-  {
-    path: "project/:projectId",
-    element: <ProjectItem />,
-  },
-  {
-    path: "concepts",
-    element: <Concepts />,
-  },
-  {
-    path: "news",
-    element: <News />,
-  },
-  {
-    path: "contact",
-    element: <Contact />,
-  },
-  {
-    path: "dashboard",
-    element: <Dashboard />,
-  },
+  // {
+  //   path: "project/:projectId",
+  //   element: <ProjectItem />,
+  // },
+  // {
+  //   path: "concepts",
+  //   element: <Concepts />,
+  // },
+  // {
+  //   path: "news",
+  //   element: <News />,
+  // },
+  // {
+  //   path: "contact",
+  //   element: <Contact />,
+  // },
+  // {
+  //   path: "dashboard",
+  //   element: <Dashboard />,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
