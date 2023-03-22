@@ -103,14 +103,13 @@ span{
     justify-content: flex-end;
     // pointer-events: all;
 .nav-open, .nav-open-web{
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // height: 5%;
-    // cursor: pointer;
-    // pointer-events: all;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    cursor: pointer;
+    pointer-events: all;
         
 
 div:nth-of-type(1){
