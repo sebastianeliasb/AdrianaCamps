@@ -1,10 +1,11 @@
 @use "../../../styles/mixins/general";
 
-.overlay-container{
-    position: fixed;
-    z-index: 1;
-    pointer-events: none;
-.main-container-big{
+.overlay-container {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+
+  .main-container-big {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,167 +15,165 @@
     justify-content: center;
     height: 95vh;
     width: 100%;
-    margin-top: 2rem;    
+    margin-top: 2rem;
     box-sizing: border-box;
-    padding: 2vh 5vw 5vh 5vw;
- 
+    padding: 1.5rem;
 
-// !! CHANGE COLOR SCHEME ORGANIZATION !! 
-.adriana-name{
-    // position: relative;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    justify-content: space-between;
-    font-family: 'Arya';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 4.5vh;
-    line-height: 177.9%;
-    text-align: center;
-    // pointer-events: all;
 
-    a{
+    // !! CHANGE COLOR SCHEME ORGANIZATION !!
+    .adriana-name {
+      // position: relative;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 2;
+      justify-content: space-between;
+      font-family: 'Arya';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 177.9%;
+      text-align: center;
+      // pointer-events: all;
+
+      a {
         cursor: pointer;
         margin: 0 3vw 0 3vw;
         text-decoration: none;
-       color: inherit;
-       pointer-events: all;
-       
-    }
-    a:visited{
+        color: inherit;
+        pointer-events: all;
+
+      }
+
+      a:visited {
         text-decoration: none;
-    }
-        
-  
-        
-     
+      }
 
-.nav-links{
-    pointer-events: all;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'roboto';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 1.6vh; 
 
-a{
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    
-}
-a:visited{
-    text-decoration: none;
-}
+      .nav-links {
+        pointer-events: all;
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 1.6vh;
 
-a:hover{
-    color:#6C9EBB; ;
-}
+        a {
+          cursor: pointer;
+          text-decoration: none;
+          color: black;
 
         }
-        
-     
-span{
-    align-self: center;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    font-size: 20px;
-    line-height: 100%;
-    width: 170px;
-    height: 40px;
-        }
-    }
-    
-        
-    
-.left-small,.right-small{
-    flex-grow:1 ;
-    flex-basis: 300px;
-    display: flex;
-        
-    }
-    
-.right-small{
-    justify-content: flex-end;
-    // pointer-events: all;
-.nav-open, .nav-open-web{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 5%;
-    cursor: pointer;
-    pointer-events: all;
-        
 
-div:nth-of-type(1){
-    position: relative;
-    top: 1rem;
-    width: 2rem;
-    height: 0.22rem;
-    background-color: #df0c0c;
-          
-            }
-          
-div:nth-of-type(2){
-    position: relative;
-    top: 1.4rem;
-    width: 2rem;
-    height: 0.15rem;
-    background-color: #000000;
-               
-            }
+        a:visited {
+          text-decoration: none;
         }
-.nav-close{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 5%;
-    cursor: pointer;
-    z-index: 1;
-        
-div:nth-of-type(1){
-    position: relative;
-    transform: rotate(45deg);
-    top: 1.2rem;
-    width: 2rem;
-    height: 0.22rem;
-    background-color: #000000;
-               
-            }
-          
-div:nth-of-type(2){
-    position: relative;
-    transform: rotate(-45deg);
-    top: 1rem;
-    width: 2rem;
-    height: 0.15rem;
-    background-color: #000000;
-            }
-            
+
+        a:hover {
+          color: #6C9EBB;;
         }
+
+      }
+
+
+      span {
+        align-self: center;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 100;
+        font-size: 20px;
+        line-height: 100%;
+        width: 170px;
+        height: 40px;
+      }
     }
-}
+
+
+    .left-small, .right-small {
+      flex-grow: 1;
+      flex-basis: 300px;
+      display: flex;
+
+    }
+
+    .right-small {
+      justify-content: flex-end;
+      // pointer-events: all;
+      .nav-open, .nav-open-web {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 5%;
+        cursor: pointer;
+
+
+        div:nth-of-type(1) {
+          position: relative;
+          top: 1rem;
+          width: 32px;
+          height: 4.5px;
+          background-color: #000000;
+
+        }
+
+        div:nth-of-type(2) {
+          position: relative;
+          top: 1.4rem;
+          width: 32px;
+          height: 2px;
+          background-color: #000000;
+
+        }
+      }
+
+      .nav-close {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 5%;
+        cursor: pointer;
+        z-index: 1;
+
+        div:nth-of-type(1) {
+          position: relative;
+          transform: rotate(45deg);
+          top: 1.2rem;
+          width: 32px;
+          height: 4px;
+          background-color: #000000;
+
+        }
+
+        div:nth-of-type(2) {
+          position: relative;
+          transform: rotate(-45deg);
+          top: 1rem;
+          width: 32px;
+          height: 2px;
+          background-color: #000000;
+        }
+
+      }
+    }
+  }
 }
 
-@media only screen and (max-width: 600px){
-.nav-links{
+@media only screen and (max-width: 600px) {
+  .nav-links {
     flex-direction: column;
     margin: 0.4rem;
     width: 10rem;
-     
-    }
-a{
-   margin: 0.1rem !important;
-      
-}
-//    .right-small{
-//    display: none !important;
-//    }
-   
+
+  }
+  a {
+    margin: 0.1rem !important;
+
+  }
+  //    .right-small{
+  //    display: none !important;
+  //    }
+
 }

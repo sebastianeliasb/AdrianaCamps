@@ -1,1 +1,1 @@
-export { default } from "./NameLayout";
+export {default} from "./NameLayout";

@@ -1,27 +1,28 @@
-.page-main{
-    // display: flex;
-    // flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    // justify-content: center;
-    
+.page-main {
+  // display: flex;
+  // flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  // justify-content: center;
+
 }
 
-@media screen and (min-width:600px) {
-    .page-main{
-        box-sizing: border-box;
-        .main-layout-left{
-            position: absolute;
-            left: 0;
-            height: 100%;
-            width: 50%;
-            
-        }
-        .main-layout-right{
-            position: absolute;
-            right: 0;
-            height: 100%;
-            width: 50%;
-        }
+@media screen and (min-width: 600px) {
+  .page-main {
+
+    .main-layout-left {
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 50%;
+
     }
+
+    .main-layout-right {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 50%;
+    }
+  }
 }

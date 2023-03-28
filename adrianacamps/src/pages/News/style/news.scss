@@ -1,17 +1,17 @@
-//Mobile
-#news{
-    box-sizing: border-box;
-    padding: 0 3.5rem 0 3.5rem;
+#news {
+  box-sizing: border-box;
+  padding: 0 3.5rem 0 3.5rem;
 
-.news-image{
+  .news-image {
     min-height: 350px;
     width: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    
-}
-.news-info-container{
+
+  }
+
+  .news-info-container {
     display: flex;
     justify-content: space-between;
     margin: 1rem 0 3rem 0;
@@ -20,136 +20,43 @@
     justify-content: center;
     align-items: center;
 
-    div{
-        // outline: 1px solid black;
-        margin: 0.2rem;
+    div {
+      // outline: 1px solid black;
+      margin: 0.2rem;
     }
 
-    div:nth-of-type(1){
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 10px;
-line-height: 130%;
-/* or 13px */
-text-align: center;
+    div:nth-of-type(1) {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 10px;
+      line-height: 130%;
+      /* or 13px */
+      text-align: center;
     }
-    div:nth-of-type(2){
-        font-family: 'Arya';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 130%;
-        /* or 26px */
-        
-        text-align: center;
-        
-    }
-    div:nth-of-type(3){
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 13px;
-        line-height: 130%;
-        /* or 17px */
-        
-        text-align: center;
-        
-    }
-}
-}
-//WEB
-@media screen and (min-width: 600px){
-    #news{
-        display: flex;
-        // margin-top: 25vh;
-        min-height: 100vh;
-    .news-left{
-        position: fixed;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 50% !important;
-        box-sizing: border-box;
-        padding: 0 8vw 0 8vw;
-    .news-image{
-        min-height: 350px;
-        width: 100%;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        
-    }
-    .news-info-container{
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem 0 3rem 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    
-        div{
-            // outline: 1px solid black;
-            margin: 0.2rem;
-        }
-    
-        div:nth-of-type(1){
-        font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 10px;
-    line-height: 130%;
-    /* or 13px */
-    text-align: center;
-        }
-        div:nth-of-type(2){
-            font-family: 'Arya';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 130%;
-            /* or 26px */
-            
-            text-align: center;
-            
-        }
-        div:nth-of-type(3){
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 13px;
-            line-height: 130%;
-            /* or 17px */
-            
-            text-align: center;
-            
-        }
-    }
-}
-.news-right{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 0 !important;
-    span{
-        width: 50%;
-    
-    }
-    .news-right-content{
-        align-items: center;
-        right: 0;
-        padding: 14vh 12vw 0 12vw;
-        flex-direction: column;
-        box-sizing: border-box;
-        display: flex;
-        width: 50%;
 
- 
-}
-}
+    div:nth-of-type(2) {
+      font-family: 'Arya';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 130%;
+      /* or 26px */
+
+      text-align: center;
+
     }
+
+    div:nth-of-type(3) {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 130%;
+      /* or 17px */
+
+      text-align: center;
+
+    }
+  }
 }

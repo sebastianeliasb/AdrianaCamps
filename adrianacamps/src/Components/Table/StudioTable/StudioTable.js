@@ -1,13 +1,13 @@
 import React from "react";
 
-function StudioTable({ showModal }) {
-  return (
-    <div className="content-information">
-      <div className="content-row-header">
-        <div>Studio Image</div>
-        <div>About</div>
-      </div>
-      {/* {projects.map((project) => (
+function StudioTable({showModal}) {
+    return (
+        <div className="content-information">
+            <div className="content-row-header">
+                <div>Studio Image</div>
+                <div>About</div>
+            </div>
+            {/* {projects.map((project) => (
         <div key={project.id} className="content-row">
           <div onClick={() => console.log(project.id)}>{project.name}</div>
           <div>{project.client}</div>
@@ -24,8 +24,8 @@ function StudioTable({ showModal }) {
           </div>
         </div>
       ))} */}
-    </div>
-  );
+        </div>
+    );
 }
 
 export default StudioTable;
