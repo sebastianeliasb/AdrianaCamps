@@ -1,1 +1,1 @@
-export { default } from "./StudioTable";
+export {default} from "./StudioTable";

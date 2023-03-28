@@ -24,6 +24,69 @@ export const createProjects = /* GraphQL */ `
     }
   }
 `;
+
+export const createHome = /* GraphQL */ `
+  mutation CreateHome(
+    $input: CreateHomeInput!
+  ) {
+    createHome(input: $input) {
+      carrouselImages
+    }
+  }
+`;
+
+export const createStudio = /* GraphQL */ `
+  mutation CreateStudio(
+    $input: CreateStudioInput!
+  ) {
+    createStudio(input: $input) {
+      aboutImage
+      aboutMe
+      philosophy
+      route
+      username
+    }
+  }
+`;
+
+export const createConcept = /* GraphQL */ `
+  mutation CreateConcept(
+    $input: CreateConceptInput!
+  ) {
+    createConcept(input: $input) {
+    conceptsImageMain
+    conceptImages
+    conceptTitle
+    conceptText
+    }
+  }
+`;
+
+export const createContact = /* GraphQL */ `
+  mutation CreateContact(
+    $input: CreateContactInput!
+  ) {
+    createContact(input: $input) {
+    contactImage
+    contactText
+    }
+  }
+`;
+
+export const createNews = /* GraphQL */ `
+  mutation CreateNews(
+    $input: CreateNewsInput!
+  ) {
+    createNews(input: $input) {
+    newsYear 
+    newsTitle
+    newsDate
+    newsSource
+    newsLink
+    }
+  }
+`;
+
 export const updateProjects = /* GraphQL */ `
   mutation UpdateProjects(
     $input: UpdateProjectsInput!
