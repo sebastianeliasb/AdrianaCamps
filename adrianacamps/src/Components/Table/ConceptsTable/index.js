@@ -1,1 +1,1 @@
-export { default } from "./ConceptsTable";
+export {default} from "./ConceptsTable";

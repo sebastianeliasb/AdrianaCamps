@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainPageLayout from "../../layouts/MainPageLayout";
 
 import "./style/concepts.scss";
@@ -7,13 +7,45 @@ import "./style/concepts.scss";
 import ContentContainer from "../../Components/ContentContainer";
 import ConceptsContent from "../../Components/ConceptsContent";
 import WebNav from "../../Components/WebNav";
+import { API, Storage } from "aws-amplify";
+import { listConcepts } from "../../graphql/queries";
 
 function Concepts() {
+  const [concept, setConcept] = useState([]);
+
+  useEffect(() => {
+    fetchConcept();
+  }, []);
+
+  async function fetchConcept() {
+    const conceptData = await API.graphql({ query: listConcepts });
+    const { items } = conceptData.data.listConcepts;
+    const conceptWithImages = [];
+    for (let index = 0; index < items.length; index++) {
+      let concept = items[index];
+      if (concept.conceptImages) {
+        let conceptsImagesList = [];
+        for (let idx = 0; idx < concept.conceptImages.length; idx++) {
+          conceptsImagesList.push(
+            await Storage.get(concept.conceptImages[idx])
+          );
+        }
+        concept.conceptsImageMain = await Storage.get(
+          concept.conceptsImageMain
+        );
+        concept.conceptImages = conceptsImagesList;
+      }
+      conceptWithImages.push(concept);
+    }
+    setConcept(conceptWithImages);
+  }
+
   return (
     <MainPageLayout
       backgroundColorLeft={"white"}
       backgroundColorRight={"beige"}
     >
+      <img src={concept[1]?.conceptsImageMain} alt={"main"} />
       <WebNav />
       <ContentContainer>
         <div id="concepts">

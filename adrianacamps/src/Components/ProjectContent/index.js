@@ -1,1 +1,1 @@
-export { default } from "./ProjectContent";
+export {default} from "./ProjectContent";

@@ -1,1 +1,1 @@
-export { default } from "./WebNav";
+export {default} from "./WebNav";

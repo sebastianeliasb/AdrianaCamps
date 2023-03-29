@@ -1,14 +1,14 @@
 import React from "react";
 
 function ConceptsTable() {
-  return (
-    <div className="content-information">
-      <div className="content-row-header">
-        <div>Concept Image</div>
-        <div>Concept Name</div>
-        <div>Concept sub-name</div>
-      </div>
-      {/* {projects.map((project) => (
+    return (
+        <div className="content-information">
+            <div className="content-row-header">
+                <div>Concept Image</div>
+                <div>Concept Name</div>
+                <div>Concept sub-name</div>
+            </div>
+            {/* {projects.map((project) => (
         <div key={project.id} className="content-row">
           <div onClick={() => console.log(project.id)}>{project.name}</div>
           <div>{project.client}</div>
@@ -25,8 +25,8 @@ function ConceptsTable() {
           </div>
         </div>
       ))} */}
-    </div>
-  );
+        </div>
+    );
 }
 
 export default ConceptsTable;
