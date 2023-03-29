@@ -1,8 +1,9 @@
-.web-nav{
-    display: none ;
+.web-nav {
+  display: none;
 }
-@media only screen and (min-width: 600px){
-    .web-nav{
+
+@media only screen and (min-width: 600px) {
+  .web-nav {
     position: absolute;
     display: flex;
     width: 100%;
@@ -11,26 +12,29 @@
     align-items: center;
     // background-color: aqua;
     margin-top: 14vh;
-    a{
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 300;           
-        margin: 4vw;
-        font-size: 1.8vh;
-        text-decoration: none;
-        cursor: pointer;
-        z-index: 1;
-        color: black;
+
+    a {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 300;
+      margin: 4vw;
+      font-size: 1.8vh;
+      text-decoration: none;
+      cursor: pointer;
+      z-index: 1;
+      color: black;
     }
-    a:visited{
-        text-decoration: none;
+
+    a:visited {
+      text-decoration: none;
     }
-    
-    a:hover{
-        color:#6C9EBB; ;
+
+    a:hover {
+      color: #6C9EBB;;
     }
-    .selected{
-        color: #6C9EBB;
+
+    .selected {
+      color: #6C9EBB;
     }
-}
+  }
 }

@@ -48,3 +48,91 @@ export const listProjects = /* GraphQL */ `
     }
   }
 `;
+
+export const listHomes = /* GraphQL */ `
+  query ListHomes(
+    $filter: TableHomeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        carrouselImages
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listStudios = /* GraphQL */ `
+  query ListStudios(
+    $filter: TableStudioFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStudios(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+          aboutImage
+          aboutMe
+          philosophy
+          route
+          username
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listContacts = /* GraphQL */ `
+  query ListContacts(
+    $filter: TableContactFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+          contactImage
+          contactText
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listConcepts = /* GraphQL */ `
+  query ListConcepts(
+    $filter: TableConceptFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listConcepts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+          conceptsImageMain
+          conceptImages
+          conceptTitle
+          conceptText
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listNews = /* GraphQL */ `
+  query ListNews(
+    $filter: TableNewsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+          newsYear 
+          newsTitle
+          newsDate
+          newsSource
+          newsLink
+      }
+      nextToken
+    }
+  }
+`;

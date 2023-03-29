@@ -1,1 +1,1 @@
-export { default } from "./DashboardNav";
+export {default} from "./DashboardNav";

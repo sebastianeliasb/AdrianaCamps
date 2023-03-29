@@ -1,1 +1,1 @@
-export { default } from "./NameBox";
+export {default} from "./NameBox";

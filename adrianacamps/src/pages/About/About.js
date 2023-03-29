@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 //style
 import testImage from "../../assets/about_try_image.png";
 import "./style/about.scss";
@@ -7,8 +7,34 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 //components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 import WebNav from "../../Components/WebNav";
+import { API, Storage } from "aws-amplify";
+import { listStudios } from "../../graphql/queries";
 
 function About() {
+  const [studio, setStudio] = useState([]);
+
+  useEffect(() => {
+    fetchAbout();
+  }, []);
+
+  async function fetchAbout() {
+    const studioData = await API.graphql({ query: listStudios });
+    const { items } = studioData.data.listStudios;
+    const studioWithImages = [];
+    for (let index = 0; index < items.length; index++) {
+      let studio = items[index];
+      if (studio.aboutImage) {
+        let studiosImagesList = [];
+        for (let idx = 0; idx < studio.aboutImage.length; idx++) {
+          studiosImagesList.push(await Storage.get(studio.aboutImage[idx]));
+        }
+        studio.aboutImage = studiosImagesList;
+      }
+      studioWithImages.push(studio);
+    }
+    setStudio(studioWithImages);
+  }
+
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -20,7 +46,7 @@ function About() {
           <div className="about-left">
             <div
               className="about-image-container"
-              style={{ backgroundImage: `url(${testImage})` }}
+              style={{ backgroundImage: `url(${studio[0]?.aboutImage[0]})` }}
             ></div>
           </div>
           <div className="about-right">
@@ -28,7 +54,7 @@ function About() {
             <div className="about-right-content">
               <div
                 className="about-image-container"
-                style={{ backgroundImage: `url(${testImage})` }}
+                style={{ backgroundImage: `url(${studio[0]?.aboutImage[0]})` }}
               />
               <div className="about-text-container">
                 <u>Sobre mi</u>

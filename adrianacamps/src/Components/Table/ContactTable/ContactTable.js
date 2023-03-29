@@ -1,12 +1,14 @@
 import React from "react";
 
 function ContactTable() {
-  return (
-    <div className="content-information">
-      <div className="content-row-header">
-        {/* <div>Carrousel Images</div> */}
-      </div>
-      {/* {projects.map((project) => (
+    return (
+        <div className="content-information">
+            <div className="content-row-header">
+                <div>Contact Image</div>
+                <div>Contact Text</div>
+                {/* <div>Carrousel Images</div> */}
+            </div>
+            {/* {projects.map((project) => (
         <div key={project.id} className="content-row">
           <div onClick={() => console.log(project.id)}>{project.name}</div>
           <div>{project.client}</div>
@@ -23,8 +25,8 @@ function ContactTable() {
           </div>
         </div>
       ))} */}
-    </div>
-  );
+        </div>
+    );
 }
 
 export default ContactTable;

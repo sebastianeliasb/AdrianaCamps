@@ -1,6 +1,6 @@
 projects:
   adrianacamps:
-    schemaPath: src/graphql/schema.json
+    schemaPath: src/graphql/schemaOrig.json
     includes:
       - src/graphql/**/*.js
     excludes:
