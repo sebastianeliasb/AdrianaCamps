@@ -1,65 +1,65 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function DashboardNav({selected, handleSelect}) {
-    return (
-        <div className="nav-body">
-            <Link to="/">
-                <header>Adriana</header>
-            </Link>
-            <div>
+function DashboardNav({ selected, handleSelect }) {
+  return (
+    <div className="nav-body">
+      <Link to="/">
+        <header>Mllamo</header>
+      </Link>
+      <div>
         <span
-            className={selected === "home" ? "selected" : ""}
-            onClick={() => handleSelect("home")}
+          className={selected === "home" ? "selected" : ""}
+          onClick={() => handleSelect("home")}
         >
           Home
         </span>
-            </div>
-            <div>
+      </div>
+      <div>
         <span
-            className={selected === "studio" ? "selected" : ""}
-            onClick={() => handleSelect("studio")}
+          className={selected === "studio" ? "selected" : ""}
+          onClick={() => handleSelect("studio")}
         >
           Studio
         </span>
-            </div>
-            <div>
+      </div>
+      <div>
         <span
-            className={selected === "projects" ? "selected" : ""}
-            onClick={() => {
-                handleSelect("projects");
-            }}
+          className={selected === "projects" ? "selected" : ""}
+          onClick={() => {
+            handleSelect("projects");
+          }}
         >
           Projects
         </span>
-            </div>
-            <div>
+      </div>
+      <div>
         <span
-            className={selected === "news" ? "selected" : ""}
-            onClick={() => handleSelect("news")}
+          className={selected === "news" ? "selected" : ""}
+          onClick={() => handleSelect("news")}
         >
           News
         </span>
-            </div>
-            <div>
+      </div>
+      <div>
         <span
-            className={selected === "contact" ? "selected" : ""}
-            onClick={() => handleSelect("contact")}
+          className={selected === "contact" ? "selected" : ""}
+          onClick={() => handleSelect("contact")}
         >
           Contact
         </span>
-            </div>
-            <div>
+      </div>
+      <div>
         <span
-            className={selected === "concepts" ? "selected" : ""}
-            onClick={() => handleSelect("concepts")}
+          className={selected === "concepts" ? "selected" : ""}
+          onClick={() => handleSelect("concepts")}
         >
           Concepts
         </span>
-            </div>
-            <header>Camps</header>
-        </div>
-    );
+      </div>
+      <header>SEB</header>
+    </div>
+  );
 }
 
 export default DashboardNav;

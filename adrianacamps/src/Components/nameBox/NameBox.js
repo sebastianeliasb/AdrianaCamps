@@ -24,19 +24,19 @@ function NameBox(props) {
           {navOpen ? (
             <>
               <div>
-                <Link to="/">ADRIANA</Link>
+                <Link to="/">MLlamo</Link>
               </div>
               {props.text}
-              <div>CAMPS</div>
+              <div>SEB</div>
             </>
           ) : (
             <>
               <div>
                 {" "}
-                <a href="/">ADRIANA</a>
+                <a href="/">MLlamo</a>
               </div>
               <div className="nav-links">{props.text}</div>
-              <div>CAMPS</div>
+              <div>SEB</div>
             </>
           )}
         </div>

@@ -9,10 +9,25 @@
   font-style: normal;
   font-weight: 600;
   font-size: 25px;
+
+  img{
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+  }
 }
 
 span::first-letter {
   text-transform: capitalize;
+}
+.content-information {
+  overflow-y: scroll; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Hide scrollbar */
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+}
+
+.content-information::-webkit-scrollbar {
+  width: 0px; /* Hide scrollbar in Chrome, Safari, and Opera */
 }
 
 .content-information {
@@ -23,6 +38,19 @@ span::first-letter {
   height: 100%;
   // background-color: aquamarine;
   margin-top: 2rem;
+
+ 
+
+
+  .content-information {
+    overflow-y: scroll; /* Enable vertical scrolling */
+    scrollbar-width: none; /* Hide scrollbar */
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+  }
+  
+  .content-information::-webkit-scrollbar {
+    width: 0px; /* Hide scrollbar in Chrome, Safari, and Opera */
+  }
 
   .content-row-header, .content-row {
     display: flex;

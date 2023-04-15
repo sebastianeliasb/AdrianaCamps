@@ -45,7 +45,7 @@ function Concepts() {
       backgroundColorLeft={"white"}
       backgroundColorRight={"beige"}
     >
-      <img src={concept[1]?.conceptsImageMain} alt={"main"} />
+      {/* <img src={concept[1]?.conceptsImageMain} alt={"main"} /> */}
       <WebNav />
       <ContentContainer>
         <div id="concepts">
