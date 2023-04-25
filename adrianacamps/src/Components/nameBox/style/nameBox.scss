@@ -101,7 +101,47 @@ span{
     
 .right-small{
     justify-content: flex-end;
-    // pointer-events: all;
+    // background-color: #df0c0c;
+    .hamburger{
+        height: 5vh;
+        div:nth-of-type(1){
+        position: relative;
+        top: 1rem;
+        width: 2rem;
+        height: 0.22rem;
+        
+              
+                }
+              
+    div:nth-of-type(2){
+        position: relative;
+        top: 1.4rem;
+        width: 2rem;
+        height: 0.15rem;
+        background-color: #000000;
+                   
+                }
+            }
+
+    .top-right-small{
+        // background-color: #6b0cdf;
+        display: flex;
+       
+
+                .language-box{
+                    margin-top:1.7vh;
+                    margin-left: 2rem;
+                    height: 2vh;
+                    font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 100%;
+                    // background-color: aqua;
+                }
+    }
+
+    
 .nav-open, .nav-open-web{
     display: flex;
     flex-direction: column;
@@ -111,25 +151,8 @@ span{
     cursor: pointer;
     pointer-events: all;
         
+}
 
-div:nth-of-type(1){
-    position: relative;
-    top: 1rem;
-    width: 2rem;
-    height: 0.22rem;
-    background-color: #df0c0c;
-          
-            }
-          
-div:nth-of-type(2){
-    position: relative;
-    top: 1.4rem;
-    width: 2rem;
-    height: 0.15rem;
-    background-color: #000000;
-               
-            }
-        }
 .nav-close{
     display: flex;
     flex-direction: column;
@@ -138,25 +161,27 @@ div:nth-of-type(2){
     height: 5%;
     cursor: pointer;
     z-index: 1;
-        
-div:nth-of-type(1){
-    position: relative;
-    transform: rotate(45deg);
-    top: 1.2rem;
-    width: 2rem;
-    height: 0.22rem;
-    background-color: #000000;
-               
-            }
-          
-div:nth-of-type(2){
-    position: relative;
-    transform: rotate(-45deg);
-    top: 1rem;
-    width: 2rem;
-    height: 0.15rem;
-    background-color: #000000;
-            }
+        .hamburger-X{
+            div:nth-of-type(1){
+                position: relative;
+                transform: rotate(45deg);
+                top: 1.2rem;
+                width: 2rem;
+                height: 0.22rem;
+                background-color: #000000;
+                           
+                        }
+                      
+            div:nth-of-type(2){
+                position: relative;
+                transform: rotate(-45deg);
+                top: 1rem;
+                width: 2rem;
+                height: 0.15rem;
+                background-color: #000000;
+                        }
+        }
+
             
         }
     }

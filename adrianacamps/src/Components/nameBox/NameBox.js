@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 //style
 import "./style/nameBox.scss";
@@ -15,6 +15,31 @@ function NameBox(props) {
 
   const navOpen =
     props.navClass === "nav-open" || props.navClass === "nav-open-web";
+
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("selectedLanguage") || "ES"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("selectedLanguage", selectedLanguage);
+  }, [selectedLanguage]);
+
+  function handleMouseEnter() {
+    setDropdownVisible(true);
+  }
+
+  function handleMouseLeave() {
+    setDropdownVisible(false);
+  }
+
+  function handleLanguageClick(language) {
+    setSelectedLanguage(language);
+
+    setDropdownVisible(false);
+  }
+
+  const availableLanguages = ["ES", "EN", "FN"];
 
   return (
     <div className="overlay-container">
@@ -41,22 +66,40 @@ function NameBox(props) {
           )}
         </div>
         <div className="right-small" style={{ pointerEvents: props.events }}>
-          <nav
-            className={props.navClass}
-            onClick={props.toggleNav}
-            style={navStyle}
-          >
-            {navOpen ? (
-              <>
-                <div style={{ backgroundColor: props.navColor }}></div>
-                <div style={{ backgroundColor: props.navColor }}></div>
-              </>
-            ) : (
-              <>
-                <div></div>
-                <div></div>
-              </>
-            )}
+          <nav className={props.navClass} style={navStyle}>
+            <div className="top-right-small">
+              {navOpen ? (
+                <div className="hamburger" onClick={props.toggleNav}>
+                  <div style={{ backgroundColor: props.navColor }}></div>
+                  <div style={{ backgroundColor: props.navColor }}></div>
+                </div>
+              ) : (
+                <>
+                  <div className="hamburger-X" onClick={props.toggleNav}>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </>
+              )}
+              <div
+                className="language-box"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                {selectedLanguage}
+                {isDropdownVisible && (
+                  <div className="dropdown-menu">
+                    {availableLanguages.map((language) =>
+                      selectedLanguage !== language ? (
+                        <div onClick={() => handleLanguageClick(language)}>
+                          {language}
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
           </nav>
         </div>
       </div>
