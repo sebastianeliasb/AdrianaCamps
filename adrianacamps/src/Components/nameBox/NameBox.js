@@ -76,8 +76,7 @@ function NameBox(props) {
               ) : (
                 <>
                   <div className="hamburger-X" onClick={props.toggleNav}>
-                    <div></div>
-                    <div></div>
+                    X
                   </div>
                 </>
               )}
