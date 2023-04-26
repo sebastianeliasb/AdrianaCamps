@@ -11,7 +11,7 @@ import { API, Storage } from "aws-amplify";
 import { listConcepts } from "../../graphql/queries";
 
 function Concepts() {
-  const [concept, setConcept] = useState([]);
+  const [concepts, setConcept] = useState([]);
 
   useEffect(() => {
     fetchConcept();
@@ -69,8 +69,8 @@ function Concepts() {
           <div className="concepts-right">
             <span></span>
             <div className="concepts-right-content">
-              <ConceptsContent />
-              <ConceptsContent />
+              <ConceptsContent data={concepts} />
+              {/* <ConceptsContent /> */}
             </div>
           </div>
         </div>

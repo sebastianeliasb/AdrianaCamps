@@ -39,7 +39,7 @@ function NameBox(props) {
     setDropdownVisible(false);
   }
 
-  const availableLanguages = ["ES", "EN", "FN"];
+  const availableLanguages = ["ES", "EN", "FR"];
 
   return (
     <div className="overlay-container">

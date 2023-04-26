@@ -1,0 +1,17 @@
+#error-page{
+    height: 100vh;
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+
+.home-icon{
+    cursor: pointer;
+    // background-color: aqua;
+    z-index: 1;
+    img{
+        height: 10vh;
+        
+    }
+}
+}
