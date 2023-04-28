@@ -14,6 +14,9 @@ import {
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { SimpleMdeReact } from "react-simplemde-editor";
 import option1 from "../../assets/Untitled-1.png";
+import Input from "../Input";
+import UploadImagebtn from "../UploadImageBtn/UploadImagebtn";
+import Textarea from "../Textarea/Textarea";
 
 const initialState = {
   name: "",
@@ -266,8 +269,9 @@ function Modal({
               </div>
               {/* <div className="modal-nav">{props.navTabs}</div> */}
               <div className="modal-info-container">
-                <input
-                  className="name-input"
+                <Input
+                  // label="name"
+                  // className="name-input"
                   onChange={onChange}
                   name="name"
                   value={projectData.name}
@@ -279,7 +283,12 @@ function Modal({
           ) : (
             <div className="modal-body">
               <div className="modal-title">
-                <span>{props.modalTitle} add</span>
+                {props.modalTitle.endsWith("s") &&
+                props.modalTitle !== "news" ? (
+                  <span>New {props.modalTitle.slice(0, -1)}</span>
+                ) : (
+                  <span>New {props.modalTitle}</span>
+                )}
               </div>
               {/* <div className="modal-nav">{props.navTabs}</div> */}
               {selected === "projects" ? (
@@ -313,66 +322,85 @@ function Modal({
                   <div className="modal-info-container">
                     {selectedTag === "mainInfo" ? (
                       <div className="modal-mainInfo-subcontainer">
-                        <input
+                        <Input
                           className="name-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="name"
                           value={project.name}
-                          placeholder="name"
+                          placeholder="Project Title"
+                          label="Project Title"
                         />
-                        <input
+
+                        <Input
                           className="client-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="client"
                           value={project.client}
-                          placeholder="client"
+                          placeholder="Client"
+                          label="Client"
                         />
-                        <input
+                        <Input
                           className="location-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="location"
                           value={project.location}
-                          placeholder="location"
+                          placeholder="Location"
+                          label="Location"
                         />
-                        <input
+                        <Input
                           className="subName-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="subName"
                           value={project.subName}
-                          placeholder="subName"
+                          placeholder="Sub-name"
+                          label="Sub-name"
                         />
-                        <input
+                        <Input
                           className="photographer-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="photographer"
                           value={project.photographer}
-                          placeholder="photographer"
+                          placeholder="Photographer"
+                          label="Photographer"
                         />
-                        <input
+                        <Input
                           className="surface-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="surface"
                           value={project.surface}
-                          placeholder="surface"
+                          placeholder="Surface"
+                          label="Surface"
                         />
                       </div>
                     ) : selectedTag === "description" ? (
                       <div className="modal-desciption-subcontainer">
-                        <textarea
+                        <Textarea
+                          onChange={(e) => onChange(e, "createProject")}
+                          placeholder="Description"
+                          value={project.description}
+                          name="description"
+                        />
+                        {/* <textarea
                           type="text"
                           className="desc-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="description"
                           value={project.description}
                           placeholder="description"
+                        /> */}
+                        <Textarea
+                          onChange={(e) => onChange(e, "createProject")}
+                          placeholder="Sub-description"
+                          value={project.subDescription}
+                          name="subDescription"
                         />
-                        <textarea
+                        {/* <textarea
                           className="subDesc-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="subDescription"
                           value={project.subDescription}
                           placeholder="subDescription"
-                        />
+                        /> */}
                       </div>
                     ) : selectedTag === "images" ? (
                       <div className="modal-images-subcontainer">
@@ -410,9 +438,11 @@ function Modal({
                           <div>
                             {" "}
                             <div>
-                              <button
+                              <UploadImagebtn
+                                id={"home-upload"}
                                 onClick={uploadImage}
-                              >{`Upload Image`}</button>
+                                btnText={"Upload Images"}
+                              />
                             </div>
                             <div>
                               {images &&
@@ -437,15 +467,15 @@ function Modal({
                 </>
               ) : selected === "studio" ? (
                 <div className="modal-info-container">
-                  <input
+                  <Textarea
                     className="name-input"
                     onChange={(e) => onChange(e, "createStudio")}
                     name="aboutMe"
-                    // value={project.name}
+                    // value={studio.name}
                     placeholder="About"
                   />
-                  {/* <input
-                    // className="images-input"
+                  <input
+                    className="images-input"
                     type="file"
                     ref={imageFileInput}
                     onChange={(e) => handleChange(e, "images")}
@@ -466,19 +496,23 @@ function Modal({
                   <button
                     onClick={createNewStudio}
                   >{`Create ${props.modalTitle}`}</button>
-                  <button onClick={uploadImage}>{`Upload Image`}</button> */}
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
                 </div>
               ) : selected === "home" ? (
                 <div className="modal-info-container">
-                  <input
+                  <Input
                     className="name-input"
                     onChange={(e) => onChange(e, "createHome")}
                     name="name"
                     // value={project.name}
                     placeholder="Image title"
+                    label="Name"
                   />
                   <input
-                    // className="images-input"
+                    className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
@@ -500,7 +534,10 @@ function Modal({
                   <button
                     onClick={createNewHome}
                   >{`Create ${props.modalTitle}`}</button>
-                  <button onClick={uploadImage}>{`Upload Image`}</button>
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Images"}
+                  />
                 </div>
               ) : selected === "concepts" ? (
                 <div className="modal-info-container">
@@ -519,7 +556,7 @@ function Modal({
                     placeholder="Concept Title"
                   />
                   <input
-                    // className="images-input"
+                    className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
@@ -530,7 +567,7 @@ function Modal({
                     placeholder="Image"
                   />
                   <input
-                    // className="images-input"
+                    className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
@@ -558,11 +595,14 @@ function Modal({
                   <button
                     onClick={createNewConcept}
                   >{`Create ${props.modalTitle}`}</button>
-                  <button onClick={uploadImage}>{`Upload Image`}</button>
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Images"}
+                  />
                 </div>
               ) : selected === "contact" ? (
                 <div className="modal-info-container">
-                  <input
+                  <Textarea
                     // className="name-input"
                     onChange={(e) => onChange(e, "createContact")}
                     name="contactText"
@@ -570,7 +610,7 @@ function Modal({
                     placeholder="Contact Text"
                   />
                   <input
-                    // className="images-input"
+                    className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
@@ -591,48 +631,61 @@ function Modal({
                   <button
                     onClick={createNewContact}
                   >{`Create ${props.modalTitle}`}</button>
-                  <button onClick={uploadImage}>{`Upload Image`}</button>
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
                 </div>
               ) : selected === "news" ? (
                 <div className="modal-info-container">
-                  <input
+                  <Input
                     // className="name-input"
                     onChange={(e) => onChange(e, "createNews")}
                     name="newsYear"
                     // value={project.name}
                     placeholder="Year"
+                    label="Year"
                   />
-                  <input
+                  <Input
                     // className="name-input"
                     onChange={(e) => onChange(e, "createNews")}
                     name="newsTitle"
                     // value={project.name}
                     placeholder="Title"
+                    label="Title"
                   />
-                  <input
+                  <Input
                     // className="name-input"
                     onChange={(e) => onChange(e, "createNews")}
                     name="newsDate"
                     // value={project.name}
                     placeholder="Date"
+                    label="Date"
                   />
-                  <input
+                  <Input
                     // className="name-input"
                     onChange={(e) => onChange(e, "createNews")}
                     name="newsSource"
                     // value={project.name}
                     placeholder="Source"
+                    label="Source"
+                    size="large"
                   />
-                  <input
+                  <Input
                     // className="name-input"
                     onChange={(e) => onChange(e, "createNews")}
                     name="newsLink"
                     // value={project.name}
                     placeholder="Link"
+                    label="Link"
                   />
                   <button
                     onClick={createNewNews}
                   >{`Create ${props.modalTitle}`}</button>
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
                 </div>
               ) : null}
             </div>

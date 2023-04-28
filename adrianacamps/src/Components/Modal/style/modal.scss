@@ -11,6 +11,10 @@
 
 }
 
+.images-input{
+  display: none;
+}
+
 .modal-body {
   position: absolute;
   display: flex;
@@ -128,7 +132,7 @@
                                }
 
 .modal-desciption-subcontainer{
-background-color: aqua; 
+// background-color: aqua; 
  display: flex;                   
    }
 
@@ -179,32 +183,12 @@ background-color: aqua;
        div:nth-of-type(1){
         // background-color: aqua;
         width: 20%;
-        button {
-          cursor: pointer;
+        #home-upload {
+         
           margin-top: 22vh;
-          height: 20%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 6px 14px;
-          font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-          border-radius: 6px;
-          color: #3D3D3D;
-          background: #fff;
-          border: none;
-          box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
-          user-select: none;
-          border: 1px solid black;
-          -webkit-user-select: none;
-          touch-action: manipulation;
-        }
-        
-        button:focus {
-          box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(217, 199, 166, 0.5);
           
-          outline: 0;
         }
+      
       }
       div:nth-of-type(2){
       display: flex;
