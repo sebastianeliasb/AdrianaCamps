@@ -28,13 +28,22 @@ min-height: 35vh;
     font-weight: 200;
     font-size:20px;
     line-height: 130%;
-    color: black;
+    color: black !important;
 /* or 26px */
     text-align: center;
     // outline: 1px solid black;
     margin: 0.5rem;
+    a{
+    color: black !important;
+        text-decoration: none;
+     }
+     a:visited{
+        text-decoration: none;
+        color: black;
+     }
 }
 a{
+    
     text-decoration: none;
  }
  a:visited{
