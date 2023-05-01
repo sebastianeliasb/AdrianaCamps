@@ -17,7 +17,8 @@ import option1 from "../../assets/Untitled-1.png";
 import Input from "../Input";
 import UploadImagebtn from "../UploadImageBtn/UploadImagebtn";
 import Textarea from "../Textarea/Textarea";
-
+import Carrusel from "../Carrusel/Carrusel";
+import ModalCarrusel from "../ModalCarrusel/ModalCarrusel";
 const initialState = {
   name: "",
   subName: "",
@@ -415,9 +416,6 @@ function Modal({
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                           </select>
-                        </div>
-                        <div>
-                          {" "}
                           <div>
                             <input
                               // className="images-input"
@@ -435,27 +433,31 @@ function Modal({
                               )}
                             </div>
                           </div>
-                          <div>
-                            {" "}
-                            <div>
-                              <UploadImagebtn
-                                id={"home-upload"}
-                                onClick={uploadImage}
-                                btnText={"Upload Images"}
-                              />
-                            </div>
-                            <div>
-                              {images &&
-                                images.length !== 0 &&
-                                Array.from(images).map((image) => (
+                        </div>
+                        <div>
+                          <UploadImagebtn
+                            id={"home-upload"}
+                            onClick={uploadImage}
+                            btnText={"Upload Images"}
+                          />
+                        </div>
+                        <div className="image-carrusel">
+                          <ModalCarrusel>
+                            {images &&
+                              images.length !== 0 &&
+                              Array.from(images).map((image, index) => (
+                                <div key={index}>
+                                  <ul>
+                                    <li>Image {index + 1}</li>
+                                  </ul>
                                   <img
                                     key={image.name}
                                     alt="To upload"
                                     src={URL.createObjectURL(image)}
                                   />
-                                ))}
-                            </div>{" "}
-                          </div>
+                                </div>
+                              ))}
+                          </ModalCarrusel>
                         </div>
                       </div>
                     ) : null}
@@ -479,7 +481,7 @@ function Modal({
                     type="file"
                     ref={imageFileInput}
                     onChange={(e) => handleChange(e, "images")}
-                    multiple
+                    // multiple
                     // name="projectImages"
                     // value={project.projectImages}
                     placeholder="projectImages"
@@ -503,14 +505,14 @@ function Modal({
                 </div>
               ) : selected === "home" ? (
                 <div className="modal-info-container">
-                  <Input
+                  {/* <Input
                     className="name-input"
                     onChange={(e) => onChange(e, "createHome")}
                     name="name"
                     // value={project.name}
                     placeholder="Image title"
                     label="Name"
-                  />
+                  /> */}
                   <input
                     className="images-input"
                     type="file"
@@ -522,15 +524,25 @@ function Modal({
                     // value={project.projectImages}
                     placeholder="Image"
                   />
-                  {images &&
-                    images.length !== 0 &&
-                    Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
-                    ))}
+
+                  <div className="image-carrusel">
+                    <ModalCarrusel>
+                      {images &&
+                        images.length !== 0 &&
+                        Array.from(images).map((image, index) => (
+                          <div key={index}>
+                            <ul>
+                              <li>Image {index + 1}</li>
+                            </ul>
+                            <img
+                              key={image.name}
+                              alt="To upload"
+                              src={URL.createObjectURL(image)}
+                            />
+                          </div>
+                        ))}
+                    </ModalCarrusel>
+                  </div>
                   <button
                     onClick={createNewHome}
                   >{`Create ${props.modalTitle}`}</button>

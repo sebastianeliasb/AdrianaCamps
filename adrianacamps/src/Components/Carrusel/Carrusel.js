@@ -10,7 +10,7 @@ import pic2 from "../../assets/news_image.jpg";
 import homeImage from "../../assets/home_image.jpg";
 import pic from "../../assets/project_image.jpg";
 
-function Carrusel() {
+function Carrusel(props) {
   const settings = {
     dots: false,
     infinite: true,
