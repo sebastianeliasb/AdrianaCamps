@@ -45,7 +45,7 @@ function News() {
             <div className="news-info-container">
               <div>15 Novembre 2023</div>
               <div>LOS MEJORES 300 INTERIORISTAS</div>
-              <div>Leer mas</div>
+              <div className="read-more">Leer mas</div>
             </div>
           </div>
           <div className="news-right">
