@@ -26,6 +26,13 @@
             font-style: normal;
             font-weight: 400;
             font-size: 20px;
+
+            a{text-decoration: none;
+                color: black;
+            }
+            a:visited{
+color: black;
+            }
         }
         .project-title2{
             display: flex;
