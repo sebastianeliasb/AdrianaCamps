@@ -51,7 +51,7 @@ function Modal({
     carrouselImages: [],
   });
   const [studio, setStudio] = useState({
-    aboutImage: "",
+    aboutImage: [],
     aboutMe: "",
     philosophy: "",
     route: "",
