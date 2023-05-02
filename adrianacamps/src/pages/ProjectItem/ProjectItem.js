@@ -44,7 +44,7 @@ function ProjectItem() {
         backgroundColorRight={"beige"}
         backgroundColor={backgroundColor}
       >
-        <WebNav />
+        {/* ... */}
         <ContentContainer>
           <div className="project-item-body">
             {/* First section */}
@@ -52,68 +52,61 @@ function ProjectItem() {
               <div className="project-content-left">
                 <img src={project_images[0]} alt="main"></img>
               </div>
-              <div className="project-content-right">
-                <div className="project-detail">
-                  <div className="project-info">
-                    <span>{projectName}</span>
-                    <span>{`${projectLocation}(${projectDate})`}</span>
-                    <span>{projectDescription}</span>
-                  </div>
-                  <div className="project-aspects">
-                    <span>
-                      {projectClient ? `Cliente: ${projectClient}` : null}
-                    </span>
-                    <span>
-                      {projectPhotographer
-                        ? `Fotografo: ${projectPhotographer}`
-                        : null}
-                    </span>
-                    <span>
-                      {projectSize ? `Superficie: ${projectSize}` : null}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div className="project-content-right">{/* ... */}</div>
             </div>
             {/* Second section */}
-            <div>
-              <img src={project_images[1]} alt="first"></img>
-            </div>
+            {project_images[1] && (
+              <div>
+                <img src={project_images[1]} alt="first"></img>
+              </div>
+            )}
             {/* Third section */}
-            <div>
-              <img src={project_images[2]} alt="pic"></img>
-              <span>{subDescription}</span>
-              <span></span>
-              <img src={project_images[3]} alt="pic"></img>
-            </div>
+            {project_images[2] && (
+              <div>
+                <img src={project_images[2]} alt="pic"></img>
+                <span>{subDescription}</span>
+                <span></span>
+                <img src={project_images[3]} alt="pic"></img>
+              </div>
+            )}
             {/* Fourth section */}
-            <div>
-              <img src={project_images[4]} alt="pic"></img>
-            </div>
+            {project_images[4] && (
+              <div>
+                <img src={project_images[4]} alt="pic"></img>
+              </div>
+            )}
             {/* Five section */}
-            <div>
-              <span></span>
-              <img src={project_images[5]} alt="pic"></img>
-              <img src={project_images[6]} alt="pic"></img>
-              <span></span>
-            </div>
+            {project_images[5] && project_images[6] && (
+              <div>
+                <span></span>
+                <img src={project_images[5]} alt="pic"></img>
+                <img src={project_images[6]} alt="pic"></img>
+                <span></span>
+              </div>
+            )}
             {/* Six section */}
-            <div>
-              <span></span>
-              <img src={project_images[7]} alt="pic"></img>
-              <img src={project_images[8]} alt="pic"></img>
-              <span></span>
-            </div>
+            {project_images[7] && project_images[8] && (
+              <div>
+                <span></span>
+                <img src={project_images[7]} alt="pic"></img>
+                <img src={project_images[8]} alt="pic"></img>
+                <span></span>
+              </div>
+            )}
             {/* Seven section */}
-            <div>
-              <img src={project_images[9]} alt="pic"></img>
-            </div>
+            {project_images[9] && (
+              <div>
+                <img src={project_images[9]} alt="pic"></img>
+              </div>
+            )}
             {/* Eighth section */}
-            <div>
-              <img src={project_images[10]} alt="pic"></img>
-              <img src={project_images[11]} alt="pic"></img>
-              <img src={project_images[12]} alt="pic"></img>
-            </div>
+            {project_images[10] && project_images[11] && project_images[12] && (
+              <div>
+                <img src={project_images[10]} alt="pic"></img>
+                <img src={project_images[11]} alt="pic"></img>
+                <img src={project_images[12]} alt="pic"></img>
+              </div>
+            )}
           </div>
         </ContentContainer>
       </MainPageLayout>
