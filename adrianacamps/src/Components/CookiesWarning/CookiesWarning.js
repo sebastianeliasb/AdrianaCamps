@@ -29,7 +29,9 @@ function CookiesWarning() {
             This website uses cookies to ensure you get the best experience on
             our website.
           </p>
-          <button onClick={handleAccept}>Accept</button>
+          <button className="cookies-btn" onClick={handleAccept}>
+            Accept
+          </button>
         </div>
       )}
     </>
