@@ -28,7 +28,7 @@
   .cookies-warning.slide-down {
     transform: translateY(100%);
   }
-  button {
+  .cookies-btn {
     --c:  #f6f6f6; /* the color*/
     
     box-shadow: 0 0 0 .1em inset var(--c); 
@@ -42,11 +42,11 @@
     outline-offset: .1em;
     transition: background-size .4s, background-position 0s .4s;
   }
-  button:hover {
+  .cookies-btn:hover {
     --_p: 100%;
     transition: background-position .4s, background-size 0s;
   }
-  button:active {
+  .cookies-btn:active {
     box-shadow: 0 0 9e9q inset #0009; 
     background-color: var(--c);
     color: #fff;
@@ -55,7 +55,7 @@
   
   
 
-  button {
+  .cookies-btn {
     font-family: "roboto";
     font-weight: 300;
     font-size: 20px;
