@@ -88,6 +88,9 @@ function Concepts() {
       ))}
     </p>
   );
+  if (!concepts) {
+    return null;
+  }
   return (
     <MainPageLayout
       backgroundColorLeft={"white"}

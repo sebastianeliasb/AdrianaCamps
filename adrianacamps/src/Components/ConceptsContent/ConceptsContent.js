@@ -24,7 +24,7 @@ function ConceptsContent({ data }) {
           </Link>
         </div>
         <p className="project-title2" style={{ margin: "8px" }}>
-          {concept.conceptText}
+          {/* {concept.conceptText} */}
         </p>
       </div>
     </>

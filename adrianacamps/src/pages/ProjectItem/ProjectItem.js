@@ -18,6 +18,7 @@ function ProjectItem() {
   const projectClient = data.project.client;
   const projectPhotographer = data.project.photographer;
   const projectSize = data.project.surface;
+  const subDescription = data.project.subDescription;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -81,14 +82,7 @@ function ProjectItem() {
             {/* Third section */}
             <div>
               <img src={project_images[2]} alt="pic"></img>
-              <span>
-                At ground floor level, while daily life and lines of sight
-                extrude freely beyond the walls of the house to colonise the
-                entirety of the plot, the atmosphere is purposefully
-                introspective. On the upper floors, the emphasis shifts to
-                elevated vistas and successive recalibration of the dialogue
-                between interior space and the fall of natural light.
-              </span>
+              <span>{subDescription}</span>
               <span></span>
               <img src={project_images[3]} alt="pic"></img>
             </div>
