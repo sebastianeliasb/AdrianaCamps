@@ -24,7 +24,6 @@ function Contact() {
       }
       contactsWithImages.push(contact);
     }
-    console.log("contact - ", contactsWithImages);
     setContacts(contactsWithImages);
   }
 
@@ -90,16 +89,19 @@ function Contact() {
             <div id="contact">
               {/* <div className="contact-content"> */}
               <div className="contact-right">
-                <div
+                <img
                   className="contact-image"
-                  style={{
-                    backgroundImage: `url(${contacts[0]?.contactImage})`,
-                  }}
-                ></div>
+                  src={contacts[0]?.contactImage}
+                  alt="contact"
+                ></img>
               </div>
               <div className="contact-left">
                 <div className="contact-text">
-                  <p>{contacts[0]?.contactText}</p>
+                  <p>
+                    Si quieres más información sobre nuestros servicios, no
+                    dudes en ponerte en contacto con nosotros rellenando este
+                    formulario y te daremos una respuesta lo antes posible.
+                  </p>
                 </div>
 
                 <form id="contact-form">
