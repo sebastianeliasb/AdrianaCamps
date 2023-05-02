@@ -114,7 +114,7 @@ function Dashboard() {
     }));
   }
 
-  async function deleteProcess(id, aboutMe = "") {
+  async function deleteProcess(id) {
     if (selected === "home") {
       console.log("home delete - ", id);
       await API.graphql({
@@ -124,10 +124,10 @@ function Dashboard() {
       });
       fetchHomes();
     } else if (selected === "studio") {
-      console.log("studio delete - ", id, aboutMe);
+      console.log("studio delete - ", id);
       await API.graphql({
         query: deleteStudioMutation,
-        variables: { input: { id, aboutMe } },
+        variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchStudios();
