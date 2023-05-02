@@ -745,18 +745,18 @@ function Modal({
                 <Input
                   // className="name-input"
                   onChange={(e) => onChange(e, "createNews")}
-                  name="newsYear"
-                  value={news.newsYear}
-                  placeholder="Year"
-                  label="newsYear"
+                  name="newsTitle"
+                  value={news.newsTitle}
+                  placeholder="Title"
+                  label="Title"
                 />
                 <Input
                   // className="name-input"
                   onChange={(e) => onChange(e, "createNews")}
-                  name="newsTitle"
-                  value={news.newsTitle}
-                  placeholder="Title"
-                  label="newsTitle"
+                  name="newsYear"
+                  value={news.newsYear}
+                  placeholder="Year"
+                  label="Year"
                 />
                 <Input
                   // className="name-input"
@@ -764,7 +764,7 @@ function Modal({
                   name="newsDate"
                   value={news.newsDate}
                   placeholder="Date"
-                  label="newsDate"
+                  label="Date"
                 />
                 <Input
                   // className="name-input"
@@ -772,7 +772,7 @@ function Modal({
                   name="newsSource"
                   value={news.newsSource}
                   placeholder="Source"
-                  label="newsSource"
+                  label="Source"
                   size="large"
                 />
                 <Input
@@ -781,7 +781,7 @@ function Modal({
                   name="newsLink"
                   value={news.newsLink}
                   placeholder="Link"
-                  label="newsLink"
+                  label="Link"
                 />
                 <br />
                 <br />

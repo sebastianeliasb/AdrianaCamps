@@ -66,7 +66,6 @@ function News() {
 
               <div className="read-more">
                 <a href={news[selectedNews]?.newsLink}>Leer mas</a>
-                {/* <div>{news[selectedNews]?.newsLink}</div> */}
               </div>
             </div>
           </div>

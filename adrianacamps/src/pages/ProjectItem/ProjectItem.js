@@ -32,13 +32,7 @@ function ProjectItem() {
   console.log(project_images);
   return (
     <>
-      {/* <div>
-        {data.project.projectImages.map((el) => (
-          <div key={el} className="project-content-left">
-            <img src={el} alt="main" />
-          </div>
-        ))}
-      </div> */}
+      <WebNav />
       <MainPageLayout
         backgroundColorLeft={"white"}
         backgroundColorRight={"beige"}
@@ -52,7 +46,28 @@ function ProjectItem() {
               <div className="project-content-left">
                 <img src={project_images[0]} alt="main"></img>
               </div>
-              <div className="project-content-right">{/* ... */}</div>
+              <div className="project-content-right">
+                <div className="project-detail">
+                  <div className="project-info">
+                    <span>{projectName}</span>
+                    <span>{`${projectLocation}(${projectDate})`}</span>
+                    <span>{projectDescription}</span>
+                  </div>
+                  <div className="project-aspects">
+                    <span>
+                      {projectClient ? `Cliente: ${projectClient}` : null}
+                    </span>
+                    <span>
+                      {projectPhotographer
+                        ? `Fotografo: ${projectPhotographer}`
+                        : null}
+                    </span>
+                    <span>
+                      {projectSize ? `Superficie: ${projectSize}` : null}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
             {/* Second section */}
             {project_images[1] && (

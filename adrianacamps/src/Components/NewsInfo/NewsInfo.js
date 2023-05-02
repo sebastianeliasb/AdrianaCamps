@@ -17,36 +17,51 @@ function NewsInfo(props) {
     props.selectNews(id, index);
   };
 
+  const groupedData = props.data.reduce((acc, item) => {
+    const year = item.newsYear;
+    const group = acc.find((group) => group.year === year);
+
+    if (group) {
+      group.items.push(item);
+    } else {
+      acc.push({ year, items: [item] });
+    }
+
+    return acc;
+  }, []);
+
   return (
     <>
-      {props.data.map((data, index) => (
-        <div className="news-info-toggle">
-          {!activeToggleIds.includes(data.id) ? (
+      {groupedData.map((group, index) => (
+        <div className="news-info-toggle" key={index}>
+          {!activeToggleIds.includes(group.year) ? (
             <div className="closed-container">
-              <div className="info-date">{data.newsYear}</div>
-              <button onClick={() => toggleInfo(data.id)}>+</button>
+              <div className="info-date">{group.year}</div>
+              <button onClick={() => toggleInfo(group.year)}>+</button>
             </div>
           ) : (
             <div className="opened-container">
               <div className="opened-top">
-                <div className="info-date">{data.newsDate}</div>
-                <button onClick={() => toggleInfo(data.id)}>—</button>
+                <div className="info-date">{group.year}</div>
+                <button onClick={() => toggleInfo(group.year)}>—</button>
               </div>
-              <div
-                className={classNames({
-                  "opened-bottom": true,
-                  "opened-bottom-active": props.selectedNewsID === data.id,
-                })}
-              >
+              {group.items.map((item, index) => (
                 <div
-                  className="opened-bottom-info"
-                  onClick={() => onClickEachItem(data.id, index)}
+                  className={classNames({
+                    "opened-bottom": true,
+                    "opened-bottom-active": props.selectedNewsID === item.id,
+                  })}
+                  key={index}
                 >
-                  {" "}
-                  <div>{data.newsTitle}</div>
-                  <div>{data.newsSource}</div>
+                  <div
+                    className="opened-bottom-info"
+                    onClick={() => onClickEachItem(item.id, index)}
+                  >
+                    <div>{item.newsTitle}</div>
+                    <div>{item.newsSource}</div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           )}
         </div>

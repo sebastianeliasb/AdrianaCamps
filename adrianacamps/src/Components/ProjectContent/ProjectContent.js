@@ -51,7 +51,7 @@ function ProjectContent({ data }) {
             {project.name}
           </Link>
         </div>
-        <div className="project-title2">{project.name}</div>
+        <div className="project-title2">{project.subName}</div>
       </div>
     </>
   ));
