@@ -30,6 +30,7 @@ function NewsInfo(props) {
     return acc;
   }, []);
 
+  groupedData.sort((a, b) => b.year - a.year);
   return (
     <>
       {groupedData.map((group, index) => (
