@@ -22,7 +22,7 @@ function StudioTable({ showModal, studios, deleteStudio }) {
               style={{ backgroundImage: `url(${edit})` }}
             ></span>
             <span
-              onClick={() => deleteStudio(project.id, project.aboutMe)}
+              onClick={() => deleteStudio(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}
             ></span>
           </div>

@@ -205,10 +205,8 @@ function Modal({
 
     studio.id = uuid();
 
-    studio.aboutImage = Array.from(images).map((img) => img.name);
-    Array.from(images).map(async (image) => {
-      await Storage.put(image.name, image);
-    });
+    studio.aboutImage = images[0].name;
+    await Storage.put(images[0].name, images[0]);
 
     await API.graphql({
       query: createStudios,

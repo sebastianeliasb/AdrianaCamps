@@ -25,9 +25,7 @@ function About() {
       let studio = items[index];
       if (studio.aboutImage) {
         let studiosImagesList = [];
-        for (let idx = 0; idx < studio.aboutImage.length; idx++) {
-          studiosImagesList.push(await Storage.get(studio.aboutImage[idx]));
-        }
+        studiosImagesList.push(await Storage.get(studio.aboutImage));
         studio.aboutImage = studiosImagesList;
       }
       studioWithImages.push(studio);
