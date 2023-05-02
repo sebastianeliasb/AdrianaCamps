@@ -1,3 +1,6 @@
+body{
+  overflow: hidden;
+}
 .modal-backdrop {
   position: absolute;
   display: flex;
@@ -104,10 +107,98 @@
   .modal-info-container {
     display: flex;
     flex-direction: column;
-   min-height: 40vh;
-   width: 60vw;
-  //  background-color: bisque;
-   justify-content: space-around;
+    min-height: 40vh;
+    width: 60vw;
+    justify-content: space-around;
+    // background-color: antiquewhite;
+
+    .text-area-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+    }
+img{
+  height: 20vh;
+  // width: 50%;
+}
+.home-modal-container{
+  display: flex;
+  width: 100%;
+  // background-color: chartreuse;
+  box-sizing: border-box;
+  padding: 1em;
+
+div{
+  display: flex;
+  width: 100%;
+}
+input{width:50%;
+height: 5vh;}
+img{width:100%;}
+
+  
+}
+    .news-modal-container{
+      display: grid;
+      justify-content: space-around;
+      align-items: center;
+grid-template-columns: auto;
+grid-template-rows: auto;
+flex-direction: column;
+min-height: 20vh;
+grid-template-areas: "name location"
+"subName photo"
+"client surface"   
+    ;
+
+    input {
+      width: 20vw;
+      height: 5vh;
+    }
+    img{
+      height: 10vh;
+      margin: 2rem;
+    }
+    }
+    .modal-contact-container{
+      display: flex;
+      // background-color: chartreuse;
+      box-sizing: border-box;
+      padding: 1em;
+
+      img{
+        height: 30vh;
+        width: 50%;
+      }
+      
+    }
+  }
+  
+  // .text-area-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: flex-start;
+  //   justify-content: space-between;
+  //   width: 100%;
+  // }
+  
+  // .image-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  //   width: 100%;
+  // }
   
 
                                .modal-mainInfo-subcontainer{
@@ -253,6 +344,5 @@ div:nth-of-type(2){
 
 
   }
-}       
 
 

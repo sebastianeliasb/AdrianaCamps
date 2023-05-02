@@ -469,87 +469,87 @@ function Modal({
                 </>
               ) : selected === "studio" ? (
                 <div className="modal-info-container">
-                  <Textarea
-                    className="name-input"
-                    onChange={(e) => onChange(e, "createStudio")}
-                    name="aboutMe"
-                    // value={studio.name}
-                    placeholder="About"
-                  />
-                  <input
-                    className="images-input"
-                    type="file"
-                    ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "images")}
-                    // multiple
-                    // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="projectImages"
-                  />
-                  {images &&
-                    images.length !== 0 &&
-                    Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
-                    ))}
-                  <button
-                    onClick={createNewStudio}
-                  >{`Create ${props.modalTitle}`}</button>
+                  <div className="text-area-container">
+                    <Textarea
+                      className="about-input"
+                      onChange={(e) => onChange(e, "createStudio")}
+                      name="aboutMe"
+                      placeholder="About"
+                    />
+
+                    {/* <div className="image-container"> */}
+                    <input
+                      className="images-input"
+                      type="file"
+                      ref={imageFileInput}
+                      onChange={(e) => handleChange(e, "images")}
+                      placeholder="projectImages"
+                    />
+                    {images &&
+                      images.length !== 0 &&
+                      Array.from(images).map((image) => (
+                        <img
+                          key={image.name}
+                          alt="To upload"
+                          src={URL.createObjectURL(image)}
+                        />
+                      ))}
+                  </div>
+                  {/* </div> */}
+
                   <UploadImagebtn
                     onClick={uploadImage}
                     btnText={"Upload Image"}
                   />
+                  <button
+                    onClick={createNewStudio}
+                  >{`Create ${props.modalTitle}`}</button>
                 </div>
               ) : selected === "home" ? (
                 <div className="modal-info-container">
-                  {/* <Input
-                    className="name-input"
-                    onChange={(e) => onChange(e, "createHome")}
-                    name="name"
-                    // value={project.name}
-                    placeholder="Image title"
-                    label="Name"
-                  /> */}
-                  <input
-                    className="images-input"
-                    type="file"
-                    id="file"
-                    ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "images")}
-                    multiple
-                    // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="Image"
-                  />
-
-                  <div className="image-carrusel">
-                    <ModalCarrusel>
-                      {images &&
-                        images.length !== 0 &&
-                        Array.from(images).map((image, index) => (
-                          <div key={index}>
-                            <ul>
-                              <li>Image {index + 1}</li>
-                            </ul>
-                            <img
-                              key={image.name}
-                              alt="To upload"
-                              src={URL.createObjectURL(image)}
-                            />
-                          </div>
-                        ))}
-                    </ModalCarrusel>
+                  <div className="home-modal-container">
+                    <div>
+                      <Input
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createHome")}
+                        name="name"
+                        // value={project.name}
+                        placeholder="Image title"
+                        label="Name"
+                      />
+                      <input
+                        className="images-input"
+                        type="file"
+                        id="file"
+                        ref={imageFileInput}
+                        onChange={(e) => handleChange(e, "images")}
+                        multiple
+                        // name="projectImages"
+                        // value={project.projectImages}
+                        placeholder="Image"
+                      />
+                    </div>
+                    {/* <ModalCarrusel> */}
+                    {images &&
+                      images.length !== 0 &&
+                      Array.from(images).map((image, index) => (
+                        <div key={index}>
+                          <img
+                            key={image.name}
+                            alt="To upload"
+                            src={URL.createObjectURL(image)}
+                          />
+                        </div>
+                      ))}
+                    {/* </ModalCarrusel> */}
                   </div>
-                  <button
-                    onClick={createNewHome}
-                  >{`Create ${props.modalTitle}`}</button>
                   <UploadImagebtn
                     onClick={uploadImage}
                     btnText={"Upload Images"}
                   />
+                  <button
+                    onClick={createNewHome}
+                  >{`Create ${props.modalTitle}`}</button>
                 </div>
               ) : selected === "concepts" ? (
                 <div className="modal-info-container">
@@ -614,90 +614,114 @@ function Modal({
                 </div>
               ) : selected === "contact" ? (
                 <div className="modal-info-container">
-                  <Textarea
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createContact")}
-                    name="contactText"
-                    // value={project.name}
-                    placeholder="Contact Text"
-                  />
-                  <input
-                    className="images-input"
-                    type="file"
-                    id="file"
-                    ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "images")}
-                    // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="Image"
-                  />
-                  {images &&
-                    images.length !== 0 &&
-                    Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
-                    ))}
-                  <button
-                    onClick={createNewContact}
-                  >{`Create ${props.modalTitle}`}</button>
-                  <UploadImagebtn
-                    onClick={uploadImage}
-                    btnText={"Upload Image"}
-                  />
+                  <div>
+                    <Textarea
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createContact")}
+                      name="contactText"
+                      // value={project.name}
+                      placeholder="Contact Text"
+                    />
+                    <input
+                      className="images-input"
+                      type="file"
+                      id="file"
+                      ref={imageFileInput}
+                      onChange={(e) => handleChange(e, "images")}
+                      // name="projectImages"
+                      // value={project.projectImages}
+                      placeholder="Image"
+                    />
+                    {images &&
+                      images.length !== 0 &&
+                      Array.from(images).map((image) => (
+                        <img
+                          key={image.name}
+                          alt="To upload"
+                          src={URL.createObjectURL(image)}
+                        />
+                      ))}
+                    <button
+                      onClick={createNewContact}
+                    >{`Create ${props.modalTitle}`}</button>
+                    <UploadImagebtn
+                      onClick={uploadImage}
+                      btnText={"Upload Image"}
+                    />
+                  </div>
                 </div>
               ) : selected === "news" ? (
                 <div className="modal-info-container">
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsYear"
-                    // value={project.name}
-                    placeholder="Year"
-                    label="Year"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsTitle"
-                    // value={project.name}
-                    placeholder="Title"
-                    label="Title"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsDate"
-                    // value={project.name}
-                    placeholder="Date"
-                    label="Date"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsSource"
-                    // value={project.name}
-                    placeholder="Source"
-                    label="Source"
-                    size="large"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsLink"
-                    // value={project.name}
-                    placeholder="Link"
-                    label="Link"
-                  />
-                  <button
-                    onClick={createNewNews}
-                  >{`Create ${props.modalTitle}`}</button>
+                  <div className="news-modal-container">
+                    <Input
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createNews")}
+                      name="newsYear"
+                      // value={project.name}
+                      placeholder="Year"
+                      label="Year"
+                    />
+                    <Input
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createNews")}
+                      name="newsTitle"
+                      // value={project.name}
+                      placeholder="Title"
+                      label="Title"
+                    />
+                    <Input
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createNews")}
+                      name="newsDate"
+                      // value={project.name}
+                      placeholder="Date"
+                      label="Date"
+                    />
+                    <Input
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createNews")}
+                      name="newsSource"
+                      // value={project.name}
+                      placeholder="Source"
+                      label="Source"
+                      size="large"
+                    />
+                    <Input
+                      // className="name-input"
+                      onChange={(e) => onChange(e, "createNews")}
+                      name="newsLink"
+                      // value={project.name}
+                      placeholder="Link"
+                      label="Link"
+                    />
+
+                    <input
+                      className="images-input"
+                      type="file"
+                      id="file"
+                      ref={imageFileInput}
+                      onChange={(e) => handleChange(e, "images")}
+                      // name="projectImages"
+                      // value={project.projectImages}
+                      placeholder="Image"
+                    />
+                    {images &&
+                      images.length !== 0 &&
+                      Array.from(images).map((image) => (
+                        <img
+                          key={image.name}
+                          alt="To upload"
+                          src={URL.createObjectURL(image)}
+                        />
+                      ))}
+                  </div>
                   <UploadImagebtn
                     onClick={uploadImage}
                     btnText={"Upload Image"}
                   />
+                  <button
+                    onClick={createNewContact}
+                  >{`Create ${props.modalTitle}`}</button>
                 </div>
               ) : null}
             </div>
