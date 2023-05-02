@@ -15,9 +15,6 @@ function ProjectItem() {
   const projectLocation = data.project.location;
   const projectDescription = data.project.description;
   const projectDate = data.project.date;
-  const projectClient = data.project.client;
-  const projectPhotographer = data.project.photographer;
-  const projectSize = data.project.surface;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -56,17 +53,9 @@ function ProjectItem() {
                     <span>{projectDescription}</span>
                   </div>
                   <div className="project-aspects">
-                    <span>
-                      {projectClient ? `Cliente: ${projectClient}` : null}
-                    </span>
-                    <span>
-                      {projectPhotographer
-                        ? `Fotografo: ${projectPhotographer}`
-                        : null}
-                    </span>
-                    <span>
-                      {projectSize ? `Superficie: ${projectSize}` : null}
-                    </span>
+                    <span>Cliente:Lorem Ipsum</span>
+                    <span>Fotografo:Lorem Ipsum</span>
+                    <span>Superficie:Lorem Ipsum</span>
                   </div>
                 </div>
               </div>

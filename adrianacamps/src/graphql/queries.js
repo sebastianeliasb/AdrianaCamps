@@ -51,13 +51,14 @@ export const listProjects = /* GraphQL */ `
 
 export const listHomes = /* GraphQL */ `
   query ListHomes(
-    $filter: TableHomeFilterInput
+    $filter: TableHomesFilterInput
     $limit: Int
     $nextToken: String
   ) {
     listHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         carrouselImages
       }
       nextToken
@@ -67,17 +68,18 @@ export const listHomes = /* GraphQL */ `
 
 export const listStudios = /* GraphQL */ `
   query ListStudios(
-    $filter: TableStudioFilterInput
+    $filter: TableStudiosFilterInput
     $limit: Int
     $nextToken: String
   ) {
     listStudios(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-          aboutImage
-          aboutMe
-          philosophy
-          route
-          username
+        id
+        aboutImage
+        aboutMe
+        philosophy
+        route
+        username
       }
       nextToken
     }
@@ -92,8 +94,9 @@ export const listContacts = /* GraphQL */ `
   ) {
     listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-          contactImage
-          contactText
+        id
+        contactImage
+        contactText
       }
       nextToken
     }
@@ -108,10 +111,11 @@ export const listConcepts = /* GraphQL */ `
   ) {
     listConcepts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-          conceptsImageMain
-          conceptImages
-          conceptTitle
-          conceptText
+        id
+        conceptsImageMain
+        conceptImages
+        conceptTitle
+        conceptText
       }
       nextToken
     }
@@ -126,11 +130,13 @@ export const listNews = /* GraphQL */ `
   ) {
     listNews(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-          newsYear 
-          newsTitle
-          newsDate
-          newsSource
-          newsLink
+        id
+        newsYear
+        newsTitle
+        newsDate
+        newsSource
+        newsLink
+        newsImage
       }
       nextToken
     }

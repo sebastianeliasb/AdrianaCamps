@@ -3,10 +3,12 @@
 #footer-main-container{
     position: relative;
     height: 100vh;
+   
     align-items: center;
     text-align: center;
     flex-direction: column;
     justify-content: center;
+    // background-color: red;   
     margin: 17rem 0 11rem 0;
     .footer-top{
         display: flex;
@@ -16,7 +18,7 @@ div{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 1.48vh;
     display: flex;
     flex-direction: column;
     line-height: 140%;
@@ -30,12 +32,9 @@ div:nth-of-type(2){
     a:active{
         text-decoration: none;
     }
-
     
   
 }
-
-
 div:nth-of-type(3){
     span:nth-of-type(4){
             color:#959595
@@ -43,21 +42,19 @@ div:nth-of-type(3){
         }
 
 }
-a:hover{
-    color: #6C9EBB;
-    cursor: pointer;
-}
 }
 
 
 @media only screen and (min-width: 600px){
     #footer-main-container{
         position: relative;
+        
         bottom: 0;
         left: 0;
         height: 8vh;
         width: 100%;
         margin: 5rem 0 16vh 0;
+        
         box-sizing: border-box;
         padding: 2vh 0 0 0;
 

@@ -6,11 +6,12 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 import WebNav from "../../Components/WebNav";
 
 import "./style/news.scss";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { listNews } from "../../graphql/queries";
 
 function News() {
   const [news, setNews] = useState([]);
+  const [selectedNews, setSelectedNews] = useState(0);
 
   useEffect(() => {
     fetchNews();
@@ -18,7 +19,17 @@ function News() {
 
   async function fetchNews() {
     const newsData = await API.graphql({ query: listNews });
-    setNews(newsData);
+    const { items } = newsData.data.listNews;
+    const newsWithImages = [];
+    for (let index = 0; index < items.length; index++) {
+      let news = items[index];
+      if (news.newsImage) {
+        news.newsImage = await Storage.get(news.newsImage);
+      }
+      newsWithImages.push(news);
+    }
+    console.log("news - ", newsWithImages);
+    setNews(newsWithImages);
   }
 
   const w = document.documentElement.clientWidth || window.innerWidth;
@@ -28,6 +39,11 @@ function News() {
   } else {
     backgroundColor = "none";
   }
+
+  const selectNews = (id, index) => {
+    setSelectedNews(index);
+  };
+
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -39,19 +55,25 @@ function News() {
           <div className="news-left">
             <div
               className="news-image"
-              style={{ backgroundImage: `url(${newsImage})` }}
+              style={{
+                backgroundImage: `url(${news[selectedNews]?.newsImage})`,
+              }}
             ></div>
 
             <div className="news-info-container">
-              <div>15 Novembre 2023</div>
-              <div>LOS MEJORES 300 INTERIORISTAS</div>
-              <div className="read-more">Leer mas</div>
+              <div>{news[selectedNews]?.newsDate}</div>
+              <div>{news[selectedNews]?.newsTitle}</div>
+              <div>{news[selectedNews]?.newsLink}</div>
             </div>
           </div>
           <div className="news-right">
             <span></span>
             <div className="news-right-content">
-              <NewsInfo />
+              <NewsInfo
+                data={news}
+                selectNews={selectNews}
+                selectedNewsID={news[selectedNews]?.id}
+              />
             </div>
           </div>
         </div>

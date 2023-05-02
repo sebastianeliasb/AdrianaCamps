@@ -8,7 +8,7 @@ import "../ProjectItem/style/projectItem.scss";
 function ConceptItem() {
   const location = useLocation();
   const data = location.state;
-  const projectName = data.project.name;
+  const projectName = data.project.main;
   const projectImages = {
     mainImage: data.project.projectImages[0],
   };

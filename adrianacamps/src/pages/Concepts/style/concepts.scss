@@ -1,107 +1,99 @@
 //Web
-@media only screen and (min-width: 600px){
-  #concepts{
-      // background-color: cadetblue;
+@media only screen and (min-width: 600px) {
+  #concepts {
+    // background-color: cadetblue;
+    display: flex;
+    min-height: 500px;
+
+    .concepts-left {
+      position: fixed;
+      left: 0;
       display: flex;
-      
-  
-      .concepts-left{
-          position: fixed;
-          left: 0;
-          display: flex;
-          width: 50% !important;
-          box-sizing: border-box;
-          padding: 14vh 10vw 0 5vw;
-        
-  .concepts-intro{ 
-      display: flex;
-      flex-direction: column;
-      font-family: 'roboto';
-      font-style: normal;
-      font-weight: 300;
-      font-size:16px;
-      line-height: 120%;
-      width: 100%;
-  
+      width: 50% !important;
+      box-sizing: border-box;
+      padding: 14vh 10vw 0 5vw;
+
+      .concepts-intro {
+        display: flex;
+        flex-direction: column;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 1.7vh;
+        line-height: 120%;
+        width: 100%;
       }
-  }
-  .concepts-right{
+    }
+    .concepts-right {
       position: relative;
       display: flex;
       flex-direction: row;
       width: 100%;
       padding: 0 !important;
-  
-  span{
-      width: 50%;
-  
+
+      span {
+        width: 50%;
+      }
+      .concepts-right-content {
+        // background-color: azure;
+        align-items: center;
+        right: 0;
+        padding: 0vh 0 0 10vw;
+        flex-direction: column;
+        box-sizing: border-box;
+        display: flex;
+        width: 50%;
+      }
+    }
   }
-      .concepts-right-content{
-          // background-color: azure;
-          align-items: center;
-          right: 0;
-          padding: 0vh 0 0 10vw;
-          flex-direction: column;
-          box-sizing: border-box;
-          display: flex;
-          width: 50%;
-          
+}
+
+//Mobile
+@media only screen and (max-width: 600px) {
+  #concepts {
+    box-sizing: border-box;
+    flex-direction: column;
+    display: flex;
+
+    .concepts-left {
+      box-sizing: border-box;
+      padding: 0 10vw 0 10vw;
+      margin-bottom: 3vh;
+
+      .concepts-intro {
+        display: flex;
+        flex-direction: column;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 1.8vh;
+        line-height: 120%;
+        width: 100%;
       }
+    }
+    .concepts-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 0 10vw 0 10vw;
+      width: 100%;
+      padding: 0 !important;
+      // background-color: aqua;
+
+      span {
+        width: 50%;
+      }
+      .concepts-right-content {
+        // background-color: azure;
+        align-items: center;
+        right: 0;
+        padding: 0vh 8vw 0 8vw;
+        flex-direction: column;
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+      }
+    }
   }
-      }
-          }
-  
-  //Mobile
-  @media only screen and (max-width: 600px){
-      #concepts{
-          box-sizing: border-box;
-          flex-direction: column;
-          display: flex;
-      
-          .concepts-left{
-              box-sizing: border-box;
-              padding: 0 10vw 0 10vw;
-              margin-bottom: 3vh;
-            
-      .concepts-intro{ 
-          display: flex;
-          flex-direction: column;
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 300;
-          font-size: 1.8vh;
-          line-height: 120%;
-          width: 100%;
-      
-          }
-      }
-      .concepts-right{
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          box-sizing: border-box;
-          padding: 0 10vw 0 10vw;
-          width: 100%;
-          padding: 0 !important;
-          // background-color: aqua;
-      
-      span{
-          width: 50%;
-      
-      }
-          .concepts-right-content{
-              // background-color: azure;
-              align-items: center;
-              right: 0;
-              padding: 0vh 8vw 0 8vw;
-              flex-direction: column;
-              box-sizing: border-box;
-              display: flex;
-              width: 100%;
-              
-          }
-      }
-          }
-  }
-  
-  
+}

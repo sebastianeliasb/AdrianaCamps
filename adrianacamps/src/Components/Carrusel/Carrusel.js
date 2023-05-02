@@ -10,7 +10,7 @@ import pic2 from "../../assets/news_image.jpg";
 import homeImage from "../../assets/home_image.jpg";
 import pic from "../../assets/project_image.jpg";
 
-function Carrusel() {
+function Carrusel({ data }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -20,43 +20,44 @@ function Carrusel() {
     speed: 4000,
     autoplaySpeed: 3000,
   };
+  console.log("images - ", data);
   return (
     <>
       <div className="carrusel">
         <Slider {...settings}>
-          <div>
-            <img src={homeImage} alt="Image 1" />
-          </div>
-          <div>
-            <img src={pic2} alt="Image 2" />
-          </div>
-          <div>
-            <img src={pic} alt="Image 3" />
-          </div>
+          {data.length > 0 &&
+            data.map((home, index) => (
+              <div key={index}>
+                <img src={home.carrouselImages[0]} alt="Image 1" />
+              </div>
+            ))}
         </Slider>
       </div>
       <div className="backdrop"></div>
     </>
   );
 }
-// function Carrusel({data}) {
-//     return (
-//         <>
-//             <div className="carrusel">
-//                 {data[0]?.carrouselImages.map((home, index) => (
-//                     <div key={index} className="project-content-box">
-//                         <div
-//                             className="project-image"
-//                             style={{
-//                                 backgroundImage: `url(${home}) `,
-//                             }}
-//                         />
-//                     </div>
-//                 ))}
-//             </div>
-//             <div className="backdrop"/>
-//         </>
-//     );
+
+// function Carrusel({ data }) {
+//   return (
+//     <>
+//       <div className="carrusel">
+//         {data[0]?.carrouselImages.map((home, index) => (
+//           <div
+//             ley={index}
+//             className="project-image"
+//             style={{
+//               backgroundImage: `url(${home}) `,
+//               backgroundSize: "cover",
+//               width: "100%",
+//               height: "100%",
+//             }}
+//           />
+//         ))}
+//       </div>
+//       <div className="backdrop" />
+//     </>
+//   );
 // }
 
 export default Carrusel;

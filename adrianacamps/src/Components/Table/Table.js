@@ -8,7 +8,7 @@ import NewsTable from "./NewsTable/NewsTable";
 import ContactTable from "./ContactTable/ContactTable";
 import ConceptsTable from "./ConceptsTable/ConceptsTable";
 
-function Table({ data, showModal, selected, deleteProject }) {
+function Table({ data, showModal, selected, deleteProcess }) {
   switch (selected) {
     case "projects":
       return (
@@ -24,7 +24,7 @@ function Table({ data, showModal, selected, deleteProject }) {
           <ProjectsTable
             showModal={showModal}
             projects={data.projects}
-            deleteProject={deleteProject}
+            deleteProject={deleteProcess}
           />
         </>
       );
@@ -39,7 +39,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <HomeTable />
+          <HomeTable
+            showModal={showModal}
+            homes={data.homes}
+            deleteHome={deleteProcess}
+          />
         </>
       );
     case "studio":
@@ -53,7 +57,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <StudioTable />
+          <StudioTable
+            showModal={showModal}
+            studios={data.studios}
+            deleteStudio={deleteProcess}
+          />
         </>
       );
     case "news":
@@ -67,7 +75,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <NewsTable />
+          <NewsTable
+            showModal={showModal}
+            news={data.news}
+            deleteNews={deleteProcess}
+          />
         </>
       );
     case "contact":
@@ -81,7 +93,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <ContactTable />
+          <ContactTable
+            showModal={showModal}
+            contacts={data.contacts}
+            deleteContact={deleteProcess}
+          />
         </>
       );
     case "concepts":
@@ -95,7 +111,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <ConceptsTable />
+          <ConceptsTable
+            showModal={showModal}
+            concepts={data.concepts}
+            deleteConcept={deleteProcess}
+          />
         </>
       );
     default:

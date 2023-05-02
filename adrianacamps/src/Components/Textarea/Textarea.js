@@ -20,10 +20,11 @@ function Textarea(props) {
     <div className="textarea-wrapper">
       <textarea
         placeholder={props.placeholder}
-        ref={textareaRef}
-        value={text}
-        onChange={handleChange}
         className="textarea"
+        name={props.name}
+        // id="name"
+        value={props.value}
+        onChange={props.onChange}
       />
     </div>
   );
