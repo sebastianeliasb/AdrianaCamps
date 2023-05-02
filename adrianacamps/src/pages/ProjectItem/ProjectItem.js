@@ -26,15 +26,18 @@ function ProjectItem() {
   } else {
     backgroundColor = "none";
   }
+
+  const project_images = data.project.projectImages;
+  console.log(project_images);
   return (
     <>
       {/* <div>
-                {data.project.projectImages.map(el => (
-                    <div key={el} className="project-content-left">
-                        <img src={el} alt="main"/>
-                    </div>
-                ))}
-            </div> */}
+        {data.project.projectImages.map((el) => (
+          <div key={el} className="project-content-left">
+            <img src={el} alt="main" />
+          </div>
+        ))}
+      </div> */}
       <MainPageLayout
         backgroundColorLeft={"white"}
         backgroundColorRight={"beige"}
@@ -46,7 +49,7 @@ function ProjectItem() {
             {/* First section */}
             <div className="first_section">
               <div className="project-content-left">
-                <img src={projectImages.mainImage} alt="main"></img>
+                <img src={project_images[0]} alt="main"></img>
               </div>
               <div className="project-content-right">
                 <div className="project-detail">
@@ -73,11 +76,11 @@ function ProjectItem() {
             </div>
             {/* Second section */}
             <div>
-              <img src={projectImages.mainImage} alt="first"></img>
+              <img src={project_images[1]} alt="first"></img>
             </div>
             {/* Third section */}
             <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[2]} alt="pic"></img>
               <span>
                 At ground floor level, while daily life and lines of sight
                 extrude freely beyond the walls of the house to colonise the
@@ -87,35 +90,35 @@ function ProjectItem() {
                 between interior space and the fall of natural light.
               </span>
               <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[3]} alt="pic"></img>
             </div>
             {/* Fourth section */}
             <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[4]} alt="pic"></img>
             </div>
             {/* Five section */}
             <div>
               <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[5]} alt="pic"></img>
+              <img src={project_images[6]} alt="pic"></img>
               <span></span>
             </div>
             {/* Six section */}
             <div>
               <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[7]} alt="pic"></img>
+              <img src={project_images[8]} alt="pic"></img>
               <span></span>
             </div>
             {/* Seven section */}
             <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[9]} alt="pic"></img>
             </div>
             {/* Eighth section */}
             <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={project_images[10]} alt="pic"></img>
+              <img src={project_images[11]} alt="pic"></img>
+              <img src={project_images[12]} alt="pic"></img>
             </div>
           </div>
         </ContentContainer>

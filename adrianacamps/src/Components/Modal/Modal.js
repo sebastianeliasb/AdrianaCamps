@@ -429,6 +429,14 @@ function Modal({
                         placeholder="Surface"
                         label="Surface"
                       />
+                      <Input
+                        className="date-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="date"
+                        value={project.date}
+                        placeholder="Date"
+                        label="Date"
+                      />
                     </div>
                   ) : selectedTag === "description" ? (
                     <div className="modal-desciption-subcontainer">

@@ -23,7 +23,7 @@ function NewsInfo(props) {
         <div className="news-info-toggle">
           {!activeToggleIds.includes(data.id) ? (
             <div className="closed-container">
-              <div className="info-date">{data.newsDate}</div>
+              <div className="info-date">{data.newsYear}</div>
               <button onClick={() => toggleInfo(data.id)}>+</button>
             </div>
           ) : (

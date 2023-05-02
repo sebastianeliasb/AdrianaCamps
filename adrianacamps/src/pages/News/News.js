@@ -63,7 +63,11 @@ function News() {
             <div className="news-info-container">
               <div>{news[selectedNews]?.newsDate}</div>
               <div>{news[selectedNews]?.newsTitle}</div>
-              <div>{news[selectedNews]?.newsLink}</div>
+
+              <div className="read-more">
+                <a href={news[selectedNews]?.newsLink}>Leer mas</a>
+                {/* <div>{news[selectedNews]?.newsLink}</div> */}
+              </div>
             </div>
           </div>
           <div className="news-right">
