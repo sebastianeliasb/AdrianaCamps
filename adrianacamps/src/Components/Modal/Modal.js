@@ -742,75 +742,77 @@ function Modal({
               </div>
             ) : selected === "news" ? (
               <div className="modal-info-container">
-                <div className="news-modal-container">
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsYear"
-                    // value={project.name}
-                    placeholder="Year"
-                    label="Year"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsTitle"
-                    // value={project.name}
-                    placeholder="Title"
-                    label="Title"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsDate"
-                    // value={project.name}
-                    placeholder="Date"
-                    label="Date"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsSource"
-                    // value={project.name}
-                    placeholder="Source"
-                    label="Source"
-                    size="large"
-                  />
-                  <Input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createNews")}
-                    name="newsLink"
-                    // value={project.name}
-                    placeholder="Link"
-                    label="Link"
-                  />
-
-                  <input
-                    className="images-input"
-                    type="file"
-                    id="file"
-                    ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "images")}
-                    // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="Image"
-                  />
-                  {images &&
-                    images.length !== 0 &&
-                    Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
-                    ))}
-                </div>
+                <Input
+                  // className="name-input"
+                  onChange={(e) => onChange(e, "createNews")}
+                  name="newsYear"
+                  value={news.newsYear}
+                  placeholder="Year"
+                  label="newsYear"
+                />
+                <Input
+                  // className="name-input"
+                  onChange={(e) => onChange(e, "createNews")}
+                  name="newsTitle"
+                  value={news.newsTitle}
+                  placeholder="Title"
+                  label="newsTitle"
+                />
+                <Input
+                  // className="name-input"
+                  onChange={(e) => onChange(e, "createNews")}
+                  name="newsDate"
+                  value={news.newsDate}
+                  placeholder="Date"
+                  label="newsDate"
+                />
+                <Input
+                  // className="name-input"
+                  onChange={(e) => onChange(e, "createNews")}
+                  name="newsSource"
+                  value={news.newsSource}
+                  placeholder="Source"
+                  label="newsSource"
+                  size="large"
+                />
+                <Input
+                  // className="name-input"
+                  onChange={(e) => onChange(e, "createNews")}
+                  name="newsLink"
+                  value={news.newsLink}
+                  placeholder="Link"
+                  label="newsLink"
+                />
+                <br />
+                <br />
+                <input
+                  className="images-input"
+                  type="file"
+                  id="file"
+                  ref={imageFileInput}
+                  accept="image/png, image/gif, image/jpeg"
+                  onChange={(e) => handleChange(e, "images")}
+                  // name="projectImages"
+                  //value={news.newsImage}
+                  placeholder="Image"
+                />
+                {images &&
+                  images.length !== 0 &&
+                  Array.from(images).map((image) => (
+                    <img
+                      key={image.name}
+                      alt="To upload"
+                      src={URL.createObjectURL(image)}
+                    />
+                  ))}
                 <UploadImagebtn
                   onClick={uploadImage}
                   btnText={"Upload Image"}
                 />
+                <br />
+                <br />
                 <button
-                  onClick={createNewContact}
+                  onClick={createNewNews}
                 >{`Create ${props.modalTitle}`}</button>
               </div>
             ) : null}
