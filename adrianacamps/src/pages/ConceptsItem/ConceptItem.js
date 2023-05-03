@@ -8,13 +8,13 @@ import "../ProjectItem/style/projectItem.scss";
 function ConceptItem() {
   const location = useLocation();
   const data = location.state;
-  const projectName = data.project.main;
-  const projectImages = {
-    mainImage: data.project.projectImages[0],
-  };
-  const projectLocation = data.project.location;
-  const projectDescription = data.project.description;
-  const projectDate = data.project.date;
+  // const projectName = data.concept.main;
+  // const projectImages = {
+  //   mainImage: data.concept.projectImages[0],
+  // };
+  // const projectLocation = data.concept.location;
+  // const projectDescription = data.concept.description;
+  // const projectDate = data.concept.date;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -39,9 +39,9 @@ function ConceptItem() {
       >
         <WebNav />
         <ContentContainer>
-          <div className="project-item-body">
-            {/* First section */}
-            <div className="first_section">
+          {/* <div className="project-item-body"> */}
+          {/* First section */}
+          {/* <div className="first_section">
               <div className="project-content-left">
                 <img src={projectImages.mainImage} alt="main"></img>
               </div>
@@ -59,13 +59,13 @@ function ConceptItem() {
                   </div>
                 </div>
               </div>
-            </div>
-            {/* Second section */}
-            <div>
+            </div> */}
+          {/* Second section */}
+          {/* <div>
               <img src={projectImages.mainImage} alt="first"></img>
-            </div>
-            {/* Third section */}
-            <div>
+            </div> */}
+          {/* Third section */}
+          {/* <div>
               <img src={projectImages.mainImage} alt="pic"></img>
               <span>
                 At ground floor level, while daily life and lines of sight
@@ -77,36 +77,36 @@ function ConceptItem() {
               </span>
               <span></span>
               <img src={projectImages.mainImage} alt="pic"></img>
-            </div>
-            {/* Fourth section */}
-            <div>
+            </div> */}
+          {/* Fourth section */}
+          {/* <div>
               <img src={projectImages.mainImage} alt="pic"></img>
-            </div>
-            {/* Five section */}
-            <div>
+            </div> */}
+          {/* Five section */}
+          {/* <div>
               <span></span>
               <img src={projectImages.mainImage} alt="pic"></img>
               <img src={projectImages.mainImage} alt="pic"></img>
               <span></span>
-            </div>
-            {/* Six section */}
-            <div>
+            </div> */}
+          {/* Six section */}
+          {/* <div>
               <span></span>
               <img src={projectImages.mainImage} alt="pic"></img>
               <img src={projectImages.mainImage} alt="pic"></img>
               <span></span>
-            </div>
-            {/* Seven section */}
-            <div>
+            </div> */}
+          {/* Seven section */}
+          {/* <div>
+              <img src={projectImages.mainImage} alt="pic"></img>
+            </div> */}
+          {/* Eighth section */}
+          {/* <div>
+              <img src={projectImages.mainImage} alt="pic"></img>
+              <img src={projectImages.mainImage} alt="pic"></img>
               <img src={projectImages.mainImage} alt="pic"></img>
             </div>
-            {/* Eighth section */}
-            <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-            </div>
-          </div>
+          </div> */}
         </ContentContainer>
       </MainPageLayout>
     </>

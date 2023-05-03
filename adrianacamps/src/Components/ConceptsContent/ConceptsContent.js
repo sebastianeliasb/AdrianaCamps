@@ -8,7 +8,7 @@ function ConceptsContent({ data }) {
   }
   return data.map((concept, index) => (
     <>
-      <div className="concept-content-box">
+      <div key={index} className="concept-content-box">
         <div className="concept-image-link">
           <Link to={`/concept/${concept.id}`} state={{ concept }}>
             <img
