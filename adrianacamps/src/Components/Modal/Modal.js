@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuid } from "uuid";
 import "./style/modal.scss";
 import "easymde/dist/easymde.min.css";
@@ -150,7 +152,16 @@ function Modal({
       }));
     }
   }
-
+  const notifySuccess = (section) => {
+    toast.success(`New ${section} created!`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+  const notifyError = () => {
+    toast.error(`Algo fallo porfavor prueba otra vez`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
   async function createNewProject() {
     if (!name) return;
     if (images.length === 0) {
@@ -158,22 +169,26 @@ function Modal({
     }
 
     project.id = uuid();
+    try {
+      project.projectImages = Array.from(images)
+        .map((img) => img.name)
+        .join(",");
+      Array.from(images).map(async (image) => {
+        await Storage.put(image.name, image);
+      });
 
-    project.projectImages = Array.from(images)
-      .map((img) => img.name)
-      .join(",");
-    Array.from(images).map(async (image) => {
-      await Storage.put(image.name, image);
-    });
-
-    await API.graphql({
-      query: createProjects,
-      variables: { input: project },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setProject(initialState);
-    setImages(null);
+      await API.graphql({
+        query: createProjects,
+        variables: { input: project },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setProject(initialState);
+      setImages(null);
+      notifySuccess("project");
+    } catch (error) {
+      notifyError();
+    }
   }
 
   async function createNewHome() {
@@ -819,6 +834,7 @@ function Modal({
           </div>
         </>
       ) : null}
+      <ToastContainer />
     </>
   );
 }

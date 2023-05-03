@@ -7,6 +7,7 @@ import WebNav from "../../Components/WebNav";
 import { API, Storage } from "aws-amplify";
 import { listContacts } from "../../graphql/queries";
 import { useForm, ValidationError } from "@formspree/react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Contact() {
   const [contacts, setContacts] = useState([]);
@@ -34,8 +35,12 @@ function Contact() {
     event.preventDefault(); // prevent default form submission behavior
 
     try {
-      await handleSubmit(event); // submit form data to Formspree
-      alert("Thank you for your message!"); // show confirmation message
+      const recaptchaResponse = await window.grecaptcha.execute();
+      const formData = new FormData(event.target);
+      formData.set("g-recaptcha-response", recaptchaResponse);
+
+      await handleSubmit(formData); // submit form data to Formspree
+      alert("Email Sent"); // show confirmation message
       event.target.reset(); // reset form inputs
     } catch (error) {
       console.error(error);
@@ -71,6 +76,7 @@ function Contact() {
                     id="names"
                     name="name"
                     placeholder="Full Name"
+                    required
                   ></input>
                   <input
                     type="email"
@@ -91,6 +97,7 @@ function Contact() {
                     placeholder="Message"
                   ></input>
                   <div className="send-form-container">
+                    {/* <ReCAPTCHA sitekey="6LfDitslAAAAAFSMnD9x33Y9mO_mUuf03o_EQVFb" /> */}
                     <ValidationError
                       prefix="Message"
                       field="message"
