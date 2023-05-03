@@ -6,16 +6,16 @@ function StudioTable({ showModal, studios, deleteStudio }) {
   return (
     <div className="content-information">
       <div className="content-row-header">
-        <div>About Me</div>
-        <div>Philosophy</div>
-        <div>Route</div>
+        <div>TRAYECTORIA</div>
+        <div>EL ESTUDIO</div>
+        <div>CLIENTES</div>
         <div>Edit</div>
       </div>{" "}
       {studios.map((project) => (
         <div key={project.id} className="content-row">
           <div onClick={() => console.log(project.id)}>{project.aboutMe}</div>
           <div>{project.philosophy}</div>
-          <div>{project.username}</div>
+          <div>{project.route}</div>
           <div>
             <span
               onClick={() => showModal(true, project)}

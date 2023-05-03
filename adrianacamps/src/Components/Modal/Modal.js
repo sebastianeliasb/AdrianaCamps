@@ -643,7 +643,7 @@ function Modal({
                   value={concept.conceptTitle}
                   placeholder="Concept Title"
                 />
-                <Input
+                <Textarea
                   className="name-input"
                   label="conceptText"
                   onChange={(e) => onChange(e, "createConcept")}

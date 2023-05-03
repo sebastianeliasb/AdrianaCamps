@@ -88,6 +88,8 @@ function Concepts() {
       ))}
     </p>
   );
+
+  const conceptText = concepts[1]?.conceptText; // get the aboutMe string from the studio object
   if (!concepts) {
     return null;
   }
@@ -106,7 +108,17 @@ function Concepts() {
               <p>
                 <u>Concepts for sale</u>
               </p>
-              <p>{concepts[0].conceptText}</p>
+              <p>
+                {" "}
+                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
+                {conceptText && conceptText.includes("*") ? (
+                  conceptText
+                    .split("*")
+                    .map((text, index) => <p key={index}>{text}</p>)
+                ) : (
+                  <p>{conceptText}</p>
+                )}
+              </p>
             </div>
           </div>
           <div className="concepts-right">

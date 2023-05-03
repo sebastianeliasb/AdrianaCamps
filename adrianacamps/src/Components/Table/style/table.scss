@@ -21,7 +21,7 @@ span::first-letter {
   text-transform: capitalize;
 }
 .content-information {
-  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-y: scroll !important; /* Enable vertical scrolling */
   scrollbar-width: none; /* Hide scrollbar */
   -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
 }
@@ -54,17 +54,28 @@ span::first-letter {
     display: flex;
     width: 100%;
     border-bottom: 1px solid rgba(61, 61, 61, 0.702);
-    height: 5vh;
+    height: auto;
+    min-height: 5vh;
 
     div {
+      // box-sizing: border-box;
       font-weight: 600;
       display: flex;
-      align-items: center;
+      // align-items: center;
       flex-grow: 1;
       min-width: 10%;
       max-width: 25%;
-      justify-content: center;
-      overflow: hidden;
+      // justify-content: center;
+      overflow: scroll;
+    }
+    div {
+      overflow-y: scroll; /* Enable vertical scrolling */
+      scrollbar-width: none; /* Hide scrollbar */
+      -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    }
+  
+    div::-webkit-scrollbar {
+      width: 0px; /* Hide scrollbar in Chrome, Safari, and Opera */
     }
   }
 

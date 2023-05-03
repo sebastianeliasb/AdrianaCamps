@@ -34,6 +34,10 @@ function About() {
     console.log("studio image - ", studioWithImages);
   }
 
+  const trayectoria = studio[0]?.aboutMe; // get the aboutMe string from the studio object
+  const estudio = studio[0]?.philosophy; // get the aboutMe string from the studio object
+  const clientes = studio[0]?.route; // get the aboutMe string from the studio object
+
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -59,15 +63,36 @@ function About() {
                 className="about-text-container"
                 style={{ minHeight: "500px" }}
               >
-                <u>Sobre mi</u>
-                <p>{studio[0]?.aboutMe}</p>
+                <u>TRAYECTORIA</u>
+                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
+                {trayectoria && trayectoria.includes("*") ? (
+                  trayectoria
+                    .split("*")
+                    .map((text, index) => <p key={index}>{text}</p>)
+                ) : (
+                  <p>{trayectoria}</p>
+                )}
                 <br />
-                <u>Filosofia</u>
-                <p>{studio[0]?.philosophy}</p>
+                <u>EL ESTUDIO</u>
+                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
+                {estudio && estudio.includes("*") ? (
+                  estudio
+                    .split("*")
+                    .map((text, index) => <p key={index}>{text}</p>)
+                ) : (
+                  <p>{estudio}</p>
+                )}
                 <br />
-                <u>Recorrido</u>
-                <p>{studio[0]?.route}</p>
-                <br />{" "}
+                <u>CLIENTES</u>
+                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
+                {clientes && clientes.includes("*") ? (
+                  clientes
+                    .split("*")
+                    .map((text, index) => <p key={index}>{text}</p>)
+                ) : (
+                  <p>{clientes}</p>
+                )}
+                <br />
               </div>
               {/* <Footer /> */}
             </div>
