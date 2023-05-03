@@ -12,6 +12,7 @@ import { listNews } from "../../graphql/queries";
 function News() {
   const [news, setNews] = useState([]);
   const [selectedNews, setSelectedNews] = useState(0);
+  const [selectedNewsId, setSelectedNewsId] = useState(null); // add state variable for selected news id
 
   useEffect(() => {
     fetchNews();
@@ -40,10 +41,13 @@ function News() {
     backgroundColor = "none";
   }
 
-  const selectNews = (id, index) => {
+  const selectNews = (id) => {
+    const index = news.findIndex((item) => item.id === id);
     setSelectedNews(index);
+    setSelectedNewsId(id);
   };
 
+  console.log(news[selectedNews]?.newsImage);
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -66,6 +70,7 @@ function News() {
 
               <div className="read-more">
                 <a href={news[selectedNews]?.newsLink}>Leer mas</a>
+                {/* <div>{news[selectedNews]?.newsLink}</div> */}
               </div>
             </div>
           </div>
@@ -75,7 +80,7 @@ function News() {
               <NewsInfo
                 data={news}
                 selectNews={selectNews}
-                selectedNewsID={news[selectedNews]?.id}
+                selectedNewsId={selectedNewsId}
               />
             </div>
           </div>

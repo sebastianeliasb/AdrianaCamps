@@ -6,6 +6,7 @@ import sendArrow from "../../assets/arrow.png";
 import WebNav from "../../Components/WebNav";
 import { API, Storage } from "aws-amplify";
 import { listContacts } from "../../graphql/queries";
+import { useForm, ValidationError } from "@formspree/react";
 
 function Contact() {
   const [contacts, setContacts] = useState([]);
@@ -27,59 +28,20 @@ function Contact() {
     setContacts(contactsWithImages);
   }
 
-  // return (
-  //   <>
-  //     <MainPageLayout backgroundColorRight={"beige"}>
-  //       <WebNav />
-  //       <ContentContainer>
-  //         <div id="contact">
-  //           <div className="contact-right">
-  //             <img src={contacts[0]?.contactImage} alt="contact" />
-  //           </div>
-  //           <div className="contact-left">
-  //             <div className="contact-text">
-  //               <p>
-  //                 Si quieres más información sobre nuestros servicios, no dudes
-  //                 en ponerte en contacto con nosotros rellenando este formulario
-  //                 y te daremos una respuesta lo antes posible.
-  //               </p>
-  //             </div>
+  const [state, handleSubmit] = useForm("mknayzwo");
 
-  //             <form id="contact-form">
-  //               <input
-  //                 type="text"
-  //                 id="names"
-  //                 name="names"
-  //                 placeholder="Full Name"
-  //               />
-  //               <input
-  //                 type="email"
-  //                 id="email"
-  //                 name="email"
-  //                 placeholder="Email"
-  //               />
-  //               <input
-  //                 type="text"
-  //                 id="subject"
-  //                 name="subject"
-  //                 placeholder="Subject"
-  //               />
-  //               <input
-  //                 type="text"
-  //                 id="message"
-  //                 name="message"
-  //                 placeholder="Message"
-  //               />
-  //               <div className="send-form-container">
-  //                 <img role="button" src={sendArrow} alt="sendForm" />
-  //               </div>
-  //             </form>
-  //           </div>
-  //         </div>
-  //       </ContentContainer>
-  //     </MainPageLayout>
-  //   </>
-  // );
+  const handleFormSubmit = async (event) => {
+    event.preventDefault(); // prevent default form submission behavior
+
+    try {
+      await handleSubmit(event); // submit form data to Formspree
+      alert("Thank you for your message!"); // show confirmation message
+      event.target.reset(); // reset form inputs
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <MainPageLayout backgroundColorRight={"beige"}>
@@ -87,7 +49,6 @@ function Contact() {
         <ContentContainer>
           <span className="try_span">
             <div id="contact">
-              {/* <div className="contact-content"> */}
               <div className="contact-right">
                 <img
                   className="contact-image"
@@ -104,11 +65,11 @@ function Contact() {
                   </p>
                 </div>
 
-                <form id="contact-form">
+                <form onSubmit={handleFormSubmit} id="contact-form">
                   <input
                     type="text"
                     id="names"
-                    name="names"
+                    name="name"
                     placeholder="Full Name"
                   ></input>
                   <input
@@ -130,13 +91,19 @@ function Contact() {
                     placeholder="Message"
                   ></input>
                   <div className="send-form-container">
-                    <img role="button" src={sendArrow} alt="sendForm"></img>
+                    <ValidationError
+                      prefix="Message"
+                      field="message"
+                      errors={state.errors}
+                    />
+                    <button type="submit" className="send-form-button">
+                      <img src={sendArrow} alt="Send" />
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
           </span>
-          {/* </div> */}
         </ContentContainer>
       </MainPageLayout>
     </>

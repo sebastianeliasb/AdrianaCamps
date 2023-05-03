@@ -9,6 +9,12 @@
   background-position: center center;
 }
 }
+button[type="submit"] {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
 .contact-left{
 .contact-text{
   margin-top: 1.5rem;

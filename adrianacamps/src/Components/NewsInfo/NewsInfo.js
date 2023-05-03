@@ -13,13 +13,14 @@ function NewsInfo(props) {
     }
   };
 
-  const onClickEachItem = (id, index) => {
-    props.selectNews(id, index);
+  const onClickEachItem = (id) => {
+    props.selectNews(id);
   };
 
   const groupedData = props.data.reduce((acc, item) => {
     const year = item.newsYear;
     const group = acc.find((group) => group.year === year);
+    // const id = item.id
 
     if (group) {
       group.items.push(item);
@@ -31,6 +32,7 @@ function NewsInfo(props) {
   }, []);
 
   groupedData.sort((a, b) => b.year - a.year);
+
   return (
     <>
       {groupedData.map((group, index) => (
@@ -50,7 +52,7 @@ function NewsInfo(props) {
                 <div
                   className={classNames({
                     "opened-bottom": true,
-                    "opened-bottom-active": props.selectedNewsID === item.id,
+                    "opened-bottom-active": props.selectedNewsId === item.id,
                   })}
                   key={index}
                 >
