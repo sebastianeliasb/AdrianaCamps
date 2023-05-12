@@ -14,15 +14,27 @@
       font-size: 1rem;
       font-family: "Roboto", sans-serif;
       resize: none;
-      overflow: hidden;
-      height: 2rem;
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: gray transparent;
+      height: 10rem;
       padding: 0.5rem;
       
       background-color: transparent;
   
-    //   &:focus {
-    //     box-shadow: 0 0 0 2px #0070f3;
-    //   }
+      // &:focus {
+      //   box-shadow: 0 0 0 2px #0070f3;
+      // }
+    }
+    .textarea::-webkit-scrollbar {
+      width: 6px;
+      cursor: pointer;
+    }
+    
+    .textarea::-webkit-scrollbar-thumb {
+      background-color: gray;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
   

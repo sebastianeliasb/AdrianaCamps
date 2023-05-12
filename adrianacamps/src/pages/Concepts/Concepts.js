@@ -12,7 +12,6 @@ import { API, Storage, graphqlOperation } from "aws-amplify";
 import { listConcepts } from "../../graphql/queries";
 import GraphQLAPI, { GRAPHQL_AUTH_MODE } from "@aws-amplify/api-graphql";
 
-// const initialState = { name: '', subName: '', location: '', date: '', description: '', subDescription: '', client: '', photographer: '', surface: '', projectImages: '' }
 const initialState = [
   {
     conceptsImageMain: "",
@@ -21,65 +20,39 @@ const initialState = [
     conceptText: "",
   },
 ];
-function Concepts() {
-  const [concepts, setConcept] = useState(initialState);
-  const [apiError, setApiError] = useState();
 
-  React.useEffect(() => {
-    fetchConcepts();
-  }, []);
+async function fetchConcepts(setConcept) {
+  try {
+    const conceptData = await API.graphql(graphqlOperation(listConcepts));
+    const items = conceptData.data.listConcepts.items;
 
-  const fetchConcepts = async () => {
-    try {
-      // const conceptData = await GraphQLAPI.graphql({ query: listConcepts, authMode: GRAPHQL_AUTH_MODE.API_KEY })
-      const conceptData = await API.graphql(graphqlOperation(listConcepts));
-      const items = conceptData.data.listConcepts.items;
-
-      const conceptWithImages = [];
-      for (let index = 0; index < items.length; index++) {
-        let concept = items[index];
+    const conceptWithImages = await Promise.all(
+      items.map(async (concept) => {
         if (concept.conceptImages) {
-          let conceptsImagesList = [];
-          for (let idx = 0; idx < concept.conceptImages.length; idx++) {
-            conceptsImagesList.push(
-              await Storage.get(concept.conceptImages[idx])
-            );
-          }
+          let conceptsImagesList = await Promise.all(
+            concept.conceptImages.map(async (image) => await Storage.get(image))
+          );
           concept.conceptsImageMain = await Storage.get(
             concept.conceptsImageMain
           );
           concept.conceptImages = conceptsImagesList;
         }
-        conceptWithImages.push(concept);
-      }
-      console.log("concept - ", conceptWithImages);
-      setConcept(conceptWithImages);
-      setApiError(null);
-    } catch (error) {
-      console.log("error on fetching concepts", error);
-      setApiError(error);
-    }
-    // const conceptData = await API.graphql({ query: listConcepts });
+        return concept;
+      })
+    );
+    setConcept(conceptWithImages);
+  } catch (error) {
+    console.log("error on fetching concepts", error);
+  }
+}
 
-    // const conceptWithImages = [];
-    // for (let index = 0; index < items.length; index++) {
-    //   let concept = items[index];
-    //   if (concept.conceptImages) {
-    //     let conceptsImagesList = [];
-    //     for (let idx = 0; idx < concept.conceptImages.length; idx++) {
-    //       conceptsImagesList.push(
-    //         await Storage.get(concept.conceptImages[idx])
-    //       );
-    //     }
-    //     concept.conceptsImageMain = await Storage.get(
-    //       concept.conceptsImageMain
-    //     );
-    //     concept.conceptImages = conceptsImagesList;
-    //   }
-    //   conceptWithImages.push(concept);
-    // }
-    // setConcept(conceptWithImages);
-  };
+function Concepts() {
+  const [concepts, setConcept] = useState(initialState);
+  const [apiError, setApiError] = useState();
+
+  useEffect(() => {
+    fetchConcepts(setConcept);
+  }, []);
 
   const errorMessage = apiError && (
     <p>

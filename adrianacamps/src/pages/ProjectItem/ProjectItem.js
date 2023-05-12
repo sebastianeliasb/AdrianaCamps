@@ -8,28 +8,20 @@ import "./style/projectItem.scss";
 function ProjectItem() {
   const location = useLocation();
   const data = location.state;
-  const projectName = data.project.name;
-  const projectImages = {
-    mainImage: data.project.projectImages[0],
-  };
-  const projectLocation = data.project.location;
-  const projectDescription = data.project.description;
-  const projectDate = data.project.date;
-  const projectClient = data.project.client;
-  const projectPhotographer = data.project.photographer;
-  const projectSize = data.project.surface;
-  const subDescription = data.project.subDescription;
+  const {
+    name: projectName,
+    projectImages,
+    location: projectLocation,
+    description: projectDescription,
+    date: projectDate,
+    client: projectClient,
+    photographer: projectPhotographer,
+    surface: projectSize,
+    subDescription,
+  } = data.project;
 
-  const w = document.documentElement.clientWidth || window.innerWidth;
-  let backgroundColor;
-  if (w <= 600) {
-    backgroundColor = "beige";
-  } else {
-    backgroundColor = "none";
-  }
+  const backgroundColor = window.innerWidth <= 600 ? "beige" : "none";
 
-  const project_images = data.project.projectImages;
-  console.log(project_images);
   return (
     <>
       <WebNav />
@@ -44,7 +36,7 @@ function ProjectItem() {
             {/* First section */}
             <div className="first_section">
               <div className="project-content-left">
-                <img src={project_images[0]} alt="main"></img>
+                <img src={projectImages[0]} alt="main"></img>
               </div>
               <div className="project-content-right">
                 <div className="project-detail">
@@ -54,72 +46,66 @@ function ProjectItem() {
                     <span>{projectDescription}</span>
                   </div>
                   <div className="project-aspects">
-                    <span>
-                      {projectClient ? `Cliente: ${projectClient}` : null}
-                    </span>
-                    <span>
-                      {projectPhotographer
-                        ? `Fotografo: ${projectPhotographer}`
-                        : null}
-                    </span>
-                    <span>
-                      {projectSize ? `Superficie: ${projectSize}` : null}
-                    </span>
+                    {projectClient && <span>Cliente: {projectClient}</span>}
+                    {projectPhotographer && (
+                      <span>Fotografo: {projectPhotographer}</span>
+                    )}
+                    {projectSize && <span>Superficie: {projectSize}</span>}
                   </div>
                 </div>
               </div>
             </div>
             {/* Second section */}
-            {project_images[1] && (
+            {projectImages[1] && (
               <div>
-                <img src={project_images[1]} alt="first"></img>
+                <img src={projectImages[1]} alt="first"></img>
               </div>
             )}
             {/* Third section */}
-            {project_images[2] && (
+            {projectImages[2] && (
               <div>
-                <img src={project_images[2]} alt="pic"></img>
+                <img src={projectImages[2]} alt="pic"></img>
                 <span>{subDescription}</span>
                 <span></span>
-                <img src={project_images[3]} alt="pic"></img>
+                <img src={projectImages[3]} alt="pic"></img>
               </div>
             )}
             {/* Fourth section */}
-            {project_images[4] && (
+            {projectImages[4] && (
               <div>
-                <img src={project_images[4]} alt="pic"></img>
+                <img src={projectImages[4]} alt="pic"></img>
               </div>
             )}
             {/* Five section */}
-            {project_images[5] && project_images[6] && (
+            {projectImages[5] && projectImages[6] && (
               <div>
                 <span></span>
-                <img src={project_images[5]} alt="pic"></img>
-                <img src={project_images[6]} alt="pic"></img>
+                <img src={projectImages[5]} alt="pic"></img>
+                <img src={projectImages[6]} alt="pic"></img>
                 <span></span>
               </div>
             )}
             {/* Six section */}
-            {project_images[7] && project_images[8] && (
+            {projectImages[7] && projectImages[8] && (
               <div>
                 <span></span>
-                <img src={project_images[7]} alt="pic"></img>
-                <img src={project_images[8]} alt="pic"></img>
+                <img src={projectImages[7]} alt="pic"></img>
+                <img src={projectImages[8]} alt="pic"></img>
                 <span></span>
               </div>
             )}
             {/* Seven section */}
-            {project_images[9] && (
+            {projectImages[9] && (
               <div>
-                <img src={project_images[9]} alt="pic"></img>
+                <img src={projectImages[9]} alt="pic"></img>
               </div>
             )}
             {/* Eighth section */}
-            {project_images[10] && project_images[11] && project_images[12] && (
+            {projectImages[10] && projectImages[11] && projectImages[12] && (
               <div>
-                <img src={project_images[10]} alt="pic"></img>
-                <img src={project_images[11]} alt="pic"></img>
-                <img src={project_images[12]} alt="pic"></img>
+                <img src={projectImages[10]} alt="pic"></img>
+                <img src={projectImages[11]} alt="pic"></img>
+                <img src={projectImages[12]} alt="pic"></img>
               </div>
             )}
           </div>

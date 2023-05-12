@@ -10,27 +10,30 @@ import { useForm, ValidationError } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer, toast } from "react-toastify";
 
+async function fetchContacts(setContacts) {
+  const contactData = await API.graphql({ query: listContacts });
+  const { items } = contactData.data.listContacts;
+  const contactsWithImages = await Promise.all(
+    items.map(async (contact) => {
+      if (contact.contactImage) {
+        contact.contactImage = await Storage.get(contact.contactImage);
+      }
+      return contact;
+    })
+  );
+  setContacts(contactsWithImages);
+}
+
+const emailRegex =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 function Contact() {
   const [contacts, setContacts] = useState([]);
   const [validationMessage, setValidationMessage] = useState("");
 
   useEffect(() => {
-    fetchContacts();
+    fetchContacts(setContacts);
   }, []);
-
-  async function fetchContacts() {
-    const contactData = await API.graphql({ query: listContacts });
-    const { items } = contactData.data.listContacts;
-    const contactsWithImages = [];
-    for (let index = 0; index < items.length; index++) {
-      let contact = items[index];
-      if (contact.contactImage) {
-        contact.contactImage = await Storage.get(contact.contactImage);
-      }
-      contactsWithImages.push(contact);
-    }
-    setContacts(contactsWithImages);
-  }
 
   const [state, handleSubmit] = useForm("mknayzwo");
 
@@ -41,8 +44,6 @@ function Contact() {
     }
 
     // Email verification
-    const emailRegex =
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!emailRegex.test(email)) {
       setValidationMessage("Please enter a valid email address");
       return false;
@@ -58,12 +59,10 @@ function Contact() {
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const subject = event.target.subject.value;
-    const message = event.target.message.value;
+    const { name, email, subject, message } = event.target.elements;
 
-    if (!verifyInput(name, email, subject, message)) return;
+    if (!verifyInput(name.value, email.value, subject.value, message.value))
+      return;
 
     try {
       // const recaptchaResponse = await window.grecaptcha.execute();

@@ -23,6 +23,74 @@ import {
 } from "../../graphql/mutations";
 import DashboardNav from "../../Components/DashboardNav/DashboardNav";
 
+async function fetchData(setData) {
+  const [
+    homesData,
+    projectData,
+    studiosData,
+    newsData,
+    contactsData,
+    conceptsData,
+  ] = await Promise.all([
+    API.graphql({ query: listHomes }),
+    API.graphql({ query: listProjects }),
+    API.graphql({ query: listStudios }),
+    API.graphql({ query: listNews }),
+    API.graphql({ query: listContacts }),
+    API.graphql({ query: listConcepts }),
+  ]);
+
+  setData({
+    homes: homesData.data.listHomes.items,
+    projects: projectData.data.listProjects.items,
+    studios: studiosData.data.listStudios.items,
+    news: newsData.data.listNews.items,
+    contacts: contactsData.data.listContacts.items,
+    concepts: conceptsData.data.listConcepts.items,
+  });
+}
+
+async function deleteProcess(selected, id) {
+  let mutation;
+  let refetch;
+
+  switch (selected) {
+    case "home":
+      mutation = deleteHomeMututation;
+      refetch = listHomes;
+      break;
+    case "studio":
+      mutation = deleteStudioMutation;
+      refetch = listStudios;
+      break;
+    case "concepts":
+      mutation = deleteConceptMutation;
+      refetch = listConcepts;
+      break;
+    case "news":
+      mutation = deleteNewMutation;
+      refetch = listNews;
+      break;
+    case "contact":
+      mutation = deleteContactMutation;
+      refetch = listContacts;
+      break;
+    case "projects":
+      mutation = deleteProjectMutation;
+      refetch = listProjects;
+      break;
+  }
+
+  await API.graphql({
+    query: mutation,
+    variables: { input: { id } },
+    authMode: "AMAZON_COGNITO_USER_POOLS",
+  });
+
+  const data = await API.graphql({ query: refetch });
+  return data.data[Object.keys(data.data)[0]].items;
+}
+
 function Dashboard() {
   const [data, setData] = useState({
     projects: [],
@@ -37,134 +105,11 @@ function Dashboard() {
   const [signedUser, setSignedUser] = useState(false);
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-
-  //**  UseEffects **//
   useEffect(() => {
     authListener();
     checkUser();
+    fetchData(setData);
   }, []);
-
-  useEffect(() => {
-    fetchHomes();
-    fetchProjects();
-    fetchStudios();
-    fetchNews();
-    fetchContacts();
-    fetchConcepts();
-  }, []);
-
-  //** */ Data Logic **//
-  async function fetchHomes() {
-    const homesData = await API.graphql({
-      query: listHomes,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      homes: homesData.data.listHomes.items,
-    }));
-  }
-
-  async function fetchProjects() {
-    const projectData = await API.graphql({
-      query: listProjects,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      projects: projectData.data.listProjects.items,
-    }));
-  }
-
-  async function fetchStudios() {
-    const projectData = await API.graphql({
-      query: listStudios,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      studios: projectData.data.listStudios.items,
-    }));
-  }
-
-  async function fetchNews() {
-    const projectData = await API.graphql({
-      query: listNews,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      news: projectData.data.listNews.items,
-    }));
-  }
-
-  async function fetchContacts() {
-    const projectData = await API.graphql({
-      query: listContacts,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      contacts: projectData.data.listContacts.items,
-    }));
-  }
-
-  async function fetchConcepts() {
-    const projectData = await API.graphql({
-      query: listConcepts,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      concepts: projectData.data.listConcepts.items,
-    }));
-  }
-
-  async function deleteProcess(id) {
-    if (selected === "home") {
-      console.log("home delete - ", id);
-      await API.graphql({
-        query: deleteHomeMututation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchHomes();
-    } else if (selected === "studio") {
-      console.log("studio delete - ", id);
-      await API.graphql({
-        query: deleteStudioMutation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchStudios();
-    } else if (selected === "concepts") {
-      console.log("concepts delete - ", id);
-      await API.graphql({
-        query: deleteConceptMutation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchConcepts();
-    } else if (selected === "news") {
-      console.log("news delete - ", id);
-      await API.graphql({
-        query: deleteNewMutation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchNews();
-    } else if (selected === "contact") {
-      console.log("contact delete - ", id);
-      await API.graphql({
-        query: deleteContactMutation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchContacts();
-    } else if (selected === "projects") {
-      console.log("projects delete - ", id);
-      await API.graphql({
-        query: deleteProjectMutation,
-        variables: { input: { id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      fetchProjects();
-    }
-  }
 
   //** Auth Logic **//
   async function checkUser() {
@@ -197,17 +142,16 @@ function Dashboard() {
   };
   const [projectData, setProjectData] = useState(null);
 
-  const toggleModal = (isEditing = false, project) => {
+  const toggleModal = async (isEditing = false, project) => {
     setIsEditing(isEditing);
     setModal(!modal);
     setProjectData(project || null);
 
-    fetchProjects();
-    fetchHomes();
-    fetchStudios();
-    fetchNews();
-    fetchContacts();
-    fetchConcepts();
+    const newData = await deleteProcess(selected, project?.id);
+    setData((prevData) => ({
+      ...prevData,
+      [selected]: newData,
+    }));
   };
 
   return (
@@ -225,13 +169,7 @@ function Dashboard() {
               </>
             )}
 
-            <Table
-              deleteProcess={deleteProcess}
-              data={data}
-              showModal={toggleModal}
-              selected={selected}
-              // projectId={data.projects.map((project) => project.id)}
-            />
+            <Table data={data} showModal={toggleModal} selected={selected} />
           </div>
         </div>
         <Modal

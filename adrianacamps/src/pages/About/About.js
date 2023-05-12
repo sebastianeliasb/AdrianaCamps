@@ -10,29 +10,28 @@ import WebNav from "../../Components/WebNav";
 import { API, Storage } from "aws-amplify";
 import { listStudios } from "../../graphql/queries";
 
-function About() {
-  const [studio, setStudio] = useState([]);
-
-  useEffect(() => {
-    fetchAbout();
-  }, []);
-
-  async function fetchAbout() {
-    const studioData = await API.graphql({ query: listStudios });
-    const { items } = studioData.data.listStudios;
-    const studioWithImages = [];
-    for (let index = 0; index < items.length; index++) {
-      let studio = items[index];
+async function fetchAbout(setStudio) {
+  const studioData = await API.graphql({ query: listStudios });
+  const { items } = studioData.data.listStudios;
+  const studioWithImages = await Promise.all(
+    items.map(async (studio) => {
       if (studio.aboutImage) {
         let studiosImagesList = [];
         studiosImagesList.push(await Storage.get(studio.aboutImage));
         studio.aboutImage = studiosImagesList;
       }
-      studioWithImages.push(studio);
-    }
-    setStudio(studioWithImages);
-    console.log("studio image - ", studioWithImages);
-  }
+      return studio;
+    })
+  );
+  setStudio(studioWithImages);
+}
+
+function About() {
+  const [studio, setStudio] = useState([]);
+
+  useEffect(() => {
+    fetchAbout(setStudio);
+  }, []);
 
   const trayectoria = studio[0]?.aboutMe; // get the aboutMe string from the studio object
   const estudio = studio[0]?.philosophy; // get the aboutMe string from the studio object

@@ -1,53 +1,56 @@
 import React, { useEffect, useState } from "react";
-import newsImage from "../../assets/news_image.jpg";
 import ContentContainer from "../../Components/ContentContainer";
 import NewsInfo from "../../Components/NewsInfo/NewsInfo";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import WebNav from "../../Components/WebNav";
+import { useMediaQuery } from "react-responsive";
 
 import "./style/news.scss";
 import { API, Storage } from "aws-amplify";
 import { listNews } from "../../graphql/queries";
+import _ from "lodash";
 
-function News() {
-  const [news, setNews] = useState([]);
-  const [selectedNews, setSelectedNews] = useState(0);
-  const [selectedNewsId, setSelectedNewsId] = useState(null); // add state variable for selected news id
-
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  async function fetchNews() {
-    const newsData = await API.graphql({ query: listNews });
-    const { items } = newsData.data.listNews;
-    const newsWithImages = [];
-    for (let index = 0; index < items.length; index++) {
-      let news = items[index];
+async function fetchNews(setNews) {
+  const newsData = await API.graphql({ query: listNews });
+  const { items } = newsData.data.listNews;
+  const newsWithImages = await Promise.all(
+    items.map(async (news) => {
       if (news.newsImage) {
         news.newsImage = await Storage.get(news.newsImage);
       }
-      newsWithImages.push(news);
-    }
-    console.log("news - ", newsWithImages);
-    setNews(newsWithImages);
-  }
+      return news;
+    })
+  );
+  setNews(newsWithImages);
+}
 
-  const w = document.documentElement.clientWidth || window.innerWidth;
-  let backgroundColor;
-  if (w <= 600) {
-    backgroundColor = "beige";
-  } else {
-    backgroundColor = "none";
-  }
+function News() {
+  const [news, setNews] = useState([]);
+  const [selectedNewsId, setSelectedNewsId] = useState(null);
+
+  useEffect(() => {
+    fetchNews(setNews);
+  }, []);
+
+  useEffect(() => {
+    if (news.length > 0) {
+      const latestNews = _.maxBy(news, (item) => {
+        const [month, day, year] = item.newsDate.split("/");
+        return new Date(year, month - 1, day);
+      });
+      setSelectedNewsId(latestNews.id);
+    }
+  }, [news]);
 
   const selectNews = (id) => {
-    const index = news.findIndex((item) => item.id === id);
-    setSelectedNews(index);
     setSelectedNewsId(id);
   };
 
-  console.log(news[selectedNews]?.newsImage);
+  const selectedNews = _.find(news, { id: selectedNewsId });
+
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+  const backgroundColor = isMobile ? "beige" : "none";
+
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -60,17 +63,16 @@ function News() {
             <div
               className="news-image"
               style={{
-                backgroundImage: `url(${news[selectedNews]?.newsImage})`,
+                backgroundImage: `url(${selectedNews?.newsImage})`,
               }}
             ></div>
 
             <div className="news-info-container">
-              <div>{news[selectedNews]?.newsDate}</div>
-              <div>{news[selectedNews]?.newsTitle}</div>
+              <div>{selectedNews?.newsDate}</div>
+              <div>{selectedNews?.newsTitle}</div>
 
               <div className="read-more">
-                <a href={news[selectedNews]?.newsLink}>Leer mas</a>
-                {/* <div>{news[selectedNews]?.newsLink}</div> */}
+                <a href={selectedNews?.newsLink}>Leer mas</a>
               </div>
             </div>
           </div>
