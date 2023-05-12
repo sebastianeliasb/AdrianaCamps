@@ -8,9 +8,12 @@ import { API, Storage } from "aws-amplify";
 import { listContacts } from "../../graphql/queries";
 import { useForm, ValidationError } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { ToastContainer, toast } from "react-toastify";
 
 function Contact() {
   const [contacts, setContacts] = useState([]);
+  const [validationMessage, setValidationMessage] = useState("");
+
   useEffect(() => {
     fetchContacts();
   }, []);
@@ -31,17 +34,44 @@ function Contact() {
 
   const [state, handleSubmit] = useForm("mknayzwo");
 
+  const verifyInput = (name, email, subject, message) => {
+    if (!name || !email || !subject || !message) {
+      setValidationMessage("Please fill in all fields");
+      return false;
+    }
+
+    // Email verification
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!emailRegex.test(email)) {
+      setValidationMessage("Please enter a valid email address");
+      return false;
+    }
+
+    setValidationMessage("");
+    return true;
+  };
+  const notifyFormSuccess = (section) => {
+    toast.success(`El correo ha sido enviado correctamente!`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
   const handleFormSubmit = async (event) => {
-    event.preventDefault(); // prevent default form submission behavior
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const subject = event.target.subject.value;
+    const message = event.target.message.value;
+
+    if (!verifyInput(name, email, subject, message)) return;
 
     try {
-      const recaptchaResponse = await window.grecaptcha.execute();
+      // const recaptchaResponse = await window.grecaptcha.execute();
       const formData = new FormData(event.target);
-      formData.set("g-recaptcha-response", recaptchaResponse);
-
-      await handleSubmit(formData); // submit form data to Formspree
-      alert("Email Sent"); // show confirmation message
-      event.target.reset(); // reset form inputs
+      // formData.set("g-recaptcha-response", recaptchaResponse);
+      await handleSubmit(formData);
+      notifyFormSuccess();
+      event.target.reset();
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +99,6 @@ function Contact() {
                     formulario y te daremos una respuesta lo antes posible.
                   </p>
                 </div>
-
                 <form onSubmit={handleFormSubmit} id="contact-form">
                   <input
                     type="text"
@@ -83,21 +112,24 @@ function Contact() {
                     id="email"
                     name="email"
                     placeholder="Email"
+                    required
                   ></input>
                   <input
                     type="text"
                     id="subject"
                     name="subject"
                     placeholder="Subject"
+                    required
                   ></input>
                   <input
                     type="text"
                     id="message"
                     name="message"
                     placeholder="Message"
+                    required
                   ></input>
                   <div className="send-form-container">
-                    {/* <ReCAPTCHA sitekey="6LfDitslAAAAAFSMnD9x33Y9mO_mUuf03o_EQVFb" /> */}
+                    {/* <ReCAPTCHA sitekey="<your-site-key>" /> */}
                     <ValidationError
                       prefix="Message"
                       field="message"
@@ -108,9 +140,11 @@ function Contact() {
                     </button>
                   </div>
                 </form>
+                <div>{validationMessage}</div>
               </div>
             </div>
           </span>
+          <ToastContainer />
         </ContentContainer>
       </MainPageLayout>
     </>
