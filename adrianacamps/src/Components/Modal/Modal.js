@@ -20,6 +20,7 @@ import Input from "../Input";
 import UploadImagebtn from "../UploadImageBtn/UploadImagebtn";
 import Textarea from "../Textarea/Textarea";
 import ModalCarrusel from "../ModalCarrusel";
+import { showToast } from "../Toast/Toast";
 
 const initialProjectState = {
   name: "",
@@ -172,16 +173,6 @@ function Modal({
       }));
     }
   }
-  const notifySuccess = (section) => {
-    toast.success(`New ${section} created!`, {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
-  const notifyError = () => {
-    toast.error(`Algo fallo porfavor prueba otra vez`, {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
   async function createNewProject() {
     if (!name) return;
     if (images.length === 0) {
@@ -205,9 +196,9 @@ function Modal({
       toggleModal();
       setProject(initialProjectState);
       setImages(null);
-      notifySuccess("project");
+      showToast("New project created!", "success");
     } catch (error) {
-      notifyError();
+      showToast("Error creating project!", "error");
     }
   }
 
@@ -217,20 +208,24 @@ function Modal({
     }
 
     home.id = uuid();
+    try {
+      home.carrouselImages = Array.from(images).map((img) => img.name);
+      Array.from(images).map(async (image) => {
+        await Storage.put(image.name, image);
+      });
 
-    home.carrouselImages = Array.from(images).map((img) => img.name);
-    Array.from(images).map(async (image) => {
-      await Storage.put(image.name, image);
-    });
-
-    await API.graphql({
-      query: createHomes,
-      variables: { input: home },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setHome({ carrouselImages: [] });
-    setImages(null);
+      await API.graphql({
+        query: createHomes,
+        variables: { input: home },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setHome(initialHomeState);
+      setImages(null);
+      showToast("Carrousel Image added successfully", "success");
+    } catch (error) {
+      showToast("Error creating home!", "error");
+    }
   }
 
   async function createNewStudio() {
@@ -239,102 +234,118 @@ function Modal({
     }
 
     studio.id = uuid();
+    try {
+      studio.aboutImage = images[0].name;
+      await Storage.put(images[0].name, images[0]);
 
-    studio.aboutImage = images[0].name;
-    await Storage.put(images[0].name, images[0]);
-
-    await API.graphql({
-      query: createStudios,
-      variables: { input: studio },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    console.log(studio);
-    setStudio({
-      aboutImage: [],
-      aboutMe: "",
-      philosophy: "",
-      route: "",
-      username: "",
-    });
-    setImages(null);
+      await API.graphql({
+        query: createStudios,
+        variables: { input: studio },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      console.log(studio);
+      setStudio({
+        aboutImage: [],
+        aboutMe: "",
+        philosophy: "",
+        route: "",
+        username: "",
+      });
+      setImages(null);
+      showToast("Studio created successfully", "success");
+    } catch (error) {
+      showToast("Error creating studio!", "error");
+    }
   }
 
   async function createNewConcept() {
     if (images.length === 0) {
       return;
     }
+    try {
+      concept.conceptImages = Array.from(images).map((img) => img.name);
+      concept.conceptsImageMain = imageMain.name;
+      await Storage.put(imageMain.name, imageMain);
+      Array.from(images).map(async (image) => {
+        await Storage.put(image.name, image);
+      });
 
-    concept.conceptImages = Array.from(images).map((img) => img.name);
-    concept.conceptsImageMain = imageMain.name;
-    await Storage.put(imageMain.name, imageMain);
-    Array.from(images).map(async (image) => {
-      await Storage.put(image.name, image);
-    });
-
-    await API.graphql({
-      query: createConcept,
-      variables: { input: concept },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setConcept({
-      conceptsImageMain: "",
-      conceptImages: [],
-      conceptTitle: "",
-      conceptText: "",
-    });
-    setImages(null);
+      await API.graphql({
+        query: createConcept,
+        variables: { input: concept },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setConcept({
+        conceptsImageMain: "",
+        conceptImages: [],
+        conceptTitle: "",
+        conceptText: "",
+      });
+      setImages(null);
+      showToast("Concept created successfully", "success");
+    } catch (error) {
+      showToast("Error creating concept!", "error");
+    }
   }
 
   async function createNewContact() {
     if (images.length === 0) {
       return;
     }
+    try {
+      if (typeof images[0].image === "string") {
+        contact.contactImage = project.contactImage;
+      } else {
+        contact.contactImage = images[0].name;
+        await Storage.put(images[0].name, images[0]);
+      }
 
-    if (typeof images[0].image === "string") {
-      contact.contactImage = project.contactImage;
-    } else {
-      contact.contactImage = images[0].name;
-      await Storage.put(images[0].name, images[0]);
+      await API.graphql({
+        query: isEditing ? updateContact : createContact,
+        variables: { input: contact },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setContact({
+        contactImage: "",
+        contactText: "",
+      });
+      setImages(null);
+      showToast("Contact created successfully", "success");
+    } catch (error) {
+      showToast("Error creating contact!", "error");
     }
-
-    await API.graphql({
-      query: isEditing ? updateContact : createContact,
-      variables: { input: contact },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setContact({
-      contactImage: "",
-      contactText: "",
-    });
-    setImages(null);
   }
 
   async function createNewNews() {
     if (images.length === 0) {
       return;
     }
+    try {
+      news.newsImage = images[0].name;
+      await Storage.put(images[0].name, images[0]);
 
-    news.newsImage = images[0].name;
-    await Storage.put(images[0].name, images[0]);
-
-    await API.graphql({
-      query: createNews,
-      variables: { input: news },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setNews({
-      newsLink: "",
-      newsImage: "",
-      newsYear: "",
-      newsTitle: "",
-      newsSource: "",
-      newsDate: "",
-    });
-    setImages(null);
+      await API.graphql({
+        query: createNews,
+        variables: { input: news },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setNews({
+        newsLink: "",
+        newsImage: "",
+        newsYear: "",
+        newsTitle: "",
+        newsSource: "",
+        newsDate: "",
+      });
+      setImages(null);
+      showToast("News created successfully", "success");
+    } catch (error) {
+      showToast("Error creating news!", "error");
+    }
   }
 
   async function uploadImage() {

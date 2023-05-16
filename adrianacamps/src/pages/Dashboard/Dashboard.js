@@ -22,7 +22,7 @@ import {
   deleteHome as deleteHomeMututation,
 } from "../../graphql/mutations";
 import DashboardNav from "../../Components/DashboardNav/DashboardNav";
-
+import { showToast } from "../../Components/Toast/Toast.js";
 function Dashboard() {
   const [data, setData] = useState({
     projects: [],
@@ -123,6 +123,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchHomes();
+      showToast("Carrousel Image deleted successfully", "info");
     } else if (selected === "studio") {
       console.log("studio delete - ", id);
       await API.graphql({
@@ -131,6 +132,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchStudios();
+      showToast("Project deleted successfully", "info");
     } else if (selected === "concepts") {
       console.log("concepts delete - ", id);
       await API.graphql({
@@ -139,6 +141,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchConcepts();
+      showToast("Concept deleted successfully", "info");
     } else if (selected === "news") {
       console.log("news delete - ", id);
       await API.graphql({
@@ -147,6 +150,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchNews();
+      showToast("News deleted successfully", "info");
     } else if (selected === "contact") {
       console.log("contact delete - ", id);
       await API.graphql({
@@ -155,6 +159,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchContacts();
+      showToast("Contact deleted successfully", "info");
     } else if (selected === "projects") {
       console.log("projects delete - ", id);
       await API.graphql({
@@ -163,6 +168,7 @@ function Dashboard() {
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       fetchProjects();
+      showToast("Project deleted successfully", "info");
     }
   }
 

@@ -8,7 +8,8 @@ import { API, Storage } from "aws-amplify";
 import { listContacts } from "../../graphql/queries";
 import { useForm, ValidationError } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { showToast } from "../../Components/Toast/Toast";
 
 async function fetchContacts(setContacts) {
   const contactData = await API.graphql({ query: listContacts });
@@ -52,11 +53,11 @@ function Contact() {
     setValidationMessage("");
     return true;
   };
-  const notifyFormSuccess = (section) => {
-    toast.success(`El correo ha sido enviado correctamente!`, {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
+  // const notifyFormSuccess = (section) => {
+  //   toast.success(`El correo ha sido enviado correctamente!`, {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { name, email, subject, message } = event.target.elements;
@@ -69,10 +70,11 @@ function Contact() {
       const formData = new FormData(event.target);
       // formData.set("g-recaptcha-response", recaptchaResponse);
       await handleSubmit(formData);
-      notifyFormSuccess();
+      showToast("El correo se ha enviado correctamente", "success");
       event.target.reset();
     } catch (error) {
       console.error(error);
+      showToast("No se ha podido enviar el correo", "error");
     }
   };
 
