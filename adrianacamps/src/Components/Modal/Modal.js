@@ -95,7 +95,7 @@ function Modal({
     setNews(initialNewsState);
     setContact(initialContactState);
     setConcept(initialConceptsState);
-
+    setImageMain(null);
     setImages(null);
     // ...
   };
@@ -521,7 +521,7 @@ function Modal({
                     <div className="modal-images-subcontainer">
                       <div>
                         {" "}
-                        <select
+                        {/* <select
                           value={project.option}
                           name="option"
                           onChange={(e) => onChange(e, "createProject")}
@@ -529,7 +529,7 @@ function Modal({
                           <option value="1">Option 1</option>
                           <option value="2">Option 2</option>
                           <option value="3">Option 3</option>
-                        </select>
+                        </select> */}
                         <div>
                           <input
                             // className="images-input"
@@ -764,47 +764,27 @@ function Modal({
                   // value={project.projectImages}
                   placeholder="Image"
                 />
-                <input
-                  className="images-input"
-                  type="file"
-                  id="file"
-                  ref={imageMainFileInput}
-                  onChange={(e) => handleChange(e, "mainImage")}
-                  // name="projectImages"
-                  // value={project.projectImages}
-                  accept="image/png, image/gif, image/jpeg"
-                  placeholder="Image Main"
-                />
-                {images &&
-                  images.length !== 0 &&
-                  Array.from(images).map((image) => (
-                    <div className="image-container" key={image.name}>
-                      <img alt="To upload" src={URL.createObjectURL(image)} />
-                      <div className="image-overlay">
-                        <span className="image-delete" onClick={onClickDelete}>
-                          X
-                        </span>
+                <div className="concept-img-cont">
+                  {images &&
+                    images.length !== 0 &&
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                {imageMain && (
-                  <img
-                    onClick={onClickDelete}
-                    key={imageMain.name}
-                    alt="To upload"
-                    src={URL.createObjectURL(imageMain)}
-                  />
-                )}
+                    ))}
+                </div>
                 {(!images || images.length === 0) && (
                   <UploadImagebtn
                     onClick={uploadImage}
                     btnText={"Upload Image"}
-                  />
-                )}
-                {(!imageMain || imageMain.length === 0) && (
-                  <UploadImagebtn
-                    onClick={uploadImageMain}
-                    btnText={"Upload Main Image"}
                   />
                 )}
                 <button

@@ -17,10 +17,10 @@ function StudioTable({ showModal, studios, deleteStudio }) {
           <div>{project.philosophy}</div>
           <div>{project.route}</div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, project)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            ></span> */}
             <span
               onClick={() => deleteStudio(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}

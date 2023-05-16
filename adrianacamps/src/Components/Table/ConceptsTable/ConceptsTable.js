@@ -8,7 +8,8 @@ function ConceptsTable({ showModal, concepts, deleteConcept }) {
       <div className="content-row-header">
         <div>Concept Title</div>
         <div>Concept Text</div>
-        <div>Edit</div>
+        <div>Delete</div>
+        {/* <div>Delete</div> */}
       </div>
       {concepts.map((project) => (
         <div key={project.id} className="content-row">
@@ -17,10 +18,10 @@ function ConceptsTable({ showModal, concepts, deleteConcept }) {
           </div>
           <div>{project.conceptText}</div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, project)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            ></span> */}
             <span
               onClick={() => deleteConcept(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}

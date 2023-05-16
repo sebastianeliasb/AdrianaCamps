@@ -9,7 +9,8 @@ function NewsTable({ showModal, news, deleteNews }) {
         <div>Title</div>
         <div>Year</div>
         <div>Link</div>
-        <div>Edit</div>
+        <div></div>
+        <div>Delete</div>
       </div>
       {news.map((project) => (
         <div key={project.id} className="content-row">
@@ -17,10 +18,10 @@ function NewsTable({ showModal, news, deleteNews }) {
           <div>{project.newsYear}</div>
           <div>{project.newsLink}</div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, project)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            ></span> */}
             <span
               onClick={() => deleteNews(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}

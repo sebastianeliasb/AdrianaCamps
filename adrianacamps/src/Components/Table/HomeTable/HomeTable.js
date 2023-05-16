@@ -7,7 +7,8 @@ function HomeTable({ showModal, homes, deleteHome }) {
     <div className="content-information">
       <div className="content-row-header">
         <div style={{ maxWidth: "70%" }}>Name</div>
-        <div>Edit</div>
+        <div></div>
+        <div>Delete</div>
       </div>
       {homes.map((eachHome) => (
         <div key={eachHome.id} className="content-row">
@@ -18,10 +19,10 @@ function HomeTable({ showModal, homes, deleteHome }) {
             {eachHome.name}
           </div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, eachHome)}
               style={{ backgroundImage: `url(${edit})` }}
-            />
+            /> */}
             <span
               onClick={() => deleteHome(eachHome.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}

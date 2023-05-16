@@ -113,8 +113,13 @@ height: 75vh;
     justify-content: space-around;
     // background-color: antiquewhite;
 
+
+    .concept-img-cont{
+      display: flex;
+    }
 /* CSS */
 .create-btn {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   max-height: 7vh;
   align-items: center;
@@ -291,6 +296,7 @@ grid-template-areas: "name location"
 
   .modal-images-subcontainer{
     display: flex;
+    width: 100%;
 //     flex-direction: column;
 //     height: 40vh;
 //     // background-color: aqua;

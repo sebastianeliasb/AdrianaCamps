@@ -7,7 +7,8 @@ function ContactTable({ showModal, contacts, deleteContact }) {
     <div className="content-information">
       <div className="content-row-header">
         <div style={{ maxWidth: "70%" }}>Contact Text</div>
-        <div>Edit</div>
+        <div></div>
+        <div>Delete</div>
         {/* <div>Carrousel Images</div> */}
       </div>
       {contacts.map((project) => (
@@ -19,10 +20,10 @@ function ContactTable({ showModal, contacts, deleteContact }) {
             {project.contactText}
           </div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, project)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            ></span> */}
             <span
               onClick={() => deleteContact(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}
