@@ -95,13 +95,18 @@ function Modal({
     setNews(initialNewsState);
     setContact(initialContactState);
     setConcept(initialConceptsState);
+
     setImages(null);
     // ...
   };
 
   const handleToggle = () => {
     toggleModal();
+    setSelectedTag("mainInfo");
     resetInputs();
+  };
+  const onClickDelete = () => {
+    setImages(null);
   };
   const {
     name,
@@ -544,11 +549,12 @@ function Modal({
                         </div>
                       </div>
                       <div>
-                        <UploadImagebtn
-                          id={"home-upload"}
-                          onClick={uploadImage}
-                          btnText={"Upload Images"}
-                        />
+                        {(!images || images.length === 0) && (
+                          <UploadImagebtn
+                            onClick={uploadImage}
+                            btnText={"Upload Image"}
+                          />
+                        )}
                       </div>
                       <div className="image-carrusel">
                         <ModalCarrusel>
@@ -560,6 +566,7 @@ function Modal({
                                   <li>Image {index + 1}</li>
                                 </ul>
                                 <img
+                                  // onClick={onClickDelete}
                                   key={image.name}
                                   alt="To upload"
                                   src={URL.createObjectURL(image)}
@@ -571,68 +578,108 @@ function Modal({
                     </div>
                   ) : null}
 
-                  <button onClick={createNewProject}>{`Create project`}</button>
+                  <button
+                    className="create-btn"
+                    onClick={createNewProject}
+                  >{`Create project`}</button>
                 </div>
               </>
             ) : selected === "studio" ? (
-              <div className="modal-info-container">
-                <div className="text-area-container">
-                  <Textarea
-                    className="name-input"
-                    onChange={(e) => onChange(e, "createStudio")}
-                    name="aboutMe"
-                    value={studio.aboutMe}
-                    placeholder="About"
-                  />
-                  <Textarea
-                    className="name-input"
-                    onChange={(e) => onChange(e, "createStudio")}
-                    name="philosophy"
-                    value={studio.philosophy}
-                    placeholder="Philosophy"
-                  />
-                  <Textarea
-                    className="name-input"
-                    onChange={(e) => onChange(e, "createStudio")}
-                    name="route"
-                    value={studio.route}
-                    placeholder="Route"
-                  />
-                  {/* <Textarea
+              <>
+                <div className="create-tags">
+                  <span
+                    className={
+                      selectedTag === "mainInfo" ? "selectedTag" : null
+                    }
+                    onClick={() => handleModalTag("mainInfo")}
+                  >
+                    Main Info
+                  </span>
+                  <span
+                    className={selectedTag === "image" ? "selectedTag" : null}
+                    onClick={() => handleModalTag("image")}
+                  >
+                    Image
+                  </span>
+                </div>
+                <div className="modal-info-container">
+                  {selectedTag === "mainInfo" ? (
+                    <div className="text-area-container">
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="aboutMe"
+                        value={studio.aboutMe}
+                        placeholder="About"
+                      />
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="philosophy"
+                        value={studio.philosophy}
+                        placeholder="Philosophy"
+                      />
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="route"
+                        value={studio.route}
+                        placeholder="Route"
+                      />
+                      {/* <Textarea
                     className="name-input"
                     onChange={(e) => onChange(e, "createStudio")}
                     name="username"
                     value={studio.username}
                     placeholder="Username"
                   /> */}
-                  <input
-                    className="images-input"
-                    type="file"
-                    ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "images")}
-                    // multiple
-                    // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="studioImages"
-                  />
-                  {images &&
-                    images.length !== 0 &&
-                    Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
+                    </div>
+                  ) : selectedTag === "image" ? (
+                    <div>
+                      {" "}
+                      <input
+                        className="images-input"
+                        type="file"
+                        ref={imageFileInput}
+                        onChange={(e) => handleChange(e, "images")}
+                        // multiple
+                        // name="projectImages"
+                        // value={project.projectImages}
+                        placeholder="studioImages"
                       />
-                    ))}
+                      {images &&
+                        images.length !== 0 &&
+                        Array.from(images).map((image) => (
+                          <div className="image-container" key={image.name}>
+                            <img
+                              alt="To upload"
+                              src={URL.createObjectURL(image)}
+                            />
+                            <div className="image-overlay">
+                              <span
+                                className="image-delete"
+                                onClick={onClickDelete}
+                              >
+                                X
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      {(!images || images.length === 0) && (
+                        <UploadImagebtn
+                          onClick={uploadImage}
+                          btnText={"Upload Image"}
+                        />
+                      )}
+                    </div>
+                  ) : null}
+
+                  <button
+                    className="create-btn"
+                    onClick={createNewStudio}
+                  >{`Create ${props.modalTitle}`}</button>
                 </div>
-                <UploadImagebtn
-                  onClick={uploadImage}
-                  btnText={"Upload Images"}
-                />
-                <button
-                  onClick={createNewStudio}
-                >{`Create ${props.modalTitle}`}</button>
-              </div>
+              </>
             ) : selected === "home" ? (
               <div className="modal-info-container">
                 <div className="home-modal-container">
@@ -659,43 +706,52 @@ function Modal({
                   {/* <ModalCarrusel> */}
                   {images &&
                     images.length !== 0 &&
-                    Array.from(images).map((image, index) => (
-                      <div key={index}>
-                        <img
-                          key={image.name}
-                          alt="To upload"
-                          src={URL.createObjectURL(image)}
-                        />
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
                       </div>
                     ))}
                   {/* </ModalCarrusel> */}
                 </div>
-                <UploadImagebtn
-                  onClick={uploadImage}
-                  btnText={"Upload Images"}
-                />
+                {(!images || images.length === 0) && (
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
+                )}
                 <button
+                  className="create-btn"
                   onClick={createNewHome}
                 >{`Create ${props.modalTitle}`}</button>
               </div>
             ) : selected === "concepts" ? (
               <div className="modal-info-container">
-                <Input
-                  className="name-input"
-                  label="conceptTitle"
-                  onChange={(e) => onChange(e, "createConcept")}
-                  name="conceptTitle"
-                  value={concept.conceptTitle}
-                  placeholder="Concept Title"
-                />
-                <Textarea
-                  className="name-input"
-                  label="conceptText"
-                  onChange={(e) => onChange(e, "createConcept")}
-                  name="conceptText"
-                  value={concept.conceptText}
-                  placeholder="Concept Text"
-                />
+                <div className="concepts-container">
+                  <Input
+                    className="name-input"
+                    label="conceptTitle"
+                    onChange={(e) => onChange(e, "createConcept")}
+                    name="conceptTitle"
+                    value={concept.conceptTitle}
+                    placeholder="Concept Title"
+                  />
+                  <Textarea
+                    className="name-input"
+                    label="conceptText"
+                    onChange={(e) => onChange(e, "createConcept")}
+                    name="conceptText"
+                    value={concept.conceptText}
+                    placeholder="Concept Text"
+                  />
+                </div>
                 <input
                   className="images-input"
                   type="file"
@@ -722,34 +778,43 @@ function Modal({
                 {images &&
                   images.length !== 0 &&
                   Array.from(images).map((image) => (
-                    <img
-                      key={image.name}
-                      alt="To upload"
-                      src={URL.createObjectURL(image)}
-                    />
+                    <div className="image-container" key={image.name}>
+                      <img alt="To upload" src={URL.createObjectURL(image)} />
+                      <div className="image-overlay">
+                        <span className="image-delete" onClick={onClickDelete}>
+                          X
+                        </span>
+                      </div>
+                    </div>
                   ))}
                 {imageMain && (
                   <img
+                    onClick={onClickDelete}
                     key={imageMain.name}
                     alt="To upload"
                     src={URL.createObjectURL(imageMain)}
                   />
                 )}
-                <UploadImagebtn
-                  onClick={uploadImage}
-                  btnText={"Upload Images"}
-                />
-                <UploadImagebtn
-                  onClick={uploadImageMain}
-                  btnText={"Upload Main Image"}
-                />
+                {(!images || images.length === 0) && (
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
+                )}
+                {(!imageMain || imageMain.length === 0) && (
+                  <UploadImagebtn
+                    onClick={uploadImageMain}
+                    btnText={"Upload Main Image"}
+                  />
+                )}
                 <button
+                  className="create-btn"
                   onClick={createNewConcept}
                 >{`Create ${props.modalTitle}`}</button>
               </div>
             ) : selected === "contact" ? (
               <div className="modal-info-container">
-                <div>
+                <div className="modal-contact-container">
                   <Textarea
                     // className="name-input"
                     onChange={(e) => onChange(e, "createContact")}
@@ -757,6 +822,7 @@ function Modal({
                     // value={project.name}
                     placeholder="Contact Text"
                   />
+
                   <input
                     className="images-input"
                     type="file"
@@ -770,95 +836,117 @@ function Modal({
                   {images &&
                     images.length !== 0 &&
                     Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
                     ))}
-                  <button
-                    onClick={createNewContact}
-                  >{`Create ${props.modalTitle}`}</button>
-                  <UploadImagebtn
-                    onClick={uploadImage}
-                    btnText={"Upload Image"}
-                  />
+
+                  {(!images || images.length === 0) && (
+                    <UploadImagebtn
+                      onClick={uploadImage}
+                      btnText={"Upload Image"}
+                    />
+                  )}
                 </div>
+                <button
+                  className="create-btn"
+                  onClick={createNewContact}
+                >{`Create ${props.modalTitle}`}</button>
               </div>
             ) : selected === "news" ? (
               <div className="modal-info-container">
-                <Input
-                  // className="name-input"
-                  onChange={(e) => onChange(e, "createNews")}
-                  name="newsTitle"
-                  value={news.newsTitle}
-                  placeholder="Title"
-                  label="Title"
-                />
-                <Input
-                  // className="name-input"
-                  onChange={(e) => onChange(e, "createNews")}
-                  name="newsYear"
-                  value={news.newsYear}
-                  placeholder="Year"
-                  label="Year"
-                />
-                <Input
-                  // className="name-input"
-                  onChange={(e) => onChange(e, "createNews")}
-                  name="newsDate"
-                  value={news.newsDate}
-                  placeholder="Date"
-                  label="Date"
-                />
-                <Input
-                  // className="name-input"
-                  onChange={(e) => onChange(e, "createNews")}
-                  name="newsSource"
-                  value={news.newsSource}
-                  placeholder="Source"
-                  label="Source"
-                  size="large"
-                />
-                <Input
-                  // className="name-input"
-                  onChange={(e) => onChange(e, "createNews")}
-                  name="newsLink"
-                  value={news.newsLink}
-                  placeholder="Link"
-                  label="Link"
-                />
-                <br />
-                <br />
-                <input
-                  className="images-input"
-                  type="file"
-                  id="file"
-                  ref={imageFileInput}
-                  accept="image/png, image/gif, image/jpeg"
-                  onChange={(e) => handleChange(e, "images")}
-                  // name="projectImages"
-                  //value={news.newsImage}
-                  placeholder="Image"
-                />
-                {images &&
-                  images.length !== 0 &&
-                  Array.from(images).map((image) => (
-                    <img
-                      key={image.name}
-                      alt="To upload"
-                      src={URL.createObjectURL(image)}
+                <div className="news-modal-container">
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsTitle"
+                    value={news.newsTitle}
+                    placeholder="Title"
+                    label="Title"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsYear"
+                    value={news.newsYear}
+                    placeholder="Year"
+                    label="Year"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsDate"
+                    value={news.newsDate}
+                    placeholder="Date"
+                    label="Date"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsSource"
+                    value={news.newsSource}
+                    placeholder="Source"
+                    label="Source"
+                    size="large"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsLink"
+                    value={news.newsLink}
+                    placeholder="Link"
+                    label="Link"
+                  />
+                  <br />
+                  <br />
+                  <input
+                    className="images-input"
+                    type="file"
+                    id="file"
+                    ref={imageFileInput}
+                    accept="image/png, image/gif, image/jpeg"
+                    onChange={(e) => handleChange(e, "images")}
+                    // name="projectImages"
+                    //value={news.newsImage}
+                    placeholder="Image"
+                  />
+                  {images &&
+                    images.length !== 0 &&
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+
+                  {(!images || images.length === 0) && (
+                    <UploadImagebtn
+                      onClick={uploadImage}
+                      btnText={"Upload Image"}
                     />
-                  ))}
-                <UploadImagebtn
-                  onClick={uploadImage}
-                  btnText={"Upload Image"}
-                />
-                <br />
-                <br />
-                <button
-                  onClick={createNewNews}
-                >{`Create ${props.modalTitle}`}</button>
+                  )}
+                  <br />
+                  <br />
+                  <button
+                    className="create-btn"
+                    onClick={createNewNews}
+                  >{`Create ${props.modalTitle}`}</button>
+                </div>
               </div>
             ) : null}
           </div>
