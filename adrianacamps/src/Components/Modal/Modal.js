@@ -15,14 +15,13 @@ import {
   updateContact,
 } from "../../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { SimpleMdeReact } from "react-simplemde-editor";
 import option1 from "../../assets/Untitled-1.png";
 import Input from "../Input";
 import UploadImagebtn from "../UploadImageBtn/UploadImagebtn";
 import Textarea from "../Textarea/Textarea";
 import ModalCarrusel from "../ModalCarrusel";
 
-const initialState = {
+const initialProjectState = {
   name: "",
   subName: "",
   location: "",
@@ -32,8 +31,39 @@ const initialState = {
   client: "",
   photographer: "",
   surface: "",
-  projectImages: "",
+  projectImages: [],
   //option: "1",
+};
+
+const initialHomeState = {
+  id: "",
+  name: "",
+  carrouselImages: [],
+};
+const initialStudioState = {
+  aboutImage: [],
+  aboutMe: "",
+  philosophy: "",
+  route: "",
+  username: "",
+};
+const initialNewsState = {
+  newsYear: "",
+  newsTitle: "",
+  newsDate: "",
+  newsSource: "",
+  newsLink: "",
+  newsImage: [],
+};
+const initialContactState = {
+  contactImage: "",
+  contactText: "",
+};
+const initialConceptsState = {
+  conceptsImageMain: "",
+  conceptImages: [],
+  conceptTitle: "",
+  conceptText: "",
 };
 
 function Modal({
@@ -46,42 +76,32 @@ function Modal({
   ...props
 }) {
   const [selectedTag, setSelectedTag] = useState("mainInfo");
-  const [project, setProject] = useState(initialState);
-  const [home, setHome] = useState({
-    id: "",
-    name: "",
-    carrouselImages: [],
-  });
-  const [studio, setStudio] = useState({
-    aboutImage: [],
-    aboutMe: "",
-    philosophy: "",
-    route: "",
-    username: "",
-  });
-  const [concept, setConcept] = useState({
-    conceptsImageMain: "",
-    conceptImages: [],
-    conceptTitle: "",
-    conceptText: "",
-  });
-  const [contact, setContact] = useState({
-    contactImage: "",
-    contactText: "",
-  });
-  const [news, setNews] = useState({
-    newsYear: "",
-    newsTitle: "",
-    newsDate: "",
-    newsSource: "",
-    newsLink: "",
-    newsImage: [],
-  });
+  const [project, setProject] = useState(initialProjectState);
+  const [home, setHome] = useState(initialHomeState);
+  const [studio, setStudio] = useState(initialStudioState);
+  const [concept, setConcept] = useState(initialConceptsState);
+  const [contact, setContact] = useState(initialContactState);
+  const [news, setNews] = useState(initialNewsState);
   const [images, setImages] = useState(null);
   const [imageMain, setImageMain] = useState(null);
   const imageFileInput = useRef(null);
   const imageMainFileInput = useRef(null);
 
+  const resetInputs = () => {
+    setProject(initialProjectState);
+    setStudio(initialStudioState);
+    setHome(initialHomeState);
+    setNews(initialNewsState);
+    setContact(initialContactState);
+    setConcept(initialConceptsState);
+    setImages(null);
+    // ...
+  };
+
+  const handleToggle = () => {
+    toggleModal();
+    resetInputs();
+  };
   const {
     name,
     subName,
@@ -183,7 +203,7 @@ function Modal({
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       toggleModal();
-      setProject(initialState);
+      setProject(initialProjectState);
       setImages(null);
       notifySuccess("project");
     } catch (error) {
@@ -342,7 +362,7 @@ function Modal({
     <>
       {show ? (
         <>
-          <div onClick={() => toggleModal()} className="modal-backdrop">
+          <div onClick={() => handleToggle()} className="modal-backdrop">
             {" "}
           </div>
           <div className="modal-body">
@@ -620,7 +640,6 @@ function Modal({
                       id="file"
                       ref={imageFileInput}
                       onChange={(e) => handleChange(e, "images")}
-                      multiple
                       // name="projectImages"
                       // value={project.projectImages}
                       placeholder="Image"
