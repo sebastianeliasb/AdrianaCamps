@@ -8,17 +8,21 @@ function Footer() {
       <div className="footer-top">
         <div>
           <span>
-            <a>Instagram</a>
+            <a href="https://www.instagram.com/adrianacamps.studio/">
+              Instagram
+            </a>
           </span>
           <span>
             {" "}
-            <a>Pinterest</a>
+            <a href="https://www.pinterest.es/adrianacampsstudio/">Pinterest</a>
           </span>
           <span>
             <a>Facebook</a>
           </span>
           <span>
-            <a>LinkedIn</a>
+            <a href="https://www.linkedin.com/in/adriana-camps-3377b531/">
+              LinkedIn
+            </a>
           </span>
         </div>
         <div>

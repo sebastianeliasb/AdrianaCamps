@@ -44,7 +44,19 @@ function Home() {
       <main className="home-main">
         <footer className="home-footer">
           <div>
-            <span>Instagram — Pinterest — LinkedIn </span>
+            <span>
+              <a href="https://www.instagram.com/adrianacamps.studio/">
+                Instagram
+              </a>
+              —
+              <a href="https://www.pinterest.es/adrianacampsstudio/">
+                Pinterest
+              </a>
+              —
+              <a href="https://www.linkedin.com/in/adriana-camps-3377b531/">
+                LinkedIn
+              </a>{" "}
+            </span>
             <span>© Adriana Camps 2023 — All Rights reserved</span>
           </div>
           <div>

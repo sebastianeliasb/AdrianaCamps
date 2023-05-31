@@ -9,6 +9,17 @@ import ContactTable from "./ContactTable/ContactTable";
 import ConceptsTable from "./ConceptsTable/ConceptsTable";
 
 function Table({ data, showModal, selected, deleteProcess }) {
+  function sortData(dataArray) {
+    return dataArray.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  }
+  const sortedProjects = sortData(data.projects);
+  const sortedHomes = sortData(data.homes);
+  const sortedStudios = sortData(data.studios);
+  const sortedNews = sortData(data.news);
+  const sortedContacts = sortData(data.contacts);
+  const sortedConcepts = sortData(data.concepts);
   switch (selected) {
     case "projects":
       return (
@@ -23,7 +34,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <ProjectsTable
             showModal={showModal}
-            projects={data.projects}
+            projects={sortedProjects}
             deleteProject={deleteProcess}
           />
         </>
@@ -41,7 +52,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <HomeTable
             showModal={showModal}
-            homes={data.homes}
+            homes={sortedHomes}
             deleteHome={deleteProcess}
           />
         </>
@@ -59,7 +70,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <StudioTable
             showModal={showModal}
-            studios={data.studios}
+            studios={sortedStudios}
             deleteStudio={deleteProcess}
           />
         </>
@@ -77,7 +88,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <NewsTable
             showModal={showModal}
-            news={data.news}
+            news={sortedNews}
             deleteNews={deleteProcess}
           />
         </>
@@ -95,7 +106,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <ContactTable
             showModal={showModal}
-            contacts={data.contacts}
+            contacts={sortedContacts}
             deleteContact={deleteProcess}
           />
         </>
@@ -113,7 +124,7 @@ function Table({ data, showModal, selected, deleteProcess }) {
           </div>
           <ConceptsTable
             showModal={showModal}
-            concepts={data.concepts}
+            concepts={sortedConcepts}
             deleteConcept={deleteProcess}
           />
         </>

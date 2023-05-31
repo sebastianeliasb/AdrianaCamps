@@ -42,7 +42,8 @@ function ProjectItem() {
                 <div className="project-detail">
                   <div className="project-info">
                     <span>{projectName}</span>
-                    <span>{`${projectLocation}(${projectDate})`}</span>
+                    <span>{projectLocation}</span>
+                    <span>{projectDate}</span>
                     <span>{projectDescription}</span>
                   </div>
                   <div className="project-aspects">

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 //style
-import testImage from "../../assets/about_try_image.png";
 import "./style/about.scss";
 //layout
 import MainPageLayout from "../../layouts/MainPageLayout";
@@ -10,28 +9,28 @@ import WebNav from "../../Components/WebNav";
 import { API, Storage } from "aws-amplify";
 import { listStudios } from "../../graphql/queries";
 
-async function fetchAbout(setStudio) {
-  const studioData = await API.graphql({ query: listStudios });
-  const { items } = studioData.data.listStudios;
-  const studioWithImages = await Promise.all(
-    items.map(async (studio) => {
-      if (studio.aboutImage) {
-        let studiosImagesList = [];
-        studiosImagesList.push(await Storage.get(studio.aboutImage));
-        studio.aboutImage = studiosImagesList;
-      }
-      return studio;
-    })
-  );
-  setStudio(studioWithImages);
-}
-
 function About() {
   const [studio, setStudio] = useState([]);
 
-  useEffect(() => {
-    fetchAbout(setStudio);
+  const fetchAbout = useCallback(async () => {
+    const studioData = await API.graphql({ query: listStudios });
+    const { items } = studioData.data.listStudios;
+    const studioWithImages = await Promise.all(
+      items.map(async (studio) => {
+        if (studio.aboutImage) {
+          let studiosImagesList = [];
+          studiosImagesList.push(await Storage.get(studio.aboutImage));
+          studio.aboutImage = studiosImagesList;
+        }
+        return studio;
+      })
+    );
+    setStudio(studioWithImages);
   }, []);
+
+  useEffect(() => {
+    fetchAbout();
+  }, [fetchAbout]);
 
   const trayectoria = studio[0]?.aboutMe; // get the aboutMe string from the studio object
   const estudio = studio[0]?.philosophy; // get the aboutMe string from the studio object

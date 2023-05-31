@@ -3,6 +3,8 @@ import { API, Auth, Hub } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import Table from "../../Components/Table/Table";
 import Modal from "../../Components/Modal";
+import gql from "graphql-tag";
+
 import {
   listProjects,
   listHomes,
@@ -23,6 +25,72 @@ import {
 } from "../../graphql/mutations";
 import DashboardNav from "../../Components/DashboardNav/DashboardNav";
 import { showToast } from "../../Components/Toast/Toast.js";
+const listData = gql`
+  query ListData {
+    listProjects {
+      items {
+        id
+        client
+        createdAt
+        date
+        description
+        location
+        name
+        photographer
+        projectImages
+        subDescription
+        subName
+        surface
+        updatedAt
+        username
+      }
+    }
+    listHomes {
+      items {
+        id
+        name
+        carrouselImages
+      }
+    }
+    listStudios {
+      items {
+        id
+        aboutImage
+        aboutMe
+        philosophy
+        route
+        username
+      }
+    }
+    listNews {
+      items {
+        id
+        newsYear
+        newsTitle
+        newsDate
+        newsSource
+        newsLink
+        newsImage
+      }
+    }
+    listContacts {
+      items {
+        id
+        contactImage
+        contactText
+      }
+    }
+    listConcepts {
+      items {
+        id
+        conceptsImageMain
+        conceptImages
+        conceptTitle
+        conceptText
+      }
+    }
+  }
+`;
 function Dashboard() {
   const [data, setData] = useState({
     projects: [],
@@ -45,74 +113,21 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetchHomes();
-    fetchProjects();
-    fetchStudios();
-    fetchNews();
-    fetchContacts();
-    fetchConcepts();
+    fetchData();
   }, []);
 
   //** */ Data Logic **//
-  async function fetchHomes() {
-    const homesData = await API.graphql({
-      query: listHomes,
+  const fetchData = async () => {
+    const result = await API.graphql({ query: listData });
+    setData({
+      projects: result.data.listProjects.items,
+      homes: result.data.listHomes.items,
+      studios: result.data.listStudios.items,
+      news: result.data.listNews.items,
+      contacts: result.data.listContacts.items,
+      concepts: result.data.listConcepts.items,
     });
-    setData((prevData) => ({
-      ...prevData,
-      homes: homesData.data.listHomes.items,
-    }));
-  }
-
-  async function fetchProjects() {
-    const projectData = await API.graphql({
-      query: listProjects,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      projects: projectData.data.listProjects.items,
-    }));
-  }
-
-  async function fetchStudios() {
-    const projectData = await API.graphql({
-      query: listStudios,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      studios: projectData.data.listStudios.items,
-    }));
-  }
-
-  async function fetchNews() {
-    const projectData = await API.graphql({
-      query: listNews,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      news: projectData.data.listNews.items,
-    }));
-  }
-
-  async function fetchContacts() {
-    const projectData = await API.graphql({
-      query: listContacts,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      contacts: projectData.data.listContacts.items,
-    }));
-  }
-
-  async function fetchConcepts() {
-    const projectData = await API.graphql({
-      query: listConcepts,
-    });
-    setData((prevData) => ({
-      ...prevData,
-      concepts: projectData.data.listConcepts.items,
-    }));
-  }
+  };
 
   async function deleteProcess(id) {
     if (selected === "home") {
@@ -122,7 +137,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchHomes();
+      fetchData();
       showToast("Carrousel Image deleted successfully", "info");
     } else if (selected === "studio") {
       console.log("studio delete - ", id);
@@ -131,7 +146,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchStudios();
+      fetchData();
       showToast("Project deleted successfully", "info");
     } else if (selected === "concepts") {
       console.log("concepts delete - ", id);
@@ -140,7 +155,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchConcepts();
+      fetchData();
       showToast("Concept deleted successfully", "info");
     } else if (selected === "news") {
       console.log("news delete - ", id);
@@ -149,7 +164,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchNews();
+      fetchData();
       showToast("News deleted successfully", "info");
     } else if (selected === "contact") {
       console.log("contact delete - ", id);
@@ -158,7 +173,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchContacts();
+      fetchData();
       showToast("Contact deleted successfully", "info");
     } else if (selected === "projects") {
       console.log("projects delete - ", id);
@@ -167,7 +182,7 @@ function Dashboard() {
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      fetchProjects();
+      fetchData();
       showToast("Project deleted successfully", "info");
     }
   }
@@ -207,13 +222,13 @@ function Dashboard() {
     setIsEditing(isEditing);
     setModal(!modal);
     setProjectData(project || null);
-
-    fetchProjects();
-    fetchHomes();
-    fetchStudios();
-    fetchNews();
-    fetchContacts();
-    fetchConcepts();
+    fetchData();
+    // fetchProjects();
+    // fetchHomes();
+    // fetchStudios();
+    // fetchNews();
+    // fetchContacts();
+    // fetchConcepts();
   };
 
   return (

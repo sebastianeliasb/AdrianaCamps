@@ -23,7 +23,8 @@ body{
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  padding: 5rem;
+  justify-content: space-between;
+  padding: 4rem;
   margin-left: auto;
   margin-right: auto;
   top: 10%;
@@ -119,7 +120,7 @@ height: 75vh;
     }
 /* CSS */
 .create-btn {
-  margin-top: 1rem;
+  // margin-top: 6rem;
   margin-bottom: 1rem;
   max-height: 7vh;
   align-items: center;
@@ -297,6 +298,7 @@ grid-template-areas: "name location"
   .modal-images-subcontainer{
     display: flex;
     width: 100%;
+    justify-content: center;
 //     flex-direction: column;
 //     height: 40vh;
 //     // background-color: aqua;
