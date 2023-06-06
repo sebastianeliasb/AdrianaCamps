@@ -44,7 +44,13 @@ function ProjectItem() {
                     <span>{projectName}</span>
                     <span>{projectLocation}</span>
                     <span>{projectDate}</span>
-                    <span>{projectDescription}</span>
+                    {projectDescription && projectDescription.includes("*") ? (
+                      projectDescription
+                        .split("*")
+                        .map((text, index) => <span key={index}>{text}</span>)
+                    ) : (
+                      <span>{projectDescription}</span>
+                    )}
                   </div>
                   <div className="project-aspects">
                     {projectClient && <span>Cliente: {projectClient}</span>}

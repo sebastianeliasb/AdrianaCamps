@@ -83,7 +83,7 @@ function Modal({
   const [concept, setConcept] = useState(initialConceptsState);
   const [contact, setContact] = useState(initialContactState);
   const [news, setNews] = useState(initialNewsState);
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [imageMain, setImageMain] = useState(null);
   const imageFileInput = useRef(null);
   const imageMainFileInput = useRef(null);
@@ -96,7 +96,7 @@ function Modal({
     setContact(initialContactState);
     setConcept(initialConceptsState);
     setImageMain(null);
-    setImages(null);
+    setImages([]);
     // ...
   };
 
@@ -364,9 +364,11 @@ function Modal({
   function handleChange(e, imgType) {
     const fileUploaded = e.target.files;
     if (!fileUploaded) return;
-    imgType === "images"
-      ? setImages(fileUploaded)
-      : setImageMain(fileUploaded[0]);
+    if (imgType === "images") {
+      setImages((prevImages) => [...prevImages, ...fileUploaded]);
+    } else {
+      setImageMain(fileUploaded[0]);
+    }
   }
 
   function handleModalTag(tag) {
@@ -549,12 +551,12 @@ function Modal({
                         </div>
                       </div>
                       <div>
-                        {(!images || images.length === 0) && (
-                          <UploadImagebtn
-                            onClick={uploadImage}
-                            btnText={"Upload Image"}
-                          />
-                        )}
+                        {/* {(!images || images.length === 0) && ( */}
+                        <UploadImagebtn
+                          onClick={uploadImage}
+                          btnText={"Upload Image"}
+                        />
+                        {/* )} */}
                       </div>
                       <div className="image-carrusel">
                         <ModalCarrusel>
