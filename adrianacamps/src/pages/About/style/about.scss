@@ -33,6 +33,11 @@ width: 100%;
       font-size: 16px;
       line-height: 110%;
       margin-top: 2rem;
+
+      a:hover{
+        color: #6C9EBB;
+        cursor: pointer;
+    }
   }
   #footer-main-container{
       display: none ;

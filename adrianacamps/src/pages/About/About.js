@@ -83,13 +83,31 @@ function About() {
                 <br />
                 <u>CLIENTES</u>
                 {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
-                {clientes && clientes.includes("*") ? (
-                  clientes
-                    .split("*")
-                    .map((text, index) => <p key={index}>{text}</p>)
+                {clientes &&
+                (clientes.includes("*") ||
+                  clientes.includes("www") ||
+                  clientes.includes("https")) ? (
+                  clientes.split("*").map((text, index) => (
+                    <p key={index}>
+                      {text.split(" ").map((word, i) => {
+                        const href = word.startsWith("http")
+                          ? word
+                          : `http://${word}`;
+                        return word.includes("www") ||
+                          word.includes("https") ? (
+                          <a key={i} href={href}>
+                            {word}
+                          </a>
+                        ) : (
+                          <span key={i}>{word} </span>
+                        );
+                      })}
+                    </p>
+                  ))
                 ) : (
                   <p>{clientes}</p>
                 )}
+
                 <br />
               </div>
               {/* <Footer /> */}
