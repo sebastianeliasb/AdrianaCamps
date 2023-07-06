@@ -6,11 +6,8 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import pic2 from "../../assets/news_image.jpg";
-import homeImage from "../../assets/home_image.jpg";
-import pic from "../../assets/project_image.jpg";
 
-function Carrusel({ data }) {
+function Carrusel({ data, error, loading }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -20,44 +17,40 @@ function Carrusel({ data }) {
     speed: 4000,
     autoplaySpeed: 3000,
   };
-  console.log("images - ", data);
+
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
+
+  const carrouselURLs = data.data.map((url) => {
+    return url.attributes.carrousel_image.data.attributes.url;
+  });
+
+  const imageTitle = data.data.map((title) => {
+    return title.attributes.Image_name;
+  });
+
+  // console.log({ imageTitle });
+
   return (
     <>
       <div className="carrusel">
         <Slider {...settings}>
-          {data.length > 0 &&
-            data.map((home, index) => (
-              <div key={index}>
-                <img src={home.carrouselImages[0]} alt="Image 1" />
-              </div>
-            ))}
+          {carrouselURLs.length > 0 &&
+            carrouselURLs.map((home) => {
+              return (
+                <div key={home.id}>
+                  <img
+                    src={`http://localhost:1337${home}`} // Updated image URL here
+                    alt={imageTitle}
+                  />
+                </div>
+              );
+            })}
         </Slider>
       </div>
       <div className="backdrop"></div>
     </>
   );
 }
-
-// function Carrusel({ data }) {
-//   return (
-//     <>
-//       <div className="carrusel">
-//         {data[0]?.carrouselImages.map((home, index) => (
-//           <div
-//             ley={index}
-//             className="project-image"
-//             style={{
-//               backgroundImage: `url(${home}) `,
-//               backgroundSize: "cover",
-//               width: "100%",
-//               height: "100%",
-//             }}
-//           />
-//         ))}
-//       </div>
-//       <div className="backdrop" />
-//     </>
-//   );
-// }
 
 export default Carrusel;

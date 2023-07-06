@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ContentContainer from "../../Components/ContentContainer";
 import MainPageLayout from "../../layouts/MainPageLayout";
+import useFetch from "../../hooks/useFetch";
+
 import "./style/contact.scss";
 import sendArrow from "../../assets/arrow.png";
 import WebNav from "../../Components/WebNav";
@@ -11,19 +13,19 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer } from "react-toastify";
 import { showToast } from "../../Components/Toast/Toast";
 
-async function fetchContacts(setContacts) {
-  const contactData = await API.graphql({ query: listContacts });
-  const { items } = contactData.data.listContacts;
-  const contactsWithImages = await Promise.all(
-    items.map(async (contact) => {
-      if (contact.contactImage) {
-        contact.contactImage = await Storage.get(contact.contactImage);
-      }
-      return contact;
-    })
-  );
-  setContacts(contactsWithImages);
-}
+// async function fetchContacts(setContacts) {
+//   const contactData = await API.graphql({ query: listContacts });
+//   const { items } = contactData.data.listContacts;
+//   const contactsWithImages = await Promise.all(
+//     items.map(async (contact) => {
+//       if (contact.contactImage) {
+//         contact.contactImage = await Storage.get(contact.contactImage);
+//       }
+//       return contact;
+//     })
+//   );
+//   setContacts(contactsWithImages);
+// }
 
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -32,11 +34,20 @@ function Contact() {
   const [contacts, setContacts] = useState([]);
   const [validationMessage, setValidationMessage] = useState("");
 
-  useEffect(() => {
-    fetchContacts(setContacts);
-  }, []);
+  // useEffect(() => {
+  //   fetchContacts(setContacts);
+  // }, []);
+  const { data, loading, error } = useFetch(
+    "http://localhost:1337/api/contacts?populate=contact_image"
+  );
 
   const [state, handleSubmit] = useForm("mknayzwo");
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
+
+  const contactImage =
+    data.data[0].attributes.contact_image.data.attributes.url;
+  const contactText = data.data[0].attributes.Contact_description;
 
   const verifyInput = (name, email, subject, message) => {
     if (!name || !email || !subject || !message) {
@@ -77,7 +88,7 @@ function Contact() {
       showToast("No se ha podido enviar el correo", "error");
     }
   };
-
+  console.log(contactText);
   return (
     <>
       <MainPageLayout backgroundColorRight={"beige"}>
@@ -88,17 +99,13 @@ function Contact() {
               <div className="contact-right">
                 <img
                   className="contact-image"
-                  src={contacts[0]?.contactImage}
+                  src={`http://localhost:1337${contactImage}`}
                   alt="contact"
                 ></img>
               </div>
               <div className="contact-left">
                 <div className="contact-text">
-                  <p>
-                    Si quieres más información sobre nuestros servicios, no
-                    dudes en ponerte en contacto con nosotros rellenando este
-                    formulario y te daremos una respuesta lo antes posible.
-                  </p>
+                  <p>{contactText}</p>
                 </div>
                 <form onSubmit={handleFormSubmit} id="contact-form">
                   <input

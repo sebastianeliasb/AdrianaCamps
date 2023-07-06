@@ -4,53 +4,43 @@ import NewsInfo from "../../Components/NewsInfo/NewsInfo";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import WebNav from "../../Components/WebNav";
 import { useMediaQuery } from "react-responsive";
+import useFetch from "../../hooks/useFetch";
 
 import "./style/news.scss";
 import { API, Storage } from "aws-amplify";
 import { listNews } from "../../graphql/queries";
 import _ from "lodash";
 
-async function fetchNews(setNews) {
-  const newsData = await API.graphql({ query: listNews });
-  const { items } = newsData.data.listNews;
-  const newsWithImages = await Promise.all(
-    items.map(async (news) => {
-      if (news.newsImage) {
-        news.newsImage = await Storage.get(news.newsImage);
-      }
-      return news;
-    })
-  );
-  setNews(newsWithImages);
-}
-
 function News() {
-  const [news, setNews] = useState([]);
+  const { data, loading, error } = useFetch(
+    "http://localhost:1337/api/news?populate=news_image"
+  );
   const [selectedNewsId, setSelectedNewsId] = useState(null);
+  const isMobile = useMediaQuery({ maxWidth: 600 });
 
   useEffect(() => {
-    fetchNews(setNews);
-  }, []);
-
-  useEffect(() => {
-    if (news.length > 0) {
-      const latestNews = _.maxBy(news, (item) => {
-        const [month, day, year] = item.newsDate.split("/");
+    if (data && data.data.length > 0) {
+      const allNews = data.data.map((news) => news);
+      const latestNews = _.maxBy(allNews, (item) => {
+        const [month, day, year] = item.attributes.date.split("/");
         return new Date(year, month - 1, day);
       });
       setSelectedNewsId(latestNews.id);
     }
-  }, [news]);
+  }, [data]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const allNews = data.data.map((news) => news);
 
   const selectNews = (id) => {
     setSelectedNewsId(id);
   };
+  const selectedNews = _.find(allNews, { id: selectedNewsId });
 
-  const selectedNews = _.find(news, { id: selectedNewsId });
-
-  const isMobile = useMediaQuery({ maxWidth: 600 });
   const backgroundColor = isMobile ? "beige" : "none";
-
+  console.log(allNews);
   return (
     <MainPageLayout
       backgroundColorLeft={"beige"}
@@ -60,19 +50,18 @@ function News() {
       <ContentContainer>
         <div id="news">
           <div className="news-left">
-            <div
+            <img
               className="news-image"
-              style={{
-                backgroundImage: `url(${selectedNews?.newsImage})`,
-              }}
-            ></div>
+              src={`http://localhost:1337${selectedNews?.attributes.news_image.data.attributes.url}`}
+              alt={selectedNews?.attributes.main_title}
+            ></img>
 
             <div className="news-info-container">
-              <div>{selectedNews?.newsDate}</div>
-              <div>{selectedNews?.newsTitle}</div>
+              <div>{selectedNews?.attributes.date}</div>
+              <div>{selectedNews?.attributes.main_title}</div>
 
               <div className="read-more">
-                <a href={selectedNews?.newsLink}>Leer mas</a>
+                <a href={selectedNews?.attributes.news_link}>Leer mas</a>
               </div>
             </div>
           </div>
@@ -80,7 +69,7 @@ function News() {
             <span></span>
             <div className="news-right-content">
               <NewsInfo
-                data={news}
+                data={allNews}
                 selectNews={selectNews}
                 selectedNewsId={selectedNewsId}
               />

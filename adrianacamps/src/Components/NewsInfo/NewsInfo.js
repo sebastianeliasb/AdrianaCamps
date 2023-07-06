@@ -5,11 +5,11 @@ import "./style/newsInfo.scss";
 function NewsInfo(props) {
   const [activeToggleIds, setActiveToggleIds] = useState([]);
 
-  const toggleInfo = (id) => {
-    if (activeToggleIds.includes(id)) {
-      setActiveToggleIds(activeToggleIds.filter((i) => i !== id));
+  const toggleInfo = (year) => {
+    if (activeToggleIds.includes(year)) {
+      setActiveToggleIds(activeToggleIds.filter((id) => id !== year));
     } else {
-      setActiveToggleIds([...activeToggleIds, id]);
+      setActiveToggleIds([...activeToggleIds, year]);
     }
   };
 
@@ -18,9 +18,8 @@ function NewsInfo(props) {
   };
 
   const groupedData = props.data.reduce((acc, item) => {
-    const year = item.newsYear;
+    const year = new Date(item.attributes.date).getFullYear().toString();
     const group = acc.find((group) => group.year === year);
-    // const id = item.id
 
     if (group) {
       group.items.push(item);
@@ -48,20 +47,20 @@ function NewsInfo(props) {
                 <div className="info-date">{group.year}</div>
                 <button onClick={() => toggleInfo(group.year)}>—</button>
               </div>
-              {group.items.map((item, index) => (
+              {group.items.map((item) => (
                 <div
                   className={classNames({
                     "opened-bottom": true,
                     "opened-bottom-active": props.selectedNewsId === item.id,
                   })}
-                  key={index}
+                  key={item.id}
                 >
                   <div
                     className="opened-bottom-info"
-                    onClick={() => onClickEachItem(item.id, index)}
+                    onClick={() => onClickEachItem(item.id)}
                   >
-                    <div>{item.newsTitle}</div>
-                    <div>{item.newsSource}</div>
+                    <div>{item.attributes.main_title}</div>
+                    <div>{item.attributes.secondary_title}</div>
                   </div>
                 </div>
               ))}

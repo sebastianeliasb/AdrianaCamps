@@ -48,10 +48,10 @@ const router = createBrowserRouter([
     path: "contact",
     element: <Contact />,
   },
-  {
-    path: "dashboard",
-    element: <Dashboard />,
-  },
+  // {
+  //   path: "dashboard",
+  //   element: <Dashboard />,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

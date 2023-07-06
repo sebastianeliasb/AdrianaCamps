@@ -1,57 +1,29 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// //style
-// import "./style/projectContent.scss";
-
-// function ProjectContent({ data }) {
-//   if (!data) {
-//     return null;
-//   }
-//   return data.map((project, index) => (
-//     <div key={index} className="project-content-box">
-//       <div
-//         className="project-image"
-//         style={{
-//           backgroundImage: `url(${project.projectImages[0]}) `,
-//         }}
-//       />
-//       <div className="project-title1">
-//         <Link to={`/project/${project.id}`} state={{ project }}>
-//           {project.name}
-//         </Link>
-//       </div>
-//       <div className="project-title2">{project.name}</div>
-//     </div>
-//   ));
-// }
-
 import React from "react";
 import { Link } from "react-router-dom";
 //style
 import "./style/projectContent.scss";
-function ProjectContent({ data }) {
+function ProjectContent({ data, loading, error }) {
   if (!data) {
     return null;
   }
-
-  return data.map((project, index) => (
+  return data.data.map((project) => (
     <>
-      <div key={index} className="project-content-box">
+      <div key={project.id} className="project-content-box">
         <div className="project-image-link">
           <Link to={`/project/${project.id}`} state={{ project }}>
             <img
+              src={`${`http://localhost:1337${project.attributes.main_image.data.attributes.url}`} `}
               className="project-image"
-              src={project.projectImages[0]}
-              alt={project.name}
+              alt={project.attributes.name}
             />
           </Link>
         </div>
         <div className="project-title1">
           <Link to={`/project/${project.id}`} state={{ project }}>
-            {project.name}
+            {project.attributes.project_title}
           </Link>
         </div>
-        <div className="project-title2">{project.subName}</div>
+        <div className="project-title2">{project.attributes.project_title}</div>
       </div>
     </>
   ));

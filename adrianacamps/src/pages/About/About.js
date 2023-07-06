@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
+import useFetch from "../../hooks/useFetch";
+import ReactMarkdown from "react-markdown";
 //style
 import "./style/about.scss";
 //layout
@@ -6,35 +8,19 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 //components
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 import WebNav from "../../Components/WebNav";
-import { API, Storage } from "aws-amplify";
-import { listStudios } from "../../graphql/queries";
 
 function About() {
-  const [studio, setStudio] = useState([]);
+  const { data, loading, error } = useFetch(
+    "http://localhost:1337/api/studios?populate=studio_image&populate=clients"
+  );
 
-  const fetchAbout = useCallback(async () => {
-    const studioData = await API.graphql({ query: listStudios });
-    const { items } = studioData.data.listStudios;
-    const studioWithImages = await Promise.all(
-      items.map(async (studio) => {
-        if (studio.aboutImage) {
-          let studiosImagesList = [];
-          studiosImagesList.push(await Storage.get(studio.aboutImage));
-          studio.aboutImage = studiosImagesList;
-        }
-        return studio;
-      })
-    );
-    setStudio(studioWithImages);
-  }, []);
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
 
-  useEffect(() => {
-    fetchAbout();
-  }, [fetchAbout]);
-
-  const trayectoria = studio[0]?.aboutMe; // get the aboutMe string from the studio object
-  const estudio = studio[0]?.philosophy; // get the aboutMe string from the studio object
-  const clientes = studio[0]?.route; // get the aboutMe string from the studio object
+  const trayectoria = data.data[0].attributes.trayectoria; // get the aboutMe string from the studio object
+  const estudio = data.data[0].attributes.el_estudio; // get the aboutMe string from the studio object
+  const clientes = data.data[0].attributes.clients.data; // get the aboutMe string from the studio object
+  const studioImage = data.data[0].attributes.studio_image.data.attributes.url;
 
   return (
     <MainPageLayout
@@ -47,7 +33,9 @@ function About() {
           <div className="about-left">
             <div
               className="about-image-container"
-              style={{ backgroundImage: `url(${studio[0]?.aboutImage[0]})` }}
+              style={{
+                backgroundImage: `url(http://localhost:1337${studioImage})`,
+              }}
             ></div>
           </div>
           <div className="about-right">
@@ -55,60 +43,38 @@ function About() {
             <div className="about-right-content">
               <div
                 className="about-image-container"
-                style={{ backgroundImage: `url(${studio[0]?.aboutImage[0]})` }}
+                style={{
+                  backgroundImage: `url(http://localhost:1337${studioImage})`,
+                }}
               />
               <div
                 className="about-text-container"
                 style={{ minHeight: "500px" }}
               >
                 <u>TRAYECTORIA</u>
-                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
-                {trayectoria && trayectoria.includes("*") ? (
-                  trayectoria
-                    .split("*")
-                    .map((text, index) => <p key={index}>{text}</p>)
-                ) : (
-                  <p>{trayectoria}</p>
-                )}
-                <br />
-                <u>EL ESTUDIO</u>
-                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
-                {estudio && estudio.includes("*") ? (
-                  estudio
-                    .split("*")
-                    .map((text, index) => <p key={index}>{text}</p>)
-                ) : (
-                  <p>{estudio}</p>
-                )}
-                <br />
-                <u>CLIENTES</u>
-                {/* check if aboutMe includes the "*" symbol and add a line break if it does */}
-                {clientes &&
-                (clientes.includes("*") ||
-                  clientes.includes("www") ||
-                  clientes.includes("https")) ? (
-                  clientes.split("*").map((text, index) => (
-                    <p key={index}>
-                      {text.split(" ").map((word, i) => {
-                        const href = word.startsWith("http")
-                          ? word
-                          : `http://${word}`;
-                        return word.includes("www") ||
-                          word.includes("https") ? (
-                          <a key={i} href={href}>
-                            {word}
-                          </a>
-                        ) : (
-                          <span key={i}>{word} </span>
-                        );
-                      })}
-                    </p>
-                  ))
-                ) : (
-                  <p>{clientes}</p>
-                )}
+
+                <ReactMarkdown>{trayectoria}</ReactMarkdown>
 
                 <br />
+                <u>EL ESTUDIO</u>
+
+                <ReactMarkdown>{estudio}</ReactMarkdown>
+
+                <br />
+                <u>CLIENTES</u>
+                {clientes.map((client) => (
+                  <React.Fragment key={client.id}>
+                    <p>
+                      {client.attributes.client_name}{" "}
+                      <a
+                        href={`http://${client.attributes.client_website}`}
+                        target="_blank"
+                      >
+                        {client.attributes.client_website}
+                      </a>
+                    </p>
+                  </React.Fragment>
+                ))}
               </div>
               {/* <Footer /> */}
             </div>

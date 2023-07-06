@@ -3,18 +3,34 @@ import { useLocation } from "react-router-dom";
 import ContentContainer from "../../Components/ContentContainer";
 import WebNav from "../../Components/WebNav";
 import MainPageLayout from "../../layouts/MainPageLayout";
+import ReactMarkdown from "react-markdown";
+
 import "../ProjectItem/style/projectItem.scss";
+import {
+  LayoutFullScreen,
+  LayoutLongLeft,
+  LayoutLongRight,
+  LayoutMediumLeft,
+  LayoutMediumRight,
+  LayoutShortLeft,
+  LayoutShortRight,
+  Layout3Row,
+} from "../../Components/ProjectLayouts";
 
 function ConceptItem() {
   const location = useLocation();
   const data = location.state;
-  // const projectName = data.concept.main;
-  // const projectImages = {
-  //   mainImage: data.concept.projectImages[0],
-  // };
-  // const projectLocation = data.concept.location;
-  // const projectDescription = data.concept.description;
-  // const projectDate = data.concept.date;
+
+  const {
+    concept_title,
+    concept_location,
+    main_description,
+    surface,
+    main_image: {
+      data: [{ attributes: main_image_attributes }],
+    },
+    layouts: { data: project_organization },
+  } = data.concept.attributes;
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -23,90 +39,81 @@ function ConceptItem() {
   } else {
     backgroundColor = "none";
   }
+
+  const renderLayoutComponent = (layoutType, sectionData) => {
+    const { Sections } = sectionData.attributes;
+
+    switch (layoutType) {
+      case "Layout Full Screen":
+        return (
+          <LayoutFullScreen section={Sections} sectionData={sectionData} />
+        );
+      case "Layout Long Left":
+        return <LayoutLongLeft section={Sections} sectionData={sectionData} />;
+      case "Layout Long Right":
+        return <LayoutLongRight section={Sections} sectionData={sectionData} />;
+      case "Layout Middle Left":
+        return (
+          <LayoutMediumLeft section={Sections} sectionData={sectionData} />
+        );
+      case "Layout Middle Right":
+        return (
+          <LayoutMediumRight section={Sections} sectionData={sectionData} />
+        );
+      case "Layout Short Left":
+        return <LayoutShortLeft section={Sections} sectionData={sectionData} />;
+      case "Layout Short Right":
+        return (
+          <LayoutShortRight section={Sections} sectionData={sectionData} />
+        );
+      case "Layout 3 Row":
+        return <Layout3Row section={Sections} sectionData={sectionData} />;
+      // Add more cases for other layout types
+      default:
+        return null;
+    }
+  };
   return (
     <>
-      {/* <div>
-                {data.project.projectImages.map(el => (
-                    <div key={el} className="project-content-left">
-                        <img src={el} alt="main"/>
-                    </div>
-                ))}
-            </div> */}
+      <WebNav />
       <MainPageLayout
         backgroundColorLeft={"white"}
         backgroundColorRight={"beige"}
         backgroundColor={backgroundColor}
       >
-        <WebNav />
         <ContentContainer>
-          {/* <div className="project-item-body"> */}
-          {/* First section */}
-          {/* <div className="first_section">
+          <div className="project-item-body">
+            <div className="first_section">
               <div className="project-content-left">
-                <img src={projectImages.mainImage} alt="main"></img>
+                <img
+                  src={`http://localhost:1337${main_image_attributes.url}`}
+                  alt="main"
+                />
               </div>
+
               <div className="project-content-right">
                 <div className="project-detail">
                   <div className="project-info">
-                    <span>{projectName}</span>
-                    <span>{`${projectLocation}(${projectDate})`}</span>
-                    <span>{projectDescription}</span>
+                    <span>{concept_title}</span>
+                    <span>{concept_location}</span>
+                    <ReactMarkdown>{main_description}</ReactMarkdown>
                   </div>
                   <div className="project-aspects">
-                    <span>Cliente:Lorem Ipsum</span>
-                    <span>Fotografo:Lorem Ipsum</span>
-                    <span>Superficie:Lorem Ipsum</span>
+                    {surface && <span>Superficie: {`${surface}m²`}</span>}
                   </div>
                 </div>
               </div>
-            </div> */}
-          {/* Second section */}
-          {/* <div>
-              <img src={projectImages.mainImage} alt="first"></img>
-            </div> */}
-          {/* Third section */}
-          {/* <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <span>
-                At ground floor level, while daily life and lines of sight
-                extrude freely beyond the walls of the house to colonise the
-                entirety of the plot, the atmosphere is purposefully
-                introspective. On the upper floors, the emphasis shifts to
-                elevated vistas and successive recalibration of the dialogue
-                between interior space and the fall of natural light.
-              </span>
-              <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
-            </div> */}
-          {/* Fourth section */}
-          {/* <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-            </div> */}
-          {/* Five section */}
-          {/* <div>
-              <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <span></span>
-            </div> */}
-          {/* Six section */}
-          {/* <div>
-              <span></span>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <span></span>
-            </div> */}
-          {/* Seven section */}
-          {/* <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-            </div> */}
-          {/* Eighth section */}
-          {/* <div>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
-              <img src={projectImages.mainImage} alt="pic"></img>
             </div>
-          </div> */}
+            {/* Render other sections */}
+            {project_organization.map((sectionData) => (
+              <div key={sectionData.id}>
+                {renderLayoutComponent(
+                  sectionData.attributes.Layouts,
+                  sectionData
+                )}
+              </div>
+            ))}
+          </div>
         </ContentContainer>
       </MainPageLayout>
     </>
