@@ -6,37 +6,17 @@ import useFetch from "../../hooks/useFetch";
 import "./style/contact.scss";
 import sendArrow from "../../assets/arrow.png";
 import WebNav from "../../Components/WebNav";
-import { API, Storage } from "aws-amplify";
-import { listContacts } from "../../graphql/queries";
 import { useForm, ValidationError } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer } from "react-toastify";
 import { showToast } from "../../Components/Toast/Toast";
 
-// async function fetchContacts(setContacts) {
-//   const contactData = await API.graphql({ query: listContacts });
-//   const { items } = contactData.data.listContacts;
-//   const contactsWithImages = await Promise.all(
-//     items.map(async (contact) => {
-//       if (contact.contactImage) {
-//         contact.contactImage = await Storage.get(contact.contactImage);
-//       }
-//       return contact;
-//     })
-//   );
-//   setContacts(contactsWithImages);
-// }
-
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 function Contact() {
-  const [contacts, setContacts] = useState([]);
   const [validationMessage, setValidationMessage] = useState("");
 
-  // useEffect(() => {
-  //   fetchContacts(setContacts);
-  // }, []);
   const { data, loading, error } = useFetch(
     "http://localhost:1337/api/contacts?populate=contact_image"
   );
@@ -64,11 +44,7 @@ function Contact() {
     setValidationMessage("");
     return true;
   };
-  // const notifyFormSuccess = (section) => {
-  //   toast.success(`El correo ha sido enviado correctamente!`, {
-  //     position: toast.POSITION.TOP_CENTER,
-  //   });
-  // };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { name, email, subject, message } = event.target.elements;

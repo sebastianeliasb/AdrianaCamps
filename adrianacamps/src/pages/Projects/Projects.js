@@ -1,8 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import useFetch from "../../hooks/useFetch";
-import "../../configureAmplify";
-import { API, Storage, graphqlOperation } from "aws-amplify";
-import { listProjects } from "../../graphql/queries";
 //Components
 import ContentContainer from "../../Components/ContentContainer";
 import ProjectContent from "../../Components/ProjectContent/ProjectContent";

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "../../configureAmplify";
+import React from "react";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import useFetch from "../../hooks/useFetch";
 import ReactMarkdown from "react-markdown";

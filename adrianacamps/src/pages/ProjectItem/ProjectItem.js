@@ -37,7 +37,6 @@ function ProjectItem() {
   } = data.project.attributes;
 
   const backgroundColor = window.innerWidth <= 600 ? "beige" : "none";
-  console.log({ project_organization });
 
   const renderLayoutComponent = (layoutType, sectionData) => {
     const { Sections } = sectionData.attributes;
@@ -77,8 +76,8 @@ function ProjectItem() {
     <>
       <WebNav />
       <MainPageLayout
-        backgroundColorLeft={"white"}
-        backgroundColorRight={"beige"}
+        backgroundColorLeft="white"
+        backgroundColorRight="beige"
         backgroundColor={backgroundColor}
       >
         <ContentContainer>

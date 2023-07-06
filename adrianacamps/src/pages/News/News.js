@@ -5,10 +5,7 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 import WebNav from "../../Components/WebNav";
 import { useMediaQuery } from "react-responsive";
 import useFetch from "../../hooks/useFetch";
-
 import "./style/news.scss";
-import { API, Storage } from "aws-amplify";
-import { listNews } from "../../graphql/queries";
 import _ from "lodash";
 
 function News() {
@@ -21,10 +18,10 @@ function News() {
   useEffect(() => {
     if (data && data.data.length > 0) {
       const allNews = data.data.map((news) => news);
-      const latestNews = _.maxBy(allNews, (item) => {
-        const [month, day, year] = item.attributes.date.split("/");
-        return new Date(year, month - 1, day);
-      });
+      const latestNews = _.maxBy(
+        allNews,
+        (item) => new Date(item.attributes.date)
+      );
       setSelectedNewsId(latestNews.id);
     }
   }, [data]);
@@ -40,10 +37,10 @@ function News() {
   const selectedNews = _.find(allNews, { id: selectedNewsId });
 
   const backgroundColor = isMobile ? "beige" : "none";
-  console.log(allNews);
+
   return (
     <MainPageLayout
-      backgroundColorLeft={"beige"}
+      backgroundColorLeft="beige"
       backgroundColor={backgroundColor}
     >
       <WebNav />
@@ -54,14 +51,14 @@ function News() {
               className="news-image"
               src={`http://localhost:1337${selectedNews?.attributes.news_image.data.attributes.url}`}
               alt={selectedNews?.attributes.main_title}
-            ></img>
+            />
 
             <div className="news-info-container">
               <div>{selectedNews?.attributes.date}</div>
               <div>{selectedNews?.attributes.main_title}</div>
 
               <div className="read-more">
-                <a href={selectedNews?.attributes.news_link}>Leer mas</a>
+                <a href={selectedNews?.attributes.news_link}>Leer más</a>
               </div>
             </div>
           </div>

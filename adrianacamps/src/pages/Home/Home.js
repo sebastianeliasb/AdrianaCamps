@@ -1,18 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useFetch from "../../hooks/useFetch";
-//style
 import "./style/home.scss";
-//components
 import Carrusel from "../../Components/Carrusel";
-//layout
 import NameLayout from "../../layouts/nameLayout";
-import { API, Storage, graphqlOperation } from "aws-amplify";
-import { listHomes } from "../../graphql/queries";
 
-function Home() {
+const Home = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/homes?populate=carrousel_image"
+    "/api/homes?populate=carrousel_image"
   );
+
+  const socialLinks = [
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/adrianacamps.studio/",
+    },
+    {
+      name: "Pinterest",
+      url: "https://www.pinterest.es/adrianacampsstudio/",
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/adriana-camps-3377b531/",
+    },
+  ];
+
   return (
     <NameLayout
       color="white"
@@ -25,17 +36,14 @@ function Home() {
         <footer className="home-footer">
           <div>
             <span>
-              <a href="https://www.instagram.com/adrianacamps.studio/">
-                Instagram
-              </a>
-              —
-              <a href="https://www.pinterest.es/adrianacampsstudio/">
-                Pinterest
-              </a>
-              —
-              <a href="https://www.linkedin.com/in/adriana-camps-3377b531/">
-                LinkedIn
-              </a>{" "}
+              {socialLinks.map((link, index) => (
+                <React.Fragment key={index}>
+                  <a href={link.url} rel="noopener noreferrer" target="_blank">
+                    {link.name}
+                  </a>
+                  {index !== socialLinks.length - 1 && " — "}
+                </React.Fragment>
+              ))}
             </span>
             <span>© Adriana Camps 2023 — All Rights reserved</span>
           </div>
@@ -46,6 +54,6 @@ function Home() {
       </main>
     </NameLayout>
   );
-}
+};
 
 export default Home;
