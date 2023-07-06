@@ -26,8 +26,9 @@ function News() {
     }
   }, [data]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (!data) {
+    return null;
+  }
 
   const allNews = data.data.map((news) => news);
 
