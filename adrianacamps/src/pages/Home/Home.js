@@ -24,6 +24,9 @@ const Home = () => {
     },
   ];
 
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <NameLayout
       color="white"
