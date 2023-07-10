@@ -11,7 +11,9 @@ const useFetch = (url) => {
       setLoading(true);
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(
+          `https://adrianacamps-strapi.onrender.com/${url}`
+        );
         const json = await res.json();
 
         setData(json);

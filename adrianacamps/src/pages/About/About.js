@@ -11,7 +11,7 @@ import WebNav from "../../Components/WebNav";
 
 function About() {
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/studios?populate=studio_image&populate=clients"
+    "api/studios?populate=studio_image&populate=clients"
   );
 
   if (loading) return <p>{loading}</p>;
@@ -34,7 +34,7 @@ function About() {
             <div
               className="about-image-container"
               style={{
-                backgroundImage: `url(http://localhost:1337${studioImage})`,
+                backgroundImage: `url(${studioImage})`,
               }}
             ></div>
           </div>
@@ -44,7 +44,7 @@ function About() {
               <div
                 className="about-image-container"
                 style={{
-                  backgroundImage: `url(http://localhost:1337${studioImage})`,
+                  backgroundImage: `url(${studioImage})`,
                 }}
               />
               <div

@@ -24,7 +24,7 @@ function Carrusel({ data, error, loading }) {
   const carrouselURLs = data.data.map((url) => {
     return url.attributes.carrousel_image.data.attributes.url;
   });
-
+  console.log(carrouselURLs);
   const imageTitle = data.data.map((title) => {
     return title.attributes.Image_name;
   });
@@ -40,7 +40,7 @@ function Carrusel({ data, error, loading }) {
               return (
                 <div key={home.id}>
                   <img
-                    src={`http://localhost:1337${home}`} // Updated image URL here
+                    src={home} // Updated image URL here
                     alt={imageTitle}
                   />
                 </div>

@@ -6,7 +6,7 @@ import NameLayout from "../../layouts/nameLayout";
 
 const Home = () => {
   const { data, loading, error } = useFetch(
-    "/api/homes?populate=carrousel_image"
+    "api/homes?populate=carrousel_image"
   );
 
   const socialLinks = [
@@ -26,7 +26,7 @@ const Home = () => {
 
   if (loading) return <p>{loading}</p>;
   if (error) return <p>{error}</p>;
-
+  console.log(data);
   return (
     <NameLayout
       color="white"
