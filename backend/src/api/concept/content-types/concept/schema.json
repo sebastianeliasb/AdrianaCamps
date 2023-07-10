@@ -23,7 +23,7 @@
     },
     "main_image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -44,7 +44,7 @@
     "concept_intro": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::concept-description.concept-description"
+      "target": "api::concept-intro.concept-intro"
     }
   }
 }

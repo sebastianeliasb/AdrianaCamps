@@ -4,8 +4,7 @@
   "info": {
     "singularName": "layout",
     "pluralName": "layouts",
-    "displayName": "Layout",
-    "description": ""
+    "displayName": "Layout"
   },
   "options": {
     "draftAndPublish": true
@@ -26,15 +25,14 @@
       ]
     },
     "project_images": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "type": "media",
+      "multiple": true
     },
     "info_text": {
       "type": "richtext"
@@ -49,17 +47,16 @@
         "S5",
         "S6",
         "S7"
-      ],
-      "required": true
+      ]
+    },
+    "image_title": {
+      "type": "string"
     },
     "project": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::project.project",
       "inversedBy": "layouts"
-    },
-    "image_title": {
-      "type": "string"
     },
     "concept": {
       "type": "relation",

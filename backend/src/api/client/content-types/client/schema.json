@@ -11,17 +11,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "studio": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::studio.studio",
-      "inversedBy": "clients"
-    },
     "client_name": {
       "type": "string"
     },
     "client_website": {
       "type": "string"
+    },
+    "studio": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::studio.studio",
+      "inversedBy": "clients"
     }
   }
 }

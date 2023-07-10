@@ -4,8 +4,7 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "Project",
-    "description": ""
+    "displayName": "Project"
   },
   "options": {
     "draftAndPublish": true
@@ -13,8 +12,7 @@
   "pluginOptions": {},
   "attributes": {
     "project_title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "project_location": {
       "type": "string"
@@ -31,12 +29,6 @@
     "surface": {
       "type": "integer"
     },
-    "layouts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::layout.layout",
-      "mappedBy": "project"
-    },
     "main_image": {
       "allowedTypes": [
         "images",
@@ -48,8 +40,13 @@
       "multiple": false
     },
     "main_description": {
-      "type": "richtext",
-      "required": true
+      "type": "richtext"
+    },
+    "layouts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layout.layout",
+      "mappedBy": "project"
     }
   }
 }

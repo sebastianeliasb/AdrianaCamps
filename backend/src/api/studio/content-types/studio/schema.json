@@ -4,8 +4,7 @@
   "info": {
     "singularName": "studio",
     "pluralName": "studios",
-    "displayName": "Studio",
-    "description": ""
+    "displayName": "studio"
   },
   "options": {
     "draftAndPublish": true
@@ -13,22 +12,20 @@
   "pluginOptions": {},
   "attributes": {
     "trayectoria": {
-      "type": "richtext",
-      "required": true
+      "type": "richtext"
     },
     "el_estudio": {
       "type": "richtext"
     },
     "studio_image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "type": "media",
+      "multiple": false
     },
     "clients": {
       "type": "relation",

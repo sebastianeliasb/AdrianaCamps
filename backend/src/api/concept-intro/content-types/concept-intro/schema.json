@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "concept_descriptions",
+  "collectionName": "concept_intros",
   "info": {
-    "singularName": "concept-description",
-    "pluralName": "concept-descriptions",
-    "displayName": "Concept_intro ",
-    "description": ""
+    "singularName": "concept-intro",
+    "pluralName": "concept-intros",
+    "displayName": "Concept_intro"
   },
   "options": {
     "draftAndPublish": true

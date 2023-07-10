@@ -20,9 +20,9 @@ function Concepts() {
   if (error) return <p>{error}</p>;
 
   // console.log(data);
-  const mainDescription =
-    data.data[0].attributes.concept_intro.data.attributes.page_desscription;
-  console.log(mainDescription);
+  // const mainDescription =
+  //   data.data[0].attributes.concept_intro.data.attributes.page_desscription;
+  // console.log(mainDescription);
   return (
     <MainPageLayout
       backgroundColorLeft={"white"}
@@ -36,7 +36,7 @@ function Concepts() {
               <p>
                 <u>Concepts for sale</u>
               </p>
-              <ReactMarkdown>{mainDescription}</ReactMarkdown>
+              {/* <ReactMarkdown>{mainDescription}</ReactMarkdown> */}
             </div>
           </div>
           <div className="concepts-right">

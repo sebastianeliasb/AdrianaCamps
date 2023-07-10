@@ -4,7 +4,7 @@
   "info": {
     "singularName": "home",
     "pluralName": "homes",
-    "displayName": "Home"
+    "displayName": "home"
   },
   "options": {
     "draftAndPublish": true
@@ -12,8 +12,7 @@
   "pluginOptions": {},
   "attributes": {
     "Image_name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "carrousel_image": {
       "allowedTypes": [
