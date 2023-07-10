@@ -10,10 +10,10 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "adrianacamps": "npm workspace frontend start",
-    "backend": "npm run build --workspace backend",
-    "start": "npm run backend",
-    "build": "npm --prefix backend run build"
+    "adrianacamps": "yarn workspace frontend start",
+    "backend": "yarn run build --workspace backend",
+    "start": "yarn run backend",
+    "build": "yarn --cwd backend run build"
   },
   "contributors": [
     {
