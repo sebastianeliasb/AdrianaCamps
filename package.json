@@ -12,7 +12,8 @@
   "scripts": {
     "adrianacamps": "npm workspace frontend start",
     "backend": "npm run build --workspace backend",
-    "start": "npm run backend"
+    "start": "npm run backend",
+    "build": "yarn workspace backend build"
   },
   "contributors": [
     {
