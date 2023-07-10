@@ -5,8 +5,12 @@
     "adrianacamps",
     "backend"
   ],
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
-    "adrianacamps": "npm frontend start",
+    "adrianacamps": "npm workspace frontend start",
     "build": "yarn workspace backend build",
     "start": "concurrently --kill-others-on-fail \"npm frontend\"  \"npm build\""
   },
