@@ -18,5 +18,8 @@
     {
       "name": "Sebastian"
     }
-  ]
+  ],
+  "dependencies": {
+    "strapi": "^3.6.11"
+  }
 }
