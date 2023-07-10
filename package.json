@@ -13,7 +13,8 @@
     "adrianacamps": "yarn workspace frontend start",
     "backend": "yarn run build --workspace backend",
     "start": "yarn run backend",
-    "build": "yarn --cwd backend run build"
+    "build": "yarn --cwd backend run build",
+    "develop": "yarn --cwd backend run develop"
   },
   "contributors": [
     {
