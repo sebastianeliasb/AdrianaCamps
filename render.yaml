@@ -3,8 +3,8 @@ services:
     name: strapi
     env: node
     plan: starter
-    buildCommand: cd backend && yarn install && yarn build
-    startCommand: cd backend && yarn start
+    buildCommand: cd backend && npm install &&npm build
+    startCommand: cd backend && npm start
     healthCheckPath: /_health
     autoDeploy: false
     envVars:
