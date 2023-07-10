@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "concept_intros",
+  "info": {
+    "singularName": "concept-intro",
+    "pluralName": "concept-intros",
+    "displayName": "Concept_intro",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "page_desscription": {
+      "type": "string"
+    },
+    "concept": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::concept.concept",
+      "inversedBy": "concept_intros"
+    }
+  }
+}

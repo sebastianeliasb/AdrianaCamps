@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "concepts",
+  "info": {
+    "singularName": "concept",
+    "pluralName": "concepts",
+    "displayName": "Concept",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "concept_title": {
+      "type": "string",
+      "required": true
+    },
+    "concept_location": {
+      "type": "string"
+    },
+    "surface": {
+      "type": "integer"
+    },
+    "main_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "main_description": {
+      "type": "richtext",
+      "required": true
+    },
+    "layouts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layout.layout",
+      "mappedBy": "concept"
+    },
+    "concept_intros": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::concept-intro.concept-intro",
+      "mappedBy": "concept"
+    }
+  }
+}

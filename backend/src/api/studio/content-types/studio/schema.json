@@ -4,7 +4,8 @@
   "info": {
     "singularName": "studio",
     "pluralName": "studios",
-    "displayName": "Studio"
+    "displayName": "Studio",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,17 +19,17 @@
       "type": "richtext"
     },
     "studio_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "clients": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::client.client",
-      "mappedBy": "studio"
+      "target": "api::client.client"
     }
   }
 }
