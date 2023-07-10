@@ -40,11 +40,8 @@
       "target": "api::layout.layout",
       "mappedBy": "concept"
     },
-    "concept_intros": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::concept-intro.concept-intro",
-      "mappedBy": "concept"
+    "concept_page_intro": {
+      "type": "richtext"
     }
   }
 }

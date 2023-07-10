@@ -18,7 +18,7 @@ function Contact() {
   const [validationMessage, setValidationMessage] = useState("");
 
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/contacts?populate=contact_image"
+    "api/contacts?populate=contact_image"
   );
 
   const [state, handleSubmit] = useForm("mknayzwo");
@@ -28,6 +28,7 @@ function Contact() {
   const contactImage =
     data.data[0].attributes.contact_image.data.attributes.url;
   const contactText = data.data[0].attributes.Contact_description;
+  console.log(data.data);
 
   const verifyInput = (name, email, subject, message) => {
     if (!name || !email || !subject || !message) {
@@ -75,7 +76,7 @@ function Contact() {
               <div className="contact-right">
                 <img
                   className="contact-image"
-                  src={`http://localhost:1337${contactImage}`}
+                  src={contactImage}
                   alt="contact"
                 ></img>
               </div>

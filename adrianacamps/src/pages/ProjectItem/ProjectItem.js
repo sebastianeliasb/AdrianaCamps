@@ -84,10 +84,7 @@ function ProjectItem() {
           <div className="project-item-body">
             <div className="first_section">
               <div className="project-content-left">
-                <img
-                  src={`http://localhost:1337${main_image_url}`}
-                  alt="main"
-                />
+                <img src={main_image_url} alt="main" />
               </div>
 
               <div className="project-content-right">

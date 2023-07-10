@@ -44,7 +44,7 @@ function Nav(props) {
             <Link to="/concepts">Concepts for sale</Link>
             <Link to="/news">News</Link>
             <Link to="/contact">Contact</Link>
-            <Link to="/dashboard">Dashboard</Link>
+            {/* <Link to="/dashboard">Dashboard</Link> */}
             {isMobile && (
               <div className="language-box-nav" onClick={handleOpenDropdown}>
                 Language

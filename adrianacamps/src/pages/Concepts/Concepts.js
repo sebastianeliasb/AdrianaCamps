@@ -13,13 +13,13 @@ import WebNav from "../../Components/WebNav";
 
 function Concepts() {
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/concepts?populate=main_image&populate=layouts.project_images&populate=concept_intro"
+    "api/concepts?populate=main_image&populate=layouts.project_images"
   );
 
   if (loading) return <p>{loading}</p>;
   if (error) return <p>{error}</p>;
 
-  // console.log(data);
+  console.log(data);
   // const mainDescription =
   //   data.data[0].attributes.concept_intro.data.attributes.page_desscription;
   // console.log(mainDescription);

@@ -12,7 +12,7 @@ function ProjectContent({ data, loading, error }) {
         <div className="project-image-link">
           <Link to={`/project/${project.id}`} state={{ project }}>
             <img
-              src={`${`http://localhost:1337${project.attributes.main_image.data.attributes.url}`} `}
+              src={project.attributes.main_image.data.attributes.url}
               className="project-image"
               alt={project.attributes.name}
             />

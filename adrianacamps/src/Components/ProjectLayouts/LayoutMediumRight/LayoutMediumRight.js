@@ -11,7 +11,7 @@ function LayoutMediumRight({ sectionData }) {
         <img
           className="image_medium_right"
           key={image.id}
-          src={`http://localhost:1337${image.attributes.url}`}
+          src={image.attributes.url}
           alt={imageTitle}
         />
       ))}

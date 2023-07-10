@@ -9,9 +9,7 @@ import "./style/news.scss";
 import _ from "lodash";
 
 function News() {
-  const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/news?populate=news_image"
-  );
+  const { data, loading, error } = useFetch("api/news?populate=news_image");
   const [selectedNewsId, setSelectedNewsId] = useState(null);
   const isMobile = useMediaQuery({ maxWidth: 600 });
 
@@ -29,6 +27,7 @@ function News() {
   if (!data) {
     return null;
   }
+  console.log(data);
 
   const allNews = data.data.map((news) => news);
 
@@ -50,7 +49,7 @@ function News() {
           <div className="news-left">
             <img
               className="news-image"
-              src={`http://localhost:1337${selectedNews?.attributes.news_image.data.attributes.url}`}
+              src={selectedNews?.attributes.news_image.data.attributes.url}
               alt={selectedNews?.attributes.main_title}
             />
 
@@ -59,7 +58,19 @@ function News() {
               <div>{selectedNews?.attributes.main_title}</div>
 
               <div className="read-more">
-                <a href={selectedNews?.attributes.news_link}>Leer más</a>
+                <a
+                  href={
+                    selectedNews?.attributes.news_link.startsWith("http")
+                      ? selectedNews?.attributes.news_link
+                      : `https://${selectedNews?.attributes.news_link}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Leer más
+                </a>
+
+                {console.log(selectedNews?.attributes.news_link)}
               </div>
             </div>
           </div>

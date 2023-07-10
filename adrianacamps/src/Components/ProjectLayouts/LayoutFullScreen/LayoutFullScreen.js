@@ -12,7 +12,7 @@ function LayoutFullScreen({ sectionData }) {
           <img
             className="project-image-large"
             key={image.id}
-            src={`http://localhost:1337${image.attributes.url}`}
+            src={image.attributes.url}
             alt={imageTitle}
           />
         ))}

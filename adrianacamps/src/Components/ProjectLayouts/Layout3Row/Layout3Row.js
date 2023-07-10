@@ -12,7 +12,7 @@ function Layout3Row({ sectionData }) {
           <img
             className="images_3_row"
             key={image.id}
-            src={`http://localhost:1337${image.attributes.url}`}
+            src={image.attributes.url}
             alt={imageTitle}
           />
         ))}

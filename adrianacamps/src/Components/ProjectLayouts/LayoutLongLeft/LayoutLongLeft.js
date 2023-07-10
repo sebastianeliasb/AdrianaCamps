@@ -12,7 +12,7 @@ function LayoutLongLeft({ sectionData }) {
           <img
             className="image_long_left"
             key={image.id}
-            src={`http://localhost:1337${image.attributes.url}`}
+            src={image.attributes.url}
             alt={imageTitle}
           />
         ))}

@@ -25,9 +25,14 @@ function ConceptItem() {
     concept_title,
     concept_location,
     main_description,
+    // project_date,
+    // client,
+    // photographer,
     surface,
     main_image: {
-      data: [{ attributes: main_image_attributes }],
+      data: {
+        attributes: { url: main_image_url },
+      },
     },
     layouts: { data: project_organization },
   } = data.concept.attributes;
@@ -85,10 +90,8 @@ function ConceptItem() {
           <div className="project-item-body">
             <div className="first_section">
               <div className="project-content-left">
-                <img
-                  src={`http://localhost:1337${main_image_attributes.url}`}
-                  alt="main"
-                />
+                <img src={main_image_url} alt="main" />
+                {/* {console.log(main_image_attributes.url)} */}
               </div>
 
               <div className="project-content-right">

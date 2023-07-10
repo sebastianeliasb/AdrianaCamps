@@ -12,7 +12,7 @@ function LayoutShortRight({ sectionData }) {
           <img
             className="image_short_right"
             key={image.id}
-            src={`http://localhost:1337${image.attributes.url}`}
+            src={image.attributes.url}
             alt={imageTitle}
           />
         ))}
