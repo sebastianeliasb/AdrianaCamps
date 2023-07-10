@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "adrianacamps": "npm frontend start",
-    "backend": "yarn build",
-    "start": "concurrently --kill-others-on-fail \"npm frontend\"  \"npm backend\""
+    "build": "yarn workspace backend build",
+    "start": "concurrently --kill-others-on-fail \"npm frontend\"  \"npm build\""
   },
   "contributors": [
     {
