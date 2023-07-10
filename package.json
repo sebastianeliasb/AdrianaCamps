@@ -11,7 +11,7 @@
   },
   "scripts": {
     "adrianacamps": "npm workspace frontend start",
-    "backend": "yarn run build --workspace backend",
+    "backend": "npm run build --workspace backend",
     "start": "concurrently --kill-others-on-fail \"npm run adrianacamps\"  \"yarn run backend\""
   },
   "contributors": [
