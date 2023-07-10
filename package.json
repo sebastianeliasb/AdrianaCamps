@@ -12,7 +12,7 @@
   "scripts": {
     "adrianacamps": "npm workspace frontend start",
     "build": "yarn workspace backend build",
-    "start": "concurrently --kill-others-on-fail \"npm frontend\"  \"npm build\""
+    "start": "concurrently --kill-others-on-fail \"npm frontend\"  \"npm run build\""
   },
   "contributors": [
     {
