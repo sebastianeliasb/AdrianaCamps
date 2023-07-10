@@ -4,25 +4,24 @@
   "info": {
     "singularName": "home",
     "pluralName": "homes",
-    "displayName": "home"
+    "displayName": "Home",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Image_name": {
+    "image_name": {
       "type": "string"
     },
     "carrousel_image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

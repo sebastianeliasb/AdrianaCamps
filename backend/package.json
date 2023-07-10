@@ -12,16 +12,15 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.11.4",
     "@strapi/plugin-users-permissions": "4.11.4",
+    "@strapi/provider-upload-cloudinary": "^4.11.4",
     "@strapi/strapi": "4.11.4",
-    "better-sqlite3": "8.0.1",
-    "pg": "^8.11.1",
-    "pg-connection-string": "^2.6.1"
+    "pg": "8.8.0"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "dd935e17-a3c2-4d12-9f2d-83cccccdacdf"
+    "uuid": "9c4fa787-fc06-465e-b286-d8a0b44c30a9"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
