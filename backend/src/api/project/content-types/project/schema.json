@@ -48,6 +48,9 @@
       "relation": "oneToMany",
       "target": "api::layout.layout",
       "mappedBy": "project"
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }
