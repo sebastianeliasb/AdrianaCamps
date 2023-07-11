@@ -27,7 +27,7 @@ function News() {
   if (!data) {
     return null;
   }
-  console.log(data);
+  // console.log(data);
 
   const allNews = data.data.map((news) => news);
 
@@ -70,7 +70,7 @@ function News() {
                   Leer más
                 </a>
 
-                {console.log(selectedNews?.attributes.news_link)}
+                {/* {console.log(selectedNews?.attributes.news_link)} */}
               </div>
             </div>
           </div>

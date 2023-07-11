@@ -23,7 +23,7 @@ function ProjectContent({ data, loading, error }) {
             {project.attributes.project_title}
           </Link>
         </div>
-        <div className="project-title2">{project.attributes.project_title}</div>
+        <div className="project-title2">{project.attributes.subtitle}</div>
       </div>
     </>
   ));

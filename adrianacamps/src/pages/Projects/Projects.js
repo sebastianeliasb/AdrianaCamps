@@ -11,6 +11,7 @@ function Projects() {
   const { data, loading, error } = useFetch(
     "api/projects?populate=main_image&populate=layouts.project_images"
   );
+
   return (
     <>
       <MainPageLayout backgroundColor={"beige"}>
