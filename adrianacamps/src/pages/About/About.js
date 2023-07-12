@@ -21,8 +21,6 @@ function About() {
   const estudio = data.data[0].attributes.el_estudio; // get the aboutMe string from the studio object
   const clientes = data.data[0].attributes.clients.data; // get the aboutMe string from the studio object
   const studioImage = data.data[0].attributes.studio_image.data.attributes.url;
-  // const colaboradors = data.data[0].attributes.colaboradors.data;
-  console.log(data.data[0]);
 
   return (
     <MainPageLayout

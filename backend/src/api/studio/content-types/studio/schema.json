@@ -30,11 +30,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::client.client"
-    },
-    "colaboradors": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::colaborador.colaborador"
     }
   }
 }

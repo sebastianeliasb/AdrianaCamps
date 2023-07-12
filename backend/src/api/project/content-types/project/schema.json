@@ -51,6 +51,11 @@
     },
     "subtitle": {
       "type": "string"
+    },
+    "colaboradors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::colaborador.colaborador"
     }
   }
 }
