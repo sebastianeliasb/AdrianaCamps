@@ -12,6 +12,8 @@ import {
   LayoutShortLeft,
   LayoutShortRight,
   Layout3Row,
+  Layout2Pics,
+  LayoutOnlyText,
 } from "../../Components/ProjectLayouts";
 
 import MainPageLayout from "../../layouts/MainPageLayout";
@@ -71,12 +73,16 @@ function ProjectItem() {
         );
       case "Layout 3 Row":
         return <Layout3Row section={Sections} sectionData={sectionData} />;
+      case "Layout 2 Pictures":
+        return <Layout2Pics section={Sections} sectionData={sectionData} />;
+      case "Layout Only Text":
+        return <LayoutOnlyText section={Sections} sectionData={sectionData} />;
       // Add more cases for other layout types
       default:
         return null;
     }
   };
-
+  console.log(data);
   return (
     <>
       <WebNav />

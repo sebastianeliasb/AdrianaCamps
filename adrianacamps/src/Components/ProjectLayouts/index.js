@@ -7,3 +7,5 @@ export { default as LayoutMediumRight } from "./LayoutMediumRight";
 export { default as LayoutShortLeft } from "./LayoutShortLeft";
 export { default as LayoutShortRight } from "./LayoutShortRight";
 export { default as Layout3Row } from "./Layout3Row";
+export { default as Layout2Pics } from "./Layout2Pics";
+export { default as LayoutOnlyText } from "./LayoutOnlyText";

@@ -5,6 +5,7 @@ function Layout2Pics({ sectionData }) {
   const infoText = sectionData.attributes.info_text;
   const imageTitle = sectionData.attributes.image_title;
   //   const shouldShowSpan = infoText !== null && infoText !== "";
+  console.log(layoutImages);
   return (
     <div className="layout_medium_right">
       {layoutImages.map((image) => (
