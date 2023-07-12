@@ -51,7 +51,9 @@
         "Layout Middle Right",
         "Layout Short Left",
         "Layout Short Right",
-        "Layout 3 Row"
+        "Layout 3 Row",
+        "Layout 2 Pictures",
+        "Layout Only Text"
       ]
     },
     "project": {

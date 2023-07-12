@@ -28,7 +28,7 @@ function ProjectItem() {
     client,
     photographer,
     surface,
-    // collaborators,
+    collaborators,
     main_image: {
       data: {
         attributes: { url: main_image_url },
@@ -104,7 +104,9 @@ function ProjectItem() {
                     {client && <span>Cliente: {client}</span>}
                     {photographer && <span>Fotografo: {photographer}</span>}
                     {surface && <span>Superficie: {`${surface}m²`}</span>}
-                    {/* {collaborators && <span>colaboradors: {collaborators}</span>} */}
+                    {collaborators && (
+                      <span>Colaboradores: {collaborators}</span>
+                    )}
                   </div>
                 </div>
               </div>
