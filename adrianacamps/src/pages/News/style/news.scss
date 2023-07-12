@@ -19,7 +19,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+.news_title{
+  text-transform: uppercase;
+}
   div{
       // outline: 1px solid black;
       margin: 0.2rem;

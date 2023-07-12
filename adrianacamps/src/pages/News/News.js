@@ -27,7 +27,6 @@ function News() {
   if (!data) {
     return null;
   }
-  // console.log(data);
 
   const allNews = data.data.map((news) => news);
 
@@ -35,6 +34,13 @@ function News() {
     setSelectedNewsId(id);
   };
   const selectedNews = _.find(allNews, { id: selectedNewsId });
+  const selectedNewsDate = selectedNews?.attributes.date
+    ? new Date(selectedNews.attributes.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : null;
 
   const backgroundColor = isMobile ? "beige" : "none";
 
@@ -54,8 +60,10 @@ function News() {
             />
 
             <div className="news-info-container">
-              <div>{selectedNews?.attributes.date}</div>
-              <div>{selectedNews?.attributes.main_title}</div>
+              <div>{selectedNewsDate}</div>
+              <div className="news_title">
+                {selectedNews?.attributes.main_title}
+              </div>
 
               <div className="read-more">
                 <a

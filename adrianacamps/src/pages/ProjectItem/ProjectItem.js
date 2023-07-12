@@ -35,7 +35,11 @@ function ProjectItem() {
     },
     layouts: { data: project_organization },
   } = data.project.attributes;
-
+  const projectDate = new Date(project_date).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
   const backgroundColor = window.innerWidth <= 600 ? "beige" : "none";
 
   const renderLayoutComponent = (layoutType, sectionData) => {
@@ -92,7 +96,7 @@ function ProjectItem() {
                   <div className="project-info">
                     <span>{project_title}</span>
                     <span>{project_location}</span>
-                    <span>{project_date}</span>
+                    <span>{projectDate}</span>
                     <ReactMarkdown>{main_description}</ReactMarkdown>
                   </div>
                   <div className="project-aspects">

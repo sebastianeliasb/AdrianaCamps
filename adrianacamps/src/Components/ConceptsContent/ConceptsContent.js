@@ -25,9 +25,9 @@ function ConceptsContent({ data, loading, error }) {
             {concept.attributes.concept_title}
           </Link>
         </div>
-        <p className="project-title2" style={{ margin: "8px" }}>
+        <span className="project-title2">
           {concept.attributes.concept_title}
-        </p>
+        </span>
       </div>
     </>
   ));

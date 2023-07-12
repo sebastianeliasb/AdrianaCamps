@@ -20,8 +20,15 @@ function Concepts() {
   if (error) return <p>{error}</p>;
 
   // console.log(data);
-  const mainDescription = data.data[0].attributes.concept_page_intro;
-  console.log(mainDescription);
+  let mainDescription = null;
+
+  for (let i = 0; i < data.data.length; i++) {
+    const project = data.data[i];
+    if (project.attributes.concept_page_intro !== null) {
+      mainDescription = project.attributes.concept_page_intro;
+      break; // Stop the loop once the element is found
+    }
+  }
   return (
     <MainPageLayout
       backgroundColorLeft={"white"}

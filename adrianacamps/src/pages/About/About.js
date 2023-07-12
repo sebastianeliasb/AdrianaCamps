@@ -11,7 +11,7 @@ import WebNav from "../../Components/WebNav";
 
 function About() {
   const { data, loading, error } = useFetch(
-    "api/studios?populate=studio_image&populate=clients"
+    "api/studios?populate=studio_image&populate=clients&populate=colaboradors"
   );
 
   if (loading) return <p>{loading}</p>;
@@ -21,6 +21,8 @@ function About() {
   const estudio = data.data[0].attributes.el_estudio; // get the aboutMe string from the studio object
   const clientes = data.data[0].attributes.clients.data; // get the aboutMe string from the studio object
   const studioImage = data.data[0].attributes.studio_image.data.attributes.url;
+  // const colaboradors = data.data[0].attributes.colaboradors.data;
+  console.log(data.data[0]);
 
   return (
     <MainPageLayout
@@ -62,19 +64,19 @@ function About() {
 
                 <br />
                 <u>CLIENTES</u>
-                {clientes.map((client) => (
-                  <React.Fragment key={client.id}>
-                    <p>
-                      {client.attributes.client_name}{" "}
+                <div className="client_box">
+                  {clientes.map((client) => (
+                    <React.Fragment key={client.id}>
+                      <span>{client.attributes.client_name}</span>
                       <a
                         href={`http://${client.attributes.client_website}`}
                         target="_blank"
                       >
                         {client.attributes.client_website}
                       </a>
-                    </p>
-                  </React.Fragment>
-                ))}
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
               {/* <Footer /> */}
             </div>
