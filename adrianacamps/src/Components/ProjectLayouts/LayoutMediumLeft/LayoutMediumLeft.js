@@ -4,7 +4,7 @@ function LayoutMediumLeft({ sectionData }) {
   const layoutImages = sectionData.attributes.project_images.data;
   const infoText = sectionData.attributes.info_text;
   const imageTitle = sectionData.attributes.image_title;
-
+  const shouldShowSpan = infoText !== null && infoText !== "";
   return (
     layoutImages.length > 0 && (
       <div className="layout_medium_left">
@@ -16,7 +16,7 @@ function LayoutMediumLeft({ sectionData }) {
             alt={imageTitle}
           />
         ))}
-        <span>{infoText ? infoText : ""}</span>
+        const shouldShowSpan = infoText !== null && infoText !== "";
       </div>
     )
   );

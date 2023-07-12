@@ -54,9 +54,9 @@ function Contact() {
       return;
 
     try {
-      // const recaptchaResponse = await window.grecaptcha.execute();
+      const recaptchaResponse = await window.grecaptcha.execute();
       const formData = new FormData(event.target);
-      // formData.set("g-recaptcha-response", recaptchaResponse);
+      formData.set("g-recaptcha-response", recaptchaResponse);
       await handleSubmit(formData);
       showToast("El correo se ha enviado correctamente", "success");
       event.target.reset();
@@ -114,7 +114,7 @@ function Contact() {
                     required
                   ></input>
                   <div className="send-form-container">
-                    {/* <ReCAPTCHA sitekey="<your-site-key>" /> */}
+                    <ReCAPTCHA sitekey="6LcwLhUnAAAAAJkhT80oRDquiu5XDO-cedK204-b" />
                     <ValidationError
                       prefix="Message"
                       field="message"
