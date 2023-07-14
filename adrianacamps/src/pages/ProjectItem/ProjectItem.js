@@ -82,7 +82,7 @@ function ProjectItem() {
         return null;
     }
   };
-  console.log(data);
+  console.log(collaborators);
   return (
     <>
       <WebNav />
@@ -110,9 +110,7 @@ function ProjectItem() {
                     {client && <span>Cliente: {client}</span>}
                     {photographer && <span>Fotografo: {photographer}</span>}
                     {surface && <span>Superficie: {`${surface}m²`}</span>}
-                    {collaborators && (
-                      <span>Colaboradores: {collaborators}</span>
-                    )}
+                    {collaborators && <span>Colabora: {collaborators}</span>}
                   </div>
                 </div>
               </div>

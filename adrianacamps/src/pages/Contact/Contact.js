@@ -114,7 +114,7 @@ function Contact() {
                     required
                   ></input>
                   <div className="send-form-container">
-                    <ReCAPTCHA sitekey="6LcwLhUnAAAAAJkhT80oRDquiu5XDO-cedK204-b" />
+                    {/* <ReCAPTCHA sitekey="6LcwLhUnAAAAAJkhT80oRDquiu5XDO-cedK204-b" /> */}
                     <ValidationError
                       prefix="Message"
                       field="message"

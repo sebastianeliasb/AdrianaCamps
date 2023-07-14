@@ -42,6 +42,9 @@
     },
     "concept_page_intro": {
       "type": "richtext"
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }

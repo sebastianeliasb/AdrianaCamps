@@ -6,7 +6,6 @@ function ConceptsContent({ data, loading, error }) {
   if (!data) {
     return null;
   }
-  console.log(data.data);
   return data.data.map((concept) => (
     <>
       <div key={concept.id} className="concept-content-box">
@@ -17,7 +16,6 @@ function ConceptsContent({ data, loading, error }) {
               src={concept.attributes.main_image.data.attributes.url}
               alt={concept.attributes.name}
             />
-            {/* {console.log(concept.attributes.main_image.data.attributes.url)} */}
           </Link>
         </div>
         <div className="concept-info-link">
@@ -25,9 +23,7 @@ function ConceptsContent({ data, loading, error }) {
             {concept.attributes.concept_title}
           </Link>
         </div>
-        <span className="project-title2">
-          {concept.attributes.concept_title}
-        </span>
+        <span className="project-title2">{concept.attributes.subtitle}</span>
       </div>
     </>
   ));

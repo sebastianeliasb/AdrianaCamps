@@ -15,6 +15,8 @@ import {
   LayoutShortLeft,
   LayoutShortRight,
   Layout3Row,
+  Layout2Pics,
+  LayoutOnlyText,
 } from "../../Components/ProjectLayouts";
 
 function ConceptItem() {
@@ -73,6 +75,10 @@ function ConceptItem() {
         );
       case "Layout 3 Row":
         return <Layout3Row section={Sections} sectionData={sectionData} />;
+      case "Layout 2 Pictures":
+        return <Layout2Pics section={Sections} sectionData={sectionData} />;
+      case "Layout Only Text":
+        return <LayoutOnlyText section={Sections} sectionData={sectionData} />;
       // Add more cases for other layout types
       default:
         return null;
@@ -91,7 +97,6 @@ function ConceptItem() {
             <div className="first_section">
               <div className="project-content-left">
                 <img src={main_image_url} alt="main" />
-                {/* {console.log(main_image_attributes.url)} */}
               </div>
 
               <div className="project-content-right">
