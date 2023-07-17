@@ -65,7 +65,7 @@ text-align: center;
 @media screen and (min-width: 600px){
   #news{
       display: flex;
-      // margin-top: 25vh;
+      height: auto;
       min-height: 100vh;
   .news-left{
       position: fixed;

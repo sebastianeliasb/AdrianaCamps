@@ -1,6 +1,7 @@
 import React from "react";
 //style
 import "./style/footer.scss";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -36,9 +37,18 @@ function Footer() {
           <span> 43895 L’Ampolla (Tarragona)</span>
         </div>
         <div>
-          <span>Aviso Legal</span>
-          <span>Política de privacidad</span>
-          <span>Política de cookies</span>
+          <span>
+            {" "}
+            <Link to="/politicas">Aviso Legal</Link>
+          </span>
+          <span>
+            {" "}
+            <Link to="/politicas">Política de privacidad</Link>
+          </span>
+          <span>
+            {" "}
+            <Link to="/politicas">Política de cookies</Link>
+          </span>
           <span>Design by Sauras Garriga</span>
         </div>
         <div>© Adriana Camps 2023 — All Rights reserved</div>
