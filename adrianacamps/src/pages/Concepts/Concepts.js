@@ -19,7 +19,6 @@ function Concepts() {
   if (loading) return <p>{loading}</p>;
   if (error) return <p>{error}</p>;
 
-  // console.log(data);
   let mainDescription = null;
 
   for (let i = 0; i < data.data.length; i++) {

@@ -77,8 +77,6 @@ function News() {
                 >
                   Leer más
                 </a>
-
-                {/* {console.log(selectedNews?.attributes.news_link)} */}
               </div>
             </div>
           </div>

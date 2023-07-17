@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContentContainer from "../../Components/ContentContainer";
 import WebNav from "../../Components/WebNav";
@@ -22,7 +22,28 @@ import {
 function ConceptItem() {
   const location = useLocation();
   const data = location.state;
+  const projectId = window.location.pathname.split("/").pop();
+  const [fetchedData, setFetchedData] = useState(null);
 
+  useEffect(() => {
+    if (!data) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://adrianacamps-strapi.onrender.com/api/concepts/${projectId}?populate=main_image&populate=layouts.project_images`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch project data");
+          }
+          const jsonData = await response.json();
+          setFetchedData(jsonData.data);
+        } catch (error) {
+          console.error("Error fetching project data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
   const {
     concept_title,
     concept_location,
@@ -32,12 +53,10 @@ function ConceptItem() {
     // photographer,
     surface,
     main_image: {
-      data: {
-        attributes: { url: main_image_url },
-      },
-    },
-    layouts: { data: project_organization },
-  } = data.concept.attributes;
+      data: { attributes: { url: main_image_url } = {} } = {},
+    } = {},
+    layouts: { data: project_organization } = {},
+  } = data?.concept?.attributes || fetchedData?.attributes || {};
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -113,14 +132,15 @@ function ConceptItem() {
               </div>
             </div>
             {/* Render other sections */}
-            {project_organization.map((sectionData) => (
-              <div key={sectionData.id}>
-                {renderLayoutComponent(
-                  sectionData.attributes.Layouts,
-                  sectionData
-                )}
-              </div>
-            ))}
+            {project_organization &&
+              project_organization.map((sectionData) => (
+                <div key={sectionData.id}>
+                  {renderLayoutComponent(
+                    sectionData.attributes.Layouts,
+                    sectionData
+                  )}
+                </div>
+              ))}
           </div>
         </ContentContainer>
       </MainPageLayout>

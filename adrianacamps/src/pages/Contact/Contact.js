@@ -28,7 +28,6 @@ function Contact() {
   const contactImage =
     data.data[0].attributes.contact_image.data.attributes.url;
   const contactText = data.data[0].attributes.Contact_description;
-  console.log(data.data);
 
   const verifyInput = (name, email, subject, message) => {
     if (!name || !email || !subject || !message) {
@@ -65,7 +64,7 @@ function Contact() {
       showToast("No se ha podido enviar el correo", "error");
     }
   };
-  console.log(contactText);
+
   return (
     <>
       <MainPageLayout backgroundColorRight={"beige"}>
