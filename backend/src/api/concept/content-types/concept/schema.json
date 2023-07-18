@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "concept_title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "concept_location": {
       "type": "string"
@@ -24,16 +25,14 @@
     "main_image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "main_description": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "layouts": {
       "type": "relation",
@@ -41,10 +40,11 @@
       "target": "api::layout.layout",
       "mappedBy": "concept"
     },
-    "concept_intro": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::concept-intro.concept-intro"
+    "concept_page_intro": {
+      "type": "richtext"
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }

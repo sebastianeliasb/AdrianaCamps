@@ -9,8 +9,9 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 
 function Projects() {
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/projects?populate=main_image&populate=layouts.project_images"
+    "api/projects?populate=main_image&populate=layouts.project_images"
   );
+
   return (
     <>
       <MainPageLayout backgroundColor={"beige"}>

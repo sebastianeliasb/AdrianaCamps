@@ -12,17 +12,16 @@
   "pluginOptions": {},
   "attributes": {
     "Contact_description": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "contact_image": {
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true
     }
   }
 }

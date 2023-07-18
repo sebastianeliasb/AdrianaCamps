@@ -249,7 +249,7 @@ function Modal({
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       toggleModal();
-      console.log(studio);
+
       setStudio({
         aboutImage: [],
         aboutMe: "",

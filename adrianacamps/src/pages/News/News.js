@@ -9,9 +9,7 @@ import "./style/news.scss";
 import _ from "lodash";
 
 function News() {
-  const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/news?populate=news_image"
-  );
+  const { data, loading, error } = useFetch("api/news?populate=news_image");
   const [selectedNewsId, setSelectedNewsId] = useState(null);
   const isMobile = useMediaQuery({ maxWidth: 600 });
 
@@ -36,6 +34,13 @@ function News() {
     setSelectedNewsId(id);
   };
   const selectedNews = _.find(allNews, { id: selectedNewsId });
+  const selectedNewsDate = selectedNews?.attributes.date
+    ? new Date(selectedNews.attributes.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : null;
 
   const backgroundColor = isMobile ? "beige" : "none";
 
@@ -50,16 +55,28 @@ function News() {
           <div className="news-left">
             <img
               className="news-image"
-              src={`http://localhost:1337${selectedNews?.attributes.news_image.data.attributes.url}`}
+              src={selectedNews?.attributes.news_image.data.attributes.url}
               alt={selectedNews?.attributes.main_title}
             />
 
             <div className="news-info-container">
-              <div>{selectedNews?.attributes.date}</div>
-              <div>{selectedNews?.attributes.main_title}</div>
+              <div>{selectedNewsDate}</div>
+              <div className="news_title">
+                {selectedNews?.attributes.main_title}
+              </div>
 
               <div className="read-more">
-                <a href={selectedNews?.attributes.news_link}>Leer más</a>
+                <a
+                  href={
+                    selectedNews?.attributes.news_link.startsWith("http")
+                      ? selectedNews?.attributes.news_link
+                      : `https://${selectedNews?.attributes.news_link}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Leer más
+                </a>
               </div>
             </div>
           </div>

@@ -29,18 +29,16 @@ function Carrusel({ data, error, loading }) {
     return title.attributes.Image_name;
   });
 
-  // console.log({ imageTitle });
-
   return (
     <>
       <div className="carrusel">
         <Slider {...settings}>
           {carrouselURLs.length > 0 &&
-            carrouselURLs.map((home) => {
+            carrouselURLs.map((home, index) => {
               return (
-                <div key={home.id}>
+                <div key={index}>
                   <img
-                    src={`http://localhost:1337${home}`} // Updated image URL here
+                    src={home} // Updated image URL here
                     alt={imageTitle}
                   />
                 </div>

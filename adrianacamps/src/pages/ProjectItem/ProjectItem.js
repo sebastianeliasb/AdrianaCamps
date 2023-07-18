@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContentContainer from "../../Components/ContentContainer";
 import WebNav from "../../Components/WebNav";
@@ -12,14 +12,39 @@ import {
   LayoutShortLeft,
   LayoutShortRight,
   Layout3Row,
+  Layout2Pics,
+  LayoutOnlyText,
 } from "../../Components/ProjectLayouts";
-
+import useFetch from "../../hooks/useFetch";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import "./style/projectItem.scss";
 
 function ProjectItem() {
   const location = useLocation();
   const data = location.state;
+  const projectId = window.location.pathname.split("/").pop();
+  const [fetchedData, setFetchedData] = useState(null);
+  useEffect(() => {
+    if (!data) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://adrianacamps-strapi.onrender.com/api/projects/${projectId}?populate=main_image&populate=layouts.project_images`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch project data");
+          }
+          const jsonData = await response.json();
+          setFetchedData(jsonData.data);
+        } catch (error) {
+          console.error("Error fetching project data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
+  console.log(projectId);
+  console.log(fetchedData);
   const {
     project_title,
     project_location,
@@ -28,14 +53,18 @@ function ProjectItem() {
     client,
     photographer,
     surface,
+    collaborators,
     main_image: {
-      data: {
-        attributes: { url: main_image_url },
-      },
-    },
-    layouts: { data: project_organization },
-  } = data.project.attributes;
+      data: { attributes: { url: main_image_url } = {} } = {},
+    } = {},
+    layouts: { data: project_organization } = {},
+  } = data?.project?.attributes || fetchedData?.attributes || {};
 
+  const projectDate = new Date(project_date).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
   const backgroundColor = window.innerWidth <= 600 ? "beige" : "none";
 
   const renderLayoutComponent = (layoutType, sectionData) => {
@@ -66,6 +95,10 @@ function ProjectItem() {
         );
       case "Layout 3 Row":
         return <Layout3Row section={Sections} sectionData={sectionData} />;
+      case "Layout 2 Pictures":
+        return <Layout2Pics section={Sections} sectionData={sectionData} />;
+      case "Layout Only Text":
+        return <LayoutOnlyText section={Sections} sectionData={sectionData} />;
       // Add more cases for other layout types
       default:
         return null;
@@ -84,10 +117,7 @@ function ProjectItem() {
           <div className="project-item-body">
             <div className="first_section">
               <div className="project-content-left">
-                <img
-                  src={`http://localhost:1337${main_image_url}`}
-                  alt="main"
-                />
+                <img src={main_image_url} alt="main" />
               </div>
 
               <div className="project-content-right">
@@ -95,26 +125,28 @@ function ProjectItem() {
                   <div className="project-info">
                     <span>{project_title}</span>
                     <span>{project_location}</span>
-                    <span>{project_date}</span>
+                    <span>{projectDate}</span>
                     <ReactMarkdown>{main_description}</ReactMarkdown>
                   </div>
                   <div className="project-aspects">
                     {client && <span>Cliente: {client}</span>}
                     {photographer && <span>Fotografo: {photographer}</span>}
                     {surface && <span>Superficie: {`${surface}m²`}</span>}
+                    {collaborators && <span>Colabora: {collaborators}</span>}
                   </div>
                 </div>
               </div>
             </div>
             {/* Render other sections */}
-            {project_organization.map((sectionData) => (
-              <div key={sectionData.id}>
-                {renderLayoutComponent(
-                  sectionData.attributes.Layouts,
-                  sectionData
-                )}
-              </div>
-            ))}
+            {project_organization &&
+              project_organization.map((sectionData) => (
+                <div key={sectionData.id}>
+                  {renderLayoutComponent(
+                    sectionData.attributes.Layouts,
+                    sectionData
+                  )}
+                </div>
+              ))}
           </div>
         </ContentContainer>
       </MainPageLayout>

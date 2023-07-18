@@ -18,7 +18,7 @@ function Contact() {
   const [validationMessage, setValidationMessage] = useState("");
 
   const { data, loading, error } = useFetch(
-    "http://localhost:1337/api/contacts?populate=contact_image"
+    "api/contacts?populate=contact_image"
   );
 
   const [state, handleSubmit] = useForm("mknayzwo");
@@ -53,9 +53,9 @@ function Contact() {
       return;
 
     try {
-      // const recaptchaResponse = await window.grecaptcha.execute();
+      const recaptchaResponse = await window.grecaptcha.execute();
       const formData = new FormData(event.target);
-      // formData.set("g-recaptcha-response", recaptchaResponse);
+      formData.set("g-recaptcha-response", recaptchaResponse);
       await handleSubmit(formData);
       showToast("El correo se ha enviado correctamente", "success");
       event.target.reset();
@@ -64,7 +64,7 @@ function Contact() {
       showToast("No se ha podido enviar el correo", "error");
     }
   };
-  console.log(contactText);
+
   return (
     <>
       <MainPageLayout backgroundColorRight={"beige"}>
@@ -75,7 +75,7 @@ function Contact() {
               <div className="contact-right">
                 <img
                   className="contact-image"
-                  src={`http://localhost:1337${contactImage}`}
+                  src={contactImage}
                   alt="contact"
                 ></img>
               </div>
@@ -113,7 +113,7 @@ function Contact() {
                     required
                   ></input>
                   <div className="send-form-container">
-                    {/* <ReCAPTCHA sitekey="<your-site-key>" /> */}
+                    {/* <ReCAPTCHA sitekey="6LcwLhUnAAAAAJkhT80oRDquiu5XDO-cedK204-b" /> */}
                     <ValidationError
                       prefix="Message"
                       field="message"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContentContainer from "../../Components/ContentContainer";
 import WebNav from "../../Components/WebNav";
@@ -15,22 +15,48 @@ import {
   LayoutShortLeft,
   LayoutShortRight,
   Layout3Row,
+  Layout2Pics,
+  LayoutOnlyText,
 } from "../../Components/ProjectLayouts";
 
 function ConceptItem() {
   const location = useLocation();
   const data = location.state;
+  const projectId = window.location.pathname.split("/").pop();
+  const [fetchedData, setFetchedData] = useState(null);
 
+  useEffect(() => {
+    if (!data) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://adrianacamps-strapi.onrender.com/api/concepts/${projectId}?populate=main_image&populate=layouts.project_images`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch project data");
+          }
+          const jsonData = await response.json();
+          setFetchedData(jsonData.data);
+        } catch (error) {
+          console.error("Error fetching project data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
   const {
     concept_title,
     concept_location,
     main_description,
+    // project_date,
+    // client,
+    // photographer,
     surface,
     main_image: {
-      data: [{ attributes: main_image_attributes }],
-    },
-    layouts: { data: project_organization },
-  } = data.concept.attributes;
+      data: { attributes: { url: main_image_url } = {} } = {},
+    } = {},
+    layouts: { data: project_organization } = {},
+  } = data?.concept?.attributes || fetchedData?.attributes || {};
 
   const w = document.documentElement.clientWidth || window.innerWidth;
   let backgroundColor;
@@ -68,6 +94,10 @@ function ConceptItem() {
         );
       case "Layout 3 Row":
         return <Layout3Row section={Sections} sectionData={sectionData} />;
+      case "Layout 2 Pictures":
+        return <Layout2Pics section={Sections} sectionData={sectionData} />;
+      case "Layout Only Text":
+        return <LayoutOnlyText section={Sections} sectionData={sectionData} />;
       // Add more cases for other layout types
       default:
         return null;
@@ -85,10 +115,7 @@ function ConceptItem() {
           <div className="project-item-body">
             <div className="first_section">
               <div className="project-content-left">
-                <img
-                  src={`http://localhost:1337${main_image_attributes.url}`}
-                  alt="main"
-                />
+                <img src={main_image_url} alt="main" />
               </div>
 
               <div className="project-content-right">
@@ -105,14 +132,15 @@ function ConceptItem() {
               </div>
             </div>
             {/* Render other sections */}
-            {project_organization.map((sectionData) => (
-              <div key={sectionData.id}>
-                {renderLayoutComponent(
-                  sectionData.attributes.Layouts,
-                  sectionData
-                )}
-              </div>
-            ))}
+            {project_organization &&
+              project_organization.map((sectionData) => (
+                <div key={sectionData.id}>
+                  {renderLayoutComponent(
+                    sectionData.attributes.Layouts,
+                    sectionData
+                  )}
+                </div>
+              ))}
           </div>
         </ContentContainer>
       </MainPageLayout>

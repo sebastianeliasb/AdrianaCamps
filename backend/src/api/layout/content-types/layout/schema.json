@@ -4,35 +4,24 @@
   "info": {
     "singularName": "layout",
     "pluralName": "layouts",
-    "displayName": "Layout"
+    "displayName": "Layout",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Layouts": {
-      "type": "enumeration",
-      "enum": [
-        "Layout Full Screen",
-        "Layout Long Left",
-        "Layout Long Right",
-        "Layout Middle Left",
-        "Layout Middle Right",
-        "Layout Short Left",
-        "Layout Short Right",
-        "Layout 3 Row"
-      ]
-    },
     "project_images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "info_text": {
       "type": "richtext"
@@ -51,6 +40,21 @@
     },
     "image_title": {
       "type": "string"
+    },
+    "Layouts": {
+      "type": "enumeration",
+      "enum": [
+        "Layout Full Screen",
+        "Layout Long Left",
+        "Layout Long Right",
+        "Layout Middle Left",
+        "Layout Middle Right",
+        "Layout Short Left",
+        "Layout Short Right",
+        "Layout 3 Row",
+        "Layout 2 Pictures",
+        "Layout Only Text"
+      ]
     },
     "project": {
       "type": "relation",

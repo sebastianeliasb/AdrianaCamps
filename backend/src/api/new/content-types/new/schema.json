@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "main_title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "secondary_title": {
       "type": "string"
@@ -22,13 +23,11 @@
     },
     "news_image": {
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true
     },
     "news_link": {
       "type": "string"

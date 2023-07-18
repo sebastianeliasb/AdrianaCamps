@@ -1,3 +1,9 @@
+body{
+  img{
+    object-fit: cover;
+    object-position: center;
+  }
+}
 #contact{
   box-sizing: border-box;
   padding: 0 3.5rem 0 3.5rem;
@@ -5,8 +11,7 @@
 .contact-image{
   min-height:22rem ;
   width:100% ;
-  background-size: cover;
-  background-position: center center;
+
 }
 }
 button[type="submit"] {
