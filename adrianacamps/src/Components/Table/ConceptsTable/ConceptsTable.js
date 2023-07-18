@@ -1,32 +1,36 @@
 import React from "react";
+import edit from "../../../assets/edit.png";
+import deleteIcon from "../../../assets/delete.png";
 
-function ConceptsTable() {
-    return (
-        <div className="content-information">
-            <div className="content-row-header">
-                <div>Concept Image</div>
-                <div>Concept Name</div>
-                <div>Concept sub-name</div>
-            </div>
-            {/* {projects.map((project) => (
+function ConceptsTable({ showModal, concepts, deleteConcept }) {
+  return (
+    <div className="content-information">
+      <div className="content-row-header">
+        <div>Concept Title</div>
+        <div>Concept Text</div>
+        <div>Delete</div>
+        {/* <div>Delete</div> */}
+      </div>
+      {concepts.map((project) => (
         <div key={project.id} className="content-row">
-          <div onClick={() => console.log(project.id)}>{project.name}</div>
-          <div>{project.client}</div>
-          <div>{project.location}</div>
+          <div onClick={() => console.log(project.id)}>
+            {project.conceptTitle}
+          </div>
+          <div>{project.conceptText}</div>
           <div>
-            <span
+            {/* <span
               onClick={() => showModal(true, project)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            ></span> */}
             <span
-              onClick={() => deleteProject(project.id)}
+              onClick={() => deleteConcept(project.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}
             ></span>
           </div>
         </div>
-      ))} */}
-        </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 export default ConceptsTable;

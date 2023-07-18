@@ -39,6 +39,20 @@ position: relative;
     display: flex;
     flex-direction: column;
    }
+
+   a{
+    cursor: pointer;
+    font-family: 'roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    // line-height: 140%;
+    color: white;
+   }
+   a:hover{
+    color: #6C9EBB;
+    cursor: pointer;
+}
 }
 
 
@@ -63,7 +77,19 @@ position: relative;
             display: flex;
             flex-direction: column;
            }
-
+           a{
+            cursor: pointer;
+            font-family: 'roboto';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 13px;
+            // line-height: 140%;
+            color: white;
+           }
+           a:hover{
+            color: #6C9EBB;
+            cursor: pointer;
+        }
     }
 
 }
@@ -72,4 +98,3 @@ position: relative;
 
 
 }
-

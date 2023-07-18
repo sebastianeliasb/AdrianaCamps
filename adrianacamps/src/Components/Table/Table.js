@@ -8,7 +8,18 @@ import NewsTable from "./NewsTable/NewsTable";
 import ContactTable from "./ContactTable/ContactTable";
 import ConceptsTable from "./ConceptsTable/ConceptsTable";
 
-function Table({ data, showModal, selected, deleteProject }) {
+function Table({ data, showModal, selected, deleteProcess }) {
+  function sortData(dataArray) {
+    return dataArray.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  }
+  const sortedProjects = sortData(data.projects);
+  const sortedHomes = sortData(data.homes);
+  const sortedStudios = sortData(data.studios);
+  const sortedNews = sortData(data.news);
+  const sortedContacts = sortData(data.contacts);
+  const sortedConcepts = sortData(data.concepts);
   switch (selected) {
     case "projects":
       return (
@@ -23,8 +34,8 @@ function Table({ data, showModal, selected, deleteProject }) {
           </div>
           <ProjectsTable
             showModal={showModal}
-            projects={data.projects}
-            deleteProject={deleteProject}
+            projects={sortedProjects}
+            deleteProject={deleteProcess}
           />
         </>
       );
@@ -39,7 +50,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <HomeTable />
+          <HomeTable
+            showModal={showModal}
+            homes={sortedHomes}
+            deleteHome={deleteProcess}
+          />
         </>
       );
     case "studio":
@@ -53,7 +68,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <StudioTable />
+          <StudioTable
+            showModal={showModal}
+            studios={sortedStudios}
+            deleteStudio={deleteProcess}
+          />
         </>
       );
     case "news":
@@ -67,7 +86,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <NewsTable />
+          <NewsTable
+            showModal={showModal}
+            news={sortedNews}
+            deleteNews={deleteProcess}
+          />
         </>
       );
     case "contact":
@@ -81,7 +104,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <ContactTable />
+          <ContactTable
+            showModal={showModal}
+            contacts={sortedContacts}
+            deleteContact={deleteProcess}
+          />
         </>
       );
     case "concepts":
@@ -95,7 +122,11 @@ function Table({ data, showModal, selected, deleteProject }) {
               src={addProject}
             ></img>
           </div>
-          <ConceptsTable />
+          <ConceptsTable
+            showModal={showModal}
+            concepts={sortedConcepts}
+            deleteConcept={deleteProcess}
+          />
         </>
       );
     default:

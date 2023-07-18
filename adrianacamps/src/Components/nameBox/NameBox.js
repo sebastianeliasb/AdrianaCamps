@@ -95,9 +95,12 @@ function NameBox(props) {
                   {selectedLanguage}
                   {isDropdownVisible && (
                     <div className="dropdown-menu">
-                      {availableLanguages.map((language) =>
+                      {availableLanguages.map((language, index) =>
                         selectedLanguage !== language ? (
-                          <div onClick={() => handleLanguageClick(language)}>
+                          <div
+                            key={index}
+                            onClick={() => handleLanguageClick(language)}
+                          >
                             {language}
                           </div>
                         ) : null

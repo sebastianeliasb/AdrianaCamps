@@ -1,96 +1,99 @@
 //Mobile
 .project-content-box{
-    display: flex;
-    flex-direction: column;
-    height: 45vh;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 3.5rem 0 3.5rem;
-    }
+  display: flex;
+  flex-direction: column;
+  height: 45vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 3.5rem 0 3.5rem;
+  }
 .project-image-link{
 min-height: 35vh;
 
 .project-image{
-    background-color: azure;
-    height: 100%;
-    width: 100%;
-    // background-size: cover;
-    // background-repeat: no-repeat;
-    object-fit: cover;
-    object-position: center;
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);   
-    }
+  background-color: azure;
+  height: 100%;
+  width: 100%;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);   
+  }
 }
 .project-title1{
-    font-family: 'Arya';    
-    font-style: normal;
-    font-weight: 200;
-    font-size:20px;
-    line-height: 130%;
-    color: black !important;
+  font-family: 'Arya';    
+  font-style: normal;
+  font-weight: 200;
+  font-size:20px;
+  line-height: 130%;
+  color: black !important;
 /* or 26px */
-    text-align: center;
-    // outline: 1px solid black;
-    margin: 0.5rem;
-    a{
-    color: black !important;
-        text-decoration: none;
-     }
-     a:visited{
-        text-decoration: none;
-        color: black;
-     }
+  text-align: center;
+  // outline: 1px solid black;
+  margin: 0.5rem;
+  text-transform: uppercase;
+  a{
+  color: black !important;
+      text-decoration: none;
+   }
+   a:visited{
+      text-decoration: none;
+      color: black;
+   }
 }
 a{
-    
-    text-decoration: none;
- }
- a:visited{
-    text-decoration: none;
-    color: black;
- }
+  
+  text-decoration: none;
+}
+a:visited{
+  text-decoration: none;
+  color: black;
+}
 
 .project-title2{
-    font-family: 'roboto';
-    font-style: normal;
-    font-weight: 300;
-    line-height: 130%;
-    font-size: 16px;
-    text-align: center;
-    margin: 0.2rem;
-    // outline: 1px solid black;
-    margin-bottom: 2rem;
+  font-family: 'roboto';
+  font-style: normal;
+  font-weight: 300;
+  line-height: 130%;
+  font-size: 16px;
+  text-align: center;
+  margin: 0.2rem;
+  // outline: 1px solid black;
+  margin-bottom: 2rem;
 }
 
 .project-image:hover{
-    cursor: pointer;
-    filter: grayscale(0);
-    -webkit-filter: grayscale(0);
-    }
+  cursor: pointer;
+  filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+  }
 
 //Web
 @media only screen and (min-width: 1366px){
 .project-body{
-    box-sizing:border-box;
-    display: flex;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-    // background-color: aqua;
+  box-sizing:border-box;
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  margin-bottom: 20vh;
+  // background-color: aqua;
 }
 .project-content-box{
-    height:55vh;
-    width: calc(100%/3);
-    padding: 0 1.5vw 0 1.5vw;
+  height:55vh;
+  width: calc(100%/3);
+  padding: 0 1.5vw 0 1.5vw;
 
 .project-image-link{
-    min-height: 45vh;
-    .project-image{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
+  min-height: 45vh;
+  .project-image{
+      width: 100%;
+      // min-height: 100vh;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+  }
 }
 } 
 
@@ -98,22 +101,22 @@ a{
 }
 
 @media (min-width: 600px) and (max-width: 1365px){
-    .project-body{
- 
-        display: flex;
-        justify-content:start;
-        flex-wrap:wrap;
-        
-    }
-    .project-content-box{
-        height: 50vh;
-        width: calc(100%/2);
+  .project-body{
 
-        .project-image{
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-    
-    } 
+      display: flex;
+      justify-content:start;
+      flex-wrap:wrap;
+      
+  }
+  .project-content-box{
+      height: 50vh;
+      width: calc(100%/2);
+
+      .project-image{
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+      }
+  
+  } 
 }

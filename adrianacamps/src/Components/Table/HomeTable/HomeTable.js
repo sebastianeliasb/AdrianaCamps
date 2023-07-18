@@ -1,31 +1,37 @@
 import React from "react";
+import edit from "../../../assets/edit.png";
+import deleteIcon from "../../../assets/delete.png";
 
-function HomeTable({showModal}) {
-    return (
-        <div className="content-information">
-            <div className="content-row-header">
-                <div>Image title</div>
-                <div>Image</div>
-            </div>
-            {/* {projects.map((project) => (
-        <div key={project.id} className="content-row">
-          <div onClick={() => console.log(project.id)}>{project.name}</div>
-          <div>{project.client}</div>
-          <div>{project.location}</div>
+function HomeTable({ showModal, homes, deleteHome }) {
+  return (
+    <div className="content-information">
+      <div className="content-row-header">
+        <div style={{ maxWidth: "70%" }}>Name</div>
+        <div></div>
+        <div>Delete</div>
+      </div>
+      {homes.map((eachHome) => (
+        <div key={eachHome.id} className="content-row">
+          <div
+            style={{ maxWidth: "70%" }}
+            onClick={() => console.log(eachHome.id)}
+          >
+            {eachHome.name}
+          </div>
           <div>
-            <span
-              onClick={() => showModal(true, project)}
+            {/* <span
+              onClick={() => showModal(true, eachHome)}
               style={{ backgroundImage: `url(${edit})` }}
-            ></span>
+            /> */}
             <span
-              onClick={() => deleteProject(project.id)}
+              onClick={() => deleteHome(eachHome.id)}
               style={{ backgroundImage: `url(${deleteIcon})` }}
-            ></span>
+            />
           </div>
         </div>
-      ))} */}
-        </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 export default HomeTable;

@@ -1,0 +1,25 @@
+.policies_container{
+
+    // min-height:70vh;
+    height: auto;
+    display: flex;
+   align-items: center;
+    flex-direction: column;
+
+    p{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 2vh;
+        line-height: 140%;
+        text-align: center;
+    }
+
+    h2{
+        font-family: 'Arya';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 2.5vh;
+        line-height: 110%;
+    }
+}

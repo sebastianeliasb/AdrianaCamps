@@ -1,0 +1,24 @@
+{
+  "name": "adrianacamps",
+  "private": true,
+  "workspaces": [
+    "adrianacamps",
+    "backend"
+  ],
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "adrianacamps": "yarn workspace frontend start",
+    "backend": "yarn run build --workspace backend",
+    "start": "yarn run backend",
+    "build": "yarn --cwd backend run build",
+    "develop": "yarn --cwd backend run develop"
+  },
+  "contributors": [
+    {
+      "name": "Sebastian"
+    }
+  ]
+}

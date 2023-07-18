@@ -1,19 +1,29 @@
 //Web
+
+a{text-decoration: none;
+    color: black;
+}
+a:visited{
+color: black;
+}
+
 @media only screen and (min-width: 600px){
     .concept-content-box{
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 55vh;
-        background-color: aqua;
+        // background-color: aqua;
         margin-bottom: 8vh;
     
         .concept-image{
-            height: 85%;
+            height: 45vh;
             width: 100%;
-            background-color: rgb(150, 26, 80);
+            // object-fit: contain;
+            object-position: center;
+            // background-color: rgb(150, 26, 80);
         }
-        span:nth-of-type(1){
+        .concept-info-link{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -24,8 +34,16 @@
             font-style: normal;
             font-weight: 400;
             font-size: 20px;
+            text-transform: uppercase;
+
+            a{text-decoration: none;
+                color: black;
+            }
+            a:visited{
+color: black;
+            }
         }
-        span:nth-of-type(2){
+        .project-title2{
             display: flex;
             // align-items: center;
             justify-content: center;
@@ -44,15 +62,29 @@
         .concept-content-box{
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 86%;
             height: 40vh;
-            background-color: aqua;
+            // background-color: aqua;
             margin-bottom: 8vh;
-        
+            // align-items: center;
+        .concept-info-link{
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+            min-width: 100%;
+            height: 10%;
+            // outline: 1px solid black;
+            font-family: 'Arya';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+        }
             .concept-image{
-                height: 85%;
+                height: 30vh;
                 width: 100%;
-                background-color: rgb(150, 26, 80);
+                //  object-fit: contain;
+                object-position: center;
+                // background-color: rgb(150, 26, 80);
             }
             span:nth-of-type(1){
                 display: flex;

@@ -5,12 +5,12 @@
   border-bottom: 1px solid rgba(61, 61, 61, 0.702);
   justify-content: space-between;
   height: 4rem;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 600;
   font-size: 25px;
 
-  img{
+  img {
     cursor: pointer;
     height: 2rem;
     width: 2rem;
@@ -21,7 +21,7 @@ span::first-letter {
   text-transform: capitalize;
 }
 .content-information {
-  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-y: scroll !important; /* Enable vertical scrolling */
   scrollbar-width: none; /* Hide scrollbar */
   -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
 }
@@ -31,7 +31,7 @@ span::first-letter {
 }
 
 .content-information {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   display: flex;
   flex-direction: column;
@@ -39,42 +39,49 @@ span::first-letter {
   // background-color: aquamarine;
   margin-top: 2rem;
 
- 
-
-
   .content-information {
     overflow-y: scroll; /* Enable vertical scrolling */
     scrollbar-width: none; /* Hide scrollbar */
     -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
   }
-  
+
   .content-information::-webkit-scrollbar {
     width: 0px; /* Hide scrollbar in Chrome, Safari, and Opera */
   }
 
-  .content-row-header, .content-row {
+  .content-row-header,
+  .content-row {
     display: flex;
     width: 100%;
     border-bottom: 1px solid rgba(61, 61, 61, 0.702);
-    height: 5vh;
+    height: auto;
+    min-height: 5vh;
 
     div {
+      // box-sizing: border-box;
       font-weight: 600;
       display: flex;
-      align-items: center;
+      // align-items: center;
       flex-grow: 1;
       min-width: 10%;
       max-width: 25%;
-      justify-content: center;
-      overflow: hidden;
+      // justify-content: center;
+      overflow: scroll;
     }
-
+    div {
+      overflow-y: scroll; /* Enable vertical scrolling */
+      scrollbar-width: none; /* Hide scrollbar */
+      -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    }
+  
+    div::-webkit-scrollbar {
+      width: 0px; /* Hide scrollbar in Chrome, Safari, and Opera */
+    }
   }
 
   .content-row {
     font-weight: 300 !important;
     font-size: 15px;
-
 
     div:nth-last-of-type(1) {
       span {
@@ -85,7 +92,6 @@ span::first-letter {
         background-repeat: no-repeat;
         cursor: pointer;
       }
-
     }
   }
 }

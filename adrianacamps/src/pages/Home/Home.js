@@ -1,58 +1,62 @@
-import React, {useEffect, useState} from "react";
-//style
+import React from "react";
+import useFetch from "../../hooks/useFetch";
 import "./style/home.scss";
-//components
 import Carrusel from "../../Components/Carrusel";
-//layout
 import NameLayout from "../../layouts/nameLayout";
-import {API, Storage} from "aws-amplify";
-import {listHomes} from "../../graphql/queries";
 
-function Home() {
-    const [homes, setHomes] = useState([]);
-    useEffect(() => {
-        fetchHomes();
-    }, []);
+const Home = () => {
+  const { data, loading, error } = useFetch(
+    "api/homes?populate=carrousel_image"
+  );
 
-    async function fetchHomes() {
-        const homeData = await API.graphql({query: listHomes});
-        const {items} = homeData.data.listHomes;
-        const homeWithImages = [];
-        for (let index = 0; index < items.length; index++) {
-            let home = items[index];
-            if (home.carrouselImages) {
-                let homeImagesList = [];
-                for (let idx = 0; idx < home.carrouselImages.length; idx++) {
-                    homeImagesList.push(await Storage.get(home.carrouselImages[idx]))
-                }
-                home.carrouselImages = homeImagesList;
-            }
-            homeWithImages.push(home);
-        }
-        setHomes(homeWithImages)
-    }
+  const socialLinks = [
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/adrianacamps.studio/",
+    },
+    {
+      name: "Pinterest",
+      url: "https://www.pinterest.es/adrianacampsstudio/",
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/adriana-camps-3377b531/",
+    },
+  ];
 
-    return (
-        <NameLayout
-            color="white"
-            navColor="white"
-            text={<span>Interior & Lighting Studio</span>}
-            navClass="nav-open"
-        >
-            <Carrusel data={homes}/>
-            <main className="home-main">
-                <footer className="home-footer">
-                    <div>
-                        <span>Instagram — Pinterest — LinkedIn </span>
-                        <span>© Adriana Camps 2023 — All Rights reserved</span>
-                    </div>
-                    <div>
-                        <span>Design by Sauras Garriga</span>
-                    </div>
-                </footer>
-            </main>
-        </NameLayout>
-    );
-}
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <NameLayout
+      color="white"
+      navColor="white"
+      text={<span>Interior & Lighting Studio</span>}
+      navClass="nav-open"
+    >
+      <Carrusel data={data} error={error} loading={loading} />
+      <main className="home-main">
+        <footer className="home-footer">
+          <div>
+            <span>
+              {socialLinks.map((link, index) => (
+                <React.Fragment key={index}>
+                  <a href={link.url} rel="noopener noreferrer" target="_blank">
+                    {link.name}
+                  </a>
+                  {index !== socialLinks.length - 1 && " — "}
+                </React.Fragment>
+              ))}
+            </span>
+            <span>© Adriana Camps 2023 — All Rights reserved</span>
+          </div>
+          <div>
+            <span>Design by Sauras Garriga</span>
+          </div>
+        </footer>
+      </main>
+    </NameLayout>
+  );
+};
 
 export default Home;
