@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import ProjectItem from "./pages/ProjectItem";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ConceptItem from "./pages/ConceptsItem/ConceptItem";
+import Policies from "./pages/Policies/Policies";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,8 @@ const router = createBrowserRouter([
     element: <Contact />,
   },
   {
-    path: "dashboard",
-    element: <Dashboard />,
+    path: "politicas",
+    element: <Policies />,
   },
 ]);
 

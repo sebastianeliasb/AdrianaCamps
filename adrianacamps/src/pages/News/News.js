@@ -1,57 +1,93 @@
 import React, { useEffect, useState } from "react";
-import newsImage from "../../assets/news_image.jpg";
 import ContentContainer from "../../Components/ContentContainer";
 import NewsInfo from "../../Components/NewsInfo/NewsInfo";
 import MainPageLayout from "../../layouts/MainPageLayout";
 import WebNav from "../../Components/WebNav";
-
+import { useMediaQuery } from "react-responsive";
+import useFetch from "../../hooks/useFetch";
 import "./style/news.scss";
-import { API } from "aws-amplify";
-import { listNews } from "../../graphql/queries";
+import _ from "lodash";
 
 function News() {
-  const [news, setNews] = useState([]);
+  const { data, loading, error } = useFetch("api/news?populate=news_image");
+  const [selectedNewsId, setSelectedNewsId] = useState(null);
+  const isMobile = useMediaQuery({ maxWidth: 600 });
 
   useEffect(() => {
-    fetchNews();
-  }, []);
+    if (data && data.data.length > 0) {
+      const allNews = data.data.map((news) => news);
+      const latestNews = _.maxBy(
+        allNews,
+        (item) => new Date(item.attributes.date)
+      );
+      setSelectedNewsId(latestNews.id);
+    }
+  }, [data]);
 
-  async function fetchNews() {
-    const newsData = await API.graphql({ query: listNews });
-    setNews(newsData);
+  if (!data) {
+    return null;
   }
 
-  const w = document.documentElement.clientWidth || window.innerWidth;
-  let backgroundColor;
-  if (w <= 600) {
-    backgroundColor = "beige";
-  } else {
-    backgroundColor = "none";
-  }
+  const allNews = data.data.map((news) => news);
+
+  const selectNews = (id) => {
+    setSelectedNewsId(id);
+  };
+  const selectedNews = _.find(allNews, { id: selectedNewsId });
+  const selectedNewsDate = selectedNews?.attributes.date
+    ? new Date(selectedNews.attributes.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : null;
+
+  const backgroundColor = isMobile ? "beige" : "none";
+
   return (
     <MainPageLayout
-      backgroundColorLeft={"beige"}
+      backgroundColorLeft="beige"
       backgroundColor={backgroundColor}
     >
       <WebNav />
       <ContentContainer>
         <div id="news">
           <div className="news-left">
-            <div
+            <img
               className="news-image"
-              style={{ backgroundImage: `url(${newsImage})` }}
-            ></div>
+              src={selectedNews?.attributes.news_image.data.attributes.url}
+              alt={selectedNews?.attributes.main_title}
+            />
 
             <div className="news-info-container">
-              <div>15 Novembre 2023</div>
-              <div>LOS MEJORES 300 INTERIORISTAS</div>
-              <div className="read-more">Leer mas</div>
+              <div>{selectedNewsDate}</div>
+              <div className="news_title">
+                {selectedNews?.attributes.main_title}
+              </div>
+
+              <div className="read-more">
+                <a
+                  href={
+                    selectedNews?.attributes.news_link.startsWith("http")
+                      ? selectedNews?.attributes.news_link
+                      : `https://${selectedNews?.attributes.news_link}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Leer más
+                </a>
+              </div>
             </div>
           </div>
           <div className="news-right">
             <span></span>
             <div className="news-right-content">
-              <NewsInfo />
+              <NewsInfo
+                data={allNews}
+                selectNews={selectNews}
+                selectedNewsId={selectedNewsId}
+              />
             </div>
           </div>
         </div>

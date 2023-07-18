@@ -1,4 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuid } from "uuid";
 import "./style/modal.scss";
 import "easymde/dist/easymde.min.css";
@@ -6,20 +8,21 @@ import { API, Storage } from "aws-amplify";
 import {
   createConcept,
   createContact,
-  createHome,
+  createHomes,
   createNews,
   createProjects,
-  createStudio,
+  createStudios,
+  updateContact,
 } from "../../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { SimpleMdeReact } from "react-simplemde-editor";
 import option1 from "../../assets/Untitled-1.png";
 import Input from "../Input";
 import UploadImagebtn from "../UploadImageBtn/UploadImagebtn";
 import Textarea from "../Textarea/Textarea";
-import Carrusel from "../Carrusel/Carrusel";
-import ModalCarrusel from "../ModalCarrusel/ModalCarrusel";
-const initialState = {
+import ModalCarrusel from "../ModalCarrusel";
+import { showToast } from "../Toast/Toast";
+
+const initialProjectState = {
   name: "",
   subName: "",
   location: "",
@@ -29,8 +32,39 @@ const initialState = {
   client: "",
   photographer: "",
   surface: "",
-  projectImages: "",
-  option: "1",
+  projectImages: [],
+  //option: "1",
+};
+
+const initialHomeState = {
+  id: "",
+  name: "",
+  carrouselImages: [],
+};
+const initialStudioState = {
+  aboutImage: [],
+  aboutMe: "",
+  philosophy: "",
+  route: "",
+  username: "",
+};
+const initialNewsState = {
+  newsYear: "",
+  newsTitle: "",
+  newsDate: "",
+  newsSource: "",
+  newsLink: "",
+  newsImage: [],
+};
+const initialContactState = {
+  contactImage: "",
+  contactText: "",
+};
+const initialConceptsState = {
+  conceptsImageMain: "",
+  conceptImages: [],
+  conceptTitle: "",
+  conceptText: "",
 };
 
 function Modal({
@@ -43,37 +77,37 @@ function Modal({
   ...props
 }) {
   const [selectedTag, setSelectedTag] = useState("mainInfo");
-  const [project, setProject] = useState(initialState);
-  const [home, setHome] = useState({
-    carrouselImages: [],
-  });
-  const [studio, setStudio] = useState({
-    aboutImage: [],
-    aboutMe: "",
-    philosophy: "",
-    route: "",
-    username: "",
-  });
-  const [concept, setConcept] = useState({
-    conceptsImageMain: "",
-    conceptImages: [],
-    conceptTitle: "",
-    conceptText: "",
-  });
-  const [contact, setContact] = useState({
-    contactImage: "",
-    contactText: "",
-  });
-  const [news, setNews] = useState({
-    newsYear: "",
-    newsTitle: "",
-    newsDate: "",
-    newsSource: "",
-    newsLink: "",
-  });
-  const [images, setImages] = useState(null);
+  const [project, setProject] = useState(initialProjectState);
+  const [home, setHome] = useState(initialHomeState);
+  const [studio, setStudio] = useState(initialStudioState);
+  const [concept, setConcept] = useState(initialConceptsState);
+  const [contact, setContact] = useState(initialContactState);
+  const [news, setNews] = useState(initialNewsState);
+  const [images, setImages] = useState([]);
   const [imageMain, setImageMain] = useState(null);
   const imageFileInput = useRef(null);
+  const imageMainFileInput = useRef(null);
+
+  const resetInputs = () => {
+    setProject(initialProjectState);
+    setStudio(initialStudioState);
+    setHome(initialHomeState);
+    setNews(initialNewsState);
+    setContact(initialContactState);
+    setConcept(initialConceptsState);
+    setImageMain(null);
+    setImages([]);
+    // ...
+  };
+
+  const handleToggle = () => {
+    toggleModal();
+    setSelectedTag("mainInfo");
+    resetInputs();
+  };
+  const onClickDelete = () => {
+    setImages(null);
+  };
   const {
     name,
     subName,
@@ -87,6 +121,29 @@ function Modal({
     projectImages,
     option,
   } = project;
+
+  useEffect(() => {
+    async function fetchCurrentData() {
+      if (selected === "projects") {
+        setProject(projectData);
+      } else if (selected === "studio") {
+        setStudio(projectData);
+      } else if (selected === "home") {
+        setHome(projectData);
+      } else if (selected === "concepts") {
+        setConcept(projectData);
+      } else if (selected === "contact") {
+        let imageURL = await Storage.get(projectData.contactImage);
+        setImages([imageURL]);
+        setContact({ ...projectData, contactImage: imageURL });
+      } else if (selected === "news") {
+        setNews(projectData);
+      }
+    }
+    if (projectData) {
+      fetchCurrentData();
+    }
+  }, [projectData]);
 
   function onChange(e, table) {
     if (table === "createProject") {
@@ -114,138 +171,204 @@ function Modal({
         ...news,
         [e.target.name]: e.target.value,
       }));
+    } else if (table === "createHome") {
+      setHome(() => ({
+        ...home,
+        [e.target.name]: e.target.value,
+      }));
     }
   }
-
   async function createNewProject() {
     if (!name) return;
+    if (images.length === 0) {
+      return;
+    }
+
     project.id = uuid();
-    if (images.length !== 0) {
+    try {
       project.projectImages = Array.from(images)
         .map((img) => img.name)
         .join(",");
       Array.from(images).map(async (image) => {
         await Storage.put(image.name, image);
       });
+
+      await API.graphql({
+        query: createProjects,
+        variables: { input: project },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setProject(initialProjectState);
+      setImages(null);
+      showToast("New project created!", "success");
+    } catch (error) {
+      showToast("Error creating project!", "error");
     }
-    await API.graphql({
-      query: createProjects,
-      variables: { input: project },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setProject(initialState);
-    setImages(null);
   }
 
   async function createNewHome() {
-    if (images.length !== 0) {
+    if (images.length === 0) {
+      return;
+    }
+
+    home.id = uuid();
+    try {
       home.carrouselImages = Array.from(images).map((img) => img.name);
       Array.from(images).map(async (image) => {
         await Storage.put(image.name, image);
       });
+
+      await API.graphql({
+        query: createHomes,
+        variables: { input: home },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setHome(initialHomeState);
+      setImages(null);
+      showToast("Carrousel Image added successfully", "success");
+    } catch (error) {
+      showToast("Error creating home!", "error");
     }
-    await API.graphql({
-      query: createHome,
-      variables: { input: home },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setHome({ carrouselImages: [] });
-    setImages(null);
   }
 
   async function createNewStudio() {
-    if (images.length !== 0) {
-      studio.aboutImage = Array.from(images).map((img) => img.name);
-      Array.from(images).map(async (image) => {
-        await Storage.put(image.name, image);
-      });
+    if (images.length === 0) {
+      return;
     }
-    await API.graphql({
-      query: createStudio,
-      variables: { input: studio },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setStudio({
-      aboutImage: [],
-      aboutMe: "",
-      philosophy: "",
-      route: "",
-      username: "",
-    });
-    setImages(null);
+
+    studio.id = uuid();
+    try {
+      studio.aboutImage = images[0].name;
+      await Storage.put(images[0].name, images[0]);
+
+      await API.graphql({
+        query: createStudios,
+        variables: { input: studio },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+
+      setStudio({
+        aboutImage: [],
+        aboutMe: "",
+        philosophy: "",
+        route: "",
+        username: "",
+      });
+      setImages(null);
+      showToast("Studio created successfully", "success");
+    } catch (error) {
+      showToast("Error creating studio!", "error");
+    }
   }
 
   async function createNewConcept() {
-    if (images.length !== 0) {
+    if (images.length === 0) {
+      return;
+    }
+    try {
       concept.conceptImages = Array.from(images).map((img) => img.name);
       concept.conceptsImageMain = imageMain.name;
       await Storage.put(imageMain.name, imageMain);
       Array.from(images).map(async (image) => {
         await Storage.put(image.name, image);
       });
+
+      await API.graphql({
+        query: createConcept,
+        variables: { input: concept },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setConcept({
+        conceptsImageMain: "",
+        conceptImages: [],
+        conceptTitle: "",
+        conceptText: "",
+      });
+      setImages(null);
+      showToast("Concept created successfully", "success");
+    } catch (error) {
+      showToast("Error creating concept!", "error");
     }
-    await API.graphql({
-      query: createConcept,
-      variables: { input: concept },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setConcept({
-      conceptsImageMain: "",
-      conceptImages: [],
-      conceptTitle: "",
-      conceptText: "",
-    });
-    setImages(null);
   }
 
   async function createNewContact() {
-    if (images.length !== 0) {
-      contact.contactImage = images[0].name;
-      await Storage.put(images[0].name, images[0]);
+    if (images.length === 0) {
+      return;
     }
-    await API.graphql({
-      query: createContact,
-      variables: { input: contact },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setContact({
-      contactImage: "",
-      contactText: "",
-    });
-    setImages(null);
+    try {
+      if (typeof images[0].image === "string") {
+        contact.contactImage = project.contactImage;
+      } else {
+        contact.contactImage = images[0].name;
+        await Storage.put(images[0].name, images[0]);
+      }
+
+      await API.graphql({
+        query: isEditing ? updateContact : createContact,
+        variables: { input: contact },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setContact({
+        contactImage: "",
+        contactText: "",
+      });
+      setImages(null);
+      showToast("Contact created successfully", "success");
+    } catch (error) {
+      showToast("Error creating contact!", "error");
+    }
   }
 
   async function createNewNews() {
-    await API.graphql({
-      query: createNews,
-      variables: { input: news },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    toggleModal();
-    setConcept({
-      conceptsImageMain: "",
-      conceptImages: [],
-      conceptTitle: "",
-      conceptText: "",
-    });
-    setImages(null);
+    if (images.length === 0) {
+      return;
+    }
+    try {
+      news.newsImage = images[0].name;
+      await Storage.put(images[0].name, images[0]);
+
+      await API.graphql({
+        query: createNews,
+        variables: { input: news },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      toggleModal();
+      setNews({
+        newsLink: "",
+        newsImage: "",
+        newsYear: "",
+        newsTitle: "",
+        newsSource: "",
+        newsDate: "",
+      });
+      setImages(null);
+      showToast("News created successfully", "success");
+    } catch (error) {
+      showToast("Error creating news!", "error");
+    }
   }
 
   async function uploadImage() {
     imageFileInput.current.click();
   }
 
+  async function uploadImageMain() {
+    imageMainFileInput.current.click();
+  }
+
   function handleChange(e, imgType) {
     const fileUploaded = e.target.files;
     if (!fileUploaded) return;
-    imgType === "images"
-      ? setImages(fileUploaded)
-      : setImageMain(fileUploaded[0]);
+    if (imgType === "images") {
+      setImages((prevImages) => [...prevImages, ...fileUploaded]);
+    } else {
+      setImageMain(fileUploaded[0]);
+    }
   }
 
   function handleModalTag(tag) {
@@ -257,32 +380,18 @@ function Modal({
     <>
       {show ? (
         <>
-          <div onClick={() => toggleModal()} className="modal-backdrop">
+          <div onClick={() => handleToggle()} className="modal-backdrop">
             {" "}
           </div>
-          {isEditing ? (
-            <div className="modal-body">
+          <div className="modal-body">
+            {isEditing ? (
               <div
                 onClick={() => console.log(projectData.id)}
                 className="modal-title"
               >
                 <span>{props.modalTitle} edit</span>
               </div>
-              {/* <div className="modal-nav">{props.navTabs}</div> */}
-              <div className="modal-info-container">
-                <Input
-                  // label="name"
-                  // className="name-input"
-                  onChange={onChange}
-                  name="name"
-                  value={projectData.name}
-                  placeholder="name"
-                />
-              </div>
-              <button>Confirm</button>
-            </div>
-          ) : (
-            <div className="modal-body">
+            ) : (
               <div className="modal-title">
                 {props.modalTitle.endsWith("s") &&
                 props.modalTitle !== "news" ? (
@@ -291,97 +400,104 @@ function Modal({
                   <span>New {props.modalTitle}</span>
                 )}
               </div>
-              {/* <div className="modal-nav">{props.navTabs}</div> */}
-              {selected === "projects" ? (
-                <>
-                  <div className="create-tags">
-                    <span
-                      className={
-                        selectedTag === "mainInfo" ? "selectedTag" : null
-                      }
-                      onClick={() => handleModalTag("mainInfo")}
-                    >
-                      Main Info
-                    </span>
-                    <span
-                      className={
-                        selectedTag === "description" ? "selectedTag" : null
-                      }
-                      onClick={() => handleModalTag("description")}
-                    >
-                      Descriptions
-                    </span>
-                    <span
-                      className={
-                        selectedTag === "images" ? "selectedTag" : null
-                      }
-                      onClick={() => handleModalTag("images")}
-                    >
-                      Images
-                    </span>
-                  </div>
-                  <div className="modal-info-container">
-                    {selectedTag === "mainInfo" ? (
-                      <div className="modal-mainInfo-subcontainer">
-                        <Input
-                          className="name-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="name"
-                          value={project.name}
-                          placeholder="Project Title"
-                          label="Project Title"
-                        />
+            )}
 
-                        <Input
-                          className="client-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="client"
-                          value={project.client}
-                          placeholder="Client"
-                          label="Client"
-                        />
-                        <Input
-                          className="location-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="location"
-                          value={project.location}
-                          placeholder="Location"
-                          label="Location"
-                        />
-                        <Input
-                          className="subName-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="subName"
-                          value={project.subName}
-                          placeholder="Sub-name"
-                          label="Sub-name"
-                        />
-                        <Input
-                          className="photographer-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="photographer"
-                          value={project.photographer}
-                          placeholder="Photographer"
-                          label="Photographer"
-                        />
-                        <Input
-                          className="surface-input"
-                          onChange={(e) => onChange(e, "createProject")}
-                          name="surface"
-                          value={project.surface}
-                          placeholder="Surface"
-                          label="Surface"
-                        />
-                      </div>
-                    ) : selectedTag === "description" ? (
-                      <div className="modal-desciption-subcontainer">
-                        <Textarea
-                          onChange={(e) => onChange(e, "createProject")}
-                          placeholder="Description"
-                          value={project.description}
-                          name="description"
-                        />
-                        {/* <textarea
+            {selected === "projects" ? (
+              <>
+                <div className="create-tags">
+                  <span
+                    className={
+                      selectedTag === "mainInfo" ? "selectedTag" : null
+                    }
+                    onClick={() => handleModalTag("mainInfo")}
+                  >
+                    Main Info
+                  </span>
+                  <span
+                    className={
+                      selectedTag === "description" ? "selectedTag" : null
+                    }
+                    onClick={() => handleModalTag("description")}
+                  >
+                    Descriptions
+                  </span>
+                  <span
+                    className={selectedTag === "images" ? "selectedTag" : null}
+                    onClick={() => handleModalTag("images")}
+                  >
+                    Images
+                  </span>
+                </div>
+                <div className="modal-info-container">
+                  {selectedTag === "mainInfo" ? (
+                    <div className="modal-mainInfo-subcontainer">
+                      <Input
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="name"
+                        value={project.name}
+                        placeholder="Project Title"
+                        label="Project Title"
+                      />
+
+                      <Input
+                        className="client-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="client"
+                        value={project.client}
+                        placeholder="Client"
+                        label="Client"
+                      />
+                      <Input
+                        className="location-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="location"
+                        value={project.location}
+                        placeholder="Location"
+                        label="Location"
+                      />
+                      <Input
+                        className="subName-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="subName"
+                        value={project.subName}
+                        placeholder="Sub-name"
+                        label="Sub-name"
+                      />
+                      <Input
+                        className="photographer-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="photographer"
+                        value={project.photographer}
+                        placeholder="Photographer"
+                        label="Photographer"
+                      />
+                      <Input
+                        className="surface-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="surface"
+                        value={project.surface}
+                        placeholder="Surface"
+                        label="Surface"
+                      />
+                      <Input
+                        className="date-input"
+                        onChange={(e) => onChange(e, "createProject")}
+                        name="date"
+                        value={project.date}
+                        placeholder="Date"
+                        label="Date"
+                      />
+                    </div>
+                  ) : selectedTag === "description" ? (
+                    <div className="modal-desciption-subcontainer">
+                      <Textarea
+                        onChange={(e) => onChange(e, "createProject")}
+                        placeholder="Description"
+                        value={project.description}
+                        name="description"
+                      />
+                      {/* <textarea
                           type="text"
                           className="desc-input"
                           onChange={(e) => onChange(e, "createProject")}
@@ -389,345 +505,436 @@ function Modal({
                           value={project.description}
                           placeholder="description"
                         /> */}
-                        <Textarea
-                          onChange={(e) => onChange(e, "createProject")}
-                          placeholder="Sub-description"
-                          value={project.subDescription}
-                          name="subDescription"
-                        />
-                        {/* <textarea
+                      <Textarea
+                        onChange={(e) => onChange(e, "createProject")}
+                        placeholder="Sub-description"
+                        value={project.subDescription}
+                        name="subDescription"
+                      />
+                      {/* <textarea
                           className="subDesc-input"
                           onChange={(e) => onChange(e, "createProject")}
                           name="subDescription"
                           value={project.subDescription}
                           placeholder="subDescription"
                         /> */}
-                      </div>
-                    ) : selectedTag === "images" ? (
-                      <div className="modal-images-subcontainer">
+                    </div>
+                  ) : selectedTag === "images" ? (
+                    <div className="modal-images-subcontainer">
+                      <div>
+                        {" "}
+                        {/* <select
+                          value={project.option}
+                          name="option"
+                          onChange={(e) => onChange(e, "createProject")}
+                        >
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select> */}
                         <div>
-                          {" "}
-                          <select
-                            value={project.option}
-                            name="option"
-                            onChange={(e) => onChange(e, "createProject")}
-                          >
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                          </select>
+                          <input
+                            // className="images-input"
+                            type="file"
+                            ref={imageFileInput}
+                            onChange={(e) => handleChange(e, "images")}
+                            multiple
+                            // name="projectImages"
+                            // value={project.projectImages}
+                            // placeholder="projectImages"
+                          />
                           <div>
-                            <input
-                              // className="images-input"
-                              type="file"
-                              ref={imageFileInput}
-                              onChange={(e) => handleChange(e, "images")}
-                              multiple
-                              // name="projectImages"
-                              // value={project.projectImages}
-                              // placeholder="projectImages"
-                            />
-                            <div>
-                              {project.option === "1" && (
-                                <img src={option1} alt="option1"></img>
-                              )}
-                            </div>
+                            {project.option === "1" && (
+                              <img src={option1} alt="option1"></img>
+                            )}
                           </div>
                         </div>
-                        <div>
-                          <UploadImagebtn
-                            id={"home-upload"}
-                            onClick={uploadImage}
-                            btnText={"Upload Images"}
-                          />
-                        </div>
-                        <div className="image-carrusel">
-                          <ModalCarrusel>
-                            {images &&
-                              images.length !== 0 &&
-                              Array.from(images).map((image, index) => (
-                                <div key={index}>
-                                  <ul>
-                                    <li>Image {index + 1}</li>
-                                  </ul>
-                                  <img
-                                    key={image.name}
-                                    alt="To upload"
-                                    src={URL.createObjectURL(image)}
-                                  />
-                                </div>
-                              ))}
-                          </ModalCarrusel>
-                        </div>
                       </div>
-                    ) : null}
+                      <div>
+                        {/* {(!images || images.length === 0) && ( */}
+                        <UploadImagebtn
+                          onClick={uploadImage}
+                          btnText={"Upload Image"}
+                        />
+                        {/* )} */}
+                      </div>
+                      <div className="image-carrusel">
+                        <ModalCarrusel>
+                          {images &&
+                            images.length !== 0 &&
+                            Array.from(images).map((image, index) => (
+                              <div key={index}>
+                                <ul>
+                                  <li>Image {index + 1}</li>
+                                </ul>
+                                <img
+                                  // onClick={onClickDelete}
+                                  key={image.name}
+                                  alt="To upload"
+                                  src={URL.createObjectURL(image)}
+                                />
+                              </div>
+                            ))}
+                        </ModalCarrusel>
+                      </div>
+                    </div>
+                  ) : null}
 
-                    <button
-                      onClick={createNewProject}
-                    >{`Create project`}</button>
-                  </div>
-                </>
-              ) : selected === "studio" ? (
+                  <button
+                    className="create-btn"
+                    onClick={createNewProject}
+                  >{`Create project`}</button>
+                </div>
+              </>
+            ) : selected === "studio" ? (
+              <>
+                <div className="create-tags">
+                  <span
+                    className={
+                      selectedTag === "mainInfo" ? "selectedTag" : null
+                    }
+                    onClick={() => handleModalTag("mainInfo")}
+                  >
+                    Main Info
+                  </span>
+                  <span
+                    className={selectedTag === "image" ? "selectedTag" : null}
+                    onClick={() => handleModalTag("image")}
+                  >
+                    Image
+                  </span>
+                </div>
                 <div className="modal-info-container">
-                  <div className="text-area-container">
-                    <Textarea
-                      className="about-input"
-                      onChange={(e) => onChange(e, "createStudio")}
-                      name="aboutMe"
-                      placeholder="About"
-                    />
+                  {selectedTag === "mainInfo" ? (
+                    <div className="text-area-container">
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="aboutMe"
+                        value={studio.aboutMe}
+                        placeholder="About"
+                      />
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="philosophy"
+                        value={studio.philosophy}
+                        placeholder="Philosophy"
+                      />
+                      <Textarea
+                        className="name-input"
+                        onChange={(e) => onChange(e, "createStudio")}
+                        name="route"
+                        value={studio.route}
+                        placeholder="Route"
+                      />
+                      {/* <Textarea
+                    className="name-input"
+                    onChange={(e) => onChange(e, "createStudio")}
+                    name="username"
+                    value={studio.username}
+                    placeholder="Username"
+                  /> */}
+                    </div>
+                  ) : selectedTag === "image" ? (
+                    <div>
+                      {" "}
+                      <input
+                        className="images-input"
+                        type="file"
+                        ref={imageFileInput}
+                        onChange={(e) => handleChange(e, "images")}
+                        // multiple
+                        // name="projectImages"
+                        // value={project.projectImages}
+                        placeholder="studioImages"
+                      />
+                      {images &&
+                        images.length !== 0 &&
+                        Array.from(images).map((image) => (
+                          <div className="image-container" key={image.name}>
+                            <img
+                              alt="To upload"
+                              src={URL.createObjectURL(image)}
+                            />
+                            <div className="image-overlay">
+                              <span
+                                className="image-delete"
+                                onClick={onClickDelete}
+                              >
+                                X
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      {(!images || images.length === 0) && (
+                        <UploadImagebtn
+                          onClick={uploadImage}
+                          btnText={"Upload Image"}
+                        />
+                      )}
+                    </div>
+                  ) : null}
 
-                    {/* <div className="image-container"> */}
+                  <button
+                    className="create-btn"
+                    onClick={createNewStudio}
+                  >{`Create ${props.modalTitle}`}</button>
+                </div>
+              </>
+            ) : selected === "home" ? (
+              <div className="modal-info-container">
+                <div className="home-modal-container">
+                  <div>
+                    <Input
+                      className="name-input"
+                      onChange={(e) => onChange(e, "createHome")}
+                      name="name"
+                      // value={project.name}
+                      placeholder="Image title"
+                      label="Name"
+                    />
                     <input
                       className="images-input"
                       type="file"
+                      id="file"
                       ref={imageFileInput}
                       onChange={(e) => handleChange(e, "images")}
-                      placeholder="projectImages"
+                      // name="projectImages"
+                      // value={project.projectImages}
+                      placeholder="Image"
                     />
-                    {images &&
-                      images.length !== 0 &&
-                      Array.from(images).map((image) => (
-                        <img
-                          key={image.name}
-                          alt="To upload"
-                          src={URL.createObjectURL(image)}
-                        />
-                      ))}
                   </div>
-                  {/* </div> */}
-
+                  {/* <ModalCarrusel> */}
+                  {images &&
+                    images.length !== 0 &&
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  {/* </ModalCarrusel> */}
+                </div>
+                {(!images || images.length === 0) && (
                   <UploadImagebtn
                     onClick={uploadImage}
                     btnText={"Upload Image"}
                   />
-                  <button
-                    onClick={createNewStudio}
-                  >{`Create ${props.modalTitle}`}</button>
-                </div>
-              ) : selected === "home" ? (
-                <div className="modal-info-container">
-                  <div className="home-modal-container">
-                    <div>
-                      <Input
-                        className="name-input"
-                        onChange={(e) => onChange(e, "createHome")}
-                        name="name"
-                        // value={project.name}
-                        placeholder="Image title"
-                        label="Name"
-                      />
-                      <input
-                        className="images-input"
-                        type="file"
-                        id="file"
-                        ref={imageFileInput}
-                        onChange={(e) => handleChange(e, "images")}
-                        multiple
-                        // name="projectImages"
-                        // value={project.projectImages}
-                        placeholder="Image"
-                      />
-                    </div>
-                    {/* <ModalCarrusel> */}
-                    {images &&
-                      images.length !== 0 &&
-                      Array.from(images).map((image, index) => (
-                        <div key={index}>
-                          <img
-                            key={image.name}
-                            alt="To upload"
-                            src={URL.createObjectURL(image)}
-                          />
-                        </div>
-                      ))}
-                    {/* </ModalCarrusel> */}
-                  </div>
-                  <UploadImagebtn
-                    onClick={uploadImage}
-                    btnText={"Upload Images"}
-                  />
-                  <button
-                    onClick={createNewHome}
-                  >{`Create ${props.modalTitle}`}</button>
-                </div>
-              ) : selected === "concepts" ? (
-                <div className="modal-info-container">
-                  <input
-                    // className="name-input"
-                    onChange={(e) => onChange(e, "createConcept")}
-                    name="conceptText"
-                    // value={project.name}
-                    placeholder="Concept Text"
-                  />
-                  <input
-                    // className="text-input"
+                )}
+                <button
+                  className="create-btn"
+                  onClick={createNewHome}
+                >{`Create ${props.modalTitle}`}</button>
+              </div>
+            ) : selected === "concepts" ? (
+              <div className="modal-info-container">
+                <div className="concepts-container">
+                  <Input
+                    className="name-input"
+                    label="conceptTitle"
                     onChange={(e) => onChange(e, "createConcept")}
                     name="conceptTitle"
-                    // value={project.name}
+                    value={concept.conceptTitle}
                     placeholder="Concept Title"
                   />
+                  <Textarea
+                    className="name-input"
+                    label="conceptText"
+                    onChange={(e) => onChange(e, "createConcept")}
+                    name="conceptText"
+                    value={concept.conceptText}
+                    placeholder="Concept Text"
+                  />
+                </div>
+                <input
+                  className="images-input"
+                  type="file"
+                  id="file"
+                  ref={imageFileInput}
+                  onChange={(e) => handleChange(e, "images")}
+                  multiple
+                  accept="image/png, image/gif, image/jpeg"
+                  // name="projectImages"
+                  // value={project.projectImages}
+                  placeholder="Image"
+                />
+                <div className="concept-img-cont">
+                  {images &&
+                    images.length !== 0 &&
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                {(!images || images.length === 0) && (
+                  <UploadImagebtn
+                    onClick={uploadImage}
+                    btnText={"Upload Image"}
+                  />
+                )}
+                <button
+                  className="create-btn"
+                  onClick={createNewConcept}
+                >{`Create ${props.modalTitle}`}</button>
+              </div>
+            ) : selected === "contact" ? (
+              <div className="modal-info-container">
+                <div className="modal-contact-container">
+                  <Textarea
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createContact")}
+                    name="contactText"
+                    // value={project.name}
+                    placeholder="Contact Text"
+                  />
+
                   <input
                     className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
                     onChange={(e) => handleChange(e, "images")}
-                    multiple
                     // name="projectImages"
                     // value={project.projectImages}
                     placeholder="Image"
                   />
+                  {images &&
+                    images.length !== 0 &&
+                    Array.from(images).map((image) => (
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+
+                  {(!images || images.length === 0) && (
+                    <UploadImagebtn
+                      onClick={uploadImage}
+                      btnText={"Upload Image"}
+                    />
+                  )}
+                </div>
+                <button
+                  className="create-btn"
+                  onClick={createNewContact}
+                >{`Create ${props.modalTitle}`}</button>
+              </div>
+            ) : selected === "news" ? (
+              <div className="modal-info-container">
+                <div className="news-modal-container">
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsTitle"
+                    value={news.newsTitle}
+                    placeholder="Title"
+                    label="Title"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsYear"
+                    value={news.newsYear}
+                    placeholder="Year"
+                    label="Year"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsDate"
+                    value={news.newsDate}
+                    placeholder="Date"
+                    label="Date"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsSource"
+                    value={news.newsSource}
+                    placeholder="Source"
+                    label="Source"
+                    size="large"
+                  />
+                  <Input
+                    // className="name-input"
+                    onChange={(e) => onChange(e, "createNews")}
+                    name="newsLink"
+                    value={news.newsLink}
+                    placeholder="Link"
+                    label="Link"
+                  />
+                  <br />
+                  <br />
                   <input
                     className="images-input"
                     type="file"
                     id="file"
                     ref={imageFileInput}
-                    onChange={(e) => handleChange(e, "mainImage")}
+                    accept="image/png, image/gif, image/jpeg"
+                    onChange={(e) => handleChange(e, "images")}
                     // name="projectImages"
-                    // value={project.projectImages}
-                    placeholder="Image Main"
+                    //value={news.newsImage}
+                    placeholder="Image"
                   />
                   {images &&
                     images.length !== 0 &&
                     Array.from(images).map((image) => (
-                      <img
-                        key={image.name}
-                        alt="To upload"
-                        src={URL.createObjectURL(image)}
-                      />
+                      <div className="image-container" key={image.name}>
+                        <img alt="To upload" src={URL.createObjectURL(image)} />
+                        <div className="image-overlay">
+                          <span
+                            className="image-delete"
+                            onClick={onClickDelete}
+                          >
+                            X
+                          </span>
+                        </div>
+                      </div>
                     ))}
-                  {imageMain && (
-                    <img
-                      key={imageMain.name}
-                      alt="To upload"
-                      src={URL.createObjectURL(imageMain)}
-                    />
-                  )}
-                  <button
-                    onClick={createNewConcept}
-                  >{`Create ${props.modalTitle}`}</button>
-                  <UploadImagebtn
-                    onClick={uploadImage}
-                    btnText={"Upload Images"}
-                  />
-                </div>
-              ) : selected === "contact" ? (
-                <div className="modal-info-container">
-                  <div>
-                    <Textarea
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createContact")}
-                      name="contactText"
-                      // value={project.name}
-                      placeholder="Contact Text"
-                    />
-                    <input
-                      className="images-input"
-                      type="file"
-                      id="file"
-                      ref={imageFileInput}
-                      onChange={(e) => handleChange(e, "images")}
-                      // name="projectImages"
-                      // value={project.projectImages}
-                      placeholder="Image"
-                    />
-                    {images &&
-                      images.length !== 0 &&
-                      Array.from(images).map((image) => (
-                        <img
-                          key={image.name}
-                          alt="To upload"
-                          src={URL.createObjectURL(image)}
-                        />
-                      ))}
-                    <button
-                      onClick={createNewContact}
-                    >{`Create ${props.modalTitle}`}</button>
+
+                  {(!images || images.length === 0) && (
                     <UploadImagebtn
                       onClick={uploadImage}
                       btnText={"Upload Image"}
                     />
-                  </div>
-                </div>
-              ) : selected === "news" ? (
-                <div className="modal-info-container">
-                  <div className="news-modal-container">
-                    <Input
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createNews")}
-                      name="newsYear"
-                      // value={project.name}
-                      placeholder="Year"
-                      label="Year"
-                    />
-                    <Input
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createNews")}
-                      name="newsTitle"
-                      // value={project.name}
-                      placeholder="Title"
-                      label="Title"
-                    />
-                    <Input
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createNews")}
-                      name="newsDate"
-                      // value={project.name}
-                      placeholder="Date"
-                      label="Date"
-                    />
-                    <Input
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createNews")}
-                      name="newsSource"
-                      // value={project.name}
-                      placeholder="Source"
-                      label="Source"
-                      size="large"
-                    />
-                    <Input
-                      // className="name-input"
-                      onChange={(e) => onChange(e, "createNews")}
-                      name="newsLink"
-                      // value={project.name}
-                      placeholder="Link"
-                      label="Link"
-                    />
-
-                    <input
-                      className="images-input"
-                      type="file"
-                      id="file"
-                      ref={imageFileInput}
-                      onChange={(e) => handleChange(e, "images")}
-                      // name="projectImages"
-                      // value={project.projectImages}
-                      placeholder="Image"
-                    />
-                    {images &&
-                      images.length !== 0 &&
-                      Array.from(images).map((image) => (
-                        <img
-                          key={image.name}
-                          alt="To upload"
-                          src={URL.createObjectURL(image)}
-                        />
-                      ))}
-                  </div>
-                  <UploadImagebtn
-                    onClick={uploadImage}
-                    btnText={"Upload Image"}
-                  />
+                  )}
+                  <br />
+                  <br />
                   <button
-                    onClick={createNewContact}
+                    className="create-btn"
+                    onClick={createNewNews}
                   >{`Create ${props.modalTitle}`}</button>
                 </div>
-              ) : null}
-            </div>
-          )}
+              </div>
+            ) : null}
+          </div>
         </>
       ) : null}
+      <ToastContainer />
     </>
   );
 }

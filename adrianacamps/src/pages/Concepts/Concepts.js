@@ -1,51 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MainPageLayout from "../../layouts/MainPageLayout";
+import useFetch from "../../hooks/useFetch";
+import ReactMarkdown from "react-markdown";
 
 import "./style/concepts.scss";
 
 //Components
 import ContentContainer from "../../Components/ContentContainer";
 import ConceptsContent from "../../Components/ConceptsContent";
+
 import WebNav from "../../Components/WebNav";
-import { API, Storage } from "aws-amplify";
-import { listConcepts } from "../../graphql/queries";
 
 function Concepts() {
-  const [concepts, setConcept] = useState([]);
+  const { data, loading, error } = useFetch(
+    "api/concepts?populate=main_image&populate=layouts.project_images"
+  );
 
-  useEffect(() => {
-    fetchConcept();
-  }, []);
+  if (loading) return <p>{loading}</p>;
+  if (error) return <p>{error}</p>;
 
-  async function fetchConcept() {
-    const conceptData = await API.graphql({ query: listConcepts });
-    const { items } = conceptData.data.listConcepts;
-    const conceptWithImages = [];
-    for (let index = 0; index < items.length; index++) {
-      let concept = items[index];
-      if (concept.conceptImages) {
-        let conceptsImagesList = [];
-        for (let idx = 0; idx < concept.conceptImages.length; idx++) {
-          conceptsImagesList.push(
-            await Storage.get(concept.conceptImages[idx])
-          );
-        }
-        concept.conceptsImageMain = await Storage.get(
-          concept.conceptsImageMain
-        );
-        concept.conceptImages = conceptsImagesList;
-      }
-      conceptWithImages.push(concept);
+  let mainDescription = null;
+
+  for (let i = 0; i < data.data.length; i++) {
+    const project = data.data[i];
+    if (project.attributes.concept_page_intro !== null) {
+      mainDescription = project.attributes.concept_page_intro;
+      break; // Stop the loop once the element is found
     }
-    setConcept(conceptWithImages);
   }
-
   return (
     <MainPageLayout
       backgroundColorLeft={"white"}
       backgroundColorRight={"beige"}
     >
-      {/* <img src={concept[1]?.conceptsImageMain} alt={"main"} /> */}
       <WebNav />
       <ContentContainer>
         <div id="concepts">
@@ -54,23 +41,13 @@ function Concepts() {
               <p>
                 <u>Concepts for sale</u>
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.st
-                laborum.
-              </p>
+              <ReactMarkdown>{mainDescription}</ReactMarkdown>
             </div>
           </div>
           <div className="concepts-right">
             <span></span>
             <div className="concepts-right-content">
-              <ConceptsContent data={concepts} />
-              {/* <ConceptsContent /> */}
+              <ConceptsContent data={data} loading={loading} error={error} />
             </div>
           </div>
         </div>

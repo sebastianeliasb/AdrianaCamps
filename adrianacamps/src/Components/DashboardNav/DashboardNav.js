@@ -5,7 +5,7 @@ function DashboardNav({ selected, handleSelect }) {
   return (
     <div className="nav-body">
       <Link to="/">
-        <header>Mllamo</header>
+        <header>ADRIANA</header>
       </Link>
       <div>
         <span
@@ -57,7 +57,7 @@ function DashboardNav({ selected, handleSelect }) {
           Concepts
         </span>
       </div>
-      <header>SEB</header>
+      <header>CAMPS</header>
     </div>
   );
 }

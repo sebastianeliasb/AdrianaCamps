@@ -19,7 +19,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+.news_title{
+  text-transform: uppercase;
+}
   div{
       // outline: 1px solid black;
       margin: 0.2rem;
@@ -63,7 +65,7 @@ text-align: center;
 @media screen and (min-width: 600px){
   #news{
       display: flex;
-      // margin-top: 25vh;
+      height: auto;
       min-height: 100vh;
   .news-left{
       position: fixed;
@@ -132,10 +134,19 @@ text-align: center;
 
   }
 }
-.read-more:hover{
-  color: #6C9EBB;
-       cursor: pointer;
-   }
+.read-more{
+  a{
+    text-decoration: none;
+    color: black;
+  } a:visited{
+    // color: black ;
+    text-decoration: none;
+  }
+  a:hover{
+    color: #6C9EBB;
+         cursor: pointer;
+     }
+}
 .news-right{
   position: relative;
   display: flex;

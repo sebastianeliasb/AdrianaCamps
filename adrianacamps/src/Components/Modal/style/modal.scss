@@ -23,13 +23,14 @@ body{
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  padding: 5rem;
+  justify-content: space-between;
+  padding: 4rem;
   margin-left: auto;
   margin-right: auto;
-  top: 25%;
+  top: 10%;
   left: 0;
   right: 0;
-  min-height: 60vh;
+height: 75vh;
   min-width: 40vw;
   max-width: 70vw;
   background-color: white;
@@ -108,10 +109,90 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 40vh;
+    max-height: 50vh;
     width: 60vw;
     justify-content: space-around;
     // background-color: antiquewhite;
 
+
+    .concept-img-cont{
+      display: flex;
+    }
+/* CSS */
+.create-btn {
+  // margin-top: 6rem;
+  margin-bottom: 1rem;
+  max-height: 7vh;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: "Arya";
+  font-size: 1.2rem;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.create-btn:hover {
+  box-shadow: rgba(217, 199, 166, 0.5) 0 0 0 3px, transparent 0 0 0 0;
+}
+    
+    .image-container {
+      position: relative;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .image-container img {
+      display: block;
+      width: 100%;
+      min-height: 10vh;
+      max-height: 20vh;
+      // object-fit: cover;
+      object-fit: contain;
+      object-position: center;
+    }
+    
+    .image-container:hover .image-overlay {
+      display: block;
+    }
+    
+    .image-overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .image-delete {
+      cursor: pointer;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: white;
+    }
+    
+    
     .text-area-container {
       display: flex;
       flex-direction: row;
@@ -127,30 +208,30 @@ body{
       justify-content: center;
       width: 50%;
     }
-img{
-  height: 20vh;
-  // width: 50%;
-}
+// img{
+//   height: 20vh;
+//   // width: 50%;
+// }
 .home-modal-container{
   display: flex;
   width: 100%;
-  // background-color: chartreuse;
   box-sizing: border-box;
   padding: 1em;
 
 div{
-  display: flex;
+  // display: flex;
   width: 100%;
 }
 input{width:50%;
 height: 5vh;}
-img{width:100%;}
+// img{width:100%;}
 
   
 }
     .news-modal-container{
       display: grid;
-      justify-content: space-around;
+      // justify-content: space-around;
+      
       align-items: center;
 grid-template-columns: auto;
 grid-template-rows: auto;
@@ -166,41 +247,28 @@ grid-template-areas: "name location"
       height: 5vh;
     }
     img{
-      height: 10vh;
-      margin: 2rem;
+      // height: 15vh;
+      // margin-top: 2rem;
     }
     }
     .modal-contact-container{
       display: flex;
+      flex-direction: row;
       // background-color: chartreuse;
       box-sizing: border-box;
       padding: 1em;
 
-      img{
-        height: 30vh;
-        width: 50%;
-      }
+      // img{
+      //   height: 30vh;
+      //   width: 50%;
+      // }
       
     }
+    .concepts-container{
+      display: flex;
+      flex-direction: column;
+    }
   }
-  
-  // .text-area-container {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: flex-start;
-  //   justify-content: space-between;
-  //   width: 100%;
-  // }
-  
-  // .image-container {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
-  //   width: 100%;
-  // }
-  
-
                                .modal-mainInfo-subcontainer{
                                 // background-color: aqua;
                                 display: grid;
@@ -210,8 +278,9 @@ grid-template-areas: "name location"
     grid-template-rows: auto;
     flex-direction: column;
     min-height: 20vh;
-    grid-template-areas: "name location"
-                          "subName photo"
+    margin-bottom: 2vh;
+    grid-template-areas: "name subName"
+                          "location photo"
                           "client surface"   
                               ;
 
@@ -228,6 +297,8 @@ grid-template-areas: "name location"
 
   .modal-images-subcontainer{
     display: flex;
+    width: 100%;
+    justify-content: center;
 //     flex-direction: column;
 //     height: 40vh;
 //     // background-color: aqua;
@@ -344,5 +415,3 @@ div:nth-of-type(2){
 
 
   }
-
-
