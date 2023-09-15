@@ -43,8 +43,6 @@ function ProjectItem() {
       fetchData();
     }
   }, []);
-  console.log(projectId);
-  console.log(fetchedData);
   const {
     project_title,
     project_location,
@@ -130,7 +128,7 @@ function ProjectItem() {
                   </div>
                   <div className="project-aspects">
                     {client && <span>Cliente: {client}</span>}
-                    {photographer && <span>Fotografo: {photographer}</span>}
+                    {photographer && <span>Fotógrafo: {photographer}</span>}
                     {surface && <span>Superficie: {`${surface}m²`}</span>}
                     {collaborators && <span>Colabora: {collaborators}</span>}
                   </div>

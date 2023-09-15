@@ -39,7 +39,7 @@ function Concepts() {
           <div className="concepts-left">
             <div className="concepts-intro">
               <p>
-                <u>Concepts for sale</u>
+                <u>Conceptos a la venta</u>
               </p>
               <ReactMarkdown>{mainDescription}</ReactMarkdown>
             </div>

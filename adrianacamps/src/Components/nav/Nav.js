@@ -39,15 +39,15 @@ function Nav(props) {
         text={
           <>
             {" "}
-            <Link to="/studio">Studio</Link>
-            <Link to="/projects">Projects</Link>
-            <Link to="/concepts">Concepts for sale</Link>
-            <Link to="/news">News</Link>
-            <Link to="/contact">Contact</Link>
+            <Link to="/studio">Estudio</Link>
+            <Link to="/projects">Proyectos</Link>
+            <Link to="/concepts">Conceptos a la venta</Link>
+            <Link to="/news">Noticias</Link>
+            <Link to="/contact">Contacto</Link>
             {/* <Link to="/dashboard">Dashboard</Link> */}
             {isMobile && (
               <div className="language-box-nav" onClick={handleOpenDropdown}>
-                Language
+                Idioma
                 {isDropdownVisible && (
                   <div className="dropdown-menu">
                     {languageOptions.map((language) =>

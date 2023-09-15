@@ -121,7 +121,7 @@ function ConceptItem() {
               <div className="project-content-right">
                 <div className="project-detail">
                   <div className="project-info">
-                    <span>{concept_title}</span>
+                    <span className="conceptsItem_title">{concept_title}</span>
                     <span>{concept_location}</span>
                     <ReactMarkdown>{main_description}</ReactMarkdown>
                   </div>

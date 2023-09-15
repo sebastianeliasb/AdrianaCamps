@@ -8,7 +8,7 @@ import MainPageLayout from "../../layouts/MainPageLayout";
 import ContentContainer from "../../Components/ContentContainer/ContentContainer";
 function Policies() {
   const { data, loading, error } = useFetch("api/politica-generals");
-  console.log(data);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -22,7 +22,6 @@ function Policies() {
   const cookies = policiesData.Cookies;
   const privacy = policiesData.Privacidad;
 
-  console.log(policiesData);
   return (
     <>
       {" "}

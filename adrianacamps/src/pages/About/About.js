@@ -51,17 +51,17 @@ function About() {
                 className="about-text-container"
                 style={{ minHeight: "500px" }}
               >
-                <u>TRAYECTORIA</u>
+                <u>Trayectoria</u>
 
                 <ReactMarkdown>{trayectoria}</ReactMarkdown>
 
                 <br />
-                <u>EL ESTUDIO</u>
+                <u>El estudio</u>
 
                 <ReactMarkdown>{estudio}</ReactMarkdown>
 
                 <br />
-                <u>CLIENTES</u>
+                <u>Clientes</u>
                 <div className="client_box">
                   {clientes.map((client) => (
                     <React.Fragment key={client.id}>

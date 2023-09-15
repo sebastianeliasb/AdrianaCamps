@@ -88,28 +88,28 @@ function Contact() {
                     type="text"
                     id="names"
                     name="name"
-                    placeholder="Full Name"
+                    placeholder="Nombre completo"
                     required
                   ></input>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Correo electrónico"
                     required
                   ></input>
                   <input
                     type="text"
                     id="subject"
                     name="subject"
-                    placeholder="Subject"
+                    placeholder="Titulo"
                     required
                   ></input>
                   <input
                     type="text"
                     id="message"
                     name="message"
-                    placeholder="Message"
+                    placeholder="Mensaje"
                     required
                   ></input>
                   <div className="send-form-container">
